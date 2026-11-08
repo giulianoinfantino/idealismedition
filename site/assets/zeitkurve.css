@@ -8,7 +8,9 @@
 
 .zk{position:relative;margin:0}
 .zk-legende{list-style:none;display:flex;flex-wrap:wrap;gap:.35rem 1.6rem;margin:0 0 .9rem;padding:0;font-size:.85rem;color:var(--text-muted)}
-.zk-legende-eintrag{display:inline-flex;align-items:center;gap:.45rem}
+.zk-legende-eintrag{display:inline-flex;flex-wrap:wrap;align-items:baseline;column-gap:.45rem}
+.zk-legende-eintrag .zk-feld{align-self:center}
+.zk-legende-zahl{white-space:nowrap}
 .zk-legende-name{color:var(--text-ink)}
 .zk-legende-zahl{font-variant-numeric:tabular-nums}
 .zk-feld{display:inline-block;width:.75rem;height:.75rem;border-radius:2px;flex:none}

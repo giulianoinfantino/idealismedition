@@ -12,7 +12,7 @@
   'use strict';
   var SVGNS = 'http://www.w3.org/2000/svg';
   var LOC = document.documentElement.lang === 'en' ? 'en-US' : 'de-DE';
-  var W = 720, H = 310, L = 46, R = 92, T = 26, B = 30;
+  var L = 46, R = 92, T = 26, B = 30;   // Breite und Höhe je Zeichnung: so breit wie der Platz, Schrift bleibt 11 px
 
   function zahl(n) { return Number(n).toLocaleString(LOC); }
   function dichte(v) {
@@ -44,6 +44,7 @@
      Gibt false zurück, wenn kein datiertes Vorkommen da ist (dann zeichnet der Aufrufer einen Hinweis). */
   function zeichne(fig, d) {
     fig.textContent = '';
+    var W = Math.max(340, Math.min(720, Math.round(fig.clientWidth || 720))), H = W < 520 ? 260 : 310;
     var reihen = d.reihen.map(function (r) {
       var p = [], summe = 0, woerter = 0;
       for (var j = 0; j < d.n; j++) {
@@ -84,7 +85,8 @@
     el('text', { x: L - 8, y: 11, 'text-anchor': 'start', class: 'zk-einheit' }, gitter).textContent = 'per 10,000 words';
     var achse = el('g', { class: 'zk-achse', 'aria-hidden': 'true' }, svg);
     el('line', { x1: L, x2: W - R, y1: y(0), y2: y(0), class: 'zk-grundlinie' }, achse);
-    for (var a = Math.ceil(d.von / 10) * 10; a <= bis; a += 10) {
+    var takt = pw < 320 ? 20 : 10;
+    for (var a = Math.ceil(d.von / takt) * takt; a <= bis; a += takt) {
       el('text', { x: x(a), y: H - 8, 'text-anchor': 'middle' }, achse).textContent = a;
     }
 
