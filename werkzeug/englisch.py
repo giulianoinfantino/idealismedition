@@ -321,9 +321,11 @@ class Repo:
             a = (f'<a class="sprache-schalter" href="{ziel}" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsche Fassung" '
                  f"onclick=\"try{{localStorage.setItem('sprache','de')}}catch(e){{}};this.href='/de'+(location.pathname==='/'?'/':location.pathname)+location.search+location.hash\">DE</a>")
         else:
+            # Vercel liefert die deutsche Startseite als /de, ohne Schrägstrich: dann bliebe nach dem Abschneiden
+            # nichts übrig, und der Schalter lüde dieselbe Seite neu. Darum „/“ als Rest.
             ziel = '/' + pfad
             a = (f'<a class="sprache-schalter" href="{ziel}?en" hreflang="en" lang="en" title="English" aria-label="English version" '
-                 f"onclick=\"try{{localStorage.setItem('sprache','en')}}catch(e){{}};this.href=location.pathname.replace(/^\\/de/,'')+location.search+location.hash\">EN</a>")
+                 f"onclick=\"try{{localStorage.setItem('sprache','en')}}catch(e){{}};this.href=(location.pathname.replace(/^\\/de(?=\\/|$)/,'')||'/')+location.search+location.hash\">EN</a>")
         t = re.sub(r'(<header class="site-header".*?</nav>)', lambda m: m.group(1) + '\n  <div class="kopf-rechts">' + a + '</div>', t, count=1, flags=re.S)
         return t
 

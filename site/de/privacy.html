@@ -38,7 +38,7 @@
       <li class="nav-weit"><a href="/de/support">Unterstützen</a></li>
     </ul>
   </nav>
-  <div class="kopf-rechts"><a class="sprache-schalter" href="/privacy?en" hreflang="en" lang="en" title="English" aria-label="English version" onclick="try{localStorage.setItem('sprache','en')}catch(e){};this.href=location.pathname.replace(/^\/de/,'')+location.search+location.hash">EN</a></div>
+  <div class="kopf-rechts"><a class="sprache-schalter" href="/privacy?en" hreflang="en" lang="en" title="English" aria-label="English version" onclick="try{localStorage.setItem('sprache','en')}catch(e){};this.href=(location.pathname.replace(/^\/de(?=\/|$)/,'')||'/')+location.search+location.hash">EN</a></div>
 </header>
 
 <main class="legal-container">
