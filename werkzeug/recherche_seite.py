@@ -66,7 +66,7 @@ ers('''  <div>Digitale Schelling-Edition · Forschungsportal</div>
   </nav>''',
     '''  <div>Edition Deutscher Idealismus · Fichte, Schelling, Hegel</div>
   <nav>
-    <a href="https://fichteedition.vercel.app/">Fichte-Edition</a>
+    <a href="https://www.fichteedition.com/">Fichte-Edition</a>
     <a href="https://www.schellingedition.com/">Schelling-Edition</a>
     <a href="https://www.hegeledition.com/">Hegel-Edition</a>
     <a href="unterstuetzen">Unterstützen</a>

@@ -58,7 +58,7 @@ def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False):
 <footer class="site-footer">
   <div>Edition Deutscher Idealismus · Fichte, Schelling, Hegel</div>
   <nav>
-    <a href="https://fichteedition.vercel.app/">Fichte-Edition</a>
+    <a href="https://www.fichteedition.com/">Fichte-Edition</a>
     <a href="https://www.schellingedition.com/">Schelling-Edition</a>
     <a href="https://www.hegeledition.com/">Hegel-Edition</a>
     <a href="/unterstuetzen">Unterstützen</a>
@@ -179,7 +179,7 @@ seite('datenschutz.html', 'Datenschutz', '''
 
   <section class="legal-section">
     <h2>4. Verweise auf andere Websites</h2>
-    <p>Die Treffer der Recherche und die Bandtitel führen in die Editionen auf fichteedition.vercel.app, schellingedition.com und hegeledition.com; dort gelten deren Datenschutzhinweise. Für die Mitgliedschaft wird auf Ko-fi verwiesen. Es handelt sich um einfache Links: Erst wenn Sie einen anklicken, verlassen Sie diese Website.</p>
+    <p>Die Treffer der Recherche und die Bandtitel führen in die Editionen auf www.fichteedition.com, schellingedition.com und hegeledition.com; dort gelten deren Datenschutzhinweise. Für die Mitgliedschaft wird auf Ko-fi verwiesen. Es handelt sich um einfache Links: Erst wenn Sie einen anklicken, verlassen Sie diese Website.</p>
   </section>
 
   <section class="legal-section">

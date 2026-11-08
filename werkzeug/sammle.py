@@ -14,8 +14,8 @@ P = HOME / 'idealismus'
 S = P / 'site'
 SUCHE = S / 'assets/suche'
 GESPERRT = {'gw-16'}          # § 70 UrhG bis 31.12.2026, siehe Hegel-Edition
-# Bis die Domain gekauft ist, liegt die Fichte-Edition unter vercel.app
-FICHTE_URL = 'https://fichteedition.vercel.app'
+# Die Fichte-Edition (Domain seit 08.11.2026)
+FICHTE_URL = 'https://www.fichteedition.com'
 
 EDITIONEN = [
     dict(id='fichte', name='Fichte', voll='Johann Gottlieb Fichte', leben='1762–1814',
