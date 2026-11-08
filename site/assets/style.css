@@ -1142,3 +1142,7 @@ body .page-card .text-unit.type-quote .dipl-line-text{text-align:center}
 .sprache-schalter{height:2rem;min-width:2.3rem;padding:0 0.45rem;display:flex;align-items:center;justify-content:center;font-size:0.68rem;letter-spacing:0.14em;border:1px solid var(--rule);border-radius:3px;color:var(--text-muted);text-decoration:none;transition:color 0.2s,border-color 0.2s}
 .sprache-schalter:hover{color:var(--accent-gold);border-color:var(--accent-gold);text-decoration:none}
 @media (max-width:600px){.kopf-rechts{gap:0.35rem}.sprache-schalter{min-width:2rem;padding:0 0.3rem}}
+
+/* Schmale Telefone (bis 480 px): das Menü lief unter den Sprachschalter.
+   Die Wortmarke weicht, das Ringzeichen bleibt und führt weiter zur Startseite (08.11.2026). */
+@media (max-width:480px){.site-title-rows{display:none}.sitenav ul{gap:.55rem}}
