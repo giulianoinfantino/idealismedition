@@ -105,3 +105,10 @@
   .an-kachel b{font-size:1.8rem}
 }
 .an.legal-container--wide{max-width:60rem}
+
+/* Ko-fi-Zahlfeld auf „Unterstützen“: Knopf in der Gestalt der übrigen, Feld erst nach dem Klick */
+.ei-kofi{margin:2.4rem 0 1rem}
+.legal-container .ei-kofi h2{font-family:var(--font-display);font-weight:400;font-size:1.35rem;color:var(--text-ink);margin:0 0 .5rem}
+button.ei-knopf{background:none;font:inherit;font-size:.86rem;cursor:pointer}
+.ei-kofi-feld{margin-top:1rem}
+.ei-kofi-ersatz{margin-top:.6rem}

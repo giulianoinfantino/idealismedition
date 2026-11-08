@@ -69,6 +69,14 @@
   </ul>
   <p class="ei-hinweis">The tiers differ only in amount; choose whichever suits you. Payment is made on Ko-fi, where the membership can be ended at any time. Prefer a one-time contribution? <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">That is possible there too.</a></p>
 
+  <section class="ei-kofi" id="kofi">
+    <h2>Support directly here</h2>
+    <p class="ei-hinweis">Once or monthly, without leaving the page. The Ko-fi payment panel loads only when you click; only then is data sent to Ko-fi (see <a href="/privacy">Privacy</a>).</p>
+    <button type="button" class="ei-knopf" id="kofi-laden">Load the Ko-fi payment panel</button>
+    <div class="ei-kofi-feld" id="kofi-feld" hidden></div>
+    <p class="ei-hinweis ei-kofi-ersatz" id="kofi-ersatz" hidden>If the panel stays empty, Ko-fi does not allow embedding in your browser. <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Then support us directly on Ko-fi.</a></p>
+  </section>
+
   <section class="legal-section">
     <h2>What membership is</h2>
     <p>A voluntary contribution to the work on the editions. It unlocks nothing that is not already open: reading, searching, and the data remain the same for everyone.</p>
@@ -81,7 +89,7 @@
 
   <section class="legal-section">
     <h2>Friends of the Edition</h2>
-    <p>Members are listed, if they wish, among the <a href="https://www.hegeledition.com/friends">Friends of the Edition</a>.</p>
+    <p>Members who wish are named among the Friends of the Edition.</p>
   </section>
 </main>
 
@@ -91,6 +99,17 @@
     <a href="https://www.fichteedition.com/">Fichte Edition</a> <a href="https://www.schellingedition.com/">Schelling Edition</a> <a href="https://www.hegeledition.com/">Hegel Edition</a> <a href="/support">Support</a> <a href="/privacy">Privacy</a> <a href="/legal-notice">Legal notice</a>
   </nav>
 </footer>
+<script>
+/* Ko-fi-Zahlfeld erst nach dem Klick laden (Zwei-Klick-Lösung): vorher geht keine Anfrage an Ko-fi */
+document.getElementById('kofi-laden').addEventListener('click', function () {
+  var f = document.getElementById('kofi-feld'), i = document.createElement('iframe');
+  i.src = 'https://ko-fi.com/idealismedition/?hidefeed=true&widget=true&embed=true&preview=true';
+  i.title = 'Ko-fi'; i.height = '712'; i.loading = 'eager';
+  i.style.cssText = 'border:0;width:100%;max-width:34rem;background:#f9f9f9;border-radius:3px';
+  f.appendChild(i); f.hidden = false; this.remove();
+  document.getElementById('kofi-ersatz').hidden = false;
+});
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

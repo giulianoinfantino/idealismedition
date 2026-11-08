@@ -72,6 +72,14 @@
   </ul>
   <p class="ei-hinweis">Die Stufen unterscheiden sich nur im Betrag; wählen Sie, was zu Ihnen passt. Bezahlt wird auf Ko-fi, wo sich die Mitgliedschaft jederzeit beenden lässt. Lieber einmalig? <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Auch das geht dort.</a></p>
 
+  <section class="ei-kofi" id="kofi">
+    <h2>Direkt hier unterstützen</h2>
+    <p class="ei-hinweis">Einmalig oder monatlich, ohne die Seite zu verlassen. Das Zahlfeld von Ko-fi lädt erst, wenn Sie klicken; erst dann gehen Daten an Ko-fi (siehe <a href="/de/privacy">Datenschutz</a>).</p>
+    <button type="button" class="ei-knopf" id="kofi-laden">Zahlfeld von Ko-fi laden</button>
+    <div class="ei-kofi-feld" id="kofi-feld" hidden></div>
+    <p class="ei-hinweis ei-kofi-ersatz" id="kofi-ersatz" hidden>Bleibt das Feld leer, lässt Ko-fi das Einbetten in Ihrem Browser nicht zu. <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Dann direkt auf Ko-fi unterstützen.</a></p>
+  </section>
+
   <section class="legal-section">
     <h2>Was die Mitgliedschaft ist</h2>
     <p>Eine freiwillige Unterstützung der Arbeit an den Ausgaben. Sie öffnet nichts, was nicht ohnehin offen ist: Lesen, Suchen und die Daten bleiben für alle gleich.</p>
@@ -84,7 +92,7 @@
 
   <section class="legal-section">
     <h2>Friends of the Edition</h2>
-    <p>Mitglieder werden, wenn sie es wünschen, unter den <a href="https://www.hegeledition.com/de/friends">Friends of the Edition</a> genannt.</p>
+    <p>Mitglieder werden, wenn sie es wünschen, unter den Friends of the Edition genannt.</p>
   </section>
 </main>
 
@@ -99,6 +107,17 @@
     <a href="/de/legal-notice">Impressum</a>
   </nav>
 </footer>
+<script>
+/* Ko-fi-Zahlfeld erst nach dem Klick laden (Zwei-Klick-Lösung): vorher geht keine Anfrage an Ko-fi */
+document.getElementById('kofi-laden').addEventListener('click', function () {
+  var f = document.getElementById('kofi-feld'), i = document.createElement('iframe');
+  i.src = 'https://ko-fi.com/idealismedition/?hidefeed=true&widget=true&embed=true&preview=true';
+  i.title = 'Ko-fi'; i.height = '712'; i.loading = 'eager';
+  i.style.cssText = 'border:0;width:100%;max-width:34rem;background:#f9f9f9;border-radius:3px';
+  f.appendChild(i); f.hidden = false; this.remove();
+  document.getElementById('kofi-ersatz').hidden = false;
+});
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

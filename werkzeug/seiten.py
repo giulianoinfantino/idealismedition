@@ -163,6 +163,14 @@ seite('support.html', 'Unterstützen', f'''
   </ul>
   <p class="ei-hinweis">Die Stufen unterscheiden sich nur im Betrag; wählen Sie, was zu Ihnen passt. Bezahlt wird auf Ko-fi, wo sich die Mitgliedschaft jederzeit beenden lässt. Lieber einmalig? <a href="{KOFI}" target="_blank" rel="noopener">Auch das geht dort.</a></p>
 
+  <section class="ei-kofi" id="kofi">
+    <h2>Direkt hier unterstützen</h2>
+    <p class="ei-hinweis">Einmalig oder monatlich, ohne die Seite zu verlassen. Das Zahlfeld von Ko-fi lädt erst, wenn Sie klicken; erst dann gehen Daten an Ko-fi (siehe <a href="/privacy">Datenschutz</a>).</p>
+    <button type="button" class="ei-knopf" id="kofi-laden">Zahlfeld von Ko-fi laden</button>
+    <div class="ei-kofi-feld" id="kofi-feld" hidden></div>
+    <p class="ei-hinweis ei-kofi-ersatz" id="kofi-ersatz" hidden>Bleibt das Feld leer, lässt Ko-fi das Einbetten in Ihrem Browser nicht zu. <a href="{KOFI}" target="_blank" rel="noopener">Dann direkt auf Ko-fi unterstützen.</a></p>
+  </section>
+
   <section class="legal-section">
     <h2>Was die Mitgliedschaft ist</h2>
     <p>Eine freiwillige Unterstützung der Arbeit an den Ausgaben. Sie öffnet nichts, was nicht ohnehin offen ist: Lesen, Suchen und die Daten bleiben für alle gleich.</p>
@@ -175,9 +183,21 @@ seite('support.html', 'Unterstützen', f'''
 
   <section class="legal-section">
     <h2>Friends of the Edition</h2>
-    <p>Mitglieder werden, wenn sie es wünschen, unter den <a href="https://www.hegeledition.com/friends">Friends of the Edition</a> genannt.</p>
+    <p>Mitglieder werden, wenn sie es wünschen, unter den Friends of the Edition genannt.</p>
   </section>
-</main>''', beschreibung='Die Ausgaben sind frei zugänglich. Wer die Arbeit mittragen will, kann Mitglied werden.', aktuell='unterstuetzen')
+</main>''', beschreibung='Die Ausgaben sind frei zugänglich. Wer die Arbeit mittragen will, kann Mitglied werden.', aktuell='unterstuetzen',
+      fuss='''<script>
+/* Ko-fi-Zahlfeld erst nach dem Klick laden (Zwei-Klick-Lösung): vorher geht keine Anfrage an Ko-fi */
+document.getElementById('kofi-laden').addEventListener('click', function () {
+  var f = document.getElementById('kofi-feld'), i = document.createElement('iframe');
+  i.src = 'https://ko-fi.com/idealismedition/?hidefeed=true&widget=true&embed=true&preview=true';
+  i.title = 'Ko-fi'; i.height = '712'; i.loading = 'eager';
+  i.style.cssText = 'border:0;width:100%;max-width:34rem;background:#f9f9f9;border-radius:3px';
+  f.appendChild(i); f.hidden = false; this.remove();
+  document.getElementById('kofi-ersatz').hidden = false;
+});
+</script>
+''')
 
 seite('legal-notice.html', 'Impressum', f'''
 <main class="legal-container">
@@ -262,12 +282,17 @@ seite('privacy.html', 'Datenschutz', '''
   </section>
 
   <section class="legal-section">
-    <h2>5. Verweise auf andere Websites</h2>
+    <h2>5. Zahlfeld von Ko-fi (nur nach Klick)</h2>
+    <p>Auf der Seite „Unterstützen“ lässt sich das Zahlfeld von Ko-fi (Ko-fi Labs Limited, Vereinigtes Königreich) in die Seite laden. Das geschieht erst, wenn Sie auf „Zahlfeld von Ko-fi laden“ klicken; vorher wird nichts von Ko-fi geladen. Nach dem Klick ruft Ihr Browser Inhalte von Servern von Ko-fi ab. Dabei erhält Ko-fi Ihre IP-Adresse und technische Angaben zu Ihrem Browser und kann Cookies setzen. Zahlungen wickelt Ko-fi über Zahlungsdienstleister wie PayPal und Stripe ab; dafür gilt die Datenschutzerklärung von Ko-fi. Rechtsgrundlage ist Ihre Einwilligung durch den Klick (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG); sie gilt nur für diesen Seitenaufruf.</p>
+  </section>
+
+  <section class="legal-section">
+    <h2>6. Verweise auf andere Websites</h2>
     <p>Die Treffer der Recherche und die Bandtitel führen in die Ausgaben auf www.fichteedition.com, schellingedition.com und hegeledition.com; dort gelten deren Datenschutzhinweise. Für die Mitgliedschaft wird auf Ko-fi verwiesen. Es handelt sich um einfache Links: Erst wenn Sie einen anklicken, verlassen Sie diese Website.</p>
   </section>
 
   <section class="legal-section">
-    <h2>6. Ihre Rechte</h2>
+    <h2>7. Ihre Rechte</h2>
     <p>Sie haben im Rahmen der gesetzlichen Bestimmungen das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie auf Beschwerde bei einer Datenschutzaufsichtsbehörde. Fragen richten Sie bitte an giulianoinfantino[at]icloud.com.</p>
   </section>
 </main>''')
