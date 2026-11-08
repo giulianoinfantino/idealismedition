@@ -10,7 +10,8 @@
   "ortho.js",
   "auswahl.js",
   "nur-eines.js",
-  "themefarbe.js"
+  "themefarbe.js",
+  "nutzung.js"
  ],
  "rechtlich": [
   "legal-notice.html",

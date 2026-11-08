@@ -5,11 +5,14 @@ Die Suchseite der Editionen bleibt die Quelle; hier wird nur ersetzt, was das Po
 Kopf und Fuss, Bandliste nach Editionen, Links in die Edition, aus der eine Stelle stammt.
   python3 werkzeug/recherche_seite.py   (danach sammle.py, das die Bandzahl einsetzt)
 """
-import pathlib, sys
+import pathlib, re, sys
 
 QUELLE = pathlib.Path.home() / 'schelling/site/de/search.html'   # deutsche Seiten liegen seit der englischen Fassung unter de/
 ZIEL = pathlib.Path.home() / 'idealismus/site/de/search.html'
 t = QUELLE.read_text(encoding='utf-8')
+# Was die Schelling-Seite für sich trägt (Fußzeile mit den anderen Ausgaben, Sprachumschalter), setzt das Portal selbst
+t = re.sub(r'\n  <div class="site-footer-familie">.*?</div>', '', t)
+t = re.sub(r'\n  <div class="kopf-rechts">.*?</div>', '', t, flags=re.S)
 
 
 def ers(alt, neu, n=1):
@@ -36,7 +39,7 @@ ers('<span class="site-title-hegel">SCHELLING</span>', '<span class="site-title-
 ers('''      <li><a href="index.html">Sammlung</a></li>
       <li><a href="text.html">Lektüre</a></li>
       <li><a href="search.html" class="current" aria-current="page">Recherche</a></li>
-      <li class="nav-weit"><a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a></li>''',
+      <li class="nav-weit"><a href="https://www.idealismedition.com/de/support">Unterstützen</a></li>''',
     '''      <li><a href="/#editionen">Ausgaben</a></li>
       <li><a href="search" class="current" aria-current="page">Recherche</a></li>
       <li class="nav-weit"><a href="/support">Unterstützen</a></li>''')
@@ -59,7 +62,7 @@ ers('„und“, „oder“, „nicht“ in Kleinbuchstaben sind Wörter.</p>',
 # ── Fuss und Skripte ─────────────────────────────────────────────────────
 ers('''  <div>Digitale Schelling-Edition</div>
   <nav>
-    <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a>
+    <a href="https://www.idealismedition.com/de/support">Unterstützen</a>
     <a href="news.html">Neuigkeiten</a>
     <a href="guidelines.html">Richtlinien</a>
     <a href="copyright.html">Urheberrecht</a>
@@ -83,7 +86,7 @@ ers('''<script>if("serviceWorker"in navigator)navigator.serviceWorker.register("
 <!-- Reichweitenmessung: cookielos, ohne dauerhafte Kennung. Siehe privacy.html -->
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>''',
-    '<script src="assets/auswahl.js" defer></script>')
+    '<script src="assets/auswahl.js" defer></script>\n<script defer src="/_vercel/insights/script.js"></script>')
 
 # ── Seite: Editionen ─────────────────────────────────────────────────────
 ers("  var BANDLISTE = (window.HEGEL_EDITION_BAENDE || []);",

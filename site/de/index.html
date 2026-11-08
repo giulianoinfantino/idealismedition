@@ -77,15 +77,44 @@
       <span class="p-leise">1770–1831<span class="p-trenn"> · </span><span data-baende="hegel">16 Bände</span></span>
     </a>
   </nav>
-  <form class="p-suche" action="recherche" method="get" role="search">
+  <form class="p-suche" action="search" method="get" role="search">
     <input type="search" name="q" placeholder="In allen 41 Bänden suchen" aria-label="In allen Bänden suchen" spellcheck="false" autocapitalize="off" autocorrect="off">
     <button type="submit">Suchen</button>
   </form>
 </main>
 
+<!-- ═══ NUTZUNG ═══ wie in der Hegel- und der Schelling-Edition. Erscheint erst, wenn /api/nutzung Daten liefert (assets/nutzung.js). -->
+<section class="lp-section nutzung-section" id="nutzung" hidden>
+  <div class="reveal" data-reveal>
+    <div class="lp-section-label">Reichweite</div>
+    <div class="lp-section-title">Nutzung der letzten 30 Tage</div>
+  </div>
+  <p class="about-lead reveal" data-reveal>
+    Besucher der Website je Tag. Gez&auml;hlt wird ohne Cookies und ohne Wiedererkennen &uuml;ber den Tag hinaus.
+  </p>
+  <figure class="nutzung-figur reveal" data-reveal>
+    <ul class="nutzung-legende" aria-label="Summe der 30 Tage"></ul>
+    <svg class="nutzung-svg" role="group" aria-label="Besucher der Website je Tag"></svg>
+    <div class="nutzung-tip" hidden aria-live="polite"></div>
+    <details class="nutzung-details">
+      <summary>Als Tabelle</summary>
+      <table class="nutzung-tabelle">
+        <thead><tr><th>Tag</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </details>
+    <figcaption class="nutzung-fuss">
+      Eindeutige Besucher je Tag (Vercel Web Analytics), nach UTC. Siehe <a href="privacy.html">Datenschutz</a>.
+    </figcaption>
+  </figure>
+</section>
+
 <footer class="p-fuss">
   <p>Digitale Ausgaben von <a href="https://giulianoinfantino.com" rel="me">Giuliano Infantino</a>. Texte gemeinfrei, Daten unter <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC&nbsp;BY&nbsp;4.0</a>.</p>
   <nav><a href="/de/support">Unterstützen</a><a href="search">Recherche</a><a href="privacy">Datenschutz</a><a href="legal-notice">Impressum</a></nav>
 </footer>
+<script src="/assets/nutzung.js" defer></script>
+<!-- Reichweitenmessung: cookielos, ohne dauerhafte Kennung. Siehe privacy -->
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

@@ -61,15 +61,44 @@
   <nav class="p-drei" id="editionen" aria-label="The editions">
     <a class="p-bild" href="https://www.fichteedition.com/"> <picture><source type="image/webp" srcset="assets/bildnisse/fichte.webp 1x, assets/bildnisse/fichte@2x.webp 2x"><img src="assets/bildnisse/fichte.jpg" width="340" height="442" alt="Johann Gottlieb Fichte" decoding="async"></picture> <span class="p-wer">Fichte</span> <span class="p-leise">1762–1814<span class="p-trenn"> · </span><span data-baende="fichte">11 volumes</span></span> </a> <a class="p-bild" href="https://www.schellingedition.com/"> <picture><source type="image/webp" srcset="assets/bildnisse/schelling.webp 1x, assets/bildnisse/schelling@2x.webp 2x"><img src="assets/bildnisse/schelling.jpg" width="340" height="442" alt="Friedrich Wilhelm Joseph Schelling" decoding="async"></picture> <span class="p-wer">Schelling</span> <span class="p-leise">1775–1854<span class="p-trenn"> · </span><span data-baende="schelling">14 volumes</span></span> </a> <a class="p-bild" href="https://www.hegeledition.com/"> <picture><source type="image/webp" srcset="assets/bildnisse/hegel.webp 1x, assets/bildnisse/hegel@2x.webp 2x"><img src="assets/bildnisse/hegel.jpg" width="340" height="442" alt="Georg Wilhelm Friedrich Hegel" decoding="async"></picture> <span class="p-wer">Hegel</span> <span class="p-leise">1770–1831<span class="p-trenn"> · </span><span data-baende="hegel">16 volumes</span></span> </a>
   </nav>
-  <form class="p-suche" action="recherche" method="get" role="search">
+  <form class="p-suche" action="search" method="get" role="search">
     <input type="search" name="q" placeholder="Search all 41 volumes" aria-label="Search all volumes" spellcheck="false" autocapitalize="off" autocorrect="off">
     <button type="submit">Search</button>
   </form>
 </main>
 
+<!-- ═══ NUTZUNG ═══ wie in der Hegel- und der Schelling-Edition. Erscheint erst, wenn /api/nutzung Daten liefert (assets/en/nutzung.js). -->
+<section class="lp-section nutzung-section" id="nutzung" hidden>
+  <div class="reveal" data-reveal>
+    <div class="lp-section-label">Reach</div>
+    <div class="lp-section-title">Use over the last 30 days</div>
+  </div>
+  <p class="about-lead reveal" data-reveal>
+    Visitors to the website per day. Counted without cookies and without recognizing visitors beyond a single day.
+  </p>
+  <figure class="nutzung-figur reveal" data-reveal>
+    <ul class="nutzung-legende" aria-label="Total for the 30 days"></ul>
+    <svg class="nutzung-svg" role="group" aria-label="Besucher der Website je Tag"></svg>
+    <div class="nutzung-tip" hidden aria-live="polite"></div>
+    <details class="nutzung-details">
+      <summary>As a table</summary>
+      <table class="nutzung-tabelle">
+        <thead><tr><th>Day</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </details>
+    <figcaption class="nutzung-fuss">
+      Unique visitors per day (Vercel Web Analytics), by UTC. See <a href="privacy.html">Privacy</a>.
+    </figcaption>
+  </figure>
+</section>
+
 <footer class="p-fuss">
   <p>Digital editions by <a href="https://giulianoinfantino.com" rel="me">Giuliano Infantino</a>. Texts in the public domain, data under <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC&nbsp;BY&nbsp;4.0</a>.</p>
   <nav><a href="/support">Support</a><a href="search">Search</a><a href="privacy">Privacy</a><a href="legal-notice">Legal notice</a></nav>
 </footer>
+<script src="/assets/en/nutzung.js" defer></script>
+<!-- Reichweitenmessung: cookielos, ohne dauerhafte Kennung. Siehe privacy -->
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
