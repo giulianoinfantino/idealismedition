@@ -69,23 +69,19 @@ def band_html(e, w):
             '</li>')
 
 
+KURZ = {'fichte': 'Sämmtliche und Nachgelassene Werke', 'schelling': 'Sämmtliche Werke', 'hegel': 'Gesammelte Werke'}
+
+
 def edition_html(e):
-    kopf = (f'<h3 class="st-gruppe-name">{e["name"]}<span class="st-gruppe-zahl">{e["voll"]}, {e["leben"]}</span></h3>'
-            f'<p class="ei-ausgabe"><em>{e["ausgabe"]}</em>, {e["hg"]}</p>')
-    if 'werke' not in e:
-        return (f'<section class="st-gruppe ei-edition" id="{e["id"]}" aria-label="{e["name"]}">'
-                f'<div class="ei-edition-kopf">{kopf}<p class="ei-stand">In Vorbereitung</p></div>'
-                '<p class="ei-vorbereitung">Die Edition ist in Vorbereitung. Der Text wird wie bei Schelling '
-                'aus mehreren Zeugen gewonnen und Seite für Seite am Scan des Drucks entschieden. '
-                'Die Bände erscheinen hier, sobald sie geprüft sind.</p></section>')
-    n = len(e['werke'])
-    return (f'<section class="st-gruppe ei-edition" id="{e["id"]}" aria-label="{e["name"]}">'
-            f'<div class="ei-edition-kopf">{kopf}'
-            f'<p class="ei-stand">{n} Bände · Fassung {esc(e["fassung"])}</p>'
-            f'<p class="ei-wege"><a href="{e["url"]}/">Zur Edition</a>'
-            f'<a href="recherche?ed={e["id"]}">Recherche</a>'
-            f'<a href="{e["neu"]}">Neu in {esc(e["fassung"])}</a></p></div>'
-            '<ol class="st-baende">' + ''.join(band_html(e, w) for w in e['werke']) + '</ol></section>')
+    """Eine stille Karte je Edition: Name, Lebensdaten, Ausgabe, Umfang, Weg in die Edition."""
+    n = len(e.get('werke', []))
+    stand = f'{n} Bände · Fassung {esc(e["fassung"])}' if n else 'In Vorbereitung'
+    return (f'<a class="ei-karte" id="{e["id"]}" href="{e["url"]}/">'
+            f'<span class="ei-karte-name">{e["name"]}</span>'
+            f'<span class="ei-karte-leben">{e["leben"]}</span>'
+            f'<span class="ei-karte-ausgabe">{KURZ[e["id"]]}</span>'
+            f'<span class="ei-karte-stand">{stand}</span>'
+            f'<span class="ei-karte-weg">Zur Edition <span aria-hidden="true">→</span></span></a>')
 
 
 def ersetze(text, marke, neu):
@@ -112,7 +108,7 @@ def main():
     woerter = json.loads(subprocess.check_output(['node', str(P / 'werkzeug/woerter.mjs'), str(SUCHE)], text=True))
 
     # Bandliste und Editionen fuer die Recherche, bevor der Worker geladen hat
-    eds = {e['id']: {'name': e['name'], 'url': e.get('url', ''), 'ausgabe': e['ausgabe']} for e in EDITIONEN}
+    eds = {e['id']: {'name': e['name'], 'url': e.get('url', ''), 'ausgabe': KURZ[e['id']]} for e in EDITIONEN}
     (S / 'assets/baende.js').write_text(
         '/* Von werkzeug/sammle.py geschrieben. */\n'
         'window.IDEALISMUS_EDITIONEN = ' + json.dumps(eds, ensure_ascii=False) + ';\n'
@@ -124,9 +120,7 @@ def main():
     ns = sum(seiten(w) for e in da for w in e['werke'])
     nw = sum(woerter.values())
     mio = f'{nw / 1e6:.1f}'.replace('.', ',')
-    zahlen = (f'    <div><dt>Bände</dt><dd>{nb}</dd></div>\n'
-              f'    <div><dt>Seiten</dt><dd>{zahl(ns)}</dd></div>\n'
-              f'    <div><dt>Wörter</dt><dd>{mio}&nbsp;Mio.</dd></div>')
+    zahlen = f'      {nb} Bände · {zahl(ns)} Seiten · {mio}&nbsp;Mio. Wörter'
     i = (S / 'index.html').read_text(encoding='utf-8')
     i = ersetze(i, 'zahlen', zahlen)
     i = ersetze(i, 'editionen', '\n'.join(edition_html(e) for e in EDITIONEN))

@@ -144,6 +144,44 @@ ers("  <link rel=\"stylesheet\" href=\"assets/recherche.css\">", "  <link rel=\"
 ers("""      '<div class="rch-zitat">' + esc(s.zitat) +""",
     """      '<div class="rch-zitat">' + (S.ordnung === 'dichte' ? '<span class="ei-autor">' + esc(edName(s.work)) + '</span> ' : '') + esc(s.zitat) +""")
 
+# ── Querverweise (recherche-quer.js, recherche-portal-worker.js) ──────────
+ers("try { worker = new Worker('assets/recherche-worker.js'); }", "try { worker = new Worker('assets/recherche-portal-worker.js'); }")
+ers('<button type="button" role="tab" id="tab-verteilung" data-ansicht="verteilung" aria-selected="false" aria-controls="search-results">Verteilung<span class="kz">3</span></button>',
+    '<button type="button" role="tab" id="tab-verteilung" data-ansicht="verteilung" aria-selected="false" aria-controls="search-results">Verteilung<span class="kz">3</span></button>\n        <button type="button" role="tab" id="tab-vergleich" data-ansicht="vergleich" aria-selected="false" aria-controls="search-results">Vergleich<span class="kz">4</span></button>')
+ers("      zeichneBaende(null);\n      if (S.q) suche(false); else status.textContent",
+    "      zeichneBaende(null);\n      worker.postMessage({ typ: 'bezuege' });\n      if (S.q) suche(false); else status.textContent")
+ers("    } else if (m.typ === 'fehler') {",
+    "    } else if (m.typ === 'vergleich') {\n      if (m.id === anfrage && S.ansicht === 'vergleich') Quer.vergleich(m, results);\n    } else if (m.typ === 'parallel') {\n      if (m.id === anfrage) Quer.parallel(m, results);\n    } else if (m.typ === 'bezuege') {\n      Quer.bezuege(m);\n    } else if (m.typ === 'fehler') {")
+ers("S.ansicht = ['stellen', 'konkordanz', 'verteilung'].indexOf(p.get('ansicht')) >= 0", "S.ansicht = ['stellen', 'konkordanz', 'verteilung', 'vergleich'].indexOf(p.get('ansicht')) >= 0")
+ers("    else zeichneVerteilung();",
+    "    else if (S.ansicht === 'vergleich') { results.innerHTML = '<p class=\"qv-warte\">Die drei Editionen werden verglichen …</p>'; worker.postMessage({ typ: 'vergleich', id: anfrage }); }\n    else zeichneVerteilung();")
+ers("""'">Lesefassung</a></div>' +""", """'">Lesefassung</a><button type="button" class="qp-knopf" data-parallel="' + s.i + '" title="Ähnliche Stellen bei Fichte, Schelling und Hegel">Parallelstellen</button></div>' +""")
+ers("    else if (e.key === '3') setzeAnsicht('verteilung');", "    else if (e.key === '3') setzeAnsicht('verteilung');\n    else if (e.key === '4') setzeAnsicht('vergleich');")
+ers("  var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };", """  // Querverweise: was recherche-quer.js von der Seite braucht
+  function sucheMit(q, ed) {
+    input.value = q; spiegeln(); S.q = q; S.aus = []; S.seiten = null; S.baende = ed ? baendeVon(ed) : [];
+    S.ansicht = 'stellen'; malAnsicht(); merkeZuletzt(q); suche(true); window.scrollTo(0, 0);
+  }
+  window.QuerCtx = {
+    esc: esc, zahl: zahl, leserLink: leserLink, edName: edName, sucheMit: sucheMit,
+    sucheInBand: function (w) { S.baende = [w]; S.seiten = null; S.ansicht = 'stellen'; malAnsicht(); suche(true); window.scrollTo(0, 0); },
+    sucheNah: function (wort, ed) {
+      var einfach = /^[\\p{L}\\p{N}*?=-]+$/u.test(S.q);
+      sucheMit(einfach ? S.q + ' NEAR/8 ' + wort : '(' + S.q + ') ' + wort, ed);
+    }
+  };
+  results.addEventListener('click', function (e) {
+    var p = e.target.closest('[data-parallel]');
+    if (!p) return;
+    var art = p.closest('.rch-stelle');
+    if (p.dataset.offen) { var q = art && art.querySelector('.qp'); if (q) q.remove(); delete p.dataset.offen; p.textContent = 'Parallelstellen'; return; }
+    p.disabled = true; p.textContent = 'Parallelstellen werden gesucht …';
+    worker.postMessage({ typ: 'parallel', id: anfrage, i: +p.dataset.parallel });
+  });
+  var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };""")
+ers('        <div id="rch-zuletzt-feld" hidden>', '        <div class="qb-feld" id="qb" hidden></div>\n        <div id="rch-zuletzt-feld" hidden>')
+ers('<script src="assets/recherche-kern.js"></script>', '<script src="assets/recherche-kern.js"></script>\n<script src="assets/recherche-quer.js"></script>')
+
 # Was nach dem Ersetzen nicht mehr vorkommen darf: Seiten der Edition, die es im Portal nicht gibt
 for rest in ('search.html', 'index.html', 'text.html', 'neuigkeiten.html', 'edition-data', 'Gesammelten Werke'):
     if rest in t:

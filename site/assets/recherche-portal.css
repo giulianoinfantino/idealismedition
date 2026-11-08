@@ -10,3 +10,64 @@
 
 /* Im schmalen Kopf ist fuer drei Wege kein Platz; „Unterstuetzen“ steht dann im Titelblatt und im Fuss. */
 @media (max-width:600px){.sitenav li.nav-weit{display:none}}
+
+/* ── Querverweise ───────────────────────────────────────────────────────── */
+/* Parallelstellen: Knopf in der Wegzeile, Block unter der Stelle */
+.qp-knopf{font:inherit;font-size:.82rem;background:none;border:0;padding:0;color:var(--accent-gold);cursor:pointer;border-bottom:1px solid transparent}
+.qp-knopf:hover{border-bottom-color:var(--accent-gold)}
+.qp-knopf:disabled{color:var(--text-muted);cursor:progress}
+.qp{grid-column:1 / -1;margin:.9rem 0 .2rem;padding:.9rem 0 .2rem 1rem;border-left:1px solid color-mix(in oklab,var(--accent-gold) 55%,transparent)}
+.qp-kopf{font-size:.82rem;color:var(--text-muted);margin-bottom:.7rem}
+.qp-kopf i{color:var(--text-body)}
+.qp-gruppe + .qp-gruppe{margin-top:.8rem}
+.qp-gruppe h4{font-family:var(--font-body);font-variant:small-caps;letter-spacing:.12em;font-size:.82rem;font-weight:500;color:var(--accent-gold);margin-bottom:.3rem}
+.qp-stelle{margin:0 0 .7rem}
+.qp-stelle a{font-family:var(--font-mono);font-size:.78rem;color:var(--text-ink)}
+.qp-titel{font-size:.78rem;color:var(--text-muted)}
+.qp-stelle p{font-size:.92rem;line-height:1.6;color:var(--text-body);margin:.15rem 0 0}
+.qp-woerter{font-size:.76rem!important;color:var(--text-muted)!important;font-style:italic}
+.qp-nichts{font-size:.84rem;color:var(--text-muted);font-style:italic}
+
+/* Vergleich: drei Spalten wie die drei Bildnisse */
+.qv-warte{color:var(--text-muted);font-style:italic;padding:1rem 0}
+.qv-kopf p{font-size:.86rem;color:var(--text-muted);max-width:44rem;margin:.2rem 0 1.2rem}
+.qv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.6rem}
+.qv-spalte{border-top:1px solid var(--rule);padding-top:.9rem;min-width:0}
+.qv-spalte header h3{font-family:var(--font-display);font-size:1.6rem;font-weight:500;color:var(--text-ink);line-height:1.1}
+.qv-spalte header p{font-size:.78rem;font-style:italic;color:var(--text-muted);margin:.15rem 0 .8rem}
+.qv-zahl b{display:block;font-family:var(--font-display);font-size:2.2rem;font-weight:400;line-height:1;color:var(--text-ink);font-variant-numeric:lining-nums}
+.qv-zahl span{font-size:.8rem;color:var(--text-muted)}
+.qv-dichte{height:4px;background:var(--rule);border-radius:2px;margin:.7rem 0 .25rem;overflow:hidden}
+.qv-dichte i{display:block;height:100%;background:var(--accent-gold);border-radius:2px}
+.qv-dichte-zahl{font-size:.76rem;color:var(--text-muted);margin-bottom:.4rem}
+.qv-spalte h4{font-family:var(--font-body);font-variant:small-caps;letter-spacing:.12em;font-size:.8rem;font-weight:500;color:var(--text-muted);margin:1rem 0 .4rem}
+.qv-baende{list-style:none;margin:0;padding:0}
+.qv-baende button{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.5rem;width:100%;font:inherit;text-align:left;background:none;border:0;padding:.25rem 0;color:var(--text-body);cursor:pointer;border-bottom:1px solid color-mix(in oklab,var(--rule) 60%,transparent)}
+.qv-baende button:hover .t{color:var(--accent)}
+.qv-baende .s{font-family:var(--font-mono);font-size:.74rem;color:var(--text-ink);white-space:nowrap}
+.qv-baende .t{font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-muted)}
+.qv-baende .n{font-size:.78rem;color:var(--text-muted);font-variant-numeric:tabular-nums}
+.qv-umfeld{display:flex;flex-wrap:wrap;gap:.3rem .35rem}
+.qv-umfeld button{font:inherit;font-size:.82rem;background:none;border:1px solid var(--rule);border-radius:2px;padding:.12rem .45rem;color:var(--text-body);cursor:pointer}
+.qv-umfeld button:hover{border-color:var(--accent-gold);color:var(--text-ink)}
+.qv-stelle{margin-bottom:.8rem}
+.qv-stelle a{font-family:var(--font-mono);font-size:.76rem;color:var(--accent)}
+.qv-stelle p{font-size:.88rem;line-height:1.55;color:var(--text-body);margin-top:.1rem}
+.qv-leer header h3,.qv-leer .qv-zahl b{color:var(--text-muted)}
+.qv-nichts{font-style:italic;color:var(--text-muted);font-size:.86rem}
+@media (max-width:900px){.qv{grid-template-columns:minmax(0,1fr)}}
+
+/* Wer nennt wen */
+.qb-feld{margin-top:1.6rem}
+.qb-unter{font-size:.84rem;color:var(--text-muted);margin:-.2rem 0 .9rem;max-width:40rem}
+.qb-tafeln{display:flex;flex-wrap:wrap;gap:1.2rem 2.6rem}
+.qb{border-collapse:collapse;font-size:.86rem}
+.qb caption{text-align:left;font-variant:small-caps;letter-spacing:.12em;font-size:.8rem;color:var(--accent-gold);padding-bottom:.35rem}
+.qb th,.qb td{padding:.28rem .7rem;border-bottom:1px solid color-mix(in oklab,var(--rule) 70%,transparent);text-align:right;font-variant-numeric:tabular-nums}
+.qb thead th{font-weight:400;font-size:.76rem;color:var(--text-muted)}
+.qb tbody th{text-align:left;font-weight:500;color:var(--text-ink);padding-left:0}
+.qb td button{font:inherit;background:none;border:0;padding:0;color:var(--text-body);cursor:pointer;border-bottom:1px solid var(--rule)}
+.qb td button:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.qb-gleich,.qb-null{color:color-mix(in oklab,var(--text-muted) 60%,transparent)}
+
+.qv-stelle mark,.qp-stelle mark{background:color-mix(in oklab,var(--accent-gold) 28%,transparent);color:inherit;padding:0 .05em;border-radius:2px}
