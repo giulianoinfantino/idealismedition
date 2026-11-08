@@ -39,6 +39,12 @@ ERSETZEN = [
     # Der Such-Worker liegt in assets/en/; seine Daten liegen in assets/suche/
     ("new URL('suche/', self.location.href)", "new URL('../suche/', self.location.href)"),
     ('class="cookie-notice-ok">Verstanden</button>', 'class="cookie-notice-ok">Got it</button>'),
+    ("(e.vorkommen === 1 ? 'Vorkommen' : 'Vorkommen')", "(e.vorkommen === 1 ? 'occurrence' : 'occurrences')"),
+    ("'Parallelstellen ausblenden'", "'Hide parallel passages'"),
+    ("'Parallelstellen'", "'Parallel passages'"),
+    ("' Vorkommen\" title=\"S. '", "' occurrences\" title=\"p. '"),
+    ("' Vorkommen</span></div>'", "' occurrences</span></div>'"),
+    ("' Vorkommen'", "' occurrences'"),
     ("'Alle ' + gesamt", "'All ' + gesamt"),
     ("'Fehler beim Senden. Bitte versuchen Sie es erneut.'", "'Sending failed. Please try again.'"),
 ]

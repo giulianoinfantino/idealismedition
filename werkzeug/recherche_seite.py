@@ -185,7 +185,7 @@ ers("  var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };", """  // Querverwei
   });
   var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };""")
 ers('        <div id="rch-zuletzt-feld" hidden>', '        <div class="qb-feld" id="qb" hidden></div>\n        <div id="rch-zuletzt-feld" hidden>')
-ers('<script src="assets/recherche-kern.js"></script>', '<script src="assets/recherche-kern.js"></script>\n<script src="assets/recherche-quer.js"></script>')
+ers('<script src="assets/recherche-kern.js"></script>', '<script src="assets/recherche-kern.js"></script>\n<script src="assets/recherche-quer.js"></script>\n<script src="assets/parallel-start.js" defer></script>')
 
 # Was nach dem Ersetzen nicht mehr vorkommen darf: Seiten der Edition, die es im Portal nicht gibt
 for rest in ('search.html', 'index.html', 'text.html', 'news.html', 'edition-data', 'Gesammelten Werke'):

@@ -17,7 +17,7 @@
         var leer = !e.stellen;
         return '<section class="qv-spalte' + (leer ? ' qv-leer' : '') + '">' +
           '<header><h3>' + NAME[e.ed] + '</h3><p>' + esc(AUSGABE[e.ed]) + '</p></header>' +
-          '<div class="qv-zahl"><b>' + zahl(e.vorkommen) + '</b><span>' + (e.vorkommen === 1 ? 'Vorkommen' : 'Vorkommen') + ' on ' + zahl(e.stellen) + ' ' + (e.stellen === 1 ? 'passage' : 'passages') + '</span></div>' +
+          '<div class="qv-zahl"><b>' + zahl(e.vorkommen) + '</b><span>' + (e.vorkommen === 1 ? 'occurrence' : 'occurrences') + ' on ' + zahl(e.stellen) + ' ' + (e.stellen === 1 ? 'passage' : 'passages') + '</span></div>' +
           '<div class="qv-dichte" title="per 10,000 words"><i style="width:' + (e.dichte / max * 100).toFixed(1) + '%"></i></div>' +
           '<p class="qv-dichte-zahl">' + komma(e.dichte) + ' per 10,000 words</p>' +
           (leer ? '<p class="qv-nichts">No passages.</p>' :
@@ -42,7 +42,7 @@
     var alt = art.querySelector('.qp');
     if (alt) alt.remove();
     var knopf = art.querySelector('[data-parallel]');
-    if (knopf) { knopf.disabled = false; knopf.textContent = 'Parallelstellen ausblenden'; knopf.dataset.offen = '1'; }
+    if (knopf) { knopf.disabled = false; knopf.textContent = 'Hide parallel passages'; knopf.dataset.offen = '1'; }
     var gruppen = ['fichte', 'schelling', 'hegel'].map(function (ed) {
       var l = m.liste.filter(function (x) { return x.ed === ed; });
       return '<div class="qp-gruppe"><h4>' + NAME[ed] + '</h4>' + (l.length ? l.map(function (x) {
