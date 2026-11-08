@@ -11,28 +11,32 @@
 @font-face { font-family:'Source Serif 4'; font-weight:200 900; src:url(fonts/SourceSerif4-Variable-roman.woff2) format('woff2'); }
 * { margin:0; padding:0; box-sizing:border-box; }
 html,body { width:1200px; height:630px; background:#1c1b20; font-family:'Source Serif 4',Georgia,serif; -webkit-font-smoothing:antialiased; }
-.frame { position:absolute; inset:22px; border:1px solid #3a3840; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding-bottom:40px; }
-.vorname { font-size:17px; font-weight:500; letter-spacing:.42em; margin-right:-.42em; text-transform:uppercase; color:#b0a89b; }
-.name { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:116px; line-height:.92; color:#f0ede4; margin:12px 0 22px; }
-.name span { display:block; }
-.zier { display:flex; align-items:center; gap:20px; }
-.zier i { width:92px; height:1px; background:#4c4a52; }
-.zier svg { width:46px; height:30px; overflow:visible; }
-.zier circle { fill:none; stroke:#cbaa5c; stroke-width:1.6px; vector-effect:non-scaling-stroke; }
-.nach { margin-top:24px; font-size:14px; font-weight:500; letter-spacing:.34em; margin-right:-.34em; text-transform:uppercase; color:#b0a89b; }
-.gw { margin-top:8px; font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:42px; line-height:1.1; color:#e8e3da; }
-.gw b { font-style:normal; font-weight:400; color:#cbaa5c; font-size:.7em; margin:0 .35em; }
-.fuss { position:absolute; left:0; right:0; bottom:28px; text-align:center; font-size:13px; font-weight:500; letter-spacing:.3em; margin-right:-.3em; text-transform:uppercase; color:#8f887d; font-variant-numeric:lining-nums; }
+.frame { position:absolute; inset:22px; border:1px solid #3a3840; display:flex; flex-direction:column; align-items:center; padding-top:30px;
+  background:radial-gradient(ellipse 70% 60% at 50% 62%, #2a282e 0%, #1c1b20 72%); }
+.vorname { font-size:15px; font-weight:500; letter-spacing:.42em; margin-right:-.42em; text-transform:uppercase; color:#b0a89b; }
+.name { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:68px; line-height:1; color:#f0ede4; margin:8px 0 24px; }
+.reihe { display:flex; gap:42px; }
+.bild { width:200px; display:flex; flex-direction:column; align-items:center; }
+.bogen { position:relative; width:200px; height:260px; border-radius:999px 999px 3px 3px; overflow:hidden; background:#121116; box-shadow:0 26px 40px -24px rgba(0,0,0,.9); }
+.bogen img { width:100%; height:100%; object-fit:cover; display:block; }
+.bogen::after { content:""; position:absolute; inset:6px; border:1px solid rgba(203,170,92,.62); border-radius:999px 999px 2px 2px; }
+.kommt .bogen img { filter:grayscale(1) brightness(.6) contrast(.92); }
+.kommt .bogen::after { border:1px dashed rgba(176,168,155,.4); }
+.wer { margin-top:12px; font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:27px; line-height:1; color:#f0ede4; }
+.kommt .wer { color:#9a9388; }
+.fuss { position:absolute; left:0; right:0; bottom:26px; text-align:center; font-size:13px; font-weight:500; letter-spacing:.3em; margin-right:-.3em; text-transform:uppercase; color:#8f887d; font-variant-numeric:lining-nums; }
 .fuss b { color:#cbaa5c; font-weight:500; }
 </style>
 </head>
 <body>
 <div class="frame">
   <div class="vorname">Edition</div>
-  <div class="name"><span>Deutscher</span><span>Idealismus</span></div>
-  <div class="zier"><i></i><svg viewBox="0 0 200 120"><circle cx="100" cy="44" r="34"/><circle cx="80" cy="72" r="34"/><circle cx="120" cy="72" r="34"/></svg><i></i></div>
-  <div class="nach">Die Werke von</div>
-  <div class="gw">Fichte<b>·</b>Schelling<b>·</b>Hegel</div>
+  <div class="name">Deutscher Idealismus</div>
+  <div class="reihe">
+    <div class="bild kommt"><div class="bogen"><img src="bildnisse/fichte@2x.jpg"></div><div class="wer">Fichte</div></div>
+    <div class="bild"><div class="bogen"><img src="bildnisse/schelling@2x.jpg"></div><div class="wer">Schelling</div></div>
+    <div class="bild"><div class="bogen"><img src="bildnisse/hegel@2x.jpg"></div><div class="wer">Hegel</div></div>
+  </div>
   <div class="fuss"><b>idealismedition.com</b> · Eine Recherche über 31 Bände</div>
 </div>
 </body>

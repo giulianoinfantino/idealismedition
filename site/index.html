@@ -26,6 +26,7 @@
   <meta name="theme-color" content="#232229">
   <link rel="preload" href="assets/fonts/SourceSerif4-Variable-roman.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/CormorantGaramond-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/bildnisse/schelling.webp" as="image" type="image/webp" imagesrcset="assets/bildnisse/schelling.webp 1x, assets/bildnisse/schelling@2x.webp 2x">
   <link rel="stylesheet" href="assets/fonts.css">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/start.css">
@@ -55,17 +56,20 @@
 
 <main id="inhalt" class="st">
 
-<!-- ═══ TITELBLATT ═══ wie bei den Editionen: in der Mitte nur der Titel, in den Ecken Neues,
-     der Herausgeber und die Wege. Die drei Ringe des Zeichens stehen hier fuer die drei Editionen:
-     der obere fuer Fichte, der linke fuer Schelling, der rechte fuer Hegel. -->
-<section class="st-titel" aria-labelledby="st-titel">
+<!-- ═══ BUEHNE ═══ Die drei Bildnisse in der Folge, in der die Systeme entstanden: Fichte, Schelling, Hegel.
+     Fichte steht grau und gedaempft, solange seine Edition in Vorbereitung ist. Die drei Ringe des Zeichens
+     gehoeren zu den drei Bildern (oben Fichte, links Schelling, rechts Hegel) und leuchten mit ihnen auf.
+     Bewegung: beim Laden ziehen sich die Goldlinien der Boegen hoch und die Bilder treten aus dem Dunkel;
+     danach atmen sie langsam. Zeiger: Lichtkegel und leichte Neigung (assets/portal.js). Ohne Bewegung,
+     wo der Leser es so eingestellt hat. -->
+<section class="st-titel ei-buehne" aria-labelledby="st-titel">
   <a class="st-neu" href="https://www.schellingedition.com/fassung-07"><span class="st-neu-marke">Neu</span><span class="st-neu-text">Schelling, alle 14 Bände</span><span class="st-neu-pfeil" aria-hidden="true">→</span></a>
-  <div class="st-titel-satz ei-satz">
-    <h1 id="st-titel" class="st-titel-name">
+  <div class="ei-mitte">
+    <h1 id="st-titel" class="ei-kopf">
       <span class="st-vorname">Edition</span>
-      <span class="st-hegel ei-titel"><span>Deutscher</span> <span>Idealismus</span></span>
+      <span class="ei-name">Deutscher Idealismus</span>
     </h1>
-    <div class="st-zier" aria-hidden="true">
+    <div class="st-zier ei-zier" aria-hidden="true">
       <span class="st-zier-linie"></span>
       <svg class="ringe-mark hero-crest st-zier-ringe" viewBox="0 0 200 120">
         <g class="ringe-spin">
@@ -76,8 +80,47 @@
       </svg>
       <span class="st-zier-linie"></span>
     </div>
-    <p class="st-nach"><span class="st-nach-zeile">Die Werke von</span>
-      <span class="st-gw ei-namen"><a href="#fichte" data-ring="a">Fichte</a><span class="ei-punkt" aria-hidden="true">·</span><a href="#schelling" data-ring="b">Schelling</a><span class="ei-punkt" aria-hidden="true">·</span><a href="#hegel" data-ring="c">Hegel</a></span></p>
+    <ol class="ei-galerie" aria-label="Die Editionen">
+      <li class="ei-bild ei-bild--kommt" data-ring="a" style="--i:0">
+        <a class="ei-bild-link" href="#fichte" aria-label="Fichte: Edition in Vorbereitung">
+          <span class="ei-rahmen"><span class="ei-tiefe"><picture>
+            <source type="image/webp" srcset="assets/bildnisse/fichte.webp 1x, assets/bildnisse/fichte@2x.webp 2x">
+            <img src="assets/bildnisse/fichte.jpg" srcset="assets/bildnisse/fichte@2x.jpg 2x" width="340" height="442" alt="Johann Gottlieb Fichte, Lithographie von Johann Friedrich Jugel nach Heinrich Anton Dähling" decoding="async">
+          </picture></span></span>
+          <span class="ei-unter">
+            <span class="ei-wer">Fichte</span>
+            <span class="ei-leben">1762–1814</span>
+            <span class="ei-was"><span class="ei-was-lang">Sämmtliche Werke · </span>in Vorbereitung</span>
+          </span>
+        </a>
+      </li>
+      <li class="ei-bild" data-ring="b" style="--i:1">
+        <a class="ei-bild-link" href="https://www.schellingedition.com/" aria-label="Schelling: zur Edition der Sämmtlichen Werke">
+          <span class="ei-rahmen"><span class="ei-tiefe"><picture>
+            <source type="image/webp" srcset="assets/bildnisse/schelling.webp 1x, assets/bildnisse/schelling@2x.webp 2x">
+            <img src="assets/bildnisse/schelling.jpg" srcset="assets/bildnisse/schelling@2x.jpg 2x" width="340" height="442" alt="Friedrich Wilhelm Joseph Schelling, Gemälde von Joseph Karl Stieler, 1835" decoding="async" fetchpriority="high">
+          </picture></span></span>
+          <span class="ei-unter">
+            <span class="ei-wer">Schelling</span>
+            <span class="ei-leben">1775–1854</span>
+            <span class="ei-was"><span class="ei-was-lang">Sämmtliche Werke · </span>14 Bände</span>
+          </span>
+        </a>
+      </li>
+      <li class="ei-bild" data-ring="c" style="--i:2">
+        <a class="ei-bild-link" href="https://www.hegeledition.com/" aria-label="Hegel: zur Edition der Gesammelten Werke">
+          <span class="ei-rahmen"><span class="ei-tiefe"><picture>
+            <source type="image/webp" srcset="assets/bildnisse/hegel.webp 1x, assets/bildnisse/hegel@2x.webp 2x">
+            <img src="assets/bildnisse/hegel.jpg" srcset="assets/bildnisse/hegel@2x.jpg 2x" width="340" height="442" alt="Georg Wilhelm Friedrich Hegel, Gemälde von Jakob Schlesinger, 1831" decoding="async">
+          </picture></span></span>
+          <span class="ei-unter">
+            <span class="ei-wer">Hegel</span>
+            <span class="ei-leben">1770–1831</span>
+            <span class="ei-was"><span class="ei-was-lang">Gesammelte Werke · </span>17 Bände</span>
+          </span>
+        </a>
+      </li>
+    </ol>
   </div>
   <p class="st-von">Digitale Editionen von Giuliano Infantino</p>
   <a class="st-entdecken" href="#zahlen"><span class="st-entdecken-wort">Entdecken</span><svg class="st-entdecken-pfeil" viewBox="0 0 12 30" aria-hidden="true"><path d="M6 1v27M1.5 23.5 6 28.5l4.5-5"/></svg></a>
@@ -176,5 +219,6 @@
     <a href="https://giulianoinfantino.com" rel="me">Giuliano Infantino</a>.
   </p>
 </footer>
+<script src="assets/portal.js" defer></script>
 </body>
 </html>

@@ -136,6 +136,17 @@ seite('impressum.html', 'Impressum', f'''
     <h2>Texte und Daten</h2>
     <p>Die Texte Fichtes, Schellings und Hegels sind gemeinfrei. Die Hegel-Edition gibt allein Hegels Text wieder, nicht den urheberrechtlich geschützten Apparat der Herausgeber der <em>Gesammelten Werke</em>. Die Daten der Editionen stehen unter CC&nbsp;BY&nbsp;4.0; Einzelheiten nennen die Editionen selbst.</p>
   </section>
+
+  <section class="legal-section">
+    <h2>Bildnachweis</h2>
+    <p>Die drei Bildnisse auf der Startseite sind gemeinfrei:</p>
+    <ul class="legal-list">
+      <li>Johann Gottlieb Fichte, Lithographie von Johann Friedrich Jugel nach einem Gemälde von Heinrich Anton Dähling (1808), Deutsche Fotothek Dresden (<a href="https://commons.wikimedia.org/wiki/File:Johann_Gottlieb_Fichte.jpg" target="_blank" rel="noopener">Wikimedia&nbsp;Commons</a>);</li>
+      <li>Friedrich Wilhelm Joseph Schelling, Gemälde von Joseph Karl Stieler (1835) (<a href="https://commons.wikimedia.org/wiki/Category:Friedrich_Wilhelm_Joseph_Schelling" target="_blank" rel="noopener">Wikimedia&nbsp;Commons</a>);</li>
+      <li>Georg Wilhelm Friedrich Hegel, Gemälde von Jakob Schlesinger (1831) (<a href="https://commons.wikimedia.org/wiki/File:1831_Schlesinger_Philosoph_Georg_Friedrich_Wilhelm_Hegel_anagoria.JPG" target="_blank" rel="noopener">Wikimedia&nbsp;Commons</a>).</li>
+    </ul>
+    <p>Die Aufnahmen sind dort als gemeinfrei ausgewiesen; für originalgetreue Vervielfältigungen gemeinfreier visueller Werke schließt § 68 UrhG ein eigenes Schutzrecht aus. Für die Startseite sind sie zugeschnitten und im Ton angeglichen, das Bildnis Fichtes in Grau, solange seine Edition in Vorbereitung ist.</p>
+  </section>
 </main>''')
 
 seite('datenschutz.html', 'Datenschutz', '''
