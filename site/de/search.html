@@ -486,7 +486,7 @@
     if (!bereit) return;   // wird nach „bereit“ nachgeholt
     anfrage++;
     worker.postMessage({ typ: 'suche', id: anfrage, q: S.q, baende: S.baende, arten: S.arten,
-                         aus: S.aus, seiten: S.seiten, ordnung: S.ordnung, jahre: S.jahre, gattung: S.gattung, hervor: S.hervor });
+                         aus: S.aus, seiten: S.seiten, ordnung: S.ordnung, hervor: S.hervor, jahre: S.jahre, gattung: S.gattung });
   }
 
   // Ohne Anfrage zeigt die Seite nur Titel, Feld, Bereich und Beispiele
@@ -578,6 +578,11 @@
       if (!S.arten.t && !S.arten.n && !S.arten.h) S.arten[a] = 1;   // nie gar nichts
       malArten(); suche(true);
     });
+  });
+  // Nur Hervorhebungen: gesperrte oder kursive Wörter des Drucks
+  $('rch-hervor').addEventListener('click', function () {
+    S.hervor = !S.hervor; this.setAttribute('aria-pressed', S.hervor ? 'true' : 'false');
+    if (S.q) suche(true); else schreibeAdresse(true);
   });
   function malAnsicht() {
     document.querySelectorAll('.rch-ansichten button').forEach(function (b) {
@@ -779,11 +784,6 @@
     });
   });
   $('rch-zeit-alle').addEventListener('click', function () { S.jahre = null; S.gattung = ''; neuGefiltert(); });
-  // Nur Hervorhebungen: gesperrte oder kursive Wörter des Drucks
-  $('rch-hervor').addEventListener('click', function () {
-    S.hervor = !S.hervor; this.setAttribute('aria-pressed', S.hervor ? 'true' : 'false');
-    if (S.q) suche(true); else schreibeAdresse(true);
-  });
   var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };
   function stelleHtml(s) {
     return '<article class="rch-stelle" tabindex="-1" data-i="' + s.i + '" data-zitat="' + esc(s.zitat) + '" data-druck="' + esc(leserLink(s, true)) + '">' +

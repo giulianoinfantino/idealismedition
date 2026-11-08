@@ -51,12 +51,14 @@ ers('<p class="rch-unter" id="rch-unter">Volltext der Sämmtlichen Werke · 14 B
 ers('''            <button type="button" data-q="&quot;das reine Seyn&quot;" title="genaue Wortfolge">„das reine Seyn“</button>
             <button type="button" data-q="Begriff* NEAR/10 Objectivität" title="Nähe, mit Wortanfang">Begriff* NEAR/10 Objectivität</button>
             <button type="button" data-q="*seyn" title="Wortende: Daseyn, Fürsichseyn …">*seyn</button>
+            <button type="button" data-q="Begriff~" title="mit gebeugten Formen: Begriffe, Begriffs …">Begriff~</button>
             <button type="button" data-q="=Seyn" title="nur diese Schreibung">=Seyn</button>''',
     '''            <button type="button" data-q="&quot;intellectuelle Anschauung&quot;" title="genaue Wortfolge">„intellectuelle Anschauung“</button>
             <button type="button" data-q="Indifferenz" title="ein Wort, in allen Schreibungen">Indifferenz</button>
             <button type="button" data-q="Nicht-Ich" title="ein Wort">Nicht-Ich</button>
             <button type="button" data-q="Schöpfung NEAR/8 Freiheit" title="Nähe">Schöpfung NEAR/8 Freiheit</button>
-            <button type="button" data-q="*seyn" title="Wortende: Daseyn, Fürsichseyn …">*seyn</button>''')
+            <button type="button" data-q="*seyn" title="Wortende: Daseyn, Fürsichseyn …">*seyn</button>
+            <button type="button" data-q="Begriff~" title="mit gebeugten Formen: Begriffe, Begriffs …">Begriff~</button>''')
 ers('„und“, „oder“, „nicht“ in Kleinbuchstaben sind Wörter.</p>',
     '„und“, „oder“, „nicht“ in Kleinbuchstaben sind Wörter. Bei Hegel wird nur Hegels Text durchsucht, nie der Apparat der Herausgeber.</p>')
 
@@ -229,7 +231,7 @@ ers("if (S.seiten) p.set('seiten', S.seiten.work + ':' + S.seiten.von + '-' + S.
 ers("S.seiten = sm ? { work: sm[1], von: +sm[2], bis: +sm[3] } : null;",
     "S.seiten = sm ? { work: sm[1], von: +sm[2], bis: +sm[3] } : null;\n    var jm = /^(\\d{4})-(\\d{4})$/.exec(p.get('jahre') || '');\n    S.jahre = jm ? { von: +jm[1], bis: +jm[2] } : null;\n    S.gattung = /^[dvne]{1,3}$/.test(p.get('gattung') || '') ? p.get('gattung') : '';")
 ers("malArten(); malAnsicht(); spiegeln();", "malArten(); malAnsicht(); malZeit(); spiegeln();")
-ers("aus: S.aus, seiten: S.seiten, ordnung: S.ordnung });", "aus: S.aus, seiten: S.seiten, ordnung: S.ordnung, jahre: S.jahre, gattung: S.gattung });")
+ers("ordnung: S.ordnung, hervor: S.hervor });", "ordnung: S.ordnung, hervor: S.hervor, jahre: S.jahre, gattung: S.gattung });")
 ers('<div class="kopf"><span>Bände</span><button type="button" id="rch-alle" hidden>alle</button></div>',
     """<div class="rch-zeit" id="rch-zeit">
         <div class="kopf"><span>Zeit</span><button type="button" id="rch-zeit-alle" hidden>alle</button></div>
@@ -246,36 +248,9 @@ ers('<div class="kopf"><span>Bände</span><button type="button" id="rch-alle" hi
       </div>
       <div class="kopf"><span>Bände</span><button type="button" id="rch-alle" hidden>alle</button></div>""")
 
-# ── Beugungsformen (Wort~) und „Nur Hervorhebungen“ (recherche-kern.js: opt.hervor, Blatt flex) ──
-ers('<dt>=Seyn</dt><dd>nur genau diese Schreibung</dd>',
-    '<dt>=Seyn</dt><dd>nur genau diese Schreibung</dd>\n              <dt>Begriff~</dt><dd>auch die gebeugten Formen<i>Begriffe, Begriffs, Begriffes, Begriffen</i></dd>')
-ers('<dt>"…"</dt><dd>genaue Wortfolge, auch über den Seitenwechsel</dd>',
-    '<dt>"…"</dt><dd>genaue Wortfolge, auch über den Seitenwechsel</dd>\n              <dt>Nur Hervorhebungen</dt><dd>Schalter unter dem Feld: nur Wörter, die der Druck sperrt oder kursiv setzt</dd>')
+# ── Beugungsformen (Wort~) und „Nur Hervorhebungen“ stehen seit 08.11.2026 in der Suchseite der Editionen selbst
+# (werkzeug/suche_hervor_einbau.py); das Portal ergänzt nur die Tastenzeile um seine zwei Ansichten
 ers('<dt>1 · 2 · 3</dt><dd>Stellen, Konkordanz, Verteilung</dd>', '<dt>1 – 5</dt><dd>Stellen, Konkordanz, Verteilung, Vergleich, Zeit</dd>')
-ers('<button type="button" data-q="*seyn" title="Wortende: Daseyn, Fürsichseyn …">*seyn</button>',
-    '<button type="button" data-q="*seyn" title="Wortende: Daseyn, Fürsichseyn …">*seyn</button>\n            <button type="button" data-q="Begriff~" title="mit gebeugten Formen: Begriffe, Begriffs …">Begriff~</button>')
-ers('<button type="button" class="rch-chip" data-art="h" aria-pressed="true">Überschriften <span class="n"></span></button>',
-    '<button type="button" class="rch-chip" data-art="h" aria-pressed="true">Überschriften <span class="n"></span></button>\n        <button type="button" class="rch-chip rch-chip-hervor" id="rch-hervor" aria-pressed="false" title="Nur Wörter, die der Druck sperrt oder kursiv setzt">Nur Hervorhebungen</button>')
-# Die Arten-Kästchen tragen data-art; der neue Schalter nicht
-ers("document.querySelectorAll('.rch-chip').forEach(function (c) { c.setAttribute('aria-pressed', S.arten[c.dataset.art] ? 'true' : 'false'); });",
-    "document.querySelectorAll('.rch-chip[data-art]').forEach(function (c) { c.setAttribute('aria-pressed', S.arten[c.dataset.art] ? 'true' : 'false'); });")
-ers("  document.querySelectorAll('.rch-chip').forEach(function (c) {\n    c.addEventListener('click', function () {\n      var a = c.dataset.art;",
-    "  document.querySelectorAll('.rch-chip[data-art]').forEach(function (c) {\n    c.addEventListener('click', function () {\n      var a = c.dataset.art;")
-ers("    document.querySelectorAll('.rch-chip').forEach(function (c) { c.querySelector('.n').textContent = zahl(m.arten[c.dataset.art] || 0); });",
-    "    document.querySelectorAll('.rch-chip[data-art]').forEach(function (c) { c.querySelector('.n').textContent = zahl(m.arten[c.dataset.art] || 0); });")
-ers("kwicOrdnung: 'werk', jahre: null, gattung: ''", "kwicOrdnung: 'werk', jahre: null, gattung: '', hervor: false")
-ers("    if (S.gattung) p.set('gattung', S.gattung);", "    if (S.gattung) p.set('gattung', S.gattung);\n    if (S.hervor) p.set('hervor', '1');")
-ers("    S.gattung = /^[dvne]{1,3}$/.test(p.get('gattung') || '') ? p.get('gattung') : '';",
-    "    S.gattung = /^[dvne]{1,3}$/.test(p.get('gattung') || '') ? p.get('gattung') : '';\n    S.hervor = p.get('hervor') === '1';")
-ers("jahre: S.jahre, gattung: S.gattung });", "jahre: S.jahre, gattung: S.gattung, hervor: S.hervor });")
-ers("  $('rch-zeit-alle').addEventListener('click', function () { S.jahre = null; S.gattung = ''; neuGefiltert(); });",
-    """  $('rch-zeit-alle').addEventListener('click', function () { S.jahre = null; S.gattung = ''; neuGefiltert(); });
-  // Nur Hervorhebungen: gesperrte oder kursive Wörter des Drucks
-  $('rch-hervor').addEventListener('click', function () {
-    S.hervor = !S.hervor; this.setAttribute('aria-pressed', S.hervor ? 'true' : 'false');
-    if (S.q) suche(true); else schreibeAdresse(true);
-  });""")
-ers("malArten(); malAnsicht(); malZeit(); spiegeln();", "malArten(); malAnsicht(); malZeit(); spiegeln();\n    $('rch-hervor').setAttribute('aria-pressed', S.hervor ? 'true' : 'false');")
 
 # Was nach dem Ersetzen nicht mehr vorkommen darf: Seiten der Edition, die es im Portal nicht gibt
 for rest in ('search.html', 'index.html', 'text.html', 'news.html', 'edition-data', 'Gesammelten Werke'):
