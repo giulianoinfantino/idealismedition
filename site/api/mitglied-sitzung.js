@@ -1,7 +1,7 @@
 // Bezahlvorgang für eine der drei Monatsstufen: legt eine Stripe-Checkout-Sitzung an, die eingebettet auf
-// der Seite „Unterstützen“ erscheint (ui_mode embedded). Der Preis entsteht mit der Sitzung (price_data),
-// in Stripe muss nichts vorbereitet werden. Gefragt wird zusätzlich, freiwillig, der Name für die Friends of the Edition.
-const { STUFEN, stripe } = require('./_stripe');
+// der Seite „Unterstützen“ erscheint (ui_mode embedded). Die drei Monatspreise sind feste Preise mit lookup_key
+// (_stripe.js legt sie beim ersten Aufruf an). Gefragt wird zusätzlich, freiwillig, der Name für die Friends of the Edition.
+const { STUFEN, stripe, preis } = require('./_stripe');
 
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
@@ -13,16 +13,14 @@ module.exports = async (req, res) => {
   const en = d.sprache === 'en', s = STUFEN[stufe];
   if (!process.env.STRIPE_PUBLISHABLE_KEY) return res.status(503).json({ ok: false, grund: 'nicht eingerichtet' });
   try {
+    const preisId = await preis(stufe);
     const sitzung = await stripe('checkout/sessions', { methode: 'POST', felder: {
       ui_mode: 'embedded',
       mode: 'subscription',
       locale: en ? 'en' : 'de',
       return_url: `https://www.idealismedition.com${en ? '' : '/de'}/support?danke={CHECKOUT_SESSION_ID}`,
       'line_items[0][quantity]': '1',
-      'line_items[0][price_data][currency]': 'eur',
-      'line_items[0][price_data][unit_amount]': String(s.betrag),
-      'line_items[0][price_data][recurring][interval]': 'month',
-      'line_items[0][price_data][product_data][name]': `${s.name} · Edition Deutscher Idealismus`,
+      'line_items[0][price]': preisId,
       'custom_fields[0][key]': 'friends',
       'custom_fields[0][type]': 'text',
       'custom_fields[0][optional]': 'true',
