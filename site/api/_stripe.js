@@ -11,7 +11,7 @@ async function stripe(pfad, { methode = 'GET', felder = null, einmalig = null } 
   if (!key) { const e = new Error('nicht eingerichtet'); e.status = 503; throw e; }
   const r = await fetch('https://api.stripe.com/v1/' + pfad, {
     method: methode,
-    headers: Object.assign({ Authorization: `Bearer ${key}`, 'Content-Type': 'application/x-www-form-urlencoded', 'Stripe-Version': '2024-06-20' },
+    headers: Object.assign({ Authorization: `Bearer ${key}`, 'Content-Type': 'application/x-www-form-urlencoded', 'Stripe-Version': '2025-09-30.clover' },
                            einmalig ? { 'Idempotency-Key': einmalig } : {}),
     body: felder ? new URLSearchParams(felder).toString() : undefined,
   });
@@ -22,6 +22,9 @@ async function stripe(pfad, { methode = 'GET', felder = null, einmalig = null } 
 // Der Monatspreis einer Stufe, über seinen lookup_key gefunden. Fehlt er (erster Aufruf, oder ein neues Konto),
 // legt die Funktion Produkt und Preis einmal an; der Idempotenzschlüssel verhindert Doppel bei gleichzeitigen Aufrufen.
 // So muss im Stripe-Dashboard nichts vorbereitet werden, und es entsteht nicht je Bezahlvorgang ein neues Produkt.
+// Steuercode für Stripe Tax: „General – Electronically Supplied Services“. Ohne ihn lehnt ein Konto mit
+// eingeschaltetem Stripe Tax die Sitzung ab („the product tax code is missing“).
+const STEUERCODE = 'txcd_10000000';
 const GEMERKT = {};   // Preis-IDs je Stufe, solange die Funktion warm bleibt (spart eine Abfrage je Bezahlvorgang)
 async function preis(stufe) {
   if (GEMERKT[stufe]) return GEMERKT[stufe];
@@ -35,6 +38,7 @@ async function preisSuchen(stufe) {
   const produkt = await stripe('products', { methode: 'POST', einmalig: 'produkt-' + s.schluessel, felder: {
     name: `${s.name} · Edition Deutscher Idealismus`,
     description: 'Mitgliedschaft: freiwillige Unterstützung der digitalen Ausgaben von Fichte, Schelling und Hegel',
+    tax_code: STEUERCODE,
   } });
   const p = await stripe('prices', { methode: 'POST', einmalig: 'preis-' + s.schluessel, felder: {
     product: produkt.id, currency: 'eur', unit_amount: String(s.betrag), 'recurring[interval]': 'month',
