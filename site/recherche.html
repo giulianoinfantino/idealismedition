@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Recherche · Edition Deutscher Idealismus</title>
+  <meta name="description" content="Eine Volltextsuche über die Werke Schellings und Hegels: zitiert bis zur Druckzeile, mit Konkordanz, Verteilung über die Bände, Phrasen, Nähe und Orthographie-Ausgleich.">
+  <link rel="canonical" href="https://www.idealismedition.com/recherche">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Recherche · Edition Deutscher Idealismus">
+  <meta property="og:description" content="Eine Volltextsuche über Schelling und Hegel: zitiert bis zur Zeile, mit Konkordanz und Verteilung.">
+  <meta property="og:url" content="https://www.idealismedition.com/recherche">
+  <meta property="og:image" content="https://www.idealismedition.com/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon-96.png">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-title" content="Idealismus">
+  <meta name="theme-color" content="#232229">
+  <link rel="preload" href="assets/fonts/SourceSerif4-Variable-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/SourceSerif4-Variable-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/fonts.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/recherche.css">
+  <link rel="stylesheet" href="assets/recherche-portal.css">
+  <script src="assets/nur-eines.js"></script>
+<script src="assets/themefarbe.js"></script>
+</head>
+<body class="search-page recherche rch-ruhe">
+
+<a href="#search-input" class="skip-link">Zur Suche springen</a>
+
+<header class="site-header" id="site-header" role="banner">
+  <a href="/" class="site-title" aria-label="Edition Deutscher Idealismus, Startseite">
+    <svg class="ringe-mark site-title-rings" viewBox="0 0 200 120" aria-hidden="true"><circle class="ring ring-a" cx="100" cy="44" r="34" vector-effect="non-scaling-stroke"/><circle class="ring ring-b" cx="80" cy="72" r="34" vector-effect="non-scaling-stroke"/><circle class="ring ring-c" cx="120" cy="72" r="34" vector-effect="non-scaling-stroke"/></svg>
+    <span class="site-title-rows">
+      <span class="site-title-hegel">IDEALISMUS</span>
+      <span class="site-title-edition">edition</span>
+    </span>
+  </a>
+  <nav class="sitenav" aria-label="Hauptnavigation">
+    <ul>
+      <li><a href="/#editionen">Editionen</a></li>
+      <li><a href="recherche" class="current" aria-current="page">Recherche</a></li>
+      <li class="nav-weit"><a href="unterstuetzen">Unterstützen</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="rch" id="search-main">
+
+  <div class="rch-kopf">
+    <div class="rch-titel">
+      <h1>Recherche</h1>
+      <p class="rch-unter" id="rch-unter">Volltext von Schelling und Hegel · 31 Bände</p>
+    </div>
+
+    <form class="rch-feld" id="rch-form" role="search" autocomplete="off">
+      <div class="rch-eingabe" id="rch-eingabe">
+        <div class="rch-spiegel" id="rch-spiegel" aria-hidden="true"></div>
+        <input type="text" id="search-input" name="q" spellcheck="false" autocapitalize="off" autocorrect="off"
+               placeholder="Wort, Wendung oder Ausdruck  ·  Taste /"
+               aria-label="Suchanfrage" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="rch-vorschlag"
+               title="Tastenkürzel: „/“ springt von überall auf der Seite hierher">
+        <kbd class="rch-taste" aria-hidden="true">/</kbd>
+      </div>
+      <button type="submit" class="rch-los">Suchen</button>
+      <ul class="rch-vorschlag" id="rch-vorschlag" role="listbox" aria-label="Vorschläge" hidden></ul>
+    </form>
+
+    <p class="rch-lesart" id="rch-lesart" aria-live="polite"></p>
+    <p class="rch-fehler" id="rch-fehler" role="alert" hidden></p>
+    <div class="rch-formen" id="rch-formen" hidden></div>
+
+    <div class="rch-leiste">
+      <div class="rch-arten" role="group" aria-label="Suchen in">
+        <span class="rch-leiste-lab" aria-hidden="true">Suchen in</span>
+        <button type="button" class="rch-chip" data-art="t" aria-pressed="true">Haupttext <span class="n"></span></button>
+        <button type="button" class="rch-chip" data-art="n" aria-pressed="true">Anmerkungen <span class="n"></span></button>
+        <button type="button" class="rch-chip" data-art="h" aria-pressed="true">Überschriften <span class="n"></span></button>
+      </div>
+      <button type="button" class="rch-baende-knopf" id="rch-baende-knopf" aria-expanded="false" aria-controls="rch-baende">Alle Bände</button>
+      <div class="rch-ansichten" role="tablist" aria-label="Ansicht">
+        <button type="button" role="tab" id="tab-stellen" data-ansicht="stellen" aria-selected="true" aria-controls="search-results">Stellen<span class="kz">1</span></button>
+        <button type="button" role="tab" id="tab-konkordanz" data-ansicht="konkordanz" aria-selected="false" aria-controls="search-results">Konkordanz<span class="kz">2</span></button>
+        <button type="button" role="tab" id="tab-verteilung" data-ansicht="verteilung" aria-selected="false" aria-controls="search-results">Verteilung<span class="kz">3</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="rch-status">
+    <span id="search-status" aria-live="polite">Die Bände werden geladen, sobald Sie ins Suchfeld gehen.</span>
+    <span class="rch-aktionen" id="rch-aktionen" hidden>
+      <span id="rch-seitenfilter"></span>
+      <label>Ordnung
+        <select id="rch-ordnung" aria-label="Ordnung der Stellen">
+          <option value="werk">Werkfolge</option>
+          <option value="dichte">Trefferdichte</option>
+        </select>
+      </label>
+      <button type="button" id="rch-zitate" title="Alle Stellen als Zitatzeilen in die Zwischenablage">Zitate kopieren</button>
+      <button type="button" id="rch-csv" title="Als Tabelle speichern (CSV, für Excel und LibreOffice)">CSV</button>
+    </span>
+  </div>
+  <div class="rch-laden" id="rch-laden" hidden><i></i></div>
+
+  <div class="rch-koerper">
+    <details class="rch-baende" id="rch-baende" open>
+      <summary id="rch-baende-summary">Bände</summary>
+      <div class="kopf"><span>Bände</span><button type="button" id="rch-alle" hidden>alle</button></div>
+      <div class="rch-baende-liste" id="rch-baende-liste"></div>
+    </details>
+
+    <section class="rch-ergebnis" id="search-results" role="tabpanel" aria-labelledby="tab-stellen" tabindex="-1">
+      <div class="rch-hilfe" id="search-guide">
+        <div>
+          <h2>Zum Beispiel</h2>
+          <div class="rch-beispiele">
+            <button type="button" data-q="&quot;intellectuelle Anschauung&quot;" title="genaue Wortfolge">„intellectuelle Anschauung“</button>
+            <button type="button" data-q="Indifferenz" title="ein Wort, in allen Schreibungen">Indifferenz</button>
+            <button type="button" data-q="Schöpfung NEAR/8 Freiheit" title="Nähe">Schöpfung NEAR/8 Freiheit</button>
+            <button type="button" data-q="*seyn" title="Wortende: Daseyn, Fürsichseyn …">*seyn</button>
+          </div>
+        </div>
+        <div id="rch-zuletzt-feld" hidden>
+          <h2>Zuletzt gesucht</h2>
+          <div class="rch-zuletzt" id="rch-zuletzt"></div>
+        </div>
+        <details class="rch-sprache" id="rch-sprache">
+        <summary>Die Suchsprache</summary>
+        <div class="rch-syntax">
+          <section>
+            <h3>Wörter</h3>
+            <dl>
+              <dt>Seyn</dt><dd>das ganze Wort; die heutige Schreibung wird mitgesucht<i>Sein findet Seyn · Teil findet Theil</i></dd>
+              <dt>=Seyn</dt><dd>nur genau diese Schreibung</dd>
+              <dt>dialekt*</dt><dd>Wortanfang<i>Dialektik, dialektisch</i></dd>
+              <dt>*seyn</dt><dd>Wortende<i>Daseyn, Fürsichseyn</i></dd>
+              <dt>ver*ung</dt><dd>beliebige Buchstaben in der Mitte; <code>?</code> steht für genau einen</dd>
+              <dt>"…"</dt><dd>genaue Wortfolge, auch über den Seitenwechsel</dd>
+            </dl>
+          </section>
+          <section>
+            <h3>Verknüpfen</h3>
+            <dl>
+              <dt>AND · UND</dt><dd>beide Wörter in derselben Stelle; ein Leerzeichen genügt</dd>
+              <dt>OR · ODER</dt><dd>mindestens eines</dd>
+              <dt>NOT · NICHT</dt><dd>schließt aus<i>Maaß NOT Maaßstab</i></dd>
+              <dt>( … )</dt><dd>gruppiert<i>(Begriff OR Idee) AND Urtheil</i></dd>
+            </dl>
+          </section>
+          <section>
+            <h3>Nähe</h3>
+            <dl>
+              <dt>NEAR/n · NAH/n</dt><dd>höchstens <em>n</em> Wörter voneinander, in beliebiger Folge</dd>
+              <dt>BEFORE/n · VOR/n</dt><dd>das zweite Wort folgt dem ersten nach höchstens <em>n</em> Wörtern</dd>
+              <dt>SENTENCE · SATZ</dt><dd>beide im selben Satz</dd>
+            </dl>
+          </section>
+          <section>
+            <h3>Tasten</h3>
+            <dl>
+              <dt>/</dt><dd>ins Suchfeld</dd>
+              <dt>j · k</dt><dd>zur nächsten, vorigen Stelle</dd>
+              <dt>Enter</dt><dd>Stelle im Druckbild öffnen</dd>
+              <dt>c</dt><dd>Zitat der Stelle kopieren</dd>
+              <dt>1 · 2 · 3</dt><dd>Stellen, Konkordanz, Verteilung</dd>
+            </dl>
+          </section>
+        </div>
+        <p class="rch-unter">Operatoren gelten in Großbuchstaben; „und“, „oder“, „nicht“ in Kleinbuchstaben sind Wörter. Bei Hegel wird nur Hegels Text durchsucht, nie der Apparat der Herausgeber.</p>
+        </details>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div class="rch-toast" id="rch-toast" role="status" aria-live="polite"></div>
+
+<footer class="site-footer" id="search-footer">
+  <div>Edition Deutscher Idealismus · Fichte, Schelling, Hegel</div>
+  <nav>
+    <a href="https://www.schellingedition.com/">Schelling-Edition</a>
+    <a href="https://www.hegeledition.com/">Hegel-Edition</a>
+    <a href="unterstuetzen">Unterstützen</a>
+    <a href="datenschutz">Datenschutz</a>
+    <a href="impressum">Impressum</a>
+  </nav>
+</footer>
+
+<script src="assets/ortho.js"></script>
+<script src="assets/baende.js"></script>
+<script src="assets/recherche-kern.js"></script>
+<script>
+(function () {
+  'use strict';
+  // ══════════════════════════════════════════════════════════════════════
+  //  Recherche — die Seite. Rechnen tut der Worker (assets/recherche-worker.js);
+  //  hier wird nur gelesen, gezeichnet und verbunden.
+  // ══════════════════════════════════════════════════════════════════════
+  var H = window.HegelRecherche;
+  var $ = function (id) { return document.getElementById(id); };
+  var input = $('search-input'), spiegel = $('rch-spiegel'), results = $('search-results'), status = $('search-status');
+
+  var S = {
+    q: '', baende: [], arten: { t: 1, n: 1, h: 1 }, ansicht: 'stellen', ordnung: 'werk',
+    aus: [], seiten: null, kwicOrdnung: 'werk'
+  };
+  var BANDLISTE = (window.HEGEL_EDITION_BAENDE || []);
+  // Jede Stelle gehoert einer Edition; die Kennung des Bandes sagt welcher (sw- Schelling, gw- Hegel).
+  var EDITIONEN = window.IDEALISMUS_EDITIONEN || {};
+  var ED_VON = {};
+  (window.HEGEL_EDITION_BAENDE || []).forEach(function (b) { ED_VON[b.work] = b.ed; });
+  function edVon(w) { return ED_VON[w] || (/^sw-/.test(w) ? 'schelling' : /^gw-/.test(w) ? 'hegel' : ''); }
+  function edName(w) { var e = EDITIONEN[edVon(w)]; return e ? e.name : ''; }
+  function baendeVon(ed) { return BANDLISTE.filter(function (b) { return edVon(b.work) === ed; }).map(function (b) { return b.work; }); }
+  /** Die Edition, deren Baende genau gewaehlt sind, sonst null. */
+  function ganzeEdition() {
+    if (!S.baende.length) return null;
+    var ed = edVon(S.baende[0]), alle = baendeVon(ed);
+    return alle.length === S.baende.length && S.baende.every(function (w) { return edVon(w) === ed; }) ? ed : null;
+  }
+  var bereit = false, ladeStart = false, worker = null, anfrage = 0, letzteAntwort = null;
+  var STUECK = 30;
+
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function zahl(n) { return Number(n).toLocaleString('de-DE'); }
+
+  // ── Worker ──────────────────────────────────────────────────────────
+  function starte() {
+    if (ladeStart) return;
+    ladeStart = true;
+    try { worker = new Worker('assets/recherche-worker.js'); }
+    catch (e) { status.textContent = 'Die Suche braucht einen Browser mit Web Workers.'; return; }
+    worker.onmessage = empfange;
+    worker.onerror = function () { status.textContent = 'Die Suche konnte nicht gestartet werden. Bitte die Seite neu laden.'; };
+    $('rch-laden').hidden = false;
+    status.textContent = 'Lade die Bände …';
+    worker.postMessage({ typ: 'lade' });
+  }
+
+  function empfange(e) {
+    var m = e.data;
+    if (m.typ === 'fortschritt') {
+      $('rch-laden').firstElementChild.style.width = (m.fertig / m.gesamt * 100) + '%';
+      status.textContent = 'Lade die Bände … ' + m.fertig + ' von ' + m.gesamt;
+    } else if (m.typ === 'bereit') {
+      bereit = true;
+      BANDLISTE = m.baende;
+      $('rch-laden').hidden = true;
+      $('rch-unter').textContent = 'Volltext von Schelling und Hegel · ' + m.baende.length + ' Bände · ' + zahl(m.woerter) + ' Wörter';
+      zeichneBaende(null);
+      if (S.q) suche(false); else status.textContent = 'Bereit. ' + zahl(m.woerter) + ' Wörter in ' + m.baende.length + ' Bänden.';
+    } else if (m.typ === 'ergebnis') {
+      if (m.id !== anfrage) return;
+      zeigeErgebnis(m);
+    } else if (m.typ === 'stellen') {
+      if (m.id !== anfrage) { wartet = false; return; }
+      zeichneStellen(m);
+    } else if (m.typ === 'kwic') {
+      if (m.id !== anfrage) { wartet = false; return; }
+      zeichneKwic(m);
+    } else if (m.typ === 'export') {
+      if (m.id !== anfrage) return;
+      fertigExport(m);
+    } else if (m.typ === 'vorschlag') {
+      zeigeVorschlag(m);
+    } else if (m.typ === 'fehler') {
+      $('rch-laden').hidden = true;
+      status.textContent = 'Fehler: ' + m.text;
+    }
+  }
+
+  // ── Feld: Farben, Lesart, Fehler ────────────────────────────────────
+  function spiegeln() {
+    var q = input.value, g = H.lies(q), out = '', p = 0;
+    var fehlStellen = g.fehler;
+    g.teile.forEach(function (t) {
+      out += esc(q.slice(p, t.von));
+      var fehl = fehlStellen.some(function (f) { return f.von === t.von; });
+      out += '<span class="s-' + t.art + (fehl ? ' s-fehl' : '') + '">' + esc(q.slice(t.von, t.bis)) + '</span>';
+      p = t.bis;
+    });
+    out += esc(q.slice(p));
+    spiegel.innerHTML = out + ' ';
+    spiegel.scrollLeft = input.scrollLeft;
+    var l = H.lesart(g.ast);
+    $('rch-lesart').innerHTML = q.trim() ? (l ? 'Gesucht: ' + esc(l).replace(/„([^“]*)“/g, '„<b>$1</b>“') : '') : '';
+    var fe = $('rch-fehler');
+    if (q.trim() && g.fehler.length) { fe.textContent = g.fehler[0].text + (g.ast ? ' Gesucht wird, was sich lesen ließ.' : ''); fe.hidden = false; }
+    else fe.hidden = true;
+    return g;
+  }
+  ['scroll', 'keyup', 'click', 'select'].forEach(function (ev) {
+    input.addEventListener(ev, function () { spiegel.scrollLeft = input.scrollLeft; });
+  });
+
+  var tippZeit = null;
+  input.addEventListener('input', function () {
+    spiegeln();
+    starte();
+    clearTimeout(tippZeit);
+    tippZeit = setTimeout(function () { S.q = input.value.trim(); S.aus = []; S.seiten = null; suche(false); }, 160);
+    fordereVorschlag();
+  });
+  input.addEventListener('focus', function () { starte(); if (!input.value.trim()) zeigeZuletzt(); });
+  $('rch-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (vorschlagWahl >= 0) { nimmVorschlag(vorschlagWahl); return; }
+    schliesseVorschlag();
+    clearTimeout(tippZeit);
+    S.q = input.value.trim();
+    merkeZuletzt(S.q);
+    suche(true);
+  });
+
+  // ── Vorschlaege ────────────────────────────────────────────────────
+  var vorschlagWahl = -1, vorschlagListe = [], vorschlagId = 0;
+  function letztesWort() {
+    var v = input.value, ende = input.selectionStart == null ? v.length : input.selectionStart;
+    if (ende !== v.length) return null;
+    var m = /(^|[\s(])(=?)([\p{L}\p{N}]{2,})$/u.exec(v);
+    if (!m) return null;
+    if (/^(AND|OR|NOT|UND|ODER|NICHT|SATZ|SENTENCE)$/.test(m[3])) return null;
+    var vorher = v.slice(0, m.index + m[1].length);
+    if ((vorher.match(/"/g) || []).length % 2) return null;
+    return { wort: m[3], von: m.index + m[1].length + m[2].length };
+  }
+  function fordereVorschlag() {
+    var lw = letztesWort();
+    if (!lw || !bereit) { schliesseVorschlag(); return; }
+    worker.postMessage({ typ: 'vorschlag', id: ++vorschlagId, praefix: lw.wort });
+  }
+  function zeigeVorschlag(m) {
+    if (m.id !== vorschlagId) return;
+    var lw = letztesWort(), ul = $('rch-vorschlag');
+    vorschlagListe = (m.liste || []).filter(function (x) { return !lw || x.form.toLowerCase() !== lw.wort.toLowerCase() || m.liste.length > 1; });
+    if (!lw || !vorschlagListe.length || document.activeElement !== input) { schliesseVorschlag(); return; }
+    ul.innerHTML = '<li class="kopf" role="presentation">Wörter der Edition</li>' + vorschlagListe.map(function (x, i) {
+      return '<li role="option" id="rv-' + i + '" data-i="' + i + '" aria-selected="false"><span>' + esc(x.form) + '</span><span class="n">' + zahl(x.n) + '</span></li>';
+    }).join('');
+    ul.hidden = false; input.setAttribute('aria-expanded', 'true');
+    vorschlagWahl = -1;
+  }
+  function schliesseVorschlag() {
+    var ul = $('rch-vorschlag'); ul.hidden = true; ul.innerHTML = '';
+    input.setAttribute('aria-expanded', 'false'); input.removeAttribute('aria-activedescendant');
+    vorschlagWahl = -1; vorschlagListe = [];
+  }
+  function markiereVorschlag(i) {
+    var lis = $('rch-vorschlag').querySelectorAll('li[role="option"]');
+    lis.forEach(function (li, k) { li.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+    vorschlagWahl = i;
+    if (i >= 0) input.setAttribute('aria-activedescendant', 'rv-' + i); else input.removeAttribute('aria-activedescendant');
+  }
+  function nimmVorschlag(i) {
+    var lw = letztesWort(), x = vorschlagListe[i];
+    if (!lw || !x) return;
+    input.value = input.value.slice(0, lw.von) + x.form + ' ';
+    schliesseVorschlag();
+    spiegeln();
+    S.q = input.value.trim(); suche(false);
+    input.focus();
+  }
+  $('rch-vorschlag').addEventListener('mousedown', function (e) {
+    var li = e.target.closest('li[data-i]');
+    if (!li) return;
+    e.preventDefault();
+    nimmVorschlag(+li.dataset.i);
+  });
+  input.addEventListener('keydown', function (e) {
+    var offen = !$('rch-vorschlag').hidden && vorschlagListe.length;
+    if (e.key === 'ArrowDown' && offen) { e.preventDefault(); markiereVorschlag(Math.min(vorschlagWahl + 1, vorschlagListe.length - 1)); }
+    else if (e.key === 'ArrowUp' && offen) { e.preventDefault(); markiereVorschlag(Math.max(vorschlagWahl - 1, -1)); }
+    else if (e.key === 'Tab' && offen && vorschlagWahl >= 0) { e.preventDefault(); nimmVorschlag(vorschlagWahl); }
+    else if (e.key === 'Escape') { if (offen) schliesseVorschlag(); else input.blur(); }
+  });
+  input.addEventListener('blur', function () { setTimeout(schliesseVorschlag, 120); });
+
+  // ── Zuletzt gesucht (nur in diesem Browser) ─────────────────────────
+  var ZL = 'idealismus-recherche-zuletzt';
+  function zuletzt() { try { return JSON.parse(localStorage.getItem(ZL) || '[]'); } catch (_) { return []; } }
+  function merkeZuletzt(q) {
+    if (!q) return;
+    var l = zuletzt().filter(function (x) { return x !== q; });
+    l.unshift(q);
+    try { localStorage.setItem(ZL, JSON.stringify(l.slice(0, 10))); } catch (_) {}
+  }
+  function zeigeZuletzt() {
+    var l = zuletzt(), feld = $('rch-zuletzt-feld');
+    if (!feld) return;
+    feld.hidden = !l.length;
+    $('rch-zuletzt').innerHTML = l.map(function (q) { return '<a href="?q=' + encodeURIComponent(q) + '" data-q="' + esc(q) + '">' + esc(q) + '</a>'; }).join('');
+  }
+
+  // ── Adresse ─────────────────────────────────────────────────────────
+  function schreibeAdresse(neu) {
+    var p = new URLSearchParams();
+    if (S.q) p.set('q', S.q);
+    var ganz = ganzeEdition();
+    if (ganz) p.set('ed', ganz); else if (S.baende.length) p.set('work', S.baende.join(','));
+    var a = (S.arten.t ? 't' : '') + (S.arten.n ? 'n' : '') + (S.arten.h ? 'h' : '');
+    if (a !== 'tnh') p.set('in', a || '-');
+    if (S.ansicht !== 'stellen') p.set('ansicht', S.ansicht);
+    if (S.ordnung !== 'werk') p.set('ordnung', S.ordnung);
+    if (S.aus.length) p.set('ohne', S.aus.join(','));
+    if (S.seiten) p.set('seiten', S.seiten.work + ':' + S.seiten.von + '-' + S.seiten.bis);
+    var url = location.pathname + (p.toString() ? '?' + p.toString() : '');
+    if (url === location.pathname + location.search) return;
+    history[neu ? 'pushState' : 'replaceState'](null, '', url);
+  }
+  function leseAdresse() {
+    var p = new URLSearchParams(location.search);
+    S.q = (p.get('q') || '').trim();
+    S.baende = (p.get('work') || '').split(',').filter(Boolean);
+    if (!S.baende.length && p.get('ed')) S.baende = baendeVon(p.get('ed'));
+    var a = p.get('in');
+    S.arten = a ? { t: a.indexOf('t') >= 0 ? 1 : 0, n: a.indexOf('n') >= 0 ? 1 : 0, h: a.indexOf('h') >= 0 ? 1 : 0 } : { t: 1, n: 1, h: 1 };
+    S.ansicht = ['stellen', 'konkordanz', 'verteilung'].indexOf(p.get('ansicht')) >= 0 ? p.get('ansicht') : 'stellen';
+    S.ordnung = p.get('ordnung') === 'dichte' ? 'dichte' : 'werk';
+    S.aus = (p.get('ohne') || '').split(',').filter(Boolean);
+    var sm = /^([\w-]+):(\d+)-(\d+)$/.exec(p.get('seiten') || '');
+    S.seiten = sm ? { work: sm[1], von: +sm[2], bis: +sm[3] } : null;
+    input.value = S.q;
+    $('rch-ordnung').value = S.ordnung;
+    malArten(); malAnsicht(); spiegeln();
+  }
+  window.addEventListener('popstate', function () { leseAdresse(); if (S.q) { starte(); suche(false); } else leer(); });
+
+  // ── Suchen ──────────────────────────────────────────────────────────
+  function suche(neu) {
+    schreibeAdresse(neu);
+    if (!S.q) { leer(); return; }
+    ruhe(false);
+    starte();
+    if (!bereit) return;   // wird nach „bereit“ nachgeholt
+    anfrage++;
+    worker.postMessage({ typ: 'suche', id: anfrage, q: S.q, baende: S.baende, arten: S.arten,
+                         aus: S.aus, seiten: S.seiten, ordnung: S.ordnung });
+  }
+
+  // Ohne Anfrage zeigt die Seite nur Titel, Feld, Bereich und Beispiele
+  // (body.rch-ruhe); Ansichten, Status und Bandliste kommen mit der ersten Anfrage.
+  function ruhe(an) { document.body.classList.toggle('rch-ruhe', !!an); }
+
+  function leer() {
+    ruhe(true);
+    letzteAntwort = null;
+    results.innerHTML = '';
+    results.appendChild(hilfe);
+    zeigeZuletzt();
+    $('rch-aktionen').hidden = true;
+    $('rch-formen').hidden = true;
+    document.querySelectorAll('.rch-chip .n').forEach(function (n) { n.textContent = ''; });
+    status.textContent = bereit ? 'Bereit.' : 'Die Bände werden geladen, sobald Sie ins Suchfeld gehen.';
+    zeichneBaende(null);
+  }
+  var hilfe = $('search-guide');
+
+  function zeigeErgebnis(m) {
+    letzteAntwort = m;
+    if (m.leer) {
+      results.innerHTML = '';
+      results.appendChild(hilfe);
+      status.textContent = m.fehler && m.fehler.length ? 'Die Anfrage enthält kein Suchwort.' : '';
+      return;
+    }
+    var g = m.gesamt;
+    status.innerHTML = g.stellen
+      ? '<b>' + zahl(g.stellen) + '</b> ' + (g.stellen === 1 ? 'Stelle' : 'Stellen') + ' auf ' + zahl(g.seiten) + ' ' + (g.seiten === 1 ? 'Seite' : 'Seiten') +
+        ' in ' + g.baende + ' ' + (g.baende === 1 ? 'Band' : 'Bänden') + ' · ' + zahl(g.vorkommen) + ' Vorkommen'
+      : 'Keine Stelle gefunden.';
+    $('rch-aktionen').hidden = !g.stellen;
+    document.querySelectorAll('.rch-chip').forEach(function (c) { c.querySelector('.n').textContent = zahl(m.arten[c.dataset.art] || 0); });
+    zeichneFormen(m.formen);
+    zeichneBaende(m.jeBand);
+    zeichneSeitenfilter();
+    if (!g.stellen) { keineTreffer(); return; }
+    zeichneAnsicht();
+  }
+
+  function keineTreffer() {
+    results.innerHTML = '<div class="rch-leer"><p>Keine Stelle für <strong>' + esc(S.q) + '</strong>' +
+      (S.baende.length ? ' in den gewählten Bänden' : '') + '.</p><ul>' +
+      '<li>Ein Wort meint das ganze Wort. Für Fortsetzungen <code>' + esc(S.q.split(/\s+/)[0].replace(/[^\p{L}\p{N}]/gu, '')) + '*</code> versuchen.</li>' +
+      '<li>Historische Schreibungen werden mitgesucht (Sein findet Seyn), Tippfehler nicht.</li>' +
+      (S.baende.length ? '<li><a href="#" data-aktion="alle">In allen Bänden suchen</a></li>' : '') +
+      (!(S.arten.t && S.arten.n && S.arten.h) ? '<li><a href="#" data-aktion="arten">Auch in Anmerkungen und Überschriften suchen</a></li>' : '') +
+      '</ul></div>';
+  }
+  results.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-aktion]');
+    if (!a) return;
+    e.preventDefault();
+    if (a.dataset.aktion === 'alle') { S.baende = []; suche(true); }
+    if (a.dataset.aktion === 'arten') { S.arten = { t: 1, n: 1, h: 1 }; malArten(); suche(true); }
+  });
+
+  // ── Formen ──────────────────────────────────────────────────────────
+  function zeichneFormen(formen) {
+    var feld = $('rch-formen');
+    var zeigen = (formen || []).filter(function (f) { return f.formen.length > 1 || f.formen.some(function (x) { return x.aus; }); });
+    if (!zeigen.length) { feld.hidden = true; feld.innerHTML = ''; return; }
+    feld.innerHTML = zeigen.map(function (f) {
+      return '<span class="wofuer">Formen zu „' + esc(f.roh) + '“</span>' + f.formen.map(function (x) {
+        return '<button type="button" class="rch-form" data-form="' + esc(x.key) + '" aria-pressed="' + (x.aus ? 'false' : 'true') + '" title="' + (x.aus ? 'wieder einschließen' : 'diese Form ausschließen') + '">' +
+          esc(x.form) + ' <span class="n">' + zahl(x.n) + '</span></button>';
+      }).join('') + (f.weitere ? '<span class="wofuer">und ' + f.weitere + ' weitere</span>' : '');
+    }).join('<span class="trenn"></span>');
+    feld.hidden = false;
+  }
+  $('rch-formen').addEventListener('click', function (e) {
+    var b = e.target.closest('.rch-form');
+    if (!b) return;
+    var f = b.dataset.form, i = S.aus.indexOf(f);
+    if (i >= 0) S.aus.splice(i, 1); else S.aus.push(f);
+    suche(true);
+  });
+
+  // ── Arten, Ansicht, Ordnung ─────────────────────────────────────────
+  function malArten() {
+    document.querySelectorAll('.rch-chip').forEach(function (c) { c.setAttribute('aria-pressed', S.arten[c.dataset.art] ? 'true' : 'false'); });
+  }
+  document.querySelectorAll('.rch-chip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      var a = c.dataset.art;
+      S.arten[a] = S.arten[a] ? 0 : 1;
+      if (!S.arten.t && !S.arten.n && !S.arten.h) S.arten[a] = 1;   // nie gar nichts
+      malArten(); suche(true);
+    });
+  });
+  function malAnsicht() {
+    document.querySelectorAll('.rch-ansichten button').forEach(function (b) {
+      var on = b.dataset.ansicht === S.ansicht;
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+      b.tabIndex = on ? 0 : -1;
+      if (on) results.setAttribute('aria-labelledby', b.id);
+    });
+  }
+  function setzeAnsicht(a) {
+    if (S.ansicht === a) return;
+    S.ansicht = a; malAnsicht(); schreibeAdresse(false);
+    if (letzteAntwort && letzteAntwort.gesamt && letzteAntwort.gesamt.stellen) zeichneAnsicht();
+  }
+  document.querySelectorAll('.rch-ansichten button').forEach(function (b) {
+    b.addEventListener('click', function () { setzeAnsicht(b.dataset.ansicht); });
+    b.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var alle = [].slice.call(document.querySelectorAll('.rch-ansichten button')), i = alle.indexOf(b);
+      var n = alle[(i + (e.key === 'ArrowRight' ? 1 : alle.length - 1)) % alle.length];
+      n.focus(); setzeAnsicht(n.dataset.ansicht);
+    });
+  });
+  $('rch-ordnung').addEventListener('change', function () { S.ordnung = this.value; suche(true); });
+
+  // ── Baende ──────────────────────────────────────────────────────────
+  function zeichneBaende(jeBand) {
+    var liste = $('rch-baende-liste');
+    var baende = jeBand || BANDLISTE.map(function (b) { return { work: b.work, sig: b.sig, title: b.title, stellen: null }; });
+    if (!baende.length && window.HEGEL_EDITION) baende = HEGEL_EDITION.works.map(function (w) { return { work: w.work_id, sig: w.siglum, title: w.title, stellen: null }; });
+    var max = 0;
+    baende.forEach(function (b) { if (b.stellen > max) max = b.stellen; });
+    var vorige = '';
+    liste.innerHTML = baende.map(function (b) {
+      var ed = edVon(b.work), kopf = '';
+      if (ed !== vorige) {
+        vorige = ed;
+        var alle = baendeVon(ed), gewaehlt = alle.length && alle.every(function (w) { return S.baende.indexOf(w) >= 0; });
+        kopf = '<button type="button" class="ei-bandkopf" data-ed="' + ed + '" aria-pressed="' + gewaehlt + '" title="nur die Bände dieser Edition">' +
+          esc(EDITIONEN[ed] ? EDITIONEN[ed].name : ed) + '<span>' + esc(EDITIONEN[ed] ? EDITIONEN[ed].ausgabe : '') + '</span></button>';
+      }
+      var an = S.baende.indexOf(b.work) >= 0;
+      var hat = b.stellen != null;
+      return kopf + '<button type="button" class="rch-band' + (hat && !b.stellen ? ' leer' : '') + '" data-work="' + b.work + '" aria-pressed="' + an + '" title="' + esc(b.title) + '">' +
+        '<span class="s">' + esc(b.sig) + '</span>' +
+        '<span><span class="t">' + esc(b.title) + '</span>' + (hat ? '<span class="bar"><i style="width:' + (max ? (b.stellen / max * 100).toFixed(1) : 0) + '%"></i></span>' : '') + '</span>' +
+        '<span class="c">' + (hat ? zahl(b.stellen) : '') + '</span></button>';
+    }).join('');
+    $('rch-alle').hidden = !S.baende.length;
+    var gesamt = BANDLISTE.length || baende.length;
+    $('rch-baende-knopf').textContent = S.baende.length ? (S.baende.length === 1 ? '1 Band gewählt' : S.baende.length + ' Bände gewählt') : 'Alle ' + gesamt + ' Bände';
+    var mit = jeBand ? jeBand.filter(function (b) { return b.stellen; }).length : 0;
+    $('rch-baende-summary').textContent = S.baende.length ? 'Bände: ' + S.baende.length + ' gewählt' : jeBand ? 'Bände · ' + mit + ' mit Treffern' : 'Bände';
+  }
+  $('rch-baende-liste').addEventListener('click', function (e) {
+    var k = e.target.closest('.ei-bandkopf');
+    if (k) {
+      var alle = baendeVon(k.dataset.ed), ganz = ganzeEdition() === k.dataset.ed;
+      S.baende = ganz ? [] : alle.slice();
+      if (S.seiten && S.baende.indexOf(S.seiten.work) < 0) S.seiten = null;
+      if (S.q) suche(true); else { zeichneBaende(null); schreibeAdresse(true); }
+      return;
+    }
+    var b = e.target.closest('.rch-band');
+    if (!b) return;
+    var w = b.dataset.work, i = S.baende.indexOf(w);
+    if (i >= 0) S.baende.splice(i, 1); else S.baende.push(w);
+    if (S.seiten && S.baende.indexOf(S.seiten.work) < 0) S.seiten = null;
+    S.baende.sort(function (a, b) { return reihe(a) - reihe(b); });
+    if (S.q) suche(true); else { zeichneBaende(null); schreibeAdresse(true); }
+  });
+  $('rch-alle').addEventListener('click', function () { S.baende = []; S.seiten = null; if (S.q) suche(true); else { zeichneBaende(null); schreibeAdresse(true); } });
+  function reihe(w) { for (var i = 0; i < BANDLISTE.length; i++) if (BANDLISTE[i].work === w) return i; return 99; }
+  function sigVon(w) { for (var i = 0; i < BANDLISTE.length; i++) if (BANDLISTE[i].work === w) return BANDLISTE[i].sig; return w; }
+
+  function zeichneSeitenfilter() {
+    var f = $('rch-seitenfilter');
+    f.innerHTML = S.seiten ? '<span class="rch-filter">' + esc(sigVon(S.seiten.work)) + ', S. ' + S.seiten.von + '–' + S.seiten.bis +
+      '<button type="button" aria-label="Seitenbereich aufheben" id="rch-seiten-weg">×</button></span>' : '';
+    var x = $('rch-seiten-weg');
+    if (x) x.addEventListener('click', function () { S.seiten = null; suche(true); });
+  }
+
+  // ── Ansichten ───────────────────────────────────────────────────────
+  var nachschub = null;
+  function nachschubAus() { if (nachschub) { nachschub.disconnect(); nachschub = null; } }
+
+  function zeichneAnsicht() {
+    nachschubAus();
+    wartet = false;   // eine Antwort auf die vorige Ansicht wird verworfen
+    results.innerHTML = '';
+    if (S.ansicht === 'stellen') { stellenGeladen = 0; gruppenOffen = letzteAntwort.gruppen.slice(); fordereStellen(); }
+    else if (S.ansicht === 'konkordanz') { kwicGeladen = 0; baueKwicRahmen(); fordereKwic(); }
+    else zeichneVerteilung();
+  }
+
+  // Stellen
+  var stellenGeladen = 0, stellenGesamt = 0, gruppenOffen = [], wartet = false;
+  function fordereStellen() {
+    if (wartet) return;
+    wartet = true;
+    worker.postMessage({ typ: 'stellen', id: anfrage, von: stellenGeladen, bis: stellenGeladen + STUECK });
+  }
+  function zeichneStellen(m) {
+    wartet = false;
+    if (S.ansicht !== 'stellen' || m.von !== stellenGeladen) return;
+    stellenGesamt = m.gesamt;
+    var html = '';
+    m.stellen.forEach(function (s) {
+      while (gruppenOffen.length && gruppenOffen[0].ab === s.i) {
+        var g = gruppenOffen.shift();
+        html += '<div class="rch-gruppe"><h2><span class="ei-autor">' + esc(edName(g.work)) + '</span> ' + esc(g.sig) + '</h2><span>' + esc(g.title) + ' · ' + zahl(g.n) + ' ' + (g.n === 1 ? 'Stelle' : 'Stellen') + '</span></div>';
+      }
+      html += stelleHtml(s);
+    });
+    var marke = results.querySelector('.rch-marke');
+    if (marke) marke.insertAdjacentHTML('beforebegin', html); else results.insertAdjacentHTML('beforeend', html);
+    stellenGeladen += m.stellen.length;
+    if (stellenGeladen < stellenGesamt) {
+      if (!marke) {
+        marke = document.createElement('div'); marke.className = 'rch-marke'; results.appendChild(marke);
+        nachschub = new IntersectionObserver(function (es) { if (es.some(function (x) { return x.isIntersecting; })) fordereStellen(); }, { rootMargin: '900px 0px' });
+        nachschub.observe(marke);
+      }
+      // Der Beobachter meldet nur Wechsel. Steht die Marke nach diesem Stueck
+      // noch im Vorlauf (grosser Schirm, kurze Stellen), kaeme nie wieder eine
+      // Meldung — also selbst nachsehen.
+      noch(marke, fordereStellen);
+    } else { nachschubAus(); if (marke) marke.remove(); }
+  }
+  function noch(marke, weiter) {
+    setTimeout(function () {
+      if (marke.isConnected && marke.getBoundingClientRect().top < window.innerHeight + 900) weiter();
+    }, 0);
+  }
+  function leserLink(s, druck) {
+    var p = new URLSearchParams();
+    p.set('work', s.work);
+    if (s.woerter && s.woerter.length) p.set('q', s.woerter.join(' '));
+    if (druck && s.ziel.von != null) p.set('z', s.ziel.von + (s.ziel.bis != null && s.ziel.bis !== s.ziel.von ? '-' + s.ziel.bis : ''));
+    if (druck) p.set('druck', '1');
+    var e = EDITIONEN[edVon(s.work)];
+    return (e && e.url ? e.url : '') + '/text?' + p.toString() + '#page-' + s.ziel.pdf;
+  }
+  var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };
+  function stelleHtml(s) {
+    return '<article class="rch-stelle" tabindex="-1" data-i="' + s.i + '" data-zitat="' + esc(s.zitat) + '" data-druck="' + esc(leserLink(s, true)) + '">' +
+      '<div class="rch-zitat">' + (S.ordnung === 'dichte' ? '<span class="ei-autor">' + esc(edName(s.work)) + '</span> ' : '') + esc(s.zitat) + (ARTNAME[s.art] ? '<span class="art">' + ARTNAME[s.art] + '</span>' : '') +
+      '<button type="button" data-kopie="' + esc(s.zitat) + '">Zitat kopieren</button></div>' +
+      (s.abschnitt ? '<div class="rch-pfad">' + esc(s.abschnitt) + '</div>' : '') +
+      '<p class="rch-text">' + s.html + '</p>' +
+      '<div class="rch-wege"><a href="' + esc(leserLink(s, true)) + '">Im Druckbild öffnen →</a><a href="' + esc(leserLink(s, false)) + '">Lesefassung</a></div>' +
+      '</article>';
+  }
+
+  // Konkordanz
+  var kwicGeladen = 0, KW = 200;
+  function baueKwicRahmen() {
+    results.innerHTML = '<div class="rch-kwic-leiste" role="group" aria-label="Konkordanz ordnen"><span>Ordnen nach</span>' +
+      '<button type="button" data-ko="werk">Werkfolge</button><button type="button" data-ko="links">Wort davor</button><button type="button" data-ko="rechts">Wort danach</button>' +
+      '<span id="rch-kwic-zahl"></span><button type="button" id="rch-kwic-csv">Als CSV</button></div>' +
+      '<div class="rch-kwic-rahmen"><table class="rch-kwic"><colgroup><col class="cz"><col><col class="cw"><col></colgroup><tbody id="rch-kwic-body"></tbody></table></div>';
+    results.querySelectorAll('[data-ko]').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.dataset.ko === S.kwicOrdnung ? 'true' : 'false');
+      b.addEventListener('click', function () { S.kwicOrdnung = b.dataset.ko; zeichneAnsicht(); });
+    });
+    $('rch-kwic-csv').addEventListener('click', function () { exportiere('kwic'); });
+  }
+  function fordereKwic() {
+    if (wartet) return;
+    wartet = true;
+    worker.postMessage({ typ: 'kwic', id: anfrage, von: kwicGeladen, bis: kwicGeladen + KW, ordnung: S.kwicOrdnung });
+  }
+  function zeichneKwic(m) {
+    wartet = false;
+    if (S.ansicht !== 'konkordanz' || m.von !== kwicGeladen) return;
+    var body = $('rch-kwic-body');
+    if (!body) return;
+    body.insertAdjacentHTML('beforeend', m.zeilen.map(function (z) {
+      return '<tr><td class="z"><a href="' + esc(leserLink(z, true)) + '">' + esc(z.zitat) + '</a></td>' +
+        '<td class="l"><span>' + esc(z.links) + '</span></td><td class="w"><mark>' + esc(z.wort) + '</mark></td><td class="r">' + esc(z.rechts) + '</td></tr>';
+    }).join(''));
+    kwicGeladen += m.zeilen.length;
+    $('rch-kwic-zahl').textContent = zahl(m.gesamt) + ' Zeilen' + (m.sortierbar ? '' : ' · zu viele, um sie zu ordnen');
+    if (!m.sortierbar) results.querySelectorAll('[data-ko="links"],[data-ko="rechts"]').forEach(function (b) { b.disabled = true; });
+    var marke = results.querySelector('.rch-marke');
+    if (kwicGeladen < m.gesamt) {
+      if (!marke) {
+        marke = document.createElement('div'); marke.className = 'rch-marke'; results.appendChild(marke);
+        nachschub = new IntersectionObserver(function (es) { if (es.some(function (x) { return x.isIntersecting; })) fordereKwic(); }, { rootMargin: '900px 0px' });
+        nachschub.observe(marke);
+      }
+      noch(marke, fordereKwic);
+    } else { nachschubAus(); if (marke) marke.remove(); }
+  }
+
+  // Verteilung
+  function zeichneVerteilung() {
+    var jb = letzteAntwort.jeBand.filter(function (b) { return !S.baende.length || S.baende.indexOf(b.work) >= 0; });
+    jb.forEach(function (b) { b.dichte = b.woerter ? b.vorkommen / b.woerter * 10000 : 0; });
+    var max = Math.max.apply(null, jb.map(function (b) { return b.dichte; }).concat([0.0001]));
+    var schritt = feineSkala(max), oben = Math.ceil(max / schritt) * schritt;
+    var X0 = 64, W = 560, zeile = 22, Y0 = 8, h = Y0 + jb.length * zeile + 26;
+    var x = function (v) { return X0 + v / oben * W; };
+    var svg = '<svg viewBox="0 0 680 ' + h + '" role="img" aria-label="Häufigkeit je 10 000 Wörter in jedem Band">';
+    for (var t = 0; t <= oben + 1e-9; t += schritt) {
+      svg += '<line class="gitter" x1="' + x(t) + '" y1="' + (Y0 - 2) + '" x2="' + x(t) + '" y2="' + (h - 22) + '"/>' +
+        '<text x="' + x(t) + '" y="' + (h - 6) + '" text-anchor="middle">' + zahlKurz(t) + '</text>';
+    }
+    jb.forEach(function (b, i) {
+      var y = Y0 + i * zeile, w = Math.max(b.vorkommen ? 1.5 : 0, x(b.dichte) - X0);
+      svg += '<g class="zeile" data-work="' + b.work + '" tabindex="0" role="button" aria-label="' + esc(b.sig) + ': ' + zahlKomma(b.dichte) + ' je 10 000 Wörter, ' + b.vorkommen + ' Vorkommen; Stellen zeigen">' +
+        '<rect x="0" y="' + y + '" width="680" height="' + zeile + '" fill="transparent"/>' +
+        '<text class="lab" x="' + (X0 - 10) + '" y="' + (y + 14.5) + '" text-anchor="end">' + esc(b.sig) + '</text>' +
+        '<rect class="balken" x="' + X0 + '" y="' + (y + 4) + '" width="' + w.toFixed(1) + '" height="13" rx="1"/>' +
+        (b.vorkommen ? '<text class="val" x="' + (X0 + w + 6).toFixed(1) + '" y="' + (y + 14.5) + '">' + zahlKomma(b.dichte) + '  (' + zahl(b.vorkommen) + ')</text>' : '') +
+        '</g>';
+    });
+    svg += '</svg>';
+    var mit = jb.filter(function (b) { return b.vorkommen; }).sort(function (a, b) { return b.vorkommen - a.vorkommen; });
+    var topo = mit.slice(0, 18).map(function (b) {
+      var hm = Math.max.apply(null, b.hist.concat([1])), spanne = b.bis - b.von + 1;
+      var zellen = b.hist.map(function (v, i) {
+        var von = Math.round(b.von + i * spanne / 40), bis = Math.max(von, Math.round(b.von + (i + 1) * spanne / 40) - 1);
+        return v ? '<button type="button" style="height:' + Math.max(6, v / hm * 100).toFixed(0) + '%" data-work="' + b.work + '" data-von="' + von + '" data-bis="' + bis + '" aria-label="S. ' + von + '–' + bis + ': ' + v + ' Vorkommen" title="S. ' + von + '–' + bis + ' · ' + v + '"></button>'
+                 : '<button type="button" class="null" tabindex="-1" aria-hidden="true" style="height:1px"></button>';
+      }).join('');
+      return '<div><div class="rch-streifen-kopf"><span><b>' + esc(b.sig) + '</b>' + esc(b.title) + '</span><span>' + zahl(b.vorkommen) + ' Vorkommen</span></div>' +
+        '<div class="rch-streifen">' + zellen + '</div><div class="rch-streifen-fuss"><span>S. ' + b.von + '</span><span>S. ' + b.bis + '</span></div></div>';
+    }).join('');
+    results.innerHTML = '<div class="rch-vt"><div><h3>Je 10 000 Wörter</h3><p class="unter">Wie oft die Anfrage trifft, gemessen an der Länge jedes Bandes; in Klammern die Vorkommen. Ein Klick zeigt die Stellen des Bandes.</p>' + svg + '</div>' +
+      (topo ? '<div><h3>Im Band</h3><p class="unter">Jeder Band von seiner ersten bis zur letzten Seite, in vierzig Abschnitten. Ein Klick auf einen Abschnitt zeigt seine Stellen.</p><div class="rch-topo">' + topo + '</div></div>' : '') + '</div>';
+    results.querySelectorAll('.zeile').forEach(function (g) {
+      function los() { S.baende = [g.dataset.work]; S.seiten = null; S.ansicht = 'stellen'; malAnsicht(); suche(true); }
+      g.addEventListener('click', los);
+      g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); los(); } });
+    });
+    results.querySelectorAll('.rch-streifen button[data-work]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        S.baende = [b.dataset.work]; S.seiten = { work: b.dataset.work, von: +b.dataset.von, bis: +b.dataset.bis };
+        S.ansicht = 'stellen'; malAnsicht(); suche(true);
+      });
+    });
+  }
+  function feineSkala(max) {
+    var roh = max / 5, p = Math.pow(10, Math.floor(Math.log10(roh))), n = roh / p;
+    return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p;
+  }
+  function zahlKomma(v) { return (v >= 10 ? v.toFixed(0) : v >= 1 ? v.toFixed(1) : v.toFixed(2)).replace('.', ','); }
+  function zahlKurz(v) { return Number(v.toPrecision(6)).toLocaleString('de-DE'); }
+
+  // ── Kopieren, Export ────────────────────────────────────────────────
+  var toastZeit = null;
+  function toast(text, mono) {
+    var t = $('rch-toast');
+    t.innerHTML = esc(text) + (mono ? '<span>' + esc(mono) + '</span>' : '');
+    t.classList.add('zeige');
+    clearTimeout(toastZeit);
+    toastZeit = setTimeout(function () { t.classList.remove('zeige'); }, 1800);
+  }
+  function kopiere(text, meldung, mono) {
+    function ersatz() {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand('copy'); } catch (_) {}
+      ta.remove();
+      toast(ok ? meldung : 'Kopieren nicht möglich', ok ? mono : null);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { toast(meldung, mono); }, ersatz);
+    else ersatz();
+  }
+  results.addEventListener('click', function (e) {
+    var k = e.target.closest('[data-kopie]');
+    if (k) { kopiere(k.dataset.kopie, 'Kopiert', k.dataset.kopie); }
+  });
+  var exportArt = null;
+  function exportiere(art) { exportArt = art; worker.postMessage({ typ: 'export', id: anfrage, art: art }); }
+  $('rch-zitate').addEventListener('click', function () { exportiere('zitate'); });
+  $('rch-csv').addEventListener('click', function () { exportiere('stellen'); });
+  function fertigExport(m) {
+    if (m.art === 'zitate') { kopiere(m.text, 'Kopiert', zahl(m.text.trim().split('\n').length) + ' Zitate'); return; }
+    var name = 'idealismus-' + (m.art === 'kwic' ? 'konkordanz' : 'stellen') + '-' + S.q.replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '').slice(0, 40) + '.csv';
+    var blob = new Blob([m.text], { type: 'text/csv;charset=utf-8' }), a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    toast('Gespeichert', name);
+  }
+
+  // ── Beispiele, Zuletzt ──────────────────────────────────────────────
+  hilfe.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-q]');
+    if (!b) return;
+    e.preventDefault();
+    input.value = b.dataset.q; spiegeln();
+    S.q = b.dataset.q; S.aus = []; S.seiten = null;
+    merkeZuletzt(S.q); suche(true);
+  });
+
+  // ── Tasten ──────────────────────────────────────────────────────────
+  function fokusStelle(r) {
+    var alle = [].slice.call(results.querySelectorAll('.rch-stelle'));
+    if (!alle.length) return;
+    var jetzt = alle.indexOf(document.activeElement);
+    var n = alle[Math.max(0, Math.min(alle.length - 1, jetzt < 0 ? 0 : jetzt + r))];
+    n.focus({ preventScroll: true });
+    n.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var tag = (document.activeElement && document.activeElement.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    if (e.key === '/') { e.preventDefault(); input.focus(); input.select(); return; }
+    if (e.key === 'j') { e.preventDefault(); fokusStelle(1); }
+    else if (e.key === 'k') { e.preventDefault(); fokusStelle(-1); }
+    else if (e.key === '1') setzeAnsicht('stellen');
+    else if (e.key === '2') setzeAnsicht('konkordanz');
+    else if (e.key === '3') setzeAnsicht('verteilung');
+    else if (e.key === 'c' || e.key === 'Enter') {
+      var s = document.activeElement && document.activeElement.closest && document.activeElement.closest('.rch-stelle');
+      if (!s || document.activeElement !== s) return;
+      e.preventDefault();
+      if (e.key === 'c') kopiere(s.dataset.zitat, 'Kopiert', s.dataset.zitat);
+      else location.href = s.dataset.druck;
+    }
+  });
+
+  // In der ersten Ansicht klappt „Alle Bände“ die Bandliste unter dem Feld auf.
+  $('rch-baende-knopf').addEventListener('click', function () {
+    var auf = !document.body.classList.contains('rch-baende-auf');
+    document.body.classList.toggle('rch-baende-auf', auf);
+    this.setAttribute('aria-expanded', auf ? 'true' : 'false');
+    if (auf) $('rch-baende').open = true;
+  });
+
+  // ── Start ───────────────────────────────────────────────────────────
+  // Auf schmalen Schirmen steht die Bandliste zugeklappt ueber den Treffern.
+  if (window.matchMedia('(max-width: 900px)').matches) $('rch-baende').open = false;
+  zeichneBaende(null);
+  leseAdresse();
+  ruhe(!S.q);
+  zeigeZuletzt();
+  if (S.q) { starte(); }
+  else (window.requestIdleCallback || function (f) { setTimeout(f, 2500); })(starte);
+})();
+</script>
+
+<script src="assets/auswahl.js" defer></script>
+</body>
+</html>

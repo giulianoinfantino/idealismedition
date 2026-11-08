@@ -1,0 +1,1137 @@
+:root{--bg-desktop:#1c1b20;--bg-paper:#232229;--bg-subtle:#2b2a33;--bg-page:#1f1e25;--text-ink:#f0ede4;--text-body:#e8e3da;--text-muted:#b0a89b;--accent:#cd4b44;--accent-gold:#cbaa5c;--accent-warm:#d07848;--rule:#44424a;--shadow-soft:rgba(0,0,0,0.15);--shadow-med:rgba(0,0,0,0.25);--header-bg:rgba(30,30,36,0.85);--header-bg-solid:rgba(30,30,36,0.95);--btn-primary-bg:#cd4b44;--btn-primary-hover:#a83030;--radius:2px;--font-display:'Cormorant Garamond','Source Serif 4',Georgia,serif;--font-body:'Hegel Griechisch','Source Serif 4',Georgia,serif;--font-mono:'JetBrains Mono','Fira Code',monospace;--banner-h:0px;--header-h:calc(56px + var(--banner-h) + env(safe-area-inset-top))}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:110%;scroll-behavior:auto;overflow-x:hidden}body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.72;color:var(--text-body);background:var(--bg-desktop);-webkit-font-smoothing:antialiased}a{color:var(--accent);text-decoration:none}.skip-link{position:absolute;top:-100%;left:1rem;z-index:9999;padding:0.6rem 1.2rem;background:var(--accent);color:var(--bg-paper);font-family:var(--font-body);font-size:0.85rem;border-radius:var(--radius);text-decoration:none;transition:top 0.15s}.skip-link:focus{top:0.5rem}:focus-visible{outline:2px solid var(--accent-gold);outline-offset:2px}input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent-gold);outline-offset:0}a:hover{text-decoration:underline}.small-caps{font-variant:small-caps;letter-spacing:0.14em;font-weight:500}.site-header{position:fixed;top:var(--banner-h);left:0;right:0;z-index:200;display:grid;grid-template-columns:1fr auto 1fr;column-gap:1rem;align-items:center;height:calc(56px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 2rem 0 1.25rem;background:var(--bg-desktop);border-bottom:1px solid var(--rule);transition:background 0.4s,box-shadow 0.4s,top 0.2s}
+.site-title{justify-self:start}
+.sitenav{justify-self:center}
+.thema-schalter{justify-self:end}
+.promo-banner{position:fixed;top:0;left:0;right:0;z-index:250;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;padding:0.5rem 2.6rem;background:var(--bg-subtle);border-bottom:1px solid var(--rule);font-size:0.78rem;color:var(--text-body);text-align:center}
+.promo-banner p{margin:0;line-height:1.4}
+.promo-banner-compact{display:none}
+.promo-banner a{color:var(--accent-gold);font-weight:600;white-space:nowrap}
+.promo-banner-bar{width:5rem;height:4px;background:var(--rule);border-radius:2px;overflow:hidden;flex:0 0 auto}
+.promo-banner-bar-fill{height:100%;background:var(--accent-gold);border-radius:2px}
+.promo-banner-close{position:absolute;right:0.6rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-muted);font-size:1.05rem;line-height:1;cursor:pointer;padding:0.4rem;font-family:inherit}
+.promo-banner-close:hover{color:var(--text-body)}
+@media (max-width:480px){.promo-banner{padding:0.5rem 2.2rem;font-size:0.72rem}.promo-banner-bar{display:none}.promo-banner-full{display:none}.promo-banner-compact{display:inline}}.site-title{display:flex;align-items:center;gap:0.5rem;text-decoration:none;line-height:1.2}
+/* `overflow:visible` als Netz: die Standard-UA-Regel kappt SVG-Inhalt
+   hart an der `viewBox`-Kante. Bei drei Ringen sassen die Ruhepositionen
+   zu nah an dieser Kante (2px Rand bei 120 Einheiten Hoehe) -- ein
+   gerader Schnitt oben/unten sah aus wie eine undurchsichtige Flaeche,
+   die die Ringe verdeckt. Jetzt mehr Rand (siehe Positionen unten), aber
+   die Regel bleibt als Absicherung stehen. */
+.ringe-mark{overflow:visible}
+.ringe-mark .ring{fill:none;stroke:var(--accent-gold)}
+/* Zwei Takte übereinander: die Ringe stoßen rasch zusammen, halten lange
+   die Vereinigung, stoßen sich rasch wieder ab -- das ist der Puls. Die
+   `<g>` darum dreht sich parallel, unabhängig und viel langsamer -- das
+   ist der Umlauf. Beides zusammen auf `.hero-crest`, nichts davon auf
+   `.site-title-rings` in der Kopfzeile, die bleibt still. */
+.hero-crest .ring-a{animation:ringe-puls-a 8s ease-in-out infinite}
+.hero-crest .ring-b{animation:ringe-puls-b 8s ease-in-out infinite}
+.hero-crest .ring-c{animation:ringe-puls-c 8s ease-in-out infinite}
+.hero-crest .ringe-spin{transform-origin:100px 62.7px;animation:ringe-spin 48s linear infinite}
+/* Die drei Ruhepositionen (100,44) / (80,72) / (120,72) bilden ein
+   Dreieck um den Schwerpunkt (100, 62.7), mit deutlich mehr Luft zur
+   `viewBox`-Kante als zuvor -- jeder Versatz unten ist genau die Strecke
+   von der eigenen Ruheposition zu diesem Schwerpunkt. */
+@keyframes ringe-puls-a{
+  0%,10%  {transform:translate(0,0)}
+  22%     {transform:translate(0,18.7px)}
+  70%     {transform:translate(0,18.7px)}
+  82%,100%{transform:translate(0,0)}
+}
+@keyframes ringe-puls-b{
+  0%,10%  {transform:translate(0,0)}
+  22%     {transform:translate(20px,-9.3px)}
+  70%     {transform:translate(20px,-9.3px)}
+  82%,100%{transform:translate(0,0)}
+}
+@keyframes ringe-puls-c{
+  0%,10%  {transform:translate(0,0)}
+  22%     {transform:translate(-20px,-9.3px)}
+  70%     {transform:translate(-20px,-9.3px)}
+  82%,100%{transform:translate(0,0)}
+}
+@keyframes ringe-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.hero-crest .ring-a,.hero-crest .ring-b,.hero-crest .ring-c,.hero-crest .ringe-spin{animation:none}}
+.site-title-rings{width:32px;height:19.2px;flex:none}
+.site-title-rings .ring{stroke-width:1}
+.site-title-rows{display:flex;flex-direction:column;line-height:0.92}
+.site-title-hegel{font-family:var(--font-display);font-size:1.02rem;font-weight:600;color:var(--text-ink);letter-spacing:0.02em}
+.site-title:hover{text-decoration:none}.site-title-edition{font-size:0.5rem;letter-spacing:0.14em;color:var(--accent-gold);font-variant:small-caps;font-weight:600;margin-top:0.05rem}.sitenav ul{list-style:none;display:flex;gap:1.6rem}.sitenav a{font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;transition:color 0.2s}.sitenav a:hover,.sitenav a.current{color:var(--accent)}.site-footer{display:flex;justify-content:space-between;align-items:center;padding:2rem;font-size:0.78rem;color:var(--text-muted);border-top:1px solid var(--rule);background:var(--bg-paper)}.site-footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem}.site-footer a{color:var(--text-muted)}.site-footer a:hover{color:var(--accent)}.error-page{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - var(--header-h) - 6rem);padding:calc(var(--header-h) + 2rem) 2rem 2rem;text-align:center}.error-content{max-width:28rem}.error-code{font-family:var(--font-display);font-size:clamp(4rem,12vw,7rem);font-weight:300;color:var(--rule);line-height:1;margin-bottom:0.5rem}.error-title{font-family:var(--font-display);font-size:1.4rem;font-weight:400;color:var(--text-ink);margin-bottom:0.8rem}.error-text{font-size:0.92rem;color:var(--text-muted);margin-bottom:2rem;line-height:1.6}.error-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}.reader-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh;padding-top:var(--header-h)}.reader-sidebar{position:sticky;top:var(--header-h);height:calc(100vh - var(--header-h));overflow-y:auto;padding:1.8rem 1.2rem;border-right:1px solid var(--rule);background:var(--bg-paper);scrollbar-width:none;-ms-overflow-style:none}.reader-sidebar::-webkit-scrollbar{display:none}.toc-list{list-style:none}.toc-list li{margin-bottom:0.35rem}.toc-list li a{font-size:0.82rem;color:var(--text-body);text-decoration:none;line-height:1.45;display:block;transition:color 0.15s}.toc-list li a:hover{color:var(--accent-gold)}.toc-list li[data-level="1"]{margin-top:1rem}.toc-list li[data-level="1"] a{font-weight:400;color:var(--text-ink);color:color-mix(in oklab,var(--accent-gold) 55%,var(--text-ink));font-size:0.84rem;letter-spacing:0.04em}.toc-list li[data-level="2"]{padding-left:0.6rem}.toc-list li[data-level="2"] a{font-size:0.82rem;color:var(--text-ink);opacity:0.92}.toc-list li[data-level="3"]{padding-left:1.2rem}.toc-list li[data-level="3"] a{font-size:0.8rem;color:var(--text-ink);opacity:0.85}.toc-list li[data-level="4"]{padding-left:1.8rem}.toc-list li[data-level="4"] a{font-size:0.78rem;color:var(--text-body);opacity:0.82}.toc-list li[data-level="5"]{padding-left:2.4rem}.toc-list li[data-level="5"] a{font-size:0.76rem;color:var(--text-body);opacity:0.78}.toc-list li[data-level="6"]{padding-left:3.0rem}.toc-list li[data-level="6"] a{font-size:0.74rem;color:var(--text-body);opacity:0.75}.toc-list li[data-level="7"]{padding-left:3.6rem}.toc-list li[data-level="7"] a{font-size:0.72rem;color:var(--text-body);opacity:0.72}
+/* Der Hover stand als `.toc-list li a:hover` weiter oben und war damit tot:
+   gleiche Spezifitaet wie die Ebenenregeln, aber frueher im Blatt -- und da
+   jeder Eintrag ein `data-level` traegt, gewann immer die Ebene. Im
+   Verzeichnis zeigte darum nichts mehr an, dass die Zeilen anklickbar sind.
+   Die Ebene im Selektor hebt die Spezifitaet ueber die Ebenenregeln. */
+.toc-list li[data-level] a:hover{color:var(--accent-gold);opacity:1}
+/* Was nicht anklickbar ist, soll auch nicht so aussehen. `toc-divider` als
+   `<span>` ist eine Zwischenueberschrift ohne Ziel, `toc-orphan` ein Verweis
+   auf eine Seite ausserhalb der Erfassung -- der traegt ein `title` und darf
+   den Fragezeichen-Zeiger zeigen. */
+.toc-list li span.toc-divider{cursor:default}.toc-list li .toc-orphan{cursor:help}
+.toc-list li.toc-active > a,.toc-list li.toc-active > .toc-divider{color:var(--accent) !important;opacity:1 !important}.toc-list li.toc-active{border-left:2px solid var(--accent-gold);padding-left:calc(0.6rem - 2px);margin-left:-2px}.toc-list li.toc-active[data-level="1"]{padding-left:calc(0rem - 2px);margin-left:-2px}.toc-list li.toc-active[data-level="3"]{padding-left:calc(1.2rem - 2px)}.toc-list li.toc-active[data-level="4"]{padding-left:calc(1.8rem - 2px)}.toc-list li.toc-active[data-level="5"]{padding-left:calc(2.4rem - 2px)}.toc-list li.toc-active[data-level="6"]{padding-left:calc(3.0rem - 2px)}.toc-list li.toc-active[data-level="7"]{padding-left:calc(3.6rem - 2px)}.toc-orphan{color:var(--text-muted);opacity:0.5;font-size:0.78rem}.toc-divider{color:var(--accent-gold);font-weight:400;letter-spacing:0.03em;text-decoration:none;display:block;transition:color 0.15s}a.toc-divider:hover{color:var(--accent-gold)}.toc-list li[data-level="1"] .toc-divider{font-size:0.84rem}.toc-list li[data-level="2"] .toc-divider{font-size:0.82rem;opacity:0.92}.text-content{padding:2rem 3rem;max-width:76rem;width:100%;margin:0 auto;min-width:0}.text-content h2{font-family:var(--font-display);font-size:1.6rem;font-weight:500;color:var(--text-ink);margin-bottom:0.5rem}.reader-sticky-bar{position:sticky;top:var(--header-h);z-index:100;background:var(--bg-desktop);padding:0 3rem;margin-left:-3rem;margin-right:-3rem;margin-top:-2rem}.reader-sticky-bar #reader-summary{margin-bottom:0.4rem}.reader-sticky-bar #reader-summary h2{font-size:1.25rem;margin-bottom:0.1rem}.reader-toolbar{display:flex;flex-wrap:nowrap;gap:1.2rem;align-items:center;margin:0;padding:0.45rem 0;border-bottom:1px solid var(--rule);font-size:0.82rem;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}.reader-toolbar::-webkit-scrollbar{display:none}.toolbar-row1{display:contents}.toolbar-left{display:contents}#search-syntax-knopf{min-width:2.1rem;text-align:center}#inline-search-go{display:none;min-width:2.1rem;text-align:center}.toolbar-group{display:flex;align-items:center;gap:0.4rem;white-space:nowrap;flex-shrink:0}.toolbar-group .small-caps{font-size:0.58rem;color:var(--text-muted)}.toolbar-search{flex:2;min-width:12rem;flex-shrink:1}.toolbar-end{margin-left:auto}.toolbar-group select,.toolbar-group input{font-family:var(--font-body);font-size:0.85rem;padding:0.25rem 0.5rem;border:1px solid var(--rule);border-radius:3px;background:var(--bg-page);color:var(--text-body)}.btn-classic{font-family:var(--font-body);font-size:0.78rem;padding:0.3rem 0.8rem;border:1px solid var(--rule);border-radius:3px;background:var(--bg-paper);color:var(--text-body);cursor:pointer;transition:all 0.2s}.btn-classic:hover{background:var(--bg-subtle);border-color:var(--accent-gold)}.cookie-notice{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:900;max-width:40rem;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--bg-paper);border:1px solid var(--rule);border-radius:var(--radius);box-shadow:0 6px 24px var(--shadow-med);opacity:0;transform:translateY(0.6rem);transition:opacity 0.25s,transform 0.25s}
+.cookie-notice.is-shown{opacity:1;transform:none}
+.cookie-notice-text{flex:1 1 20rem;margin:0;font-size:0.8rem;line-height:1.55;color:var(--text-muted)}
+.cookie-notice-text a{color:var(--accent)}
+.cookie-notice-ok{flex:0 0 auto;font-family:var(--font-body);font-size:0.78rem;letter-spacing:0.06em;padding:0.4rem 1.1rem;border:1px solid var(--accent-gold);border-radius:3px;background:transparent;color:var(--text-ink);cursor:pointer;transition:background 0.2s}
+.cookie-notice-ok:hover{background:var(--bg-subtle)}
+@media (max-width:32rem){.cookie-notice{flex-direction:column;align-items:stretch}.cookie-notice-ok{width:100%}}
+.footer-by{display:block;margin-top:0.35rem;font-size:0.72rem;letter-spacing:0.02em;color:var(--text-muted);opacity:0.82}
+.lp-footer .footer-by{margin-top:0.6rem}
+.beta-badge{display:inline-block;margin-left:0.55rem;padding:0.08em 0.45em;border:1px solid var(--accent-gold);border-radius:2px;font-family:var(--font-mono);font-size:0.52rem;line-height:1.5;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent-gold);vertical-align:middle;white-space:nowrap}
+.inline-search-wrap{position:relative;display:flex;align-items:center;flex:1;min-width:0}.inline-search-wrap input{width:100%;flex:1;min-width:0;padding-right:6.5rem}
+/* Trefferzaehler. Am Schreibtisch liegt er im Suchfeld, wie gehabt, mit
+   deckendem Hintergrund -- sobald gesucht ist, darf er den eingetippten Text
+   ueberdecken, das war nie das Problem. Das Problem war der *leere* Zaehler:
+   er trug Polsterung und Hintergrund und stand als undurchsichtiges Kaestchen
+   ueber dem Platzhalter, bevor ueberhaupt gesucht war. `:empty` nimmt ihn
+   darum ganz weg, und solange er weg ist, muss das Feld rechts auch keinen
+   Platz fuer ihn freihalten. */
+.inline-search-count{position:absolute;right:0.5rem;font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);pointer-events:none;background:var(--bg-page);padding:0.1rem 0.3rem;border-radius:2px;max-width:6rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inline-search-count:empty{display:none}
+.inline-search-wrap:has(.inline-search-count:empty) input{padding-right:0.5rem}
+/* Auf dem Handy ist das Feld zu schmal, als dass der Zaehler darin liegen
+   koennte, ohne die Eingabe zu verdecken. Dort haengt er stattdessen als
+   kleines Fenster rechts unter der Werkzeugleiste -- unter `?` und Zahnrad.
+   Bezugsrahmen ist die Leiste selbst (`.reader-toolbar{position:relative}`
+   weiter oben), darum braucht es keine geratenen Abstaende. */
+@media (max-width:768px){
+  .inline-search-wrap{position:static}
+  .inline-search-wrap input{padding-right:0.5rem}
+  /* Auf dem Handy trägt die Suchgruppe genau einen Knopf: den Suchknopf.
+     Die Syntaxhilfe weicht -- sie erklaert eine Abfragesprache, die auf einer
+     Bildschirmtastatur ohnehin niemand tippt, und jeder Knopf mehr geht von
+     der Breite des Feldes ab. */
+  #search-syntax-knopf{display:none}
+  #inline-search-go{display:inline-block}
+  .inline-search-count{top:calc(100% + 0.35rem);right:0;z-index:120;font-size:0.62rem;line-height:1;max-width:calc(100vw - 2rem);background:var(--bg-paper);border:1px solid var(--rule);border-radius:var(--radius);box-shadow:0 2px 10px var(--shadow-soft);padding:0.3rem 0.55rem}
+}mark.search-hit{background:rgba(203,170,92,0.45);color:inherit;border-radius:2px;padding:0}mark.search-hit-active{background:var(--accent-gold);color:var(--bg-paper)}.jump-input-group input{width:4rem;text-align:center}.reader-toolbar .small-caps{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.page-card{margin-bottom:0}/* Seitenumbruch. Er faellt fast nie mit einem Satzende zusammen — ueber alle
+   Baende schneiden 84-88 % der Fugen mitten in den Satz. Eine Linie quer durch
+   die Spalte behauptet dort eine Zaesur, die der Text nicht hat, und die 4,6rem
+   Weissraum darum machen aus einem Koordinatenwechsel ein Ereignis. Statt dessen
+   traegt die Fuge ein kurzes Haarstrichlein in einer Atempause (2,25rem statt
+   4,6rem Weissraum plus Linie), und die Seitenziffer haengt im Rand auf Hoehe der ersten Zeile
+   ihrer Seite. Sichtbar bleibt der Umbruch damit deutlich — nur zerschneidet er
+   die Spalte nicht mehr. */
+.page-divider{position:relative;height:3.5rem;margin:0;scroll-margin-top:calc(var(--header-h) + 5rem);user-select:none;-webkit-user-select:none}.page-divider:first-child{height:0}
+/* Der Absatzabstand der letzten Zeile einer Seite faellt aus der Karte heraus
+   und legte sich zusaetzlich ueber das Strichlein: gemessen 37px darueber gegen
+   20px darunter. Den Abstand traegt allein der Trenner, dann liegt das
+   Strichlein genau in der Mitte. */
+.page-card .page-body > .text-unit:last-child{margin-bottom:0}
+/* Ein kurzes Haarstrichlein mittig in der Atempause: es benennt die Fuge, ohne
+   die Spalte zu zerschneiden. Zu den Enden hin laeuft es aus, damit es keine
+   harte Kante setzt — eine Naht, keine Trennwand. Eigener Platzbedarf: keiner,
+   es sitzt im vorhandenen Abstand. */
+.page-divider::before{content:'';position:absolute;left:50%;top:50%;width:5rem;height:1px;transform:translate(-50%,-50%);background:linear-gradient(90deg,transparent,var(--text-muted) 16%,var(--text-muted) 84%,transparent);opacity:0.55}
+.page-divider:first-child::before{display:none}.page-head{padding:0;border:none}/* Die Ziffer haengt im rechten Rand, auf der Hoehe des Strichleins — sie gehoert
+   zum Umbruch, nicht zur ersten Textzeile der neuen Seite. Textserife statt Monospace: die Monospace liest sich wie
+   Code, die Ziffer gehoert aber zum Buch. Sie steht im Akzentgold: Gold ist in
+   dieser Edition die Farbe dessen, was nicht Hegels Text ist, sondern ihn
+   erschliesst — eine Seitenzahl ist genau das. Mediaevalziffern, damit sie in
+   der Zeile liegt statt auf ihr. */
+.page-sigel{position:absolute;left:100%;margin-left:0.9rem;top:50%;transform:translateY(-50%);font-family:var(--font-display);font-size:1.02em;font-weight:600;font-variant-numeric:oldstyle-nums;letter-spacing:0.02em;color:var(--accent-gold);opacity:0.92;white-space:nowrap;transition:opacity .18s ease,color .18s ease}
+.page-sigel:hover{opacity:1}
+/* Im Druckbild rueckt die Ziffer neben die Textspalte — so weit von ihr weg wie
+   die Randziffern auf der Gegenseite (0,55rem entspricht deren `margin-right`
+   von 0,8em). `--versatz` ist der Abstand von der Spaltenmitte zur Textkante und
+   wird je Seite gesetzt (setzeDiplVersatz in text.html), weil dort jede Seite
+   ihre eigene Breite hat. Fehlt der Wert, bleibt die Ziffer aussen stehen. */
+body.dipl-mode .page-sigel{left:50%;margin-left:calc(var(--dipl-halb, 50%) + 0.55rem)}
+/* Angesprungene Seite (Sprung ueber "GW-Seite") faerbt sich kurz an. */
+.page-divider:target .page-sigel{opacity:1;color:var(--accent-gold)}
+/* Der Bandteil ("GW 7, ") bleibt im DOM — die Zitat-Kopie und Screenreader
+   lesen ihn weiter —, nur im Satzbild waere er auf jeder Seite Wiederholung. */
+.page-sigel-werk{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.text-unit{margin-bottom:1rem;text-align:justify;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:6 3 2;overflow-wrap:break-word}.text-unit.type-heading,.text-unit.type-subheading{font-family:var(--font-display);font-weight:500;color:var(--text-ink);text-align:center;margin:2.5rem 0 1rem;letter-spacing:0.04em;opacity:0.88;scroll-margin-top:calc(var(--header-h) + 6rem)}.text-unit.type-subheading{font-size:1em;margin-top:0.5rem}.text-unit.type-heading[data-level="1"]{font-size:1.3em;font-weight:600;margin-top:3.5rem;letter-spacing:0.08em;opacity:1}.text-unit.type-heading[data-level="2"]{font-size:1.1em;font-weight:600}.text-unit.type-heading[data-level="3"]{font-size:1em}.text-unit.type-heading[data-level="4"]{font-size:0.95em;font-style:italic;letter-spacing:0.02em}/* Die Anmerkung der Enzyklopaedie ist ein eigener Textgrad, kein Absatz des Paragraphen: der Druck setzt sie kleiner und eingerueckt. Bis zum 20.08.2026 unterschied sie hier nur `0.93em` und ein Einzug von `1rem` — das las sich wie ein gewoehnlicher Absatzeinzug, und wo eine Anmerkung mitten auf der Seite begann, war der Wechsel gar nicht zu sehen.
+   Drei Mittel, alle drei leise: **Grad** (0.9em), **Einzug auf beiden Seiten** — erst der rechte macht aus dem Einzug einen Block — und ein **leichter Rueckzug der Tinte**. Kein Strich am Rand: der laege im Druckbild zwischen den Zeilenziffern und ihren Zeilen und schnitte sie ab. Keine zweite Schrift: Cormorant ist die Schrift der Ueberschriften und traegt lange Anmerkungen nicht.
+   Die Tinte faellt nur ein Stueck weit, nicht bis `--text-muted`: die Anmerkung ist Hegels Text, oft der lesenswertere Teil, und darf nicht grau aussehen. Wo `color-mix` fehlt, bleibt es bei `--text-body` — dann tragen Grad und Einzug den Unterschied allein. */.text-unit.enz-anmerkung{font-size:0.9em;line-height:1.62;margin-left:2.4rem;margin-right:1.4rem;margin-top:1.15rem;margin-bottom:1.35rem;color:var(--text-body);color:color-mix(in srgb,var(--text-body) 72%,var(--text-muted))}/* Auf schmalem Schirm ist die Spalte selbst schon knapp — der Einzug wird kleiner, sonst frisst er die Zeile auf. */@media (max-width:768px){.text-unit.enz-anmerkung{margin-left:1.25rem;margin-right:0.5rem}}@media (max-width:480px){.text-unit.enz-anmerkung{margin-left:0.9rem;margin-right:0.25rem}}/* Blattwechselbalken der Vorlage: im Bestand behalten, im Satz nicht gezeichnet. Die GW druckt ihn, aber nur GW 11 und GW 13 fuehren ihn (die aelteren Baende haben ihn nie erfasst) — sichtbar trennte er die beiden Baende vom Rest und las sich mitten im Wort wie ein Buchstabe: `chemi|sche`. `display:none` statt Loeschen, denn an den Balken haengt die Kopfprobe der Erfassung (Balken im Zeileninnern = Vorlagenseiten − 1) und die Paginierung des Erstdrucks; beides waere ohne Rescan nicht zurueckzuholen. Entschieden am 20.08.2026. */.blattwechsel{display:none}[id^="hd-"],[id^="page-"],[id^="line-"]{scroll-margin-top:calc(var(--header-h) + 5rem)}
+/* Eine Notiz steht am Fuss der Seite: springt man sie an, kaeme sie an den
+   oberen Rand und damit halb unter die Kopfleiste zu liegen. Ein Rand von
+   knapp der halben Fensterhoehe holt sie statt dessen in die Mitte, wo sie
+   neben dem Satz steht, aus dem man kam. Auf niedrigen Fenstern greift
+   weiterhin der gewoehnliche Kopfabstand. */
+[id^="fn-"],[id^="ref-fn-"]{scroll-margin-top:max(calc(var(--header-h) + 5rem), 42vh)}.text-unit.type-heading[id]{position:relative}em:not(.sperrsatz),i{font-size:1.06em;line-height:1}
+.sperrsatz{font-style:italic;font-size:1.06em;line-height:1;letter-spacing:0;hyphens:auto;-webkit-hyphens:auto}body.sperrsatz-an .sperrsatz{font-style:normal;letter-spacing:0.09em;hyphens:none;-webkit-hyphens:none}.dipl-content{display:flex;flex-direction:column}/* Ein Verzeichnisverweis ohne Ueberschrift landet an einer Unit; sie muss
+   denselben Abstand zum klebenden Kopf halten wie eine Ueberschrift. */
+.text-unit[id^="mk-"]{scroll-margin-top:calc(var(--header-h) + 6rem)}
+.dipl-line{display:flex;align-items:baseline;min-height:1.5em;padding-left:3rem;margin-left:-3rem}.dipl-line-no{flex:0 0 2.2em;margin-left:-3em;margin-right:0.8em;text-align:right;font-family:var(--font-mono);font-size:0.68em;color:var(--text-muted);user-select:none;white-space:nowrap;-webkit-user-select:none}
+/* Die Ziffer selbst kommt aus dem Attribut (siehe text.html): generierter
+   Inhalt ist nicht markierbar und wird von keinem Browser mitkopiert. */
+.dipl-line-no::before{content:attr(data-no)}.dipl-content{display:none}.reflow-content{display:block}.reflow-content>p{margin:0}.reflow-content>p.anm-absatz{margin-top:0.55em;text-indent:0}body.dipl-mode .dipl-content{display:flex;flex-direction:column}body.dipl-mode .reflow-content{display:none}body.dipl-mode .text-unit.type-heading .dipl-line-no,body.dipl-mode .text-unit.type-subheading .dipl-line-no{display:none}body.dipl-mode .text-unit.type-heading .dipl-line,body.dipl-mode .text-unit.type-subheading .dipl-line{padding-left:0;margin-left:0;justify-content:center}body.dipl-mode .text-unit.type-heading .dipl-line-text,body.dipl-mode .text-unit.type-subheading .dipl-line-text{flex:0 1 auto}body.dipl-mode .dipl-line-text{flex:1;min-width:0}@media (min-width:769px){body.dipl-mode .dipl-line-text{text-align:justify;text-align-last:justify;white-space:nowrap}}@media (min-width:769px){/* Eine Spalte fuer das ganze Werk statt eine je Seite: `max-content` mass
+   bisher jede Seite an ihrer eigenen laengsten Zeile (in GW 7 zwischen 83 und
+   95 Zeichen), wodurch die Absaetze verschieden breit untereinander standen.
+   `--dipl-spalte` wird einmal gemessen (messeDiplSpalte in text.html); das
+   `min(100%, …)` verhindert Ueberlauf, falls das Fenster schmaler ist. */
+body.dipl-mode .page-body{display:grid;grid-template-columns:min(100%, var(--dipl-spalte, max-content));justify-content:center}}body.dipl-mode .dipl-line-final .dipl-line-text{text-align-last:left}body.dipl-mode .dipl-line-kurz .dipl-line-text{text-align-last:left}/* Dritter Schriftgrad des Zeitungsteils (GW 5). Der Druck setzt die nachgedruckten Stuecke kleiner; 27 gegen 30 px Versalhoehe entspricht rund 0.92em. Kein Einzug, keine Farbe — der Satz unterscheidet sich im Grad und sonst in nichts. */.text-unit.grad-zwei{font-size:0.92em}.reader-toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);padding:0.6rem 1.4rem;background:var(--text-ink);color:var(--bg-paper);font-size:0.82rem;border-radius:4px;opacity:0;transition:opacity 0.3s,transform 0.3s;pointer-events:none;z-index:999}.reader-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.search-main{margin:0 auto;padding:0}.search-hero-area{position:relative;min-height:calc(100vh - var(--header-h));display:flex;align-items:center;justify-content:center;overflow:hidden;padding:var(--header-h) 2rem 3rem}.search-hero-content{position:relative;z-index:2;text-align:center;width:100%;max-width:52rem}.search-hero-badge{font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1.5rem;font-family:var(--font-body)}.search-hero-title{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:400;color:var(--text-ink);line-height:1.15;letter-spacing:0.01em;margin-bottom:0.6rem}.search-hero-rule{width:40px;height:1px;background:var(--rule);margin:1.2rem auto 1.8rem}.search-main.has-results .search-hero-area{min-height:0;padding:1rem 2rem;align-items:flex-start;position:sticky;top:var(--header-h);margin-top:var(--header-h);z-index:150;overflow:visible;background:var(--bg-desktop);border-bottom:1px solid var(--rule)}.search-main.has-results .search-hero-badge{display:none}.search-main.has-results .search-hero-title{display:none}.search-main.has-results .search-hero-rule{display:none}.search-main.has-results .search-hero-title{font-size:1.3rem;margin-bottom:0.4rem}.search-main.has-results .search-hero-rule{margin:0.6rem auto 1rem;opacity:0.4}.search-box-elegant{display:flex;max-width:56rem;margin:0 auto;gap:0.6rem}.search-box-elegant input{flex:1;font-family:var(--font-body);font-size:1.1rem;padding:0.9rem 1.4rem;border:1px solid var(--rule);border-radius:var(--radius);background:var(--bg-page);color:var(--text-body);transition:border-color 0.3s,box-shadow 0.3s}.search-box-elegant input:focus{border-color:var(--accent-gold);box-shadow:0 4px 20px var(--shadow-med)}.btn-search{font-family:var(--font-body);font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.9rem 2rem;background:var(--accent);color:var(--bg-paper);border:none;border-radius:var(--radius);cursor:pointer;transition:all 0.3s}.btn-search:hover{background:var(--btn-primary-hover);box-shadow:0 4px 16px var(--shadow-med)}.search-controls{max-width:56rem;margin:1rem auto 0;display:flex;flex-direction:column;gap:0.6rem}.search-filter-row{display:flex;gap:0.6rem;align-items:center;flex-wrap:wrap;justify-content:center}.search-status-inline{font-size:0.78rem;color:var(--text-muted);margin-left:auto;white-space:nowrap}.search-controls select{font-family:var(--font-body);font-size:0.8rem;padding:0.35rem 0.7rem;border:1px solid var(--rule);border-radius:3px;background:var(--bg-page);color:var(--text-body);transition:border-color 0.2s}.search-controls select:hover{border-color:var(--accent-gold)}#search-status{font-size:0.78rem;color:var(--text-muted)}.syntax-link{font-family:var(--font-body);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;opacity:0.7;transition:opacity 0.2s,color 0.2s;position:relative}.syntax-link::after{content:'';display:inline-block;width:0.35em;height:0.35em;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(45deg) translateY(-1px);margin-left:0.35em;transition:transform 0.25s}.syntax-link.active::after{transform:rotate(-135deg) translateY(-1px)}.syntax-link:hover{opacity:1;color:var(--accent-gold);text-decoration:none}.search-guide{max-width:56rem;margin:0 auto;overflow:hidden;max-height:0;opacity:0;transition:max-height 0.3s ease,opacity 0.2s ease}.search-guide.open{max-height:12rem;opacity:1;margin-top:0.4rem}.search-guide-list{display:flex;flex-wrap:wrap;gap:0.35rem 1rem;justify-content:center;padding:0.6rem 0 0.4rem;margin:0}.search-guide-list > div{display:flex;align-items:baseline;gap:0.35rem}.search-guide-list dt{margin:0}.search-guide-list dt code{font-family:var(--font-mono);font-size:0.68rem;background:var(--bg-subtle);padding:0.15rem 0.4rem;border-radius:3px;color:var(--accent)}.search-guide-list dd{margin:0;font-family:var(--font-body);font-size:0.7rem;color:var(--text-muted)}.search-guide-list dd em{font-style:italic}#search-results{max-width:48rem;margin:0 auto;padding:2.5rem 2rem 4rem}.no-results{padding:2rem 0;text-align:left}.no-results p{font-size:1.02rem;color:var(--text-ink);margin-bottom:1rem}.no-results ul{padding-left:1.2rem;margin:0}.no-results li{font-size:0.88rem;color:var(--text-muted);line-height:1.6;margin-bottom:0.5rem}.no-results a{color:var(--accent-gold)}.result-biblio{padding:1.4rem 1.4rem;margin-bottom:0.8rem;background:var(--bg-paper);border:1px solid var(--rule);border-radius:var(--radius);transition:box-shadow 0.2s,border-color 0.2s}.result-biblio:hover{border-color:var(--accent-gold);box-shadow:0 4px 16px var(--shadow-soft)}.result-biblio .sigle{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-gold);margin-bottom:0.3rem}.result-chapter{font-size:0.72rem;color:var(--text-muted);margin-bottom:0.5rem;font-style:italic}.result-biblio .snippet{font-size:0.95rem;color:var(--text-body);line-height:1.75}.result-biblio .snippet mark{background:color-mix(in srgb,var(--accent-gold) 25%,transparent);color:inherit;padding:0;border-radius:2px}.result-biblio .result-link{display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:var(--accent);transition:transform 0.2s}.result-biblio .result-link:hover{transform:translateX(4px);text-decoration:none}.result-group{margin-bottom:1.5rem}.result-group-header{display:flex;align-items:baseline;gap:0.6rem;padding:0.5rem 0;border-bottom:1px solid var(--border);margin-bottom:0.5rem;flex-wrap:wrap}.result-group-work{font-family:var(--font-body);font-size:0.9rem;font-weight:500;color:var(--accent)}.result-group-section{font-family:var(--font-body);font-size:0.85rem;color:var(--text-body)}.result-group-count{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);margin-left:auto}.result-group .result-biblio{border-left-width:2px}.legal-container{max-width:38rem;margin:0 auto;padding:calc(var(--header-h) + 3rem) 2rem 4rem}.legal-container--wide{max-width:46rem}.legal-kicker{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent-gold);margin-bottom:0.5rem}.legal-container h1{font-family:var(--font-display);font-size:2rem;font-weight:400;color:var(--text-ink);margin-bottom:1rem}.legal-lead{font-size:1.02rem;color:var(--text-muted);margin-bottom:2.5rem;line-height:1.7}.legal-section{margin-bottom:2rem}.legal-section h2{font-family:var(--font-display);font-size:1.15rem;font-weight:500;color:var(--text-ink);margin-bottom:0.6rem}.legal-section p{margin-bottom:0.8rem;font-size:0.95rem}.legal-list{padding-left:1.4rem;margin-bottom:1rem}
+.friends-list{list-style:none;padding:0;margin:0 0 2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.15rem 1.6rem}
+.friends-list li{font-family:var(--font-display);font-size:0.98rem;color:var(--text-ink);padding:0.45rem 0;border-bottom:1px solid var(--rule);text-align:left}
+.friends-list li:last-child{border-bottom:none}
+.friends-cta{text-align:center;color:var(--text-muted);font-size:0.92rem}.chart-wrap{background:var(--bg-page);border:1px solid var(--rule);border-radius:3px;padding:1.1rem 0.9rem 0.7rem;margin:1.2rem 0}.chart-title{font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.3rem}.chart-wrap svg{width:100%;height:auto;display:block;font-family:var(--font-body)}.chart-ax,.chart-tick{stroke:var(--rule);stroke-width:1}.chart-gridlabel{fill:var(--text-muted);font-size:11px}.chart-rowlabel{fill:var(--text-body);font-size:12px}.chart-vallabel{fill:var(--text-muted);font-size:10.5px;font-family:var(--font-mono)}.chart-vallabel-own{fill:var(--text-ink);font-size:10.5px;font-family:var(--font-mono);font-weight:600}.chart-dot-ref{fill:var(--text-muted)}.chart-dot-own{fill:var(--accent-gold)}.chart-ci-band{fill:var(--accent-gold);opacity:0.14}.chart-threshold{stroke:var(--accent);stroke-width:1.3;stroke-dasharray:4 3}.chart-thresholdlabel{fill:var(--accent);font-size:11px}.chart-axislabel{fill:var(--text-muted);font-size:10.5px;text-anchor:middle}.chart-bar-12{fill:var(--accent)}.chart-bar-21{fill:var(--accent-gold)}.legal-list li{font-size:0.92rem;margin-bottom:0.3rem}.fb-field{margin-bottom:1.4rem}.fb-field label{display:block;font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.4rem}.fb-field input,.fb-field select,.fb-field textarea{width:100%;font-family:var(--font-body);font-size:0.95rem;color:var(--text-ink);background:var(--bg-card);border:0.5px solid var(--text-muted);border-radius:4px;padding:0.6rem 0.8rem;transition:border-color 0.2s}.fb-field input:focus,.fb-field select:focus,.fb-field textarea:focus{border-color:var(--accent-gold)}.fb-field textarea{resize:vertical;line-height:1.6}.fb-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}@media (max-width:480px){.fb-row{grid-template-columns:1fr}}.fb-submit{font-family:var(--font-display);font-size:0.9rem;letter-spacing:0.06em;color:var(--bg-paper);background:var(--text-ink);border:none;border-radius:4px;padding:0.7rem 2.2rem;cursor:pointer;transition:opacity 0.2s}.fb-submit:hover{opacity:0.85}.fb-submit:disabled{opacity:0.5;cursor:default}.fb-success{text-align:center;padding:3rem 0;color:var(--text-ink)}.fb-success p{font-size:1.05rem;margin-bottom:1.5rem}.fb-another{font-size:0.85rem;color:var(--accent-gold);text-decoration:underline;text-underline-offset:3px}.legal-table{margin:1rem 0}.roadmap-toggle{font-family:var(--font-body);font-size:0.78rem;letter-spacing:0.06em;color:var(--accent-gold);background:none;border:1px solid var(--rule);border-radius:3px;padding:0.5rem 1rem;cursor:pointer;transition:border-color 0.2s,background 0.2s;margin-top:0.5rem;margin-bottom:1.8rem;display:block}.roadmap-toggle:hover{border-color:var(--accent-gold);background:var(--bg-subtle)}.legal-table-row{display:grid;grid-template-columns:160px 1fr;gap:1rem;padding:0.8rem 0;border-bottom:1px solid var(--rule)}.legal-table-norm{font-family:var(--font-mono);font-size:0.78rem;color:var(--accent);font-weight:500}.legal-table-text{font-size:0.88rem;max-width:34rem}.legal-quote{border-left:3px solid var(--accent-gold);padding:0.8rem 1.2rem;margin:1rem 0;font-style:italic;color:var(--text-body);background:var(--bg-paper)}.hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}.hero-content{position:relative;z-index:2;text-align:center;max-width:640px;padding:0 2rem}.hero-badge{font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1.5rem;font-family:var(--font-body)}.hero-title{font-family:var(--font-display);font-size:clamp(2.8rem,6vw,4.2rem);font-weight:400;color:var(--text-ink);line-height:1.15;letter-spacing:-0.015em}.hero-wordmark{display:flex;flex-direction:column;align-items:center;gap:1rem}.hero-wordmark-main{line-height:1}.hero-wordmark-stamp{display:flex;align-items:center;gap:0.7rem}.hero-wordmark-edition{font-family:var(--font-body);font-size:0.85rem;font-variant:small-caps;letter-spacing:0.24em;color:var(--accent-gold);font-weight:500}.hero-version{font-family:var(--font-body);font-size:0.72rem;font-weight:400;letter-spacing:0.12em;color:var(--text-muted);text-align:center;margin-top:0.5rem;font-variant:small-caps}.hero-rule{width:40px;height:1px;background:var(--rule);margin:1.5rem auto}.hero-sub{font-size:1.05rem;color:var(--text-muted);line-height:1.65;max-width:480px;margin:0 auto 2rem}.hero-actions{display:flex;gap:1rem;justify-content:center}.hero-btn-primary{font-family:var(--font-body);font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.6rem 1.8rem;background:transparent;color:var(--text-ink);border:1px solid var(--text-ink);border-radius:0;text-decoration:none;transition:border-color 0.2s,color 0.2s}.hero-btn-primary:hover{border-color:var(--accent-gold);color:var(--accent-gold);text-decoration:none}.hero-btn-secondary{font-family:var(--font-body);font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.6rem 1.8rem;border:1px solid var(--rule);color:var(--text-muted);border-radius:0;text-decoration:none;transition:border-color 0.2s,color 0.2s}.hero-btn-secondary:hover{border-color:var(--accent-gold);color:var(--text-ink);text-decoration:none}.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.6rem;cursor:pointer;z-index:2}.hero-scroll span:first-child{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-muted)}.hero-scroll-line{width:1px;height:32px;background:var(--accent-gold)}.stats-bar{display:flex;justify-content:center;gap:3rem;padding:2.5rem 2rem;background:var(--bg-paper);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);min-height:165px}.stat-item{text-align:center}.stat-value{display:block;font-family:var(--font-display);font-size:2rem;font-weight:300;color:var(--text-ink);line-height:1.2}.stat-label{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-muted)}.lp-section{max-width:72rem;margin:0 auto;padding:5rem 2rem}.lp-section-label{font-size:0.66rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent-gold);margin-bottom:0.4rem}.lp-section-title{font-family:var(--font-display);font-size:2rem;font-weight:400;color:var(--text-ink);margin-bottom:2.5rem}.roadmap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:72rem;margin:0 auto;padding:0 2rem}.roadmap-grid--3{grid-template-columns:repeat(3,1fr);max-width:60rem}.roadmap-card{position:relative;background:var(--bg-paper);border:1px solid var(--rule);border-radius:var(--radius);padding:1.8rem 1.4rem 1.4rem;transition:border-color 0.2s,box-shadow 0.3s}.roadmap-card:hover{border-color:var(--accent-gold);box-shadow:0 4px 16px var(--shadow-soft)}.roadmap-card-icon{font-family:var(--font-display);font-size:1.6rem;font-weight:300;color:var(--accent-gold);opacity:0.5;margin-bottom:0.8rem;line-height:1}.roadmap-card h4{font-family:var(--font-display);font-size:1.05rem;font-weight:500;color:var(--text-ink);margin-bottom:0.6rem}.roadmap-card p{font-family:var(--font-body);font-size:0.88rem;line-height:1.6;color:var(--text-body)}.workflow-section-wrap{padding-top:3rem}@media (max-width:960px){.roadmap-grid{grid-template-columns:repeat(2,1fr);gap:1rem}}@media (max-width:480px){.roadmap-grid{grid-template-columns:1fr;gap:0.8rem;padding:0 1rem}.roadmap-card{padding:1.2rem 1rem}.roadmap-card-icon{font-size:1.3rem}.roadmap-card h4{font-size:0.95rem}.roadmap-card p{font-size:0.82rem}}.works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(10.2rem,1fr));gap:0.8rem;max-width:60rem;margin:0 auto;padding:0 2rem;min-height:660px}[data-color="ink"]{--card-accent:196,160,80}[data-color="ink-light"]{--card-accent:180,148,74}[data-color="ink-faded"]{--card-accent:100,94,82}.work-row{display:flex;flex-direction:column;align-items:flex-start;gap:0.4rem;padding:1rem 0.95rem 0.8rem;background:var(--bg-page);border:1px solid var(--rule);border-radius:var(--radius);color:inherit;text-decoration:none;transition:background 0.2s,border-color 0.2s,box-shadow 0.3s}.work-row:hover{background:var(--bg-subtle);border-color:var(--accent-gold);box-shadow:0 4px 16px var(--shadow-soft);text-decoration:none}a.work-row:hover{text-decoration:none}.work-row-band{font-family:var(--font-display);font-size:1.35rem;font-weight:300;color:var(--accent-gold);text-align:left;line-height:1}.work-row-main{min-width:0;display:flex;flex-direction:column;gap:0.15rem}.work-row-title{font-family:var(--font-display);font-size:0.98rem;font-weight:500;color:var(--text-ink);line-height:1.3}.work-row-sig{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted)}.work-row-meta{margin-top:auto;padding-top:0.35rem;font-size:0.72rem;color:var(--text-muted)}.work-row-arrow{align-self:flex-end;margin-top:-1.4rem;font-size:0.9rem;color:var(--accent-gold);opacity:0;transition:opacity 0.2s,transform 0.2s}.work-row:hover .work-row-arrow{opacity:1;transform:translateX(3px)}.work-row--upcoming{opacity:0.4;border-style:dashed;cursor:default}.work-row--upcoming:hover{opacity:0.55}.work-row-badge{font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase}.about-section{background:var(--bg-paper);border-radius:0}.about-lead{font-size:1.08rem;color:var(--text-body);max-width:40rem;line-height:1.75;margin-bottom:3rem}.about-cols{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:3rem}.about-col{max-width:37rem}.about-col h3{font-family:var(--font-display);font-size:1.15rem;font-weight:500;color:var(--text-ink);margin-bottom:0.8rem}.about-col p{font-size:0.92rem;color:var(--text-body);margin-bottom:0.8rem}.workflow-section{margin-top:2rem}.workflow-label{display:block;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent-gold);margin-bottom:1.5rem}.workflow-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem}.workflow-step{padding:1.2rem;background:var(--bg-page);border:1px solid var(--rule);border-radius:var(--radius);transition:transform 0.3s,box-shadow 0.3s}.workflow-step:hover{border-color:var(--accent-gold)}.workflow-step-num{display:block;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-gold);margin-bottom:0.4rem}.workflow-step-name{display:block;font-family:var(--font-display);font-size:1rem;font-weight:500;color:var(--text-ink);margin-bottom:0.3rem}.workflow-step-detail{display:block;font-size:0.78rem;color:var(--text-muted);line-height:1.5}.lp-footer{text-align:center;padding:4rem 2rem;background:var(--bg-paper);border-top:1px solid var(--rule)}.lp-footer h3{font-family:var(--font-display);font-size:1.3rem;font-weight:400;color:var(--text-ink);margin-bottom:0.3rem}.lp-footer p{font-size:0.78rem;color:var(--text-muted);margin-bottom:1.5rem}.lp-footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem}.lp-footer nav a{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)}.lp-footer-credit{margin:2rem 0 0;font-size:0.68rem}.lp-footer-credit a{color:var(--text-muted)}.lp-footer nav a:hover{color:var(--accent)}.reveal,.reveal.visible,.reveal-3d,.reveal-3d.visible{opacity:1;transform:none}.reading-progress{position:fixed;top:var(--header-h);left:0;width:0;height:2px;background:var(--accent-gold);z-index:1000;transition:width 0.1s linear;pointer-events:none}.page-position{position:fixed;top:calc(var(--header-h) + 6px);right:1.2rem;z-index:199;font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);background:var(--bg-paper);padding:0.15rem 0.5rem;border-radius:var(--radius);border:1px solid var(--rule);opacity:0;transform:translateY(-4px);transition:opacity 0.25s,transform 0.25s;pointer-events:none}.page-position.visible{opacity:0.85;transform:translateY(0)}.btn-font{min-width:2.2rem;text-align:center;font-weight:600;padding-left:0.4rem;padding-right:0.4rem}.mobile-toc-toggle{display:none;position:fixed;bottom:1.2rem;right:1.2rem;z-index:900;width:3rem;height:3rem;border-radius:50%;border:1px solid var(--rule);background:var(--bg-paper);color:var(--text-ink);font-size:1.2rem;cursor:pointer;box-shadow:0 2px 12px var(--shadow-med);transition:background 0.2s}.mobile-toc-toggle:hover{background:var(--bg-subtle)}.mobile-backdrop{display:none;position:fixed;inset:0;z-index:940;background:rgba(0,0,0,0.4)}.mobile-backdrop.visible{display:block}@media (max-width:1200px){.reader-layout{grid-template-columns:220px 1fr}.text-content{padding:1.5rem 2rem}.reader-sticky-bar{padding:0 2rem;margin-left:-2rem;margin-right:-2rem;margin-top:-1.5rem}.reader-toolbar{gap:0.8rem;font-size:0.78rem}}@media (max-width:960px){.reader-layout{grid-template-columns:180px 1fr}.text-content{padding:1.2rem 1.5rem 1.2rem 2rem}.reader-sticky-bar{padding:0 1.5rem 0 2rem;margin-left:-2rem;margin-right:-1.5rem;margin-top:-1.2rem}.reader-toolbar{gap:0.6rem;font-size:0.76rem}.reader-sticky-bar #reader-summary h2{font-size:1.05rem}}@media (max-width:768px){.reader-layout{grid-template-columns:1fr}.mobile-toc-toggle{display:block}.reader-sidebar{display:block;position:fixed;top:0;left:0;width:80vw;max-width:320px;height:100vh;z-index:950;transform:translateX(-100%);transition:transform 0.25s ease;box-shadow:4px 0 20px var(--shadow-med);padding-top:calc(1.4rem + env(safe-area-inset-top,0px))}/* Die Schublade liegt mit z-index 950 ueber Kopf (200) und Banner (250) und verdeckt beide ohnehin -- der frueher reservierte Platz `calc(var(--header-h) + 1rem)` hielt oben nichts frei, sondern schob das Verzeichnis nur nach unten. Mit zweizeiligem Banner waren das rund 150 px Leerraum. `env(safe-area-inset-top)` haelt den Rand bei Geraeten mit Aussparung frei. */.reader-sidebar.mobile-open{transform:translateX(0)}.text-content{padding:1rem 1rem 1rem 1rem}.reader-sticky-bar{padding:0 1rem;margin-left:-1rem;margin-right:-1rem;margin-top:-1rem}.reader-sticky-bar #reader-summary h2{font-size:0.95rem}.reader-toolbar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:0.35rem;font-size:0.74rem;overflow-x:visible}.toolbar-row1{display:contents}.toolbar-left{display:flex;align-items:center;gap:0.35rem;min-width:0;justify-self:start}#toolbar-search{justify-self:stretch;width:auto;min-width:0;margin-top:0;order:0}.toolbar-end{justify-self:end}.toolbar-row1 .btn-classic{padding:0.3rem 0.5rem}.toolbar-row1 .einstellungen-knopf{width:1.7rem;font-size:0.78rem}#werkwahl-knopf{padding:0.25rem 1.25rem 0.25rem 0.45rem;background-position:right 0.35em center}.jump-input-group input{width:2.4rem}
+.toolbar-search .inline-search-wrap input{width:100%}
+/* Damit der Trefferzaehler auf dem Handy unter der Leiste haengen kann,
+   braucht er die Leiste als Bezugsrahmen. Seine eigene Gestalt steht weiter
+   unten bei den uebrigen Zaehlerregeln -- hier stuende sie zu frueh und
+   wuerde von ihnen ueberschrieben. */
+.reader-toolbar{position:relative}#dipl-toggle{display:none}.reading-progress{z-index:100}.page-position{display:none}.site-title{gap:0.4rem}.site-title-rings{width:26px;height:15.6px}.site-title-hegel{font-size:0.9rem}.site-title-edition{font-size:0.46rem;letter-spacing:0.08em}.site-header{padding:env(safe-area-inset-top) 1rem 0 0.6rem;column-gap:0.5rem}.sitenav{flex:1;min-width:0;justify-self:stretch}.sitenav ul{width:100%;gap:0.6rem}.sitenav ul>li:first-child{margin-left:auto}.sitenav ul>li:last-child{margin-left:auto}.sitenav a{font-size:0.68rem;letter-spacing:0.08em}.dipl-line{display:block;padding-left:0;margin-left:0}.dipl-line-no{float:left;margin:0 0.5em 0 0}.hero-title{font-size:2.4rem}.stats-bar{gap:1.5rem;flex-wrap:wrap;min-height:270px}.works-grid{padding:0 0.5rem;grid-template-columns:1fr;gap:0.7rem;min-height:2780px}.work-row{padding:1rem 1rem 0.85rem}.work-row-band{font-size:1.3rem}.about-cols{grid-template-columns:1fr;gap:2rem}.workflow-steps{grid-template-columns:1fr 1fr}.site-header{padding:env(safe-area-inset-top) 1rem 0 0.6rem}.site-footer{flex-direction:column;gap:0.8rem;text-align:center}.search-box-elegant{position:relative;flex-direction:row}
+.search-box-elegant input{width:100%;font-size:1rem;padding:0.75rem 3.4rem 0.75rem 1rem}
+.btn-search{position:absolute;right:0.35rem;top:50%;transform:translateY(-50%);width:2.6rem;height:2.6rem;padding:0;border-radius:var(--radius);font-size:0;display:flex;align-items:center;justify-content:center}
+.btn-search::after{content:"→";font-size:1.2rem;color:var(--bg-paper)}.search-hero-area{padding:calc(var(--header-h) + 1.5rem) 1rem 2rem;min-height:auto}.search-hero-title{font-size:1.6rem}.search-hero-badge{font-size:0.5rem;margin-bottom:1rem}.search-hero-rule{margin:0.8rem auto 1.2rem}.search-main.has-results .search-hero-area{padding:0.6rem 1rem}.search-main.has-results .search-hero-title{font-size:1.1rem}.search-main.has-results .search-hero-rule{margin:0.4rem auto 0.6rem}.search-filter-row{gap:0.4rem}.search-controls select{font-size:0.72rem;padding:0.3rem 0.4rem}.search-filter-row .werkwahl-knopf,.search-filter-row .auswahl-knopf{font-size:0.72rem;padding:0.3rem 1.5rem 0.3rem 0.5rem}#search-status{font-size:0.7rem}.syntax-link{font-size:0.65rem}.search-guide-list{gap:0.25rem 0.7rem;padding:0.4rem 0}.search-guide-list dt code{font-size:0.62rem;padding:0.1rem 0.3rem}.search-guide-list dd{font-size:0.62rem}#search-results{padding:1rem 1rem 3rem}.result-biblio{padding:1rem}.result-biblio .sigle{font-size:0.62rem}.result-chapter{font-size:0.68rem}.result-biblio .snippet{font-size:0.82rem}.result-biblio .result-link{font-size:0.72rem}.result-group-header{gap:0.4rem;padding:0.4rem 0}.result-group-work{font-size:0.8rem}.result-group-section{font-size:0.75rem}.result-group-count{font-size:0.62rem}.legal-table-row{grid-template-columns:1fr}.legal-table-norm{margin-bottom:0.2rem}.wk-modal-stats{grid-template-columns:1fr;gap:0.6rem}}@media (max-width:480px){.workflow-steps{grid-template-columns:1fr}.hero-actions{flex-direction:column;align-items:center}.search-filter-row{justify-content:flex-start}.search-controls select{font-size:0.68rem;padding:0.25rem 0.3rem;max-width:45%}.search-guide-list{flex-direction:column;gap:0.2rem;align-items:flex-start;padding-left:0.5rem}.result-biblio .snippet{font-size:0.78rem;line-height:1.5}.sitenav a{font-size:0.6rem;letter-spacing:0.06em}.sitenav ul{gap:0.4rem}}.page-card:not([data-rendered]) .page-body{min-height:10rem}.page-card:not([data-rendered]) .page-body::before{content:'';display:block;height:0.8em;width:80%;margin:1.2rem 0 0.8rem;border-radius:3px;background:linear-gradient(90deg,var(--bg-subtle) 25%,var(--bg-page) 50%,var(--bg-subtle) 75%);background-size:200% 100%;animation:shimmer 1.5s ease-in-out infinite}.page-card:not([data-rendered]) .page-body::after{content:'';display:block;height:0.6em;width:55%;margin:0.5rem 0;border-radius:3px;background:linear-gradient(90deg,var(--bg-subtle) 25%,var(--bg-page) 50%,var(--bg-subtle) 75%);background-size:200% 100%;animation:shimmer 1.5s ease-in-out 0.2s infinite}@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}@media print{.site-header,.site-footer,.reader-sidebar,.reader-sticky-bar,.mobile-toc-toggle,.mobile-backdrop,.reading-progress,.page-position,.page-header{display:none !important}body{background:#fff;color:#000}.reader-layout{display:block}.text-content{padding:0;max-width:100%;font-size:11pt;line-height:1.6}.page-card{border:none;page-break-inside:avoid;margin-bottom:1rem}.page-sigel{position:static;display:block;font-size:9pt;color:#666;margin-bottom:0.3rem}.text-unit{margin-bottom:0.5rem}mark.search-hit{background:#ff0;color:#000}a{color:#000;text-decoration:none}}
+.fn-ref{font-size:0.72em;vertical-align:super;line-height:0;color:inherit;text-decoration:none;padding:0 0.1em;user-select:none;-webkit-user-select:none}.fn-ref:target,.text-unit.type-author_footnote:target{background:var(--bg-subtle)}/* Die Anmerkungen stehen untereinander wie Textzeilen: kein eigener Rand,   sie stapeln sich allein auf ihrem Zeilenmass. Vorher trug jede Notiz die   `margin-bottom:1rem` jeder Unit, wodurch sie 70 px auseinander lagen, wo   die Textzeilen 29 px haben. Der Abstand des Blocks zum Haupttext bleibt   davon unberuehrt — den traegt der letzte Absatz. */.text-unit.type-author_footnote{font-size:0.9em;color:var(--text-muted);margin-top:0;margin-bottom:0;user-select:none;-webkit-user-select:none}.text-unit.type-author_footnote:last-child{margin-bottom:1rem}body.anm-zitieren .text-unit.type-author_footnote,body.anm-zitieren .text-unit.type-author_footnote *{user-select:text;-webkit-user-select:text}body.anm-zitieren .text-unit:not(.type-author_footnote),body.anm-zitieren .page-divider,body.anm-zitieren .page-sigel,body.anm-zitieren .dipl-line-no{user-select:none;-webkit-user-select:none}body.anm-zitieren .fn-marke,body.anm-zitieren .fn-ort,body.anm-zitieren .fn-ref,body.anm-zitieren .fn-aufruf{user-select:none;-webkit-user-select:none}.text-unit.type-author_footnote:first-of-type{margin-top:0.8rem;padding-top:0.5rem;border-top:1px solid var(--rule)}.text-unit.type-author_footnote .sperrsatz{color:inherit}
+
+/* Auswahlfelder in der Gestalt der Seite statt in der des Betriebssystems.
+   Das aufgeklappte Menue zeichnet weiterhin das System - das laesst sich nicht
+   gestalten; das geschlossene Feld und sein Pfeil schon. */
+.toolbar-group select,.search-controls select{appearance:none;-webkit-appearance:none;background-color:var(--bg-page);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'><path d='M0 0l5 6 5-6z' fill='%23b0a89b'/></svg>");background-repeat:no-repeat;background-position:right 0.6em center;background-size:0.55em auto;padding-right:1.9em;cursor:pointer;transition:border-color 0.2s}
+.toolbar-group select:hover,.toolbar-group select:focus,.search-controls select:focus{border-color:var(--accent-gold)}
+
+/* Handy: Hinweisleiste schmaler setzen, sie nahm sonst den halben Schirm. */
+@media (max-width:480px){.cookie-notice{left:0.5rem;right:0.5rem;bottom:0.5rem;gap:0.55rem;padding:0.7rem 0.85rem;max-height:58vh;overflow-y:auto}.cookie-notice-text{flex:1 1 100%;font-size:0.72rem;line-height:1.45}.cookie-notice-ok{width:100%;padding:0.45rem 0.8rem;font-size:0.74rem}.beta-badge{margin-left:0.35rem;font-size:0.45rem;padding:0.05em 0.35em;letter-spacing:0.05em}}
+
+/* Die Wortmarke bleibt einzeilig; sie brach sonst am Handy um und die
+   Kopfleiste lief ueber. */
+.site-title-hegel{white-space:nowrap}
+
+/* Bandauswahl im Leser — eigenes Feld statt <select>, weil die aufgeklappte
+   Liste eines <select> vom Betriebssystem gezeichnet wird. Die Liste haengt am
+   Seitenkoerper und ist fest positioniert; die Werkzeugleiste hat
+   overflow-x:auto und wuerde sie sonst abschneiden. */
+.werkwahl-knopf{font-family:var(--font-body);font-size:0.85rem;padding:0.25rem 1.9rem 0.25rem 0.6rem;border:1px solid var(--rule);border-radius:3px;background-color:var(--bg-page);color:var(--text-body);cursor:pointer;position:relative;transition:border-color 0.2s;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'><path d='M0 0l5 6 5-6z' fill='%23b0a89b'/></svg>");background-repeat:no-repeat;background-position:right 0.6em center;background-size:0.55em auto}
+.werkwahl-knopf:hover,.werkwahl-knopf[aria-expanded="true"]{border-color:var(--accent-gold)}
+.werkwahl-liste{position:fixed;z-index:1000;min-width:15rem;max-width:22rem;list-style:none;margin:0;padding:0.3rem;background:var(--bg-paper);border:1px solid var(--rule);border-radius:3px;box-shadow:0 8px 28px var(--shadow-med);max-height:min(70vh,32rem);overflow-y:auto;overscroll-behavior:contain}
+.werkwahl-liste a{display:block;padding:0.45rem 0.6rem;border-radius:2px;text-decoration:none;color:var(--text-body);transition:background 0.12s,color 0.12s}
+.werkwahl-liste a:hover,.werkwahl-liste a:focus-visible{background:var(--bg-subtle);color:var(--text-ink);text-decoration:none}
+.werkwahl-liste a.ist-gewaehlt{color:var(--accent-gold)}
+.werkwahl-sigel{display:block;font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;color:var(--accent-gold);margin-bottom:0.1rem}
+.werkwahl-liste a.ist-gewaehlt .werkwahl-sigel{color:var(--accent)}
+.werkwahl-titel{display:block;font-size:0.82rem;line-height:1.35}
+
+/* Werkauswahl der Suche: Mehrfachauswahl mit Haekchen statt <select>.
+   Der Knopf traegt die Gestalt der Bandauswahl des Lesers; das Panel haengt
+   absolut am Knopf, "Gesamte Edition" schaltet alle Werke gemeinsam. */
+.mehrwahl{position:relative}
+.mehrwahl-liste{position:absolute;top:calc(100% + 0.3rem);left:0;z-index:500;min-width:16rem;max-width:24rem;padding:0.35rem;background:var(--bg-paper);border:1px solid var(--rule);border-radius:3px;box-shadow:0 8px 28px var(--shadow-med);text-align:left;max-height:min(70vh,32rem);overflow-y:auto;overscroll-behavior:contain}
+.mehrwahl-liste label{display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.55rem;border-radius:2px;font-size:0.8rem;color:var(--text-body);cursor:pointer;transition:background 0.12s}
+.mehrwahl-liste label:hover{background:var(--bg-subtle)}
+.mehrwahl-liste input[type="checkbox"]{accent-color:var(--accent-gold);flex-shrink:0}
+.mehrwahl-alle{border-bottom:1px solid var(--rule);margin-bottom:0.25rem}
+.mehrwahl-liste .mehrwahl-sigel{display:inline;font-family:var(--font-mono);font-size:0.64rem;letter-spacing:0.08em;color:var(--accent-gold);margin:0 0.15rem 0 0}
+.mehrwahl-liste .mehrwahl-titel{display:inline;font-size:0.8rem;line-height:1.35}
+
+/* Syntax-Hilfe: dreispaltige Uebersicht mit Beispielen, groesserer Grad. */
+.guide-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;padding:1rem 0 0.6rem;text-align:left}
+.guide-title{grid-column:1/-1;font-family:var(--font-body);font-size:0.62rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent-gold);margin-bottom:0.6rem}
+/* Die Marken sind verschieden breit (`AND` gegen `NEAR/n`). Standen sie in einem eigenen Flex-Kasten je Zeile, begann der Text jeder Zeile woanders. Jetzt ist die **Spalte** das Raster, und `display:contents` laesst die Zeilen daran teilnehmen: `max-content` misst die breiteste Marke der Spalte, alle Beschreibungen fluchten. Ohne geratene Festbreite, und jede Spalte richtet sich nach ihrer eigenen Marke. */.guide-col{display:grid;grid-template-columns:max-content 1fr;column-gap:0.7rem;row-gap:0.75rem;align-items:baseline}.guide-row{display:contents}
+.guide-row>code{justify-self:start;font-family:var(--font-mono);font-size:0.72rem;background:var(--bg-subtle);padding:0.16rem 0.45rem;border-radius:3px;color:var(--accent);white-space:nowrap}
+.guide-was{display:block;font-size:0.82rem;color:var(--text-body);line-height:1.45}
+.guide-ex{display:block;font-family:var(--font-mono);font-size:0.66rem;color:var(--text-muted);margin-top:0.15rem}
+.search-guide.open{max-height:40rem}
+@media (max-width:768px){.search-main.has-results .search-hero-area{position:static;margin-top:0;padding-top:calc(var(--header-h) + 1.5rem)}}
+@media (max-width:768px){.guide-cols{grid-template-columns:1fr;gap:0.9rem;padding:0.7rem 0 0.4rem}.guide-was{font-size:0.78rem}.mehrwahl-liste{min-width:13rem}}
+
+/* Umgebaute Auswahlfelder (auswahl.js): Knopf im Hausstil, aufgeklappte
+   Liste als eigenes Panel statt der Systemliste. Das native <select> bleibt
+   fast unsichtbar im Fluss, damit Pflichtfeld-Meldungen andocken koennen. */
+.auswahl{position:relative;display:inline-block}
+select.auswahl-quelle{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none;margin:0;padding:0;border:0}
+.auswahl-liste{position:absolute;top:calc(100% + 0.3rem);left:0;z-index:500;min-width:100%;max-height:16rem;overflow-y:auto;padding:0.3rem;background:var(--bg-paper);border:1px solid var(--rule);border-radius:3px;box-shadow:0 8px 28px var(--shadow-med);display:flex;flex-direction:column;text-align:left}
+.auswahl-liste[hidden]{display:none}
+.auswahl-punkt{font-family:var(--font-body);font-size:0.8rem;text-align:left;padding:0.4rem 0.6rem;border:none;border-radius:2px;background:transparent;color:var(--text-body);cursor:pointer;white-space:nowrap;transition:background 0.12s,color 0.12s}
+.auswahl-punkt:hover,.auswahl-punkt:focus-visible{background:var(--bg-subtle);color:var(--text-ink)}
+.auswahl-punkt.ist-gewaehlt{color:var(--accent-gold)}
+.fb-field .auswahl{display:block}
+.fb-field .auswahl-knopf{width:100%;text-align:left;font-size:0.95rem;padding-top:0.6rem;padding-bottom:0.6rem;border-radius:4px;color:var(--text-ink)}
+.fb-field .auswahl-liste{width:100%}
+
+/* Handy: 'Feedback' wandert aus der Kopfleiste in die Fusszeile — oben wurde
+   es sonst zwischen Recherche und Themenschalter gequetscht. */
+.fuss-handy{display:none}
+@media (max-width:768px){.sitenav li.nav-feedback{display:none}.fuss-handy{display:inline}}
+.einstellungen-panel{position:fixed;z-index:1000;min-width:15rem;padding:0.6rem 0.7rem;background:var(--bg-paper);border:1px solid var(--rule);border-radius:3px;box-shadow:0 8px 28px var(--shadow-med);display:flex;flex-direction:column;gap:0.6rem;max-height:min(70vh,32rem);overflow-y:auto;overscroll-behavior:contain}.einstellungen-panel[hidden]{display:none}.syntax-hilfe-panel{width:23rem;max-width:88vw;gap:0.5rem}.syntax-hilfe-zeile{display:flex;flex-direction:column;gap:0.15rem;font-size:0.76rem;line-height:1.4;padding-bottom:0.4rem;border-bottom:1px solid var(--rule)}.syntax-hilfe-zeile:last-child{border-bottom:none;padding-bottom:0}.syntax-hilfe-zeile code{font-family:var(--font-mono);font-size:0.72rem;background:var(--bg-subtle);padding:0.1rem 0.4rem;border-radius:3px;color:var(--accent);align-self:flex-start}.syntax-hilfe-zeile span{color:var(--text-body)}.syntax-hilfe-zeile span em{font-style:italic;color:var(--text-muted)}.syntax-hilfe-fuss{font-size:0.72rem;color:var(--text-muted);font-style:italic}
+/* Zwei Spalten, die zweite fest. Mit `space-between` richtete sich jeder
+   Schalter nach der Laenge seines Etiketts: `Quellenangabe` ist breiter als
+   `Zeilenangabe`, also begann der Knopf woanders und wurde anders breit —
+   drei `ein` in drei Groessen untereinander. Ein Raster haelt sie in einer
+   Flucht, gleich wie lang das Wort links ist. */
+.einstellungen-zeile{display:grid;grid-template-columns:minmax(0,1fr) 7.2rem;align-items:center;gap:1rem}
+.einstellungen-zeile-steuerung{display:flex;gap:0.3rem;justify-content:flex-end}
+.einstellungen-knopf{width:2.1rem;text-align:center;font-size:0.95rem;background-image:none;padding:0.25rem}.werkzeug-icon{width:1em;height:1em;min-width:1em;flex-shrink:0;display:block}.reader-toolbar .werkwahl-knopf,.reader-toolbar .btn-classic,.reader-toolbar .toolbar-group input{height:1.9rem;box-sizing:border-box}.reader-toolbar .werkwahl-knopf,.reader-toolbar .btn-classic{display:inline-flex;align-items:center}.reader-toolbar .btn-classic,.reader-toolbar .einstellungen-knopf{justify-content:center}
+
+/* ── Eine Flaeche fuer die ganze Werkzeugleiste ───────────────────────────
+   „Druckbild/Normal" stand als einziges Bedienelement der Leiste auf
+   `--bg-paper`, alle anderen — Werkauswahl, Sprungliste, Suchfeld, Zahnrad —
+   auf `--bg-page`. Nebeneinander war das schon im Dunkeln zu sehen
+   (1,048 : 1), und beim Themenwechsel kippte die Ordnung sogar: `--bg-page`
+   ist im Dunkeln *dunkler* als `--bg-paper`, im Hellen *heller*. Zwei
+   benachbarte Knoepfe tauschten also ihre Helligkeit, je nachdem welches
+   Thema lief.
+
+   Fuer Flaechen ist die Palette richtig so — die Lesetafel liegt jeweils
+   weiter vom Rand weg als das Blatt. Fuer Bedienelemente derselben Reihe
+   nicht. Sie bekommen darum alle dieselbe Marke, im Ruhezustand wie beim
+   Ueberfahren. Geschrankt auf `.reader-toolbar`, damit die Knoepfe im
+   Einstellungsfeld — das selbst auf `--bg-paper` liegt — unberuehrt
+   bleiben. */
+.reader-toolbar .btn-classic{background:var(--bg-page)}
+/* Gleiche Spezifitaet wie `.btn-classic:hover` und weiter hinten in der Datei:
+   ohne diese Zeile haette die Regel darueber das Ueberfahren mit erschlagen.
+   Ein Textfeld bleibt aussen vor — es ist kein Knopf und soll nicht die Farbe
+   wechseln, wenn der Zeiger nur darueber hinweggeht. */
+.reader-toolbar .btn-classic:hover,
+.reader-toolbar .werkwahl-knopf:hover,
+.reader-toolbar .werkwahl-knopf[aria-expanded="true"],
+.reader-toolbar select:hover{background-color:var(--bg-subtle)}
+/* Suche mittig zwischen Band/GW-Seite links und Druckbild/Zahnrad rechts —
+   dieselbe Zwei-Randmarge-Technik wie bei der mobilen Hauptnavigation:
+   der freie Platz teilt sich gleichmaessig vor der Suche und vor dem
+   rechten Block auf. Nur am Schreibtisch — mobil bleibt die Suche ihre
+   eigene, volle Zeile unterhalb der Werkzeugleiste. */
+@media (min-width:769px){
+  /* Drei-Spalten-Gitter. Die beiden aeusseren Spalten nehmen nur, was
+     ihr Inhalt braucht (auto); die Suche in der Mitte bekommt den
+     ganzen Rest (1fr) und waechst und schrumpft mit dem Fenster. Sie
+     lag frueher auf festen 22rem und war damit exakt mittig zur
+     Toolbar -- das ist aufgegeben zugunsten der Breite: ein Suchfeld,
+     das den vorhandenen Raum nutzt, ist mehr wert als eines, das
+     mittig steht. minmax(0,1fr) statt 1fr, damit die Spalte unter die
+     Mindestbreite ihres Inhalts schrumpfen darf und die Toolbar auf
+     schmalen Fenstern nicht seitlich ueberlaeuft. */
+  .reader-toolbar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;overflow-x:visible}
+  .toolbar-left{display:flex;align-items:center;gap:0.7rem;min-width:0;justify-self:start}
+  #toolbar-search{justify-self:stretch;width:auto;min-width:0}
+  .toolbar-end{justify-self:end}
+  /* Linke Gruppe war deutlich breiter als die rechte (232px vs. 143px),
+     darum wirkte der Abstand zur Suche links kleiner als rechts, obwohl
+     die Suche selbst schon exakt mittig lag. Pfeil und Eingabefeld hier
+     verkleinert, um beide Seiten anzugleichen -- siehe Kommentar oben:
+     bei gleich breiten aeusseren Spalten macht gleich breiter Inhalt
+     auch die Luecken gleich breit. */
+  #werkwahl-knopf{background-image:none;padding:0.25rem 0.5rem}
+  .jump-input-group input{width:2.6rem}
+  .toolbar-jump .btn-classic{padding:0.3rem 0.5rem}
+}
+#dipl-toggle{min-width:5.6rem;text-align:center}#cite-toggle{text-align:center}#cite-italic-toggle{text-align:center}#emphasis-toggle{text-align:center}
+/* Seitenumbruch auf schmalen Geraeten: unter 768px bleibt kein Rand mehr, in
+   dem die Ziffer haengen koennte (Satzspiegel-Polsterung faellt dort auf 1rem).
+   Sie rueckt deshalb in die Atempause selbst und steht rechtsbuendig — kein
+   Strich, kein zusaetzlicher Platzbedarf. */
+@media (max-width:1200px){
+  /* Unterhalb 1200px faellt die Satzspiegel-Polsterung von 3rem auf 2rem und
+     weniger. Gemessen: eine dreistellige Ziffer (340) endet dort exakt auf der
+     Fensterkante — der Rand traegt sie nicht mehr. Sie rueckt deshalb in die
+     Atempause selbst und steht rechtsbuendig ueber dem Seitenanfang, weiterhin
+     ohne Strich und ohne zusaetzlichen Platzbedarf. */
+  .page-divider{height:auto;margin:1.6rem 0 0.7rem}
+  .page-divider:first-child{margin-top:0}
+  .page-sigel{position:static;display:block;margin:0;text-align:right;font-size:0.92em;line-height:1;opacity:0.92}
+}
+/* Im Druck traegt die Seitenzahl wieder den Bandnamen: das Blatt hat keinen
+   Kontext, aus dem sich "GW 7" ergaenzen liesse. */
+@media print{
+  .page-sigel-werk{position:static;width:auto;height:auto;margin:0;clip:auto;overflow:visible}
+}
+
+/* Druckbild: eine Zeile ist dort eine *gedruckte* Zeile. Passt sie nicht in die
+   Spalte, bricht der Browser sie um — und weil `.text-unit` `hyphens:auto`
+   traegt, setzt er dabei einen Trennstrich, den die Vorlage nicht hat
+   (beobachtet auf Buchseite 12: "begräntzte" wurde zu "begräntz-/te", obwohl
+   die Zeile das ganze Wort traegt). Ein erfundener Trennstrich ist in einer
+   diplomatischen Wiedergabe ein Textfehler, kein Schoenheitsfehler. Im
+   Druckbild wird deshalb nicht getrennt; bricht eine Zeile trotzdem um, ist der
+   Umbruch als solcher erkennbar und behauptet kein Zeichen. */
+body.dipl-mode .dipl-content,
+body.dipl-mode .dipl-line-text{hyphens:none;-webkit-hyphens:none}
+
+/* Ortszeichen vor Hegels Notizen: wo sie im Manuskript standen. Eigenes
+   Zeichen statt der kursiven Herausgeberformel des Drucks — die Tatsache ist
+   frei, ihre Formulierung nicht. Aufgeloest in den Editionsrichtlinien. */
+.fn-ort{font-style:italic;color:var(--accent-gold);opacity:0.8;white-space:nowrap;user-select:none;-webkit-user-select:none}
+/* Die Marke am Anfang der Notiz im Lesefluss. Sie steht als hochgestelltes
+   Zeichen schon in den Daten und wird darum nicht noch einmal gehoben. */
+.fn-marke{color:inherit;user-select:none;-webkit-user-select:none}
+/* Die gedruckte Aufrufziffer im Druckbild: sieht aus wie zuvor, ist aber ein
+   eigenes Element und wird darum nicht in ein Zitat mitgenommen. */
+.fn-aufruf{user-select:none;-webkit-user-select:none}
+
+
+/* ── Befunde-Seite ──────────────────────────────────────────────────
+   Die Diagramme benutzen die Klassen der Editionsrichtlinien (.chart-*),
+   damit die Seite nicht wie ein Fremdkoerper wirkt. Hier steht nur, was
+   dort noch fehlt. */
+.sperr-bsp{letter-spacing:0.34em;font-style:normal}
+.befund-listen{display:grid;grid-template-columns:repeat(auto-fill,minmax(11rem,1fr));gap:1rem 1.4rem;margin:1.2rem 0 0.6rem}
+.befund-liste-kopf{font-family:var(--font-body);font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent-gold);margin-bottom:0.4rem}
+.befund-liste ol{list-style:none;margin:0;padding:0;counter-reset:bl}
+.befund-liste li{display:flex;justify-content:space-between;align-items:baseline;gap:0.5rem;font-size:0.86rem;line-height:1.6;border-bottom:1px solid var(--rule)}
+.befund-liste li:last-child{border-bottom:none}
+.bl-wort{color:var(--text-ink)}
+.bl-zahl{font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted)}
+.befund-hinweis{font-size:0.86rem;color:var(--text-muted);border-left:2px solid var(--rule);padding-left:0.9rem;margin-top:1rem}
+.befund-suche{display:flex;flex-wrap:wrap;align-items:center;gap:0.6rem;margin:1.1rem 0 0.2rem}
+.befund-label{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted)}
+.befund-suche input{font-family:var(--font-body);font-size:0.95rem;color:var(--text-ink);background:var(--bg-card,var(--bg-page));border:0.5px solid var(--text-muted);border-radius:4px;padding:0.4rem 0.7rem;min-width:12rem}
+.befund-suche input:focus{border-color:var(--accent-gold);outline:none}
+.befund-status{font-size:0.8rem;color:var(--text-muted)}
+.befund-tabelle{width:100%;border-collapse:collapse;margin:0.8rem 0;font-size:0.86rem}
+.befund-tabelle th{font-family:var(--font-body);font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);font-weight:500;text-align:left;padding:0.4rem 0.6rem 0.4rem 0;border-bottom:1px solid var(--rule)}
+.befund-tabelle td{padding:0.42rem 0.6rem 0.42rem 0;border-bottom:1px solid var(--rule);color:var(--text-body)}
+.befund-tabelle th.r,.befund-tabelle td.r{text-align:right;font-family:var(--font-mono);font-size:0.76rem}
+.befund-tabelle th.r{font-family:var(--font-body)}
+.befund-tabelle tr.summe td{border-bottom:none;border-top:1px solid var(--text-muted);color:var(--text-ink)}
+.befund-tabelle a{color:var(--text-ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+.befund-tabelle a:hover{color:var(--accent-gold)}
+.befund-stand{font-size:0.76rem;color:var(--text-muted);margin-top:2.5rem;text-align:center}
+/* Auf schmalen Geraeten faellt die Tabelle sonst aus dem Satzspiegel. */
+@media (max-width:640px){.befund-tabelle{display:block;overflow-x:auto}
+.befund-listen{grid-template-columns:1fr 1fr;gap:0.8rem}}
+
+
+/* Ohne Hoehenbegrenzung lief die Bandliste auf kurzen Fenstern aus dem Bild
+   und war dort nicht erreichbar. */
+.werkwahl-liste::-webkit-scrollbar{width:8px}
+.werkwahl-liste::-webkit-scrollbar-thumb{background:var(--rule);border-radius:4px}
+
+
+/* Die Namensliste stand einspaltig und in 1,3 rem — bei 15 Eintraegen baute
+   sich daraus eine sehr hohe Saeule. Drei Spalten, kleinerer Grad; auf
+   schmalen Fenstern zwei, auf dem Telefon eine. */
+@media (max-width:720px){.friends-list{grid-template-columns:repeat(2,1fr);gap:0.15rem 1.1rem}}
+@media (max-width:460px){.friends-list{grid-template-columns:1fr}}
+
+/* ── Heller Modus ──────────────────────────────────────────────────────────
+   Jede Farbe gegen ihren Untergrund nach WCAG gemessen, nicht geschaetzt:
+   Fliesstext 12,33:1 (AAA), gedaempft 5,42:1, Akzent 6,17:1, Bronze 5,41:1.
+   Das Papier ist warm (#faf6ec) statt weiss — auf Weiss laege der Fliesstext
+   rechnerisch hoeher, waere fuer laengeres Lesen aber greller.
+   Das Gold des dunklen Modus (#cbaa5c) haette hier nur 1,9:1 und ist darum
+   durch ein Bronze ersetzt. */
+:root[data-theme="hell"]{
+  --bg-desktop:#f1ebdf;
+  --bg-paper:#faf6ec;
+  --bg-subtle:#f2ecdf;
+  --bg-page:#fdfaf3;
+  --text-ink:#24211c;
+  --text-body:#332f28;
+  --text-muted:#6b6459;
+  --accent:#a8322b;
+  --accent-gold:#7d6118;
+  --accent-warm:#9a4a1c;
+  --rule:#d9d1c1;
+  --shadow-soft:rgba(60,50,35,0.07);
+  --shadow-med:rgba(60,50,35,0.14);
+  --header-bg:rgba(250,246,236,0.86);
+  --header-bg-solid:rgba(250,246,236,0.97);
+  --btn-primary-bg:#a8322b;
+  --btn-primary-hover:#87241e;
+}
+/* Der Schatten unter dem Kopf war fuer dunklen Grund gedacht und wirkt auf
+   Papier wie Schmutz. */
+:root[data-theme="hell"] .site-header{box-shadow:0 1px 0 var(--rule)}
+
+
+/* Der Darstellungsschalter sitzt in der Kopfleiste, nicht im Zahnrad des
+   Lesers: die Wahl gilt fuer die ganze Website, das Zahnrad gibt es aber nur
+   in der Lektuere. */
+.thema-schalter{margin-left:1.2rem;flex-shrink:0;width:2rem;height:2rem;display:flex;
+  align-items:center;justify-content:center;font-size:0.95rem;line-height:1;
+  border:1px solid var(--rule);border-radius:3px;background:transparent;
+  color:var(--text-muted);cursor:pointer;transition:color 0.2s,border-color 0.2s}
+.thema-schalter:hover{color:var(--accent-gold);border-color:var(--accent-gold)}
+@media (max-width:600px){.thema-schalter{margin-left:0.6rem}}
+
+
+/* ── Startseite: Rhythmus statt Gleichmass ────────────────────────────────
+   Vier Abschnitte hintereinander, alle mit demselben Aufbau (Label, Titel,
+   Text), derselben Flaeche und `padding:5rem` — zwischen zwei Titeln lagen
+   damit 10 rem gleicher Grund. Drei Eingriffe, keiner am Inhalt:
+
+   1. Abstaende zusammengezogen: 5 -> 3,25 rem; Titelabstand 2,5 -> 1,4 rem.
+   2. Jeder zweite Abschnitt bekommt eine eigene Flaeche, randlos ueber die
+      ganze Breite. Der `box-shadow`-Kniff spart einen Huellcontainer — die
+      Abschnitte sind auf 72 rem begrenzt und zentriert, ein Hintergrund waere
+      sonst genauso schmal.
+   3. Das Label bekommt einen Strich, damit der Abschnittsanfang eine Kante
+      hat statt nur Weissraum. */
+.lp-section{padding:3.25rem 2rem}
+.lp-section-title{margin-bottom:1.4rem;font-size:1.85rem}
+.lp-section-label{margin-bottom:0.55rem;display:inline-flex;align-items:center;gap:0.6rem}
+.lp-section-label::after{content:"";display:block;width:2.2rem;height:1px;background:var(--accent-gold);opacity:0.55}
+.about-lead{margin-bottom:2rem}
+.about-cols{gap:2.2rem;margin-bottom:1.5rem}
+
+.about-section,.pubroadmap-section{
+  background:var(--bg-paper);
+  box-shadow:0 0 0 100vmax var(--bg-paper);
+  clip-path:inset(0 -100vmax);
+}
+
+/* Der Aufmacher nahm den ganzen Bildschirm; die Zahlenleiste darunter blieb
+   unsichtbar, und die Seite wirkte leer. Jetzt lugt sie hervor und laedt zum
+   Weiterlesen ein. */
+.hero{height:82vh;min-height:520px}
+
+@media (max-width:768px){
+  .lp-section{padding:2.5rem 1.2rem}
+  .lp-section-title{font-size:1.55rem;margin-bottom:1.1rem}
+  .hero{height:auto;min-height:78vh;padding:5rem 0 3rem}
+}
+
+
+/* ── Aufmacher: Luft nach unten, engere Mitte ─────────────────────────────
+   Der Rollhinweis haengt `position:absolute` am unteren Rand. Als der
+   Aufmacher noch 100vh hoch war, lag genug Raum dazwischen; mit 82vh klebte
+   `Entdecken` an den Knoepfen. Der Inhalt ist mittig ausgerichtet — ein
+   Polster unten schiebt ihn nach oben und schafft den Abstand wieder, ohne
+   den Aufmacher erneut zu strecken.
+
+   Zugleich die Mitte zusammengezogen: zwischen Strich, Untertitel und
+   Knoepfen standen 1,5 + 2 rem, was den Block auseinanderfallen liess. */
+.hero{padding-bottom:6rem}
+.hero-rule{margin:1.05rem auto}
+.hero-sub{font-size:1rem;margin:0 auto 1.6rem;max-width:460px}
+.hero-version{margin-top:0.35rem}
+
+.hero-scroll{bottom:2rem;gap:0.45rem;opacity:0.75;transition:opacity 0.2s}
+.hero-scroll:hover{opacity:1}
+.hero-scroll span:first-child{font-size:0.58rem;letter-spacing:0.24em}
+.hero-scroll-line{height:26px}
+
+@media (max-width:768px){
+  /* Auf dem Telefon steht der Hinweis im Fluss, nicht absolut — dort braucht
+     es kein Polster, sonst entsteht ein leeres Feld unter den Knoepfen. */
+  .hero{padding:4.5rem 0 3.5rem}
+  .hero-scroll{display:none}
+}
+
+
+/* ── Aufmacher unter dem Kopf halten ──────────────────────────────────────
+   `.reader-layout` und `.error-page` gleichen die Kopfhoehe mit
+   `padding-top:var(--header-h)` aus — der Aufmacher tat es nie. Solange kein
+   Spendenbalken lief, fiel das nicht auf: der Kopf ist halbdurchsichtig und
+   der Titel steht tief genug. Faehrt der Balken aus, waechst `--header-h`
+   aber um dessen Hoehe, und der Kopf schiebt sich ueber das Etikett
+   „Nach dem Text der Gesammelten Werke".
+
+   `--header-h` ist `calc(56px + var(--banner-h))`, also geht die Korrektur
+   automatisch mit, wenn der Balken erscheint oder verschwindet. */
+.hero{padding-top:var(--header-h);min-height:calc(520px + var(--header-h))}
+@media (max-width:768px){
+  .hero{padding-top:calc(var(--header-h) + 1.5rem);min-height:calc(78vh + var(--header-h))}
+}
+
+
+/* ── Die erste Bildschirmseite traegt nur den Aufmacher ───────────────────
+   Der Aufmacher stand auf `height:100vh`, die Zahlenleiste begann also
+   *genau* an der Faltkante. Genau dort ist der schlechteste Ort: schon ein
+   angestossenes Mausrad, eine Fensterhoehe mit ungerader Pixelzahl oder die
+   nachladende Schrift liessen sie hervorlugen — und weil Banner und Kopf
+   beide `position:fixed` liegen, sieht eine leicht gerollte Seite oben
+   genauso aus wie eine ungerollte. Der Leser merkt nicht, dass er schon
+   rollt, und die Eroeffnung wirkt vollgestellt.
+
+   Darum ein echter Abstand statt einer Beruehrung. Der Aufmacher behaelt
+   seine 100vh — der Rollhinweis „Entdecken" sitzt an dessen Unterkante und
+   gehoert genau dorthin, ans untere Ende des sichtbaren Bildes. Die Luecke
+   kommt darunter, zwischen Aufmacher und Zahlenleiste. `100dvh` folgt auf
+   dem Telefon der ein- und ausfahrenden Adressleiste; wo der Browser das
+   nicht kennt, bleibt es bei `100vh`. */
+.hero-page .stats-bar{margin-top:5rem}
+@media (min-width:769px){
+  /* Nur hier. Weiter unten steht der Aufmacher auf `height:auto`, damit er
+     auf kleinen Schirmen mitwachsen kann; ohne diese Schranke haette die
+     Regel das wieder eingerissen — sie steht spaeter in der Datei. */
+  @supports (height:100dvh){
+    .hero{height:100dvh}
+  }
+}
+@media (max-width:768px){
+  /* Dort ist der Aufmacher bewusst kuerzer als das Bild (`height:auto`),
+     der Rollhinweis ist ausgeblendet, und 5rem Leere waeren auf einem
+     kleinen Schirm nur ein Loch. */
+  .hero-page .stats-bar{margin-top:2rem}
+}
+
+/* Der fruehere Aufmacher hatte hier ein absolut positioniertes Bildfeld
+   (`.hero-figure`) neben linksbuendigem Text -- der ganze Block ist mit dem
+   Bildfeld selbst weggefallen; `.hero`/`.hero-content` zentrieren jetzt
+   einheitlich per Grundregel, siehe oben bei `.hero-crest`. */
+
+
+/* macOS blendet Rollleisten aus, bis man rollt — in einem Aufklappfeld sieht
+   das aus, als gaebe es keine. Hier bleiben sie sichtbar, damit erkennbar ist,
+   dass unter dem Rand noch etwas steht. */
+.mehrwahl-liste,.auswahl-liste,.werkwahl-liste,.einstellungen-panel{
+  scrollbar-width:thin;scrollbar-color:var(--rule) transparent}
+.mehrwahl-liste::-webkit-scrollbar,.auswahl-liste::-webkit-scrollbar{width:9px}
+.mehrwahl-liste::-webkit-scrollbar-thumb,.auswahl-liste::-webkit-scrollbar-thumb{
+  background:var(--rule);border-radius:5px;border:2px solid transparent;background-clip:content-box}
+.mehrwahl-liste::-webkit-scrollbar-thumb:hover,.auswahl-liste::-webkit-scrollbar-thumb:hover{
+  background:var(--accent-gold);background-clip:content-box}
+
+
+/* Der Suchkopf klemmt seinen Hintergrund mit `overflow:hidden` ein — und
+   schnitt damit die aufgeklappte Werkauswahl ab, solange noch nicht gesucht
+   worden war. Solange das Feld offen ist, faellt die Klemme weg. `:has()`
+   deckt den Fall auch dann ab, wenn die Klasse einmal nicht gesetzt wird. */
+.search-hero-area.feld-offen,
+.search-hero-area:has(.mehrwahl-liste:not([hidden])){overflow:visible}
+
+
+/* ── Bilder neben dem Text ────────────────────────────────────────────────
+   Zwei Bilder, abwechselnd links und rechts, damit die Seite einen Takt
+   bekommt statt einer Spalte:
+
+     „Das Problem"  Schlesingers Bildnis, 1831            links
+     „Open Beta"    Titelblatt der Erstausgabe, 1807      rechts
+
+   Auf den Text abgestimmt heisst hier vor allem: die **Oberkante des Bildes
+   liegt auf der ersten Textzeile**, nicht am Rand des Absatzkastens. Serifen
+   sitzen tiefer als der Kasten hoch ist; ohne den kleinen Versatz schwebt das
+   Bild sichtbar zu hoch. Und die Bildunterschrift folgt dem Zeilenmass des
+   Fliesstextes, statt ein eigenes zu erfinden. */
+.mit-bild{display:grid;grid-template-columns:12.5rem 1fr;gap:2.2rem;align-items:start;margin-bottom:2rem}
+.mit-bild--rechts{grid-template-columns:1fr 12.5rem}
+.mit-bild--rechts .portrait{order:2}
+.mit-bild-text{min-width:0}
+.mit-bild .about-lead{margin:0 0 1.1rem;max-width:40rem}
+.mit-bild .about-lead:last-child{margin-bottom:0}
+
+.portrait{margin:0.35rem 0 0}          /* auf die erste Textzeile absenken */
+.portrait img{width:100%;height:auto;display:block;border:1px solid var(--rule);
+  border-radius:var(--radius);box-shadow:0 2px 14px var(--shadow-soft)}
+.portrait figcaption{margin-top:0.55rem;font-size:0.72rem;line-height:1.5;
+  color:var(--text-muted);font-family:var(--font-body);
+  padding-top:0.45rem;border-top:1px solid var(--rule)}
+.portrait-jahr{font-variant:small-caps;letter-spacing:0.07em;color:var(--accent-gold)}
+.portrait-quelle{font-size:0.66rem;opacity:0.7}
+
+/* Das Gemaelde vertraegt eine Spur weniger Farbe; das Faksimile steht auf
+   hellem Papier und braucht im dunklen Modus keinen Rahmen, der es einsperrt. */
+.portrait img{filter:saturate(0.93) contrast(1.02)}
+.faksimile img{filter:none;border-color:transparent}
+
+@media (max-width:820px){
+  .mit-bild,.mit-bild--rechts{grid-template-columns:1fr;gap:1.4rem}
+  .mit-bild--rechts .portrait{order:0}
+  .portrait{max-width:12rem;margin:0 auto}
+  .portrait figcaption{text-align:center}
+}
+
+
+/* Der Text soll die Breite nutzen: die Bildspalte ist schmaler (12,5 statt
+   14 rem), der Abstand enger, und der Absatz hat keine eigene Hoechstbreite
+   mehr — im Gespann begrenzt ihn schon die Spalte. */
+
+
+/* ── Bandübersicht: Liste in zwei Spalten statt Kartenraster ──────────────
+   Die Karten waren 10,2 rem breit — zu schmal fuer Titel wie „Jenaer
+   Systementwuerfe III", die darin auf drei Zeilen brachen, und zu gleichfoermig
+   nebeneinander. Als Zeile gelesen traegt jeder Band seine Angaben in einer
+   Linie: Nummer, Titel, Sigle, Umfang. Zwei Spalten, damit acht Baende nicht
+   zu einer langen Kolonne werden. */
+.works-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 3rem;max-width:64rem;min-height:0}
+.work-row{flex-direction:row;align-items:baseline;gap:0.9rem;padding:0.85rem 0.2rem;
+  background:transparent;border:0;border-bottom:1px solid var(--rule);border-radius:0}
+.work-row:hover{background:transparent;border-bottom-color:var(--accent-gold)}
+.work-row-band{flex:0 0 1.9rem;font-size:1.15rem;text-align:right}
+.work-row-main{flex:1 1 auto;gap:0.1rem}
+.work-row-title{font-size:0.95rem;line-height:1.25}
+.work-row-meta{flex:0 0 auto;margin:0;padding:0;white-space:nowrap;font-size:0.7rem}
+.work-row-arrow{flex:0 0 auto;align-self:baseline;margin:0}
+.work-row:hover .work-row-arrow{opacity:1;transform:translateX(3px)}
+
+@media (max-width:820px){
+  .works-grid{grid-template-columns:1fr;gap:0}
+  .work-row-meta{display:none}
+}
+
+
+/* Das Gespann darf **genau zwei** Kinder haben: Bild und Textblock. Lagen die
+   Absaetze einzeln darin, verteilte die Rasterautomatik sie auf die Zellen —
+   der zweite Absatz landete in der 12,5 rem schmalen Bildspalte und lief als
+   Schlauch ueber den halben Bildschirm. Darum `.mit-bild-text` als Huelle. */
+.mit-bild > *:not(.portrait):not(.mit-bild-text){grid-column:1/-1}
+
+
+/* Tabellen und Formeln der Editionsrichtlinien. Zahlen rechtsbuendig und in
+   Ziffern gleicher Breite — sonst laesst sich eine Spalte nicht vergleichen. */
+.tab-wrap{overflow-x:auto;margin:1.1rem 0}
+.daten-tab{width:100%;border-collapse:collapse;font-size:0.82rem}
+.daten-tab th,.daten-tab td{padding:0.45rem 0.7rem;border-bottom:1px solid var(--rule);text-align:left}
+.daten-tab th{font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text-muted);font-weight:400;white-space:nowrap}
+.daten-tab td.num,.daten-tab th.num{text-align:right;font-variant-numeric:tabular-nums}
+.daten-tab tbody tr:last-child td{border-bottom:0}
+.daten-tab tbody tr:hover{background:var(--bg-subtle)}
+.formel{font-family:var(--font-mono);font-size:0.86rem;color:var(--text-ink);
+  background:var(--bg-page);border-left:2px solid var(--accent-gold);
+  padding:0.7rem 1rem;margin:1rem 0;overflow-x:auto}
+.legal-container--wide h3{font-family:var(--font-display);font-size:1.05rem;
+  color:var(--text-ink);margin:1.6rem 0 0.6rem}
+
+
+/* ── Suchkopf: nicht unter den Kopf zentrieren ────────────────────────────
+   `.search-hero-area` zentriert seinen Inhalt in einer Box von
+   `100vh - var(--header-h)`. Solange der Inhalt kleiner war als die Box, ging
+   das gut. Seit die Syntaxhilfe von Anfang an offensteht — und erst recht,
+   wenn der Spendenbalken `--header-h` waschsen laesst — ist er groesser, und
+   Flex-Zentrierung laesst den Ueberschuss **auf beiden Seiten** hinauslaufen:
+   oben verschwindet er unter der festen Kopfleiste.
+
+   `safe center` zentriert nur, solange Platz ist, und faellt sonst auf
+   `start` zurueck. Dazu eine Untergrenze fuer den oberen Abstand. */
+.search-hero-area{align-items:safe center;padding-top:calc(var(--header-h) + 1.25rem)}
+@media (max-width:768px){
+  .search-hero-area{align-items:flex-start}
+}
+
+
+/* Die Zeile steht in Zitatangaben hoch: `GW 21, 35¹⁴`. So ist auf einen Blick
+   zu sehen, was Seite und was Zeile ist — ein Punkt dazwischen liest sich wie
+   ein Dezimaltrennzeichen. */
+.formel sup,.legal-container sup{font-size:0.68em;line-height:0;vertical-align:0.42em;
+  font-variant-numeric:lining-nums}
+
+
+/* Der Eintrag fuers Literaturverzeichnis ist ein Satz, keine Formel — er
+   bricht um und steht in der Lesefschrift, nur der Kasten bleibt. */
+.formel.zitat-eintrag{font-family:var(--font-body);font-size:0.86rem;line-height:1.6;
+  white-space:normal;overflow-x:visible}
+.zitat-url{color:var(--accent-gold)}
+.zitat-datum{color:var(--text-muted);font-style:italic}
+
+
+/* Ein Hinweis, der nicht ueberlesen werden soll: keine Farbe des Alarms,
+   sondern ein Strich in Gold und ein ruhiger Kasten. */
+.warnung{background:var(--bg-page);border-left:2px solid var(--accent-gold);
+  padding:0.85rem 1.1rem;margin:1.2rem 0;font-size:0.92rem;line-height:1.65}
+
+
+/* Waehrend eines Themenwechsels laufen keine Uebergaenge. Gesetzt und im
+   selben Wimpernschlag wieder entfernt von `themefarbe.js` — siehe die
+   Begruendung dort. Ohne das animiert der Kopf seinen Hintergrund ueber
+   0,4 s mit und hinkt sichtbar hinter dem Rest der Seite her. */
+:root.thema-wechselt,
+:root.thema-wechselt *,
+:root.thema-wechselt *::before,
+:root.thema-wechselt *::after{transition:none !important}
+
+
+/* Ueberschrift im Einstellungsfeld. Ohne sie standen fuenf Zeilen
+   untereinander, von denen zwei das Lesen und drei das Kopieren betreffen —
+   und `Hervorhebung` kam zweimal vor, ohne dass zu sehen war, dass es zwei
+   verschiedene Dinge sind: wie der Sperrsatz erscheint, und ob er ins Zitat
+   mitgeht. Die Gruppe traegt den Unterschied, nicht das Etikett. */
+.einstellungen-gruppe{
+  font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--accent-gold);padding:0.7rem 0.15rem 0.35rem;
+  border-bottom:1px solid var(--rule);margin-bottom:0.2rem;
+}
+.einstellungen-gruppe:first-child{padding-top:0.15rem}
+/* Die Spalte ist so breit, wie `Sperrsatz` sie braucht. Ein Schalter, der
+   nur `ein` sagt, soll sie nicht fuellen — drei Buchstaben in einem Kasten
+   fuer neun sehen aus wie ein Versehen. Die Zustandsschalter stehen darum
+   schmal und rechtsbuendig, untereinander in gleicher Breite; was einen
+   Begriff traegt, nimmt die ganze Spalte. */
+.einstellungen-panel .btn-einzel-toggle{min-width:0;justify-content:center;width:100%}
+.einstellungen-panel .einstellungen-zeile-steuerung .btn-font{flex:1 1 0;min-width:0}
+
+/* Kein separates Bildfeld mehr -- Ringe, Wortmarke und Text sind eine
+   einzige zentrierte Komposition, wie eine Titelseite: Kolophon oben,
+   Name darunter, kein zweites Element daneben, das erst zusammengehalten
+   werden muss. */
+.hero{justify-content:center}
+.hero-content{flex:0 1 auto;max-width:640px;padding:0 2rem;text-align:center}
+.hero-crest{width:4.4rem;height:auto;margin-bottom:1.4rem}
+.hero-crest .ring{stroke-width:1.3}
+.hero-wordmark-line{width:2.2rem;height:1px;background:var(--rule)}
+.app-download-counter{margin-top:1.2rem;font-size:0.85rem;color:var(--text-muted);letter-spacing:0.02em}
+
+
+/* ── Fassung 0.74: Satz und Feinarbeit ────────────────────────────────────
+   Befund vom 02.09.2026 an Bildern in sieben Fensterbreiten, hell und dunkel.
+
+   1. Satzspiegel. Der Lesetext fuellte den Container von 76 rem: bei 1440 px
+      rund 135 Zeichen je Zeile, bei 1920 px 154. Lesbar sind 65 bis 90. Die
+      Spalte wird auf 40 rem begrenzt (rund 88 Zeichen), die Werkzeugleiste
+      fluchtet mit ihr, und die Seitenziffer haengt damit neben dem Text statt
+      am Fensterrand. Im Druckbild darf die Spalte 42 rem haben: die gemessene
+      Druckspalte liegt bei 34 bis 40 rem, GW 4 bei 41,7. */
+@media (min-width:769px){
+  #reader-pages{max-width:40rem;margin:0 auto}
+  body.dipl-mode #reader-pages{max-width:42rem}
+  .reader-toolbar{max-width:40rem;margin:0 auto}
+  body.dipl-mode .reader-toolbar{max-width:42rem}
+}
+
+/* 2. Ueberschriften standen unter dem Text: `opacity:.88` machte sie blasser
+      als den Absatz, und Ebene 3 hatte genau 1em. Jetzt volle Tinte und
+      deutliche Stufen; die Ebenen 5 bis 7 bleiben im Grad des Textes. */
+.text-unit.type-heading,.text-unit.type-subheading{opacity:1}
+.text-unit.type-heading[data-level="1"]{font-size:1.55em;letter-spacing:0.06em}
+.text-unit.type-heading[data-level="2"]{font-size:1.3em}
+.text-unit.type-heading[data-level="3"]{font-size:1.15em}
+.text-unit.type-heading[data-level="4"]{font-size:1.02em}
+
+/* 3. Kursive war um 6 % vergroessert und sprang aus der Zeile, auf dem
+      Telefon deutlich. Die Angleichung an die Grundschrift bleibt, 3 %
+      genuegen. */
+em:not(.sperrsatz),i,.sperrsatz{font-size:1.03em}
+
+/* 4. Telefon: Blocksatz riss bei 390 px Loecher von Geviertbreite. Unter
+      480 px Flattersatz; die Trennung bleibt. */
+@media (max-width:480px){.text-unit{text-align:left}}
+
+/* 5. Der aktive Eintrag im Verzeichnis sprach zwei Sprachen: roter Text und
+      goldener Balken. Rot ist Link und Aktion, Gold ist Apparat. Der Balken
+      bleibt, der Text steht in Tinte. */
+.toc-list li.toc-active > a,.toc-list li.toc-active > .toc-divider{color:var(--text-ink) !important}
+
+/* 6. „edition" unter HEGEL hatte 0,5 rem, also 9 px, auf dem Telefon 8.
+      Lesbar ab 0,62 rem. */
+.site-title-edition{font-size:0.62rem;letter-spacing:0.12em}
+@media (max-width:768px){.site-title-edition{font-size:0.54rem;letter-spacing:0.1em}}
+
+/* 7. Mono-Etiketten. OPEN BETA, „ab 2031" und die Sigla standen in JetBrains
+      Mono, der einzigen Groteske der Seite, und lasen sich wie Code. Sie
+      tragen jetzt die Textschrift, in Kapitaelchen oder mit Tabellenziffern.
+      Mono bleibt, wo es Syntax ist: Zeilenziffern im Druckbild, Operatoren
+      und Beispiele der Suchhilfe. */
+.beta-badge{font-family:var(--font-body);font-variant:small-caps;text-transform:none;font-size:0.68rem;letter-spacing:0.12em;line-height:1.35;padding:0.02em 0.5em 0.08em}
+.legal-table-norm{font-family:var(--font-body);font-variant-numeric:tabular-nums;font-size:0.86rem;letter-spacing:0.02em}
+.werkwahl-sigel,.mehrwahl-liste .mehrwahl-sigel{font-family:var(--font-body);font-size:0.72rem;letter-spacing:0.1em;font-variant-numeric:tabular-nums}
+.work-row-badge{font-family:var(--font-body);font-variant:small-caps;text-transform:none;font-size:0.74rem;letter-spacing:0.08em}
+/* Der Trefferzaehler des Lesefelds wurde bei „1 / 360 Seit…" abgeschnitten
+   (6 rem). Jetzt Textschrift und Platz fuer „1 / 360 Seiten · 2 / 5". */
+.inline-search-count{font-family:var(--font-body);font-variant-numeric:tabular-nums;font-size:0.7rem;max-width:10rem}
+.inline-search-wrap input{padding-right:10.5rem}
+
+/* 8. Werkfilter der Suche: „GW 5" brach in zwei Zeilen, weil die Sigle
+      inline stand, ohne Breite und ohne Umbruchschutz. */
+.mehrwahl-liste .mehrwahl-sigel{display:inline-block;min-width:2.9rem;white-space:nowrap;margin-right:0.35rem}
+
+/* 9. Syntaxhilfe: die Spalte „Naehe" hat zwei Zeilen, die Nachbarn vier.
+      Das Raster streckte die zwei auf die Hoehe der vier. */
+.guide-col{align-content:start}
+
+/* 10. Druckbild auf schmalen Fenstern (769 bis rund 920 px): die Zeilen
+       standen auf `nowrap`, die Spalte war schmaler als die Druckzeile, der
+       Text lief rechts aus dem Bild, und `html` sperrt das Rollen dorthin.
+       `passeDiplSpalteAn` in text.html setzt `--dipl-skala`: den Faktor, um
+       den der Grad sinken muss, damit die Spalte in den Platz passt. Eine
+       Druckzeile bleibt so eine Zeile; umbrechen wuerde das Druckbild
+       aufgeben. Am Schreibtisch ist der Faktor 1. */
+body.dipl-mode .dipl-content{font-size:calc(1em * var(--dipl-skala, 1))}
+
+/* 11. Aufmacher: unter dem Bild von 100 dvh lagen noch 5 rem Leere, bevor
+       die Zahlenleiste kam, und im Bild selbst schon ein Drittel. Eine
+       Luecke reicht. Die Leiste beginnt an der Faltkante, ihr Strich oben
+       markiert sie; wer rollt, sieht sie kommen. */
+@media (min-width:769px){.hero-page .stats-bar{margin-top:0}}
+
+/* 12. Der Hinweis zur lokalen Speicherung war ein Kasten von vier Zeilen,
+       fuer eine Seite, die keine Cookies setzt. Jetzt eine schmale Leiste am
+       unteren Rand; sie geht beim Rollen von selbst, siehe cookie-notice.js. */
+.cookie-notice{left:0;right:0;bottom:0;max-width:none;border-radius:0;border-width:1px 0 0;padding:0.5rem 1.5rem;gap:1rem;flex-wrap:nowrap;box-shadow:0 -6px 20px var(--shadow-soft)}
+.cookie-notice-text{font-size:0.74rem;line-height:1.45;flex:1 1 auto}
+.cookie-notice-ok{padding:0.3rem 0.9rem;font-size:0.72rem}
+@media (max-width:32rem){.cookie-notice{flex-wrap:wrap;padding:0.6rem 0.9rem}
+.cookie-notice-ok{width:auto;align-self:flex-end}
+}
+
+/* 13. Feedback: Textfelder trugen einen dunklen Halbpixelrahmen, die
+       umgebauten Auswahlfelder den hellen Seitenrahmen. Ein Rahmen. */
+.fb-field input,.fb-field textarea{border:1px solid var(--rule)}
+.fb-field input:focus,.fb-field textarea:focus{border-color:var(--accent-gold)}
+
+/* 14. Seitensprung: der Platzhalter „S." war nicht zu deuten, das Etikett
+       ist versteckt. Am Schreibtisch steht „Seite"; auf dem Telefon bleibt
+       „S.", dort ginge jeder Buchstabe von der Suche ab (text.html). */
+@media (min-width:769px){.jump-input-group input{width:3.4rem}}
+
+/* ── Nutzung der letzten 30 Tage (index.html, assets/nutzung.js) ─────────
+   Zwei Reihen, gestapelt: Website-Besucher und Mac-App-Geraete je Tag.
+   Die Reihenfarben sind je Modus gegen den Untergrund (--bg-desktop)
+   gerechnet: Helligkeitsband, Farbsehschwaeche (Deutan/Tritan),
+   Normalsicht und Kontrast >= 3:1 -- das Gold der Marke selbst (#cbaa5c
+   dunkel, #7d6118 hell) liegt dafuer zu hell bzw. zu nah am Rot.
+   Text traegt nie die Reihenfarbe; die Kennung sitzt im Feld daneben. */
+:root{--nutzung-web:#b08f3f;--nutzung-app:#c23b35}
+:root[data-theme="hell"]{--nutzung-web:#a5821f;--nutzung-app:#8f2a24}
+.nutzung-section .about-lead{margin-bottom:1.6rem}
+.nutzung-figur{position:relative;max-width:44rem;margin:0}
+.nutzung-legende{list-style:none;display:flex;flex-wrap:wrap;gap:0.4rem 1.8rem;margin:0 0 1rem 0;padding:0;font-size:0.85rem;color:var(--text-muted)}
+.nutzung-legende-eintrag{display:inline-flex;align-items:center;gap:0.5rem}
+.nutzung-feld{display:inline-block;width:0.8rem;height:0.8rem;border-radius:2px}
+.nutzung-legende-summe{font-variant-numeric:tabular-nums;color:var(--text-ink)}
+.nutzung-web{fill:var(--nutzung-web);background:var(--nutzung-web)}
+.nutzung-app{fill:var(--nutzung-app);background:var(--nutzung-app)}
+.nutzung-svg{display:block;width:100%;height:auto;font-family:var(--font-body);overflow:visible}
+.nutzung-gitter line{stroke:var(--rule);stroke-width:1;shape-rendering:crispEdges}
+.nutzung-gitter text,.nutzung-achse text{fill:var(--text-muted);font-size:11px;font-variant-numeric:tabular-nums}
+.nutzung-grundlinie{stroke:var(--text-muted);stroke-width:1;shape-rendering:crispEdges;opacity:0.6}
+.nutzung-treffer{fill:transparent}
+.nutzung-tag{outline:none;cursor:default}
+.nutzung-tag .nutzung-segment{transition:opacity 0.15s}
+.nutzung-tag.ist-aktiv .nutzung-segment{opacity:0.72}
+.nutzung-tag:focus-visible .nutzung-treffer{stroke:var(--accent-gold);stroke-width:1.5;fill:none}
+.nutzung-tip{position:absolute;top:0;z-index:5;min-width:11rem;padding:0.55rem 0.75rem;background:var(--bg-paper);border:1px solid var(--rule);border-radius:var(--radius);box-shadow:0 4px 16px var(--shadow-med);font-size:0.8rem;line-height:1.5;pointer-events:none}
+.nutzung-tip-datum{color:var(--text-muted);margin-bottom:0.25rem;white-space:nowrap}
+.nutzung-tip-zeile{display:grid;grid-template-columns:0.9rem 3.2rem 1fr;align-items:center;gap:0.4rem}
+.nutzung-tip-gesamt{border-top:1px solid var(--rule);margin-top:0.2rem;padding-top:0.2rem}
+.nutzung-strich{display:inline-block;width:0.7rem;height:2px;border-radius:1px}
+.nutzung-tip-wert{font-variant-numeric:tabular-nums;color:var(--text-ink);font-weight:600;text-align:right}
+.nutzung-tip-name{color:var(--text-muted)}
+.nutzung-details{margin-top:1.2rem;font-size:0.82rem;color:var(--text-muted)}
+.nutzung-details summary{cursor:pointer;color:var(--accent-gold);letter-spacing:0.04em}
+.nutzung-tabelle{margin-top:0.8rem;border-collapse:collapse;width:100%;max-width:28rem;font-variant-numeric:tabular-nums}
+.nutzung-tabelle th,.nutzung-tabelle td{padding:0.25rem 0.6rem;border-bottom:1px solid var(--rule);text-align:right}
+.nutzung-tabelle th:first-child{text-align:left;font-weight:400;color:var(--text-body)}
+.nutzung-tabelle thead th{color:var(--text-muted);font-weight:400}
+.nutzung-tabelle tbody th{color:var(--text-body)}
+.nutzung-fuss{margin-top:1rem;font-size:0.78rem;color:var(--text-muted)}
+@media (max-width:600px){.nutzung-legende{font-size:0.8rem}.nutzung-gitter text,.nutzung-achse text{font-size:13px}}
+/* Hinweis unter dem Download-Knopf fuer Installationen vor Sparkle (27.08.2026):
+   die konnten sich nicht selbst aktualisieren und erfahren es nur hier. */
+.app-hinweis{margin-top:1.4rem;max-width:34rem;font-size:0.85rem;line-height:1.6;color:var(--text-muted)}
+/* TEI-Download im Einstellungsfeld: ein Link, der wie die Knoepfe daneben aussieht */
+.einstellungen-panel a.btn-classic{display:inline-flex;align-items:center;text-decoration:none;color:var(--text-body);white-space:nowrap}.einstellungen-panel a.btn-classic:hover{text-decoration:none;color:var(--text-ink)}
+
+/* ═══ Fassung 0.8: Feinsatz des Lesers ════════════════════════════════════
+   Alles unter body.feinsatz (nur text.html). Entstanden aus dem Schrift- und
+   Verzeichnistest vom 22.10.2026; die Schrift selbst (Source Serif ganz,
+   Griechisch aus EB Garamond) steht in fonts.css und gilt auf allen Seiten.
+   Teile: Ziffern und Zeilenfall · Hervorhebung „schlicht“ · Verzeichnis in der
+   Seitenleiste · Titelblätter und Inhaltsanzeigen · Überschriften · Randnotizen
+   und Feinschliff. JS dazu in assets/leser-feinsatz.js. */
+
+body.feinsatz .text-unit{font-variant-numeric:oldstyle-nums proportional-nums}
+
+body.feinsatz:not(.dipl-mode) .text-unit{text-wrap:pretty}
+body.feinsatz .text-unit.type-heading,body.feinsatz .text-unit.type-subheading{text-wrap:balance}
+
+body.sperrsatz-schlicht .text-unit .sperrsatz,
+body.sperrsatz-schlicht .text-unit em,
+body.sperrsatz-schlicht .text-unit i{font-style:normal;letter-spacing:0;font-size:1em}
+
+/* ── Verzeichnis in der Seitenleiste ── */
+body.feinsatz .toc-list li{margin-bottom:.12rem;position:relative}
+body.feinsatz .toc-list li.vz-zu{display:none}
+body.feinsatz .toc-list li[data-level]{padding-left:calc(min(var(--vz-e, 0), 4) * .85rem + 1.05rem)}
+body.feinsatz .toc-list li[data-level="2"]{--vz-e:1} body.feinsatz .toc-list li[data-level="3"]{--vz-e:2}
+body.feinsatz .toc-list li[data-level="4"]{--vz-e:3} body.feinsatz .toc-list li[data-level="5"]{--vz-e:4}
+body.feinsatz .toc-list li[data-level="6"]{--vz-e:4.6} body.feinsatz .toc-list li[data-level="7"]{--vz-e:5.2}
+body.feinsatz .toc-list li[data-level] > a,body.feinsatz .toc-list li[data-level] > span{display:grid;grid-template-columns:max-content minmax(0,1fr) auto;column-gap:.4em;align-items:baseline;font-size:.8rem;line-height:1.4;opacity:1;color:var(--text-body);padding:.18rem .35rem .18rem 0;border-radius:3px}
+body.feinsatz .toc-list li[data-level="1"]{margin-top:.9rem}
+body.feinsatz .toc-list li[data-level="1"] > a,body.feinsatz .toc-list li[data-level="1"] > span{font-size:.84rem;font-weight:600;color:var(--text-ink);letter-spacing:0}
+body.feinsatz .toc-list li[data-level="2"] > a,body.feinsatz .toc-list li[data-level="2"] > span{color:var(--text-ink)}
+body.feinsatz .toc-list li > a:hover{background:var(--bg-subtle);color:var(--text-ink)}
+body.feinsatz .vz-nr{color:var(--text-muted);font-variant-numeric:lining-nums}
+body.feinsatz .vz-nr:empty{display:none}
+body.feinsatz .vz-nr:empty + .vz-t{grid-column:1 / 3}
+body.feinsatz .vz-s{font-size:.72rem;color:var(--text-muted);font-variant-numeric:tabular-nums lining-nums;padding-left:.3em}
+body.feinsatz .vz-glosse{display:block;color:var(--text-muted);font-style:italic;font-size:.95em}
+body.feinsatz .toc-list li.vz-versal .vz-t{font-variant-caps:all-small-caps;letter-spacing:.05em;font-feature-settings:"c2sc","smcp"}
+body.feinsatz .toc-list li.vz-versal[data-level="1"] .vz-t{font-weight:600;letter-spacing:.07em}
+body.feinsatz .vz-pfeil{position:absolute;top:.38rem;left:calc(min(var(--vz-e, 0), 4) * .85rem);width:1rem;height:1rem;padding:0;border:0;background:transparent;cursor:pointer;color:var(--text-muted)}
+body.feinsatz .vz-pfeil::before{content:"";position:absolute;left:.3rem;top:.25rem;width:.32rem;height:.32rem;border:solid currentColor;border-width:0 1.4px 1.4px 0;transform:rotate(-45deg);transition:transform .15s}
+body.feinsatz li.vz-offen > .vz-pfeil::before{transform:rotate(45deg);top:.15rem}
+body.feinsatz .vz-pfeil:hover{color:var(--accent-gold)}
+body.feinsatz .toc-list li.toc-active{border-left:0;margin-left:0}
+body.feinsatz .toc-list li.toc-active > a{background:color-mix(in oklab,var(--accent-gold) 16%,transparent);color:var(--text-ink) !important}
+body.feinsatz .toc-list li.toc-active > a .vz-t{color:var(--accent)}
+body.feinsatz .toc-list li.toc-active[data-level]{padding-left:calc(min(var(--vz-e, 0), 4) * .85rem + 1.05rem)}
+body.feinsatz .vz-kopfzeile{display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin-bottom:1.2rem}
+body.feinsatz .vz-kopfzeile > .small-caps{margin-bottom:0 !important}
+body.feinsatz .vz-schalter{flex:none;width:1.25rem;height:1.25rem;margin:-.3rem -.2rem 0 0;padding:.12rem;border:0;border-radius:3px;background:none;cursor:pointer;color:var(--text-muted);opacity:.75;transition:color .15s,opacity .15s,background .15s}
+body.feinsatz .vz-schalter svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+body.feinsatz .vz-schalter:hover,body.feinsatz .vz-schalter:focus-visible{color:var(--accent-gold);opacity:1;background:var(--bg-subtle)}
+
+/* ── Titelblätter, Motto, Inhaltsanzeigen im Text ── */
+body.feinsatz .page-card[data-kind="title"] .page-body,
+body.feinsatz .page-card[data-kind="title_page"] .page-body{display:flex;flex-direction:column;align-items:center;text-align:center;padding:3.5rem 0 4.5rem;min-height:18rem}
+body.feinsatz .page-card[data-kind^="title"] .text-unit{text-align:center;hyphens:manual;-webkit-hyphens:manual;text-wrap:balance;max-width:27rem;margin:0 auto .9rem;font-size:.95em;color:var(--text-body)}
+body.feinsatz .page-card[data-kind^="title"] .text-unit.type-heading{font-family:var(--font-body);font-weight:500;font-size:1.75em;line-height:1.22;letter-spacing:.01em;color:var(--text-ink);max-width:30rem;margin:0 auto 1.8rem;opacity:1}
+body.feinsatz .page-card[data-kind^="title"] .text-unit.type-heading + .text-unit:not(.type-heading){font-style:italic;font-size:1.02em;margin-bottom:2.4rem}
+body.feinsatz .page-card[data-kind^="title"] .text-unit.ia-impressum{margin-top:auto;padding-top:3rem;font-size:.82em;letter-spacing:.06em;font-variant-caps:all-small-caps;font-feature-settings:"c2sc","smcp";color:var(--text-muted)}
+body.feinsatz .page-card[data-kind="motto"] .page-body{padding:4rem 0 4rem 40%}
+body.feinsatz .page-card[data-kind="motto"] .text-unit{text-align:left;font-style:italic;hyphens:manual}
+
+body.feinsatz .page-card[data-kind="toc"] .text-unit.type-heading{margin:2.2rem 0 .9rem;letter-spacing:.03em}
+body.feinsatz .page-card[data-kind="toc"] .text-unit.type-heading:first-child{margin-top:.6rem;font-size:1.2em;font-variant-caps:all-small-caps;font-feature-settings:"c2sc","smcp";letter-spacing:.1em}
+body.feinsatz .page-card[data-kind="toc"] .text-unit.ia-zeile{margin:0 0 .28rem;text-align:left;hyphens:manual;-webkit-hyphens:manual;line-height:1.45}
+body.feinsatz:not(.dipl-mode) .ia-box{display:flex;align-items:last baseline}
+body.feinsatz .ia-t{flex:0 1 auto;padding-right:.35em}
+body.feinsatz .ia-f{flex:1 1 1.5rem;min-width:1.5rem;height:0;align-self:last baseline;transform:translateY(-.22em);border-bottom:1.5px dotted color-mix(in oklab,var(--text-muted) 55%,transparent)}
+body.feinsatz .ia-s{flex:0 0 auto;padding-left:.35em;font-variant-numeric:tabular-nums lining-nums;color:var(--text-muted)}
+body.feinsatz .ia-e1{padding-left:1.4em}
+body.feinsatz .ia-e2{padding-left:2.8em}
+body.feinsatz .ia-e3{padding-left:4.2em}
+body.feinsatz .ia-e4{padding-left:5.6em}
+body.feinsatz .ia-t{text-indent:-1.4em;padding-left:1.4em}
+body.feinsatz .ia-e0{margin-top:.55rem !important}
+body.feinsatz .ia-bereich{text-align:center !important;font-size:.85em;color:var(--text-muted);margin:-.5rem 0 .9rem !important;font-variant-numeric:lining-nums}
+body.feinsatz a.ia-link{color:inherit;text-decoration:underline;text-decoration-color:color-mix(in oklab,var(--accent-gold) 45%,transparent);text-underline-offset:2px}
+body.feinsatz a.ia-link:hover{color:var(--accent-gold);text-decoration-color:currentColor}
+body.feinsatz .ia-fliess{line-height:1.7}
+/* Verzeichnis-Seitenleiste: lange Versalwörter dürfen brechen */
+body.feinsatz .vz-t{overflow-wrap:break-word;hyphens:auto;-webkit-hyphens:auto}
+body.feinsatz .toc-list li.vz-versal[data-level="1"] .vz-t{letter-spacing:.035em}
+body.feinsatz .page-card[data-kind^="title"] .text-unit.ia-titelversal{font-style:normal;font-size:1.45em;font-variant-caps:all-small-caps;font-feature-settings:"c2sc","smcp";letter-spacing:.08em;color:var(--text-ink);margin-top:1rem}
+body.feinsatz .page-card[data-kind^="title"] .text-unit.type-heading + .text-unit.type-heading{margin-top:-.6rem}
+/* Gestapelte Überschriften am Abschnittsanfang („Zweiter Theil / Naturphilosophie / Einleitung“) rücken zusammen */
+body.feinsatz .page-card:not([data-kind^="title"]) .text-unit.type-heading + .text-unit.type-heading{margin-top:-.4rem}
+
+/* ── Überschriften aus einer Familie, mit Rangfolge ──
+   Source Serif statt Cormorant; die Variable wählt mit font-optical-sizing den
+   Schaugrad selbst. Nur in der Lesefassung, das Druckbild ist gemessen. */
+body.feinsatz:not(.dipl-mode) .page-card .text-unit.type-heading,
+body.feinsatz:not(.dipl-mode) .page-card .text-unit.type-subheading{font-family:var(--font-body);font-optical-sizing:auto;font-weight:600;font-style:normal;letter-spacing:.005em;opacity:1;color:var(--text-ink);line-height:1.25;text-wrap:balance;hyphens:manual;-webkit-hyphens:manual}
+body.feinsatz:not(.dipl-mode) .text-unit[data-ue="1"]{font-size:1.5em;margin:3.6rem 0 1.3rem}
+body.feinsatz:not(.dipl-mode) .text-unit[data-ue="2"]{font-size:1.28em;margin:3rem 0 1.1rem}
+body.feinsatz:not(.dipl-mode) .text-unit[data-ue="3"]{font-size:1.15em;margin:2.4rem 0 .9rem}
+body.feinsatz:not(.dipl-mode) .text-unit[data-ue="4"]{font-size:1.02em;font-weight:500;margin:2rem 0 .7rem}
+body.feinsatz:not(.dipl-mode) .text-unit[data-ue="5"]{font-size:.97em;font-weight:500;font-style:italic;margin:1.7rem 0 .6rem}
+/* Paragraphenzahl: klein, dicht über ihrem Text, Ziffern in Versal */
+body.feinsatz:not(.dipl-mode) .text-unit[data-ue="p"]{font-size:.98em;font-weight:600;letter-spacing:.04em;font-variant-numeric:lining-nums;margin:2rem 0 .45rem;color:var(--text-ink)}
+/* Gestapelte Überschriften rücken zusammen; eine bloße Marke („II“) steht dicht über ihrem Titel */
+body.feinsatz:not(.dipl-mode) .text-unit.type-heading + .text-unit.type-heading{margin-top:-.15rem}
+body.feinsatz:not(.dipl-mode) .text-unit.type-heading + .text-unit.type-subheading{margin-top:-.15rem}
+body.feinsatz:not(.dipl-mode) .text-unit[data-ue-nur-marke] + .text-unit.type-heading{margin-top:-.7rem}
+/* Titelblätter behalten ihren eigenen Satz  */
+body.feinsatz.feinsatz .page-card[data-kind^="title"] .text-unit.type-heading{font-size:1.75em;font-weight:500;margin-top:0}
+
+/* ── Silbentrennung in Safari ──
+   hyphenate-limit-chars kennt WebKit nicht; es hat eigene Eigenschaften. */
+body.feinsatz .text-unit{-webkit-hyphenate-limit-before:3;-webkit-hyphenate-limit-after:3;-webkit-hyphenate-limit-lines:3;hyphenate-limit-chars:6 3 3}
+
+/* ── Randnotizen am Rand + Feinschliff ── */
+body.feinsatz .page-card.rn-karte{position:relative}
+body.feinsatz .text-unit.type-author_footnote.rn-rand{position:absolute;left:calc(100% + 2.4rem);width:var(--rn-breite,14rem);margin:0;font-size:.74rem;line-height:1.42;color:var(--text-muted);text-align:left;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty}
+body.feinsatz .rn-rand .fn-ort{display:none}
+body.feinsatz .rn-rand .fn-marke{color:var(--accent-gold);font-variant-position:normal;margin-right:.15em}
+body.feinsatz .rn-rand .reflow-content{text-indent:0}
+/* Versalwörter im Fließtext als Kapitälchen */
+body.feinsatz .vs{font-variant-caps:all-small-caps;font-feature-settings:"c2sc","smcp";letter-spacing:.04em}
+body.dipl-mode .vs{font-variant-caps:normal;letter-spacing:0}
+/* Klammern der Herausgeber grau */
+body.feinsatz .hg-klammer{color:var(--text-muted);font-weight:400}
+/* Notenzeichen mit den hochgestellten Ziffern der Schrift (nur voller Schnitt) */
+body.feinsatz.feinsatz .fn-ref{font-size:1em;vertical-align:baseline;line-height:inherit;font-variant-position:super}
+/* Kapitälchen-Beschriftungen etwas weiter */
+body.feinsatz.feinsatz .small-caps{letter-spacing:.16em}
+/* Trennung: Kompromiss fürs Deutsche, 2 Buchstaben vor dem Strich erlaubt */
+body.feinsatz.feinsatz .text-unit{-webkit-hyphenate-limit-before:2;hyphenate-limit-chars:6 2 3}
+/* Telefon: etwas engerer Zeilenabstand */
+@media (max-width:480px){body.feinsatz .page-card .text-unit{line-height:1.6}}
+
+/* ── Fassung 0.8: Startseite – Herausgeberzeile und Neuigkeiten ── */
+.hero-byline{font-family:var(--font-body);font-size:.82rem;font-style:italic;color:var(--text-muted);letter-spacing:.02em;text-align:center;margin:.55rem 0 0}
+.hero-news{display:block;max-width:25rem;margin:2.2rem auto 0;padding:.85rem 1.1rem .9rem;border:1px solid var(--rule);border-radius:6px;background:color-mix(in oklab,var(--bg-paper) 70%,transparent);text-align:left;color:var(--text-body);text-decoration:none;transition:border-color .2s,background .2s}
+.hero-news:hover{border-color:var(--accent-gold);text-decoration:none;background:var(--bg-paper)}
+.hero-news-kopf{display:flex;align-items:center;gap:.5rem;font-size:.7rem;letter-spacing:.14em;font-variant-caps:all-small-caps;font-weight:600;color:var(--accent-gold)}
+.hero-news-punkt{width:.42rem;height:.42rem;border-radius:50%;background:var(--accent-gold);box-shadow:0 0 0 3px color-mix(in oklab,var(--accent-gold) 22%,transparent)}
+.hero-news-text{display:block;margin-top:.3rem;font-size:.92rem;line-height:1.45;color:var(--text-ink)}
+.hero-news-mehr{display:block;margin-top:.35rem;font-size:.78rem;color:var(--text-muted)}
+.hero-news:hover .hero-news-mehr{color:var(--accent-gold)}
+/* Neuigkeiten-Seite */
+.neuigkeiten .fassung h2{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem .7rem}
+.fassung-nr{font-variant-numeric:lining-nums tabular-nums;color:var(--accent-gold);font-weight:600}
+.fassung-datum{margin-left:auto;font-size:.72em;font-weight:400;color:var(--text-muted);font-variant-numeric:oldstyle-nums}
+.neuigkeiten .legal-list li{margin-bottom:.45rem}
+/* Hero: mindestens Fensterhoehe, waechst aber mit dem Inhalt. Mit fester Hoehe
+   (100vh) und Neuigkeitenkasten rutschte der Kopf in niedrigen Fenstern unter
+   die Leiste. Abstand nach oben und unten. „Entdecken“ ist seit 0.8 entfallen. */
+@media (min-width:769px){
+  .hero{height:auto;min-height:100vh;padding-top:calc(var(--header-h) + 3.5rem);padding-bottom:4.5rem}
+}
+/* Neuigkeiten: Teilueberschriften innerhalb einer Fassung (seit 0.8: Recherche, Startseite, Lesen). */
+.neuigkeiten .fassung-teil{font-family:var(--font-body);font-size:.8rem;font-weight:600;font-variant-caps:all-small-caps;letter-spacing:.14em;color:var(--text-muted);margin:1.3rem 0 .5rem}
+
+/* ═══ Proportionen (Oktober 2026) ═════════════════════════════════════════
+   Ein Mass fuer alle Seiten, nach dem Befund vom 23.10.2026 (am Live-Stand in
+   WebKit gemessen): Schriftgrade aus einer Skala (12 · 13.5 · 15 · 17 · 21 ·
+   26 · 34 · 44 · 68 · 176 px), Etiketten in einer Einstellung (13.5 px,
+   gesperrt 0.20 em), Abstaende im 8-px-Raster, nur Haarlinien, keine Kreise.
+   Hier: Kopfzeile und Leser. Startseite in start.css, Recherche in
+   recherche.css. */
+
+/* Kopfzeile: Navigation als Etikett wie ueberall (13.5 px, 0.20 em) */
+@media (min-width:769px){
+  .site-header .sitenav a{font-size:.77rem;letter-spacing:.2em}
+}
+
+/* Leser: Lesemass. Bei 40 rem und 17 px standen 87 Zeichen in der Zeile,
+   ein Drittel mehr als ein Buch setzt. Der Lesetext bekommt 34 rem (rund 72
+   Zeichen); das Druckbild behaelt seine Spalte, dort ist die Breite die des
+   Bandes. */
+@media (min-width:769px){
+  body.feinsatz:not(.dipl-mode) #reader-pages{max-width:34rem}
+  body.feinsatz:not(.dipl-mode) .reader-toolbar{max-width:34rem}
+}
+
+/* Leser: eine Ordnung der Ueberschriften in beiden Ansichten. Bisher fett im
+   Lesetext und gesperrte Cormorant im Druckbild. Jetzt Source Serif 500 in
+   Kapitaelchen, nach Hegels Gliederung gestuft; zusammengezogene Titel stehen
+   wie gedruckt untereinander (.ue-zeile). Titelblaetter und Inhaltsanzeigen
+   behalten ihren eigenen Satz. */
+body.feinsatz .page-card:not([data-kind^="title"]):not([data-kind="toc"]) .text-unit.type-heading,
+body.feinsatz .page-card:not([data-kind^="title"]):not([data-kind="toc"]) .text-unit.type-subheading{
+  font-family:var(--font-body);font-optical-sizing:auto;font-weight:500;font-style:normal;color:var(--text-ink);
+  font-variant-caps:all-small-caps;font-feature-settings:"c2sc","smcp";letter-spacing:.1em;line-height:1.3;opacity:1}
+body.feinsatz .page-card:not([data-kind^="title"]):not([data-kind="toc"]) .text-unit[data-ue="1"]{font-size:1.53em}
+body.feinsatz .page-card:not([data-kind^="title"]):not([data-kind="toc"]) .text-unit[data-ue="2"]{font-size:1.24em}
+body.feinsatz .page-card:not([data-kind^="title"]):not([data-kind="toc"]) .text-unit[data-ue="3"]{font-size:1em;letter-spacing:.12em}
+body.feinsatz .page-card:not([data-kind^="title"]):not([data-kind="toc"]) .text-unit[data-ue="4"],
+body.feinsatz .page-card:not([data-kind^="title"]):not([data-kind="toc"]) .text-unit[data-ue="5"]{font-size:1em;font-style:italic;font-variant-caps:normal;font-feature-settings:normal;letter-spacing:0}
+body.feinsatz .page-card:not([data-kind^="title"]):not([data-kind="toc"]) .text-unit[data-ue="p"]{font-size:.88em;letter-spacing:.06em;font-variant-numeric:lining-nums}
+body.feinsatz .text-unit.type-heading .ue-zeile{display:block}
+body.feinsatz .text-unit.type-heading .dipl-line-text{font-family:inherit;letter-spacing:inherit}
+
+/* Leser: Seitenleiste 40 px breiter, Eintraege brechen an Wortgrenzen.
+   Bei 260 px und 14 px brachen 21 von 239 Eintraegen mitten im Wort. */
+:root{--sb:0px}
+@media (min-width:769px){:root{--sb:220px}.reader-layout{grid-template-columns:220px 1fr}}
+@media (min-width:961px){:root{--sb:260px}.reader-layout{grid-template-columns:260px 1fr}}
+@media (min-width:1201px){:root{--sb:300px}.reader-layout{grid-template-columns:300px 1fr}}
+body.feinsatz .toc-list li[data-level] > a,body.feinsatz .toc-list li[data-level] > span{font-size:.77rem}
+body.feinsatz .vz-t{hyphens:manual;-webkit-hyphens:manual}
+.reader-sidebar > .small-caps{font-size:.77rem !important;letter-spacing:.2em !important}
+/* Lesestelle: Goldlinie unter dem Titel statt roter Schrift auf grauer Flaeche */
+body.feinsatz .toc-list li.toc-active > a{background:none}
+body.feinsatz .toc-list li.toc-active > a .vz-t{color:var(--text-ink);text-decoration:underline;text-decoration-color:var(--accent-gold);text-decoration-thickness:1px;text-underline-offset:.28em}
+
+/* Lesefortschritt beginnt hinter der Seitenleiste, statt wie ihre Oberkante
+   auszusehen; er waechst per scaleX (text.html). */
+.reading-progress{left:var(--sb);right:0;width:auto !important;transform:scaleX(0);transform-origin:0 50%;transition:transform .1s linear}
+
+/* Telefon: der letzte Kreis der Website wird ein Quadrat */
+.mobile-toc-toggle{border-radius:2px;width:2.75rem;height:2.75rem;font-size:1.05rem;box-shadow:0 2px 10px var(--shadow-soft)}
+
+/* Werkzeugleiste: Woerter auf einer Haarlinie statt sechs Kaesten */
+.reader-toolbar .werkwahl-knopf,.reader-toolbar .btn-classic,.reader-toolbar .toolbar-group input{
+  background:transparent !important;border:0;border-bottom:1px solid var(--rule);border-radius:0;box-shadow:none}
+.reader-toolbar .werkwahl-knopf:hover,.reader-toolbar .btn-classic:hover,.reader-toolbar .werkwahl-knopf[aria-expanded="true"]{background:transparent !important;border-bottom-color:var(--text-muted)}
+.reader-toolbar .toolbar-group input:focus{border-bottom-color:var(--accent-gold);outline:none}
+.reader-toolbar #search-syntax-knopf,.reader-toolbar #einstellungen-knopf,.reader-toolbar #inline-search-go{border-bottom-color:transparent;color:var(--text-muted)}
+.reader-toolbar #search-syntax-knopf:hover,.reader-toolbar #einstellungen-knopf:hover{color:var(--text-ink)}
+.reader-toolbar .btn-dipl[aria-pressed="true"]{border-bottom-color:var(--accent-gold);color:var(--text-ink)}
+
+/* Antiqua mitten in der Fraktur des Drucks: Der Leser setzt alles in Antiqua; die Auszeichnung lebt in den Daten. */
+.antiqua{font-style:inherit}
+.text-unit.trenner,.dipl-line.trenner{text-align:center;display:block;letter-spacing:.2em;color:var(--text-muted);text-indent:0}
+img.figur{display:block;max-width:100%;margin:.8em auto;mix-blend-mode:multiply}
+:root:not([data-theme="hell"]) img.figur{filter:invert(.92);mix-blend-mode:screen}
+/* Randmarke eines Inhaltspunkts: Titel aus der gedruckten Inhaltsuebersicht am Absatz, an dem der Gegenstand beginnt
+   (Zusatz der Edition, s. text.html mitMarke). Links ausserhalb der Zeilennummern; schmaler Bildschirm: ueber dem Absatz. */
+.hat-inhaltsmarke{position:relative}
+.inhaltsmarke{position:absolute;right:calc(100% + 3.4rem);top:.3em;width:8.5rem;display:flex;flex-direction:column;gap:.45em;text-align:right;font-family:var(--font-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif);font-size:.64rem;font-style:normal;font-weight:400;line-height:1.35;letter-spacing:.01em;color:var(--text-muted);hyphens:auto;-webkit-hyphens:auto;text-indent:0;user-select:none;-webkit-user-select:none}
+.inhaltsmarke span{display:block;padding-right:.55rem;border-right:1px solid var(--rule)}
+@media (max-width:1300px){.inhaltsmarke{position:static;width:auto;margin:0 0 .35rem;text-align:left;font-size:.68rem}.inhaltsmarke span{padding:0 0 0 .55rem;border-right:0;border-left:1px solid var(--rule)}}
+#toc-list li.toc-inhalt>a{color:var(--text-muted)}
+/* Zitat: Vers, Motto, Inschrift oder Formel, im Druck mittig abgesetzt, aber keine Ueberschrift (zeugen.py `zitat`).
+   In beiden Ansichten mittig, Zeile fuer Zeile, ohne Einzug und ohne Silbentrennung. */
+.text-unit.type-quote{text-align:center;text-indent:0;hyphens:manual;-webkit-hyphens:manual;max-width:34rem;margin:.55rem auto 1.05rem}
+.text-unit.type-quote .ue-zeile{display:block}
+.text-unit.type-quote .dipl-line-text{flex:1;text-align:center}
+/* Zitate gegen die allgemeinen Absatzregeln des Lesers durchsetzen (die setzen Blocksatz mit hoeherer Spezifitaet) */
+body .page-card .text-unit.type-quote,body.feinsatz .page-card .text-unit.type-quote{text-align:center;text-align-last:center;text-indent:0;hyphens:manual;-webkit-hyphens:manual}
+body .page-card .text-unit.type-quote .dipl-line-text{text-align:center}

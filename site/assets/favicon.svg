@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Dasselbe Zeichen wie das App-Icon: drei gleich grosse Ringe auf den
+       Ecken eines Dreiecks um die Mitte. Marke und Strichstaerke sind
+       kraeftiger gehalten als auf der Startseite, weil ein Favicon meist
+       bei 16 bis 20 px erscheint; faellt das von den Ringen eingeschlossene
+       Feld unter einen Bildpunkt, laeuft es mit Gold voll und das Zeichen
+       wird zum Klumpen. -->
+  <style>
+    .p{fill:#232229}.r{fill:none;stroke:#cbaa5c;stroke-width:1.45}
+    @media (prefers-color-scheme:light){.p{fill:#e4dfd5}.r{stroke:#8a6c30}}
+  </style>
+  <rect width="32" height="32" rx="4" class="p"/>
+  <g class="r">
+    <circle cx="16" cy="11.8" r="7.66"/>
+    <circle cx="11.5" cy="18.1" r="7.66"/>
+    <circle cx="20.5" cy="18.1" r="7.66"/>
+  </g>
+</svg>

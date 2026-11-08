@@ -1,0 +1,12 @@
+/* Recherche im Portal: die Bandliste ist nach Editionen geteilt, die Stellen nennen ihren Autor. */
+.ei-bandkopf{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;width:100%;font:inherit;text-align:left;background:none;border:0;border-top:1px solid var(--rule);border-radius:0;padding:.65rem .4rem .3rem;margin-top:.35rem;color:var(--text-ink);cursor:pointer;font-size:.86rem;font-weight:500;font-variant-caps:all-small-caps;letter-spacing:.1em}
+.ei-bandkopf:first-child{border-top:0;margin-top:0;padding-top:.2rem}
+.ei-bandkopf span{font-size:.7rem;font-weight:400;font-style:italic;font-variant-caps:normal;letter-spacing:0;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ei-bandkopf:hover{color:var(--accent)}
+.ei-bandkopf[aria-pressed="true"]{color:var(--accent)}
+.ei-autor{font-family:var(--font-body);font-variant-caps:normal;letter-spacing:0;color:var(--accent-gold)}
+.rch-gruppe h2 .ei-autor{font-weight:500;margin-right:.15em}
+.rch-zitat .ei-autor{display:block;font-size:.74rem}
+
+/* Im schmalen Kopf ist fuer drei Wege kein Platz; „Unterstuetzen“ steht dann im Titelblatt und im Fuss. */
+@media (max-width:600px){.sitenav li.nav-weit{display:none}}

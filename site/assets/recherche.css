@@ -1,0 +1,385 @@
+/* Recherche (search.html), seit Oktober 2026.
+ *
+ * Eigene Datei, nur von der Suchseite geladen: die Seite ist ein Werkzeug,
+ * kein Lesetext, und ihre Regeln sollen das Blatt der Lektuere nicht
+ * beruehren. Alle Farben kommen aus den Tokens in style.css, darum gilt die
+ * helle Darstellung ([data-theme="hell"]) ohne eigene Regeln.
+ *
+ * Aufbau: Kopf (Feld, Lesart, Formen, Leiste) ueber zwei Spalten — links die
+ * Baende als Filter mit Trefferzahl, rechts die drei Ansichten.
+ */
+
+.rch{--rch-mark:color-mix(in srgb, var(--accent-gold) 30%, transparent);
+  --rch-op:#8fb3d9; --rch-phrase:#93b98f; --rch-gut:#7fae8a;
+  max-width:76rem;margin:0 auto;padding:calc(var(--header-h) + 2.4rem) max(1.25rem, env(safe-area-inset-right, 0px)) 4rem max(1.25rem, env(safe-area-inset-left, 0px));
+  min-height:80vh}
+:root[data-theme="hell"] .rch{--rch-op:#2f5f8f;--rch-phrase:#3d6e3a;--rch-gut:#3d7a4c}
+
+.rch-kopf{display:flex;flex-direction:column;gap:.85rem;max-width:56rem}
+.rch-titel{display:flex;align-items:baseline;flex-wrap:wrap;gap:.4rem 1.2rem}
+.rch-titel h1{font-family:var(--font-display);font-weight:400;font-size:clamp(2rem,4.6vw,2.8rem);line-height:1.05;color:var(--text-ink);letter-spacing:-.005em}
+.rch-unter{font-size:.86rem;color:var(--text-muted);font-variant-numeric:tabular-nums}
+
+/* ── Feld ─────────────────────────────────────────────────────────── */
+.rch-feld{position:relative;display:flex;gap:.6rem;align-items:stretch}
+.rch-eingabe{position:relative;flex:1;min-width:0;border:1px solid var(--rule);background:var(--bg-paper);border-radius:3px;transition:border-color .15s}
+.rch-eingabe:focus-within{border-color:var(--accent-gold)}
+.rch-eingabe input,.rch-spiegel{font-family:var(--font-mono);font-size:1rem;line-height:1.5;letter-spacing:0;padding:.78rem 2.6rem .78rem .95rem;margin:0;border:0;white-space:pre;word-spacing:0;font-variant-ligatures:none}
+.rch-eingabe input{position:relative;z-index:1;width:100%;background:transparent;color:transparent;caret-color:var(--text-ink);outline:none;border-radius:3px}
+.rch-eingabe input::placeholder{color:var(--text-muted);font-family:var(--font-body);font-size:1.02rem;font-style:italic}
+.rch-eingabe input::selection{background:color-mix(in srgb, var(--accent-gold) 40%, transparent);color:var(--text-ink)}
+.rch-eingabe.ohne-spiegel input{color:var(--text-ink)}
+.rch-spiegel{position:absolute;inset:0;overflow:hidden;color:var(--text-ink);pointer-events:none}
+.rch-spiegel .s-op{color:var(--rch-op)}
+.rch-spiegel .s-klammer{color:var(--text-muted)}
+.rch-spiegel .s-phrase{color:var(--rch-phrase)}
+.rch-spiegel .s-muster{color:var(--accent-gold)}
+.rch-spiegel .s-exakt{color:var(--accent)}
+.rch-spiegel .s-fehl{text-decoration:underline wavy var(--accent);text-underline-offset:4px;text-decoration-skip-ink:none}
+.rch-taste{position:absolute;right:.7rem;top:50%;transform:translateY(-50%);z-index:2;font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);border:1px solid var(--rule);border-radius:2px;padding:0 .35rem;line-height:1.45;pointer-events:none}
+.rch-eingabe:focus-within .rch-taste{opacity:0}
+.rch-los{font-family:var(--font-body);font-size:.95rem;border:1px solid var(--rule);background:transparent;color:var(--text-ink);padding:0 1.15rem;border-radius:3px;cursor:pointer}
+.rch-los:hover{border-color:var(--accent-gold)}
+
+.rch-vorschlag{position:absolute;left:0;top:calc(100% + 4px);z-index:30;min-width:16rem;max-width:100%;list-style:none;margin:0;padding:.3rem 0;background:var(--bg-paper);border:1px solid var(--rule);border-radius:3px;box-shadow:0 18px 40px -18px var(--shadow-med)}
+.rch-vorschlag li{display:flex;justify-content:space-between;gap:2rem;padding:.32rem .9rem;cursor:pointer;font-size:.95rem}
+.rch-vorschlag li .n{color:var(--text-muted);font-variant-numeric:tabular-nums;font-size:.82rem}
+.rch-vorschlag li[aria-selected="true"],.rch-vorschlag li:hover{background:var(--bg-subtle)}
+.rch-vorschlag .kopf{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);padding:.35rem .9rem .2rem;cursor:default}
+.rch-vorschlag .kopf:hover{background:none}
+
+/* ── Lesart, Fehler, Formen ───────────────────────────────────────── */
+.rch-lesart{font-size:.93rem;color:var(--text-muted);min-height:1.5em;line-height:1.5}
+.rch-lesart b{color:var(--text-ink);font-weight:500}
+.rch-fehler{font-size:.92rem;color:var(--text-body);border-left:2px solid var(--accent);padding:.35rem .8rem;background:var(--bg-subtle)}
+.rch-formen{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .45rem}
+.rch-formen .wofuer{font-size:.78rem;color:var(--text-muted);margin-right:.25rem}
+.rch-formen .trenn{width:.6rem}
+.rch-form{font:inherit;font-size:.86rem;display:inline-flex;align-items:baseline;gap:.4rem;border:1px solid var(--rule);background:transparent;color:var(--text-body);padding:.12rem .62rem;border-radius:999px;cursor:pointer}
+.rch-form .n{font-size:.76rem;color:var(--text-muted);font-variant-numeric:tabular-nums}
+.rch-form:hover{border-color:var(--accent-gold)}
+.rch-form[aria-pressed="false"]{opacity:.5;text-decoration:line-through}
+
+/* ── Leiste ───────────────────────────────────────────────────────── */
+.rch-leiste{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1.4rem;margin-top:.2rem}
+.rch-arten{display:flex;flex-wrap:wrap;gap:.4rem}
+.rch-chip{font:inherit;font-size:.84rem;display:inline-flex;gap:.45rem;align-items:baseline;border:1px solid var(--rule);background:transparent;color:var(--text-muted);padding:.2rem .7rem;border-radius:999px;cursor:pointer}
+.rch-chip .n{font-size:.76rem;font-variant-numeric:tabular-nums}
+.rch-chip[aria-pressed="true"]{border-color:var(--accent-gold);color:var(--text-ink)}
+.rch-chip[aria-pressed="true"] .n{color:var(--text-muted)}
+.rch-ansichten{display:flex;gap:1.3rem;margin-left:auto}
+.rch-ansichten button{font:inherit;font-size:.92rem;background:none;border:0;color:var(--text-muted);padding:.2rem 0;border-bottom:1px solid transparent;cursor:pointer}
+.rch-ansichten button[aria-selected="true"]{color:var(--text-ink);border-bottom-color:var(--accent)}
+.rch-ansichten button:hover{color:var(--text-ink)}
+.rch-ansichten .kz{font-family:var(--font-mono);font-size:.62rem;color:var(--text-muted);margin-left:.3rem;opacity:.7}
+
+.rch-status{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.5rem 1.2rem;margin-top:1.3rem;padding:.6rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-size:.86rem;color:var(--text-muted)}
+.rch-status #search-status{font-variant-numeric:tabular-nums}
+.rch-status #search-status b{color:var(--text-ink);font-weight:500}
+.rch-aktionen{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;align-items:center}
+.rch-aktionen button,.rch-aktionen select{font:inherit;font-size:.84rem;background:none;border:0;color:var(--text-muted);cursor:pointer;padding:0}
+.rch-aktionen select{border-bottom:1px dotted var(--rule);color:var(--text-body)}
+.rch-aktionen button:hover{color:var(--accent)}
+.rch-filter{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--accent-gold);color:var(--text-ink);border-radius:999px;padding:.08rem .3rem .08rem .7rem;font-size:.82rem}
+.rch-filter button{border:0;background:none;color:var(--text-muted);cursor:pointer;font-size:1rem;line-height:1;padding:0 .25rem}
+
+/* ── Zwei Spalten ─────────────────────────────────────────────────── */
+.rch-koerper{display:grid;grid-template-columns:14.5rem minmax(0,1fr);gap:0 2.4rem;margin-top:1.4rem}
+.rch-baende{position:sticky;top:calc(var(--header-h) + 1rem);align-self:start;max-height:calc(100vh - var(--header-h) - 2rem);overflow:auto;padding-right:.2rem}
+.rch-baende summary{display:none}
+.rch-baende .kopf{display:flex;justify-content:space-between;align-items:baseline;font-variant:small-caps;letter-spacing:.12em;font-size:.82rem;color:var(--text-muted);margin-bottom:.45rem}
+.rch-baende .kopf button{font:inherit;font-variant:normal;letter-spacing:0;font-size:.78rem;background:none;border:0;color:var(--accent);cursor:pointer;padding:0}
+.rch-band{display:grid;grid-template-columns:3.3rem minmax(0,1fr) 2.6rem;align-items:center;gap:.55rem;width:100%;font:inherit;text-align:left;background:none;border:0;border-radius:2px;padding:.3rem .35rem;color:var(--text-body);cursor:pointer}
+.rch-band:hover{background:var(--bg-subtle)}
+.rch-band[aria-pressed="true"]{background:var(--bg-subtle);box-shadow:inset 2px 0 0 var(--accent)}
+.rch-band .s{font-family:var(--font-mono);font-size:.72rem;color:var(--text-ink);white-space:nowrap}
+.rch-band .t{display:block;font-size:.72rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
+.rch-band .bar{display:block;height:4px;background:var(--rule);border-radius:1px;position:relative;margin-top:.22rem}
+.rch-band .bar i{position:absolute;inset:0 auto 0 0;background:var(--accent-gold);border-radius:1px}
+.rch-band .c{text-align:right;font-size:.78rem;color:var(--text-muted);font-variant-numeric:tabular-nums}
+.rch-band.leer{opacity:.42}
+.rch-band.leer:hover,.rch-band.leer[aria-pressed="true"]{opacity:.8}
+
+/* ── Stellen ──────────────────────────────────────────────────────── */
+.rch-ergebnis{min-width:0}
+.rch-gruppe{display:flex;align-items:baseline;flex-wrap:wrap;gap:.2rem .8rem;padding:1.3rem 0 .45rem;border-bottom:1px solid var(--rule)}
+.rch-gruppe:first-child{padding-top:.2rem}
+.rch-gruppe h2{font-family:var(--font-display);font-weight:500;font-size:1.45rem;color:var(--text-ink);line-height:1.1}
+.rch-gruppe span{font-size:.84rem;color:var(--text-muted)}
+.rch-stelle{display:grid;grid-template-columns:8.6rem minmax(0,1fr);gap:.15rem 1.4rem;padding:1rem .2rem 1.05rem;border-bottom:1px solid var(--rule);outline:none;scroll-margin-top:calc(var(--header-h) + 5rem)}
+.rch-stelle:focus-visible,.rch-stelle.fokus{box-shadow:inset 2px 0 0 var(--accent);background:color-mix(in srgb, var(--bg-subtle) 60%, transparent)}
+.rch-zitat{grid-row:1 / span 3;font-family:var(--font-mono);font-size:.8rem;color:var(--text-ink);line-height:1.5;padding-top:.15rem}
+.rch-zitat button{display:block;font:inherit;font-family:var(--font-body);font-size:.74rem;color:var(--text-muted);background:none;border:0;padding:0;margin-top:.25rem;cursor:pointer}
+.rch-zitat button:hover{color:var(--accent)}
+.rch-zitat .art{display:block;font-family:var(--font-body);font-size:.72rem;color:var(--accent-gold);margin-top:.2rem}
+.rch-pfad{font-size:.8rem;font-style:italic;color:var(--text-muted);line-height:1.45}
+.rch-text{font-size:1rem;line-height:1.66;color:var(--text-body);hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.rch-text mark,.rch-kwic mark{background:var(--rch-mark);color:var(--text-ink);border-radius:1px;padding:0 .08em}
+.rch-text em.sperrsatz{font-style:italic}
+.rch-text .seitenwechsel{font-family:var(--font-mono);font-size:.66rem;color:var(--accent-gold);border:1px solid color-mix(in srgb, var(--accent-gold) 45%, transparent);border-radius:2px;padding:0 .22rem;vertical-align:.12em;margin:0 .1rem}
+.rch-wege{display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.82rem;margin-top:.35rem}
+.rch-wege a{color:var(--text-muted)}
+.rch-wege a:first-child{color:var(--accent)}
+.rch-wege a:hover{color:var(--accent)}
+.rch-marke{height:1px}
+.rch-mehr{display:block;margin:1.4rem auto 0;font:inherit;font-size:.9rem;border:1px solid var(--rule);background:none;color:var(--text-body);padding:.45rem 1.1rem;border-radius:3px;cursor:pointer}
+.rch-mehr:hover{border-color:var(--accent-gold)}
+
+/* ── Konkordanz ───────────────────────────────────────────────────── */
+.rch-kwic-leiste{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;align-items:center;font-size:.84rem;color:var(--text-muted);margin:.2rem 0 .6rem}
+.rch-kwic-leiste button{font:inherit;background:none;border:0;border-bottom:1px solid transparent;color:var(--text-muted);cursor:pointer;padding:0}
+.rch-kwic-leiste button[aria-pressed="true"]{color:var(--text-ink);border-bottom-color:var(--accent)}
+.rch-kwic-rahmen{overflow-x:auto}
+.rch-kwic{border-collapse:collapse;width:100%;min-width:44rem;table-layout:fixed;font-size:.92rem}
+.rch-kwic td{padding:.38rem .45rem;border-bottom:1px solid var(--rule);white-space:nowrap;overflow:hidden;vertical-align:baseline}
+.rch-kwic .z{width:8.4rem;font-family:var(--font-mono);font-size:.74rem}
+.rch-kwic .z a{color:var(--text-muted)}
+.rch-kwic .z a:hover{color:var(--accent)}
+.rch-kwic .l{text-align:right;text-overflow:clip;direction:rtl}
+.rch-kwic .l span{direction:ltr;unicode-bidi:isolate}
+.rch-kwic .w{width:max-content;text-align:center;color:var(--text-ink);font-weight:600;padding-inline:.5rem}
+.rch-kwic .r{text-overflow:ellipsis}
+.rch-kwic tr:hover td{background:var(--bg-subtle)}
+.rch-kwic col.cz{width:8.4rem}.rch-kwic col.cw{width:9.5rem}
+
+/* ── Verteilung ───────────────────────────────────────────────────── */
+.rch-vt{display:flex;flex-direction:column;gap:2rem}
+.rch-vt h3{font-family:var(--font-body);font-size:1rem;font-weight:600;color:var(--text-ink);margin-bottom:.15rem}
+.rch-vt .unter{font-size:.82rem;color:var(--text-muted);margin-bottom:.7rem}
+.rch-vt svg{display:block;width:100%;height:auto;overflow:visible}
+.rch-vt svg text{font-family:var(--font-body);fill:var(--text-muted);font-size:11px}
+.rch-vt svg .lab{fill:var(--text-body);font-size:11.5px;font-family:var(--font-mono)}
+.rch-vt svg .val{fill:var(--text-ink);font-variant-numeric:tabular-nums}
+.rch-vt svg .gitter{stroke:var(--rule);stroke-width:1}
+.rch-vt svg .balken{fill:var(--accent-gold)}
+.rch-vt svg .zeile{cursor:pointer}
+.rch-vt svg .zeile:hover .balken{fill:var(--accent)}
+.rch-vt svg .zeile:hover .lab{fill:var(--text-ink)}
+.rch-topo{display:flex;flex-direction:column;gap:1.1rem}
+.rch-streifen-kopf{display:flex;justify-content:space-between;gap:1rem;font-size:.82rem;color:var(--text-muted);margin-bottom:.25rem}
+.rch-streifen-kopf b{font-family:var(--font-mono);font-weight:400;font-size:.76rem;color:var(--text-ink);margin-right:.5rem}
+.rch-streifen{display:grid;grid-template-columns:repeat(40,1fr);gap:2px;align-items:end;height:3rem;border-bottom:1px solid var(--rule)}
+.rch-streifen button{display:block;border:0;padding:0;background:var(--accent-gold);border-radius:1px 1px 0 0;cursor:pointer;min-height:1px}
+.rch-streifen button:hover,.rch-streifen button:focus-visible{background:var(--accent)}
+.rch-streifen button.null{background:var(--rule);opacity:.6;cursor:default}
+.rch-streifen-fuss{display:flex;justify-content:space-between;font-size:.72rem;color:var(--text-muted);margin-top:.2rem;font-variant-numeric:tabular-nums}
+
+/* ── Leerzustand, Hilfe ───────────────────────────────────────────── */
+.rch-leer{padding:1.4rem 0;color:var(--text-body)}
+.rch-leer p{margin:0 0 .6rem}
+.rch-leer ul{margin:0;padding-left:1.1rem;color:var(--text-muted);font-size:.94rem;display:flex;flex-direction:column;gap:.3rem}
+.rch-hilfe{display:flex;flex-direction:column;gap:1.8rem;padding:.4rem 0 1rem}
+.rch-beispiele{display:flex;flex-wrap:wrap;gap:.5rem}
+.rch-beispiele button{font-family:var(--font-mono);font-size:.84rem;border:1px solid var(--rule);background:var(--bg-paper);color:var(--text-ink);padding:.35rem .75rem;border-radius:3px;cursor:pointer;text-align:left}
+.rch-beispiele button:hover{border-color:var(--accent-gold)}
+.rch-beispiele button small{display:block;font-family:var(--font-body);font-size:.74rem;color:var(--text-muted);margin-top:.1rem}
+.rch-syntax{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1.6rem 2.2rem}
+.rch-syntax h3,.rch-hilfe h2{font-variant:small-caps;letter-spacing:.13em;font-size:.84rem;font-weight:500;color:var(--text-muted);margin-bottom:.55rem;font-family:var(--font-body)}
+.rch-syntax dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:.55rem .9rem;align-items:baseline}
+.rch-syntax dt{font-family:var(--font-mono);font-size:.8rem;color:var(--text-ink);white-space:nowrap}
+.rch-syntax dd{margin:0;font-size:.9rem;line-height:1.45;color:var(--text-body)}
+.rch-syntax dd i{color:var(--text-muted);font-style:normal;font-family:var(--font-mono);font-size:.78rem;display:block}
+.rch-zuletzt{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.88rem}
+.rch-zuletzt a{font-family:var(--font-mono);font-size:.82rem;color:var(--text-body)}
+
+.rch-laden{height:2px;background:var(--rule);overflow:hidden;border-radius:1px;margin-top:.4rem}
+.rch-laden i{display:block;height:100%;background:var(--accent-gold);width:0;transition:width .2s}
+
+.rch-toast{position:fixed;left:50%;bottom:calc(1.4rem + env(safe-area-inset-bottom, 0px));transform:translateX(-50%) translateY(20px);opacity:0;z-index:400;background:var(--text-ink);color:var(--bg-desktop);font-size:.88rem;padding:.5rem .95rem;border-radius:3px;pointer-events:none;transition:opacity .18s,transform .18s}
+.rch-toast.zeige{opacity:1;transform:translateX(-50%) translateY(0)}
+.rch-toast span{font-family:var(--font-mono);font-size:.82rem;margin-left:.5rem}
+
+/* ── Telefon und Tablet ───────────────────────────────────────────── */
+@media (max-width:900px){
+  .rch-koerper{grid-template-columns:minmax(0,1fr)}
+  .rch-baende{position:static;max-height:none;overflow:visible;border-bottom:1px solid var(--rule);padding-bottom:.6rem;margin-bottom:.6rem}
+  .rch-baende summary{display:flex;justify-content:space-between;cursor:pointer;font-size:.9rem;color:var(--text-body);padding:.2rem 0;list-style:none}
+  .rch-baende summary::-webkit-details-marker{display:none}
+  .rch-baende summary::after{content:"▾";color:var(--text-muted)}
+  .rch-baende[open] summary::after{content:"▴"}
+  .rch-baende .kopf{margin-top:.6rem}
+  .rch-baende-liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:0 1rem}
+}
+@media (max-width:640px){
+  .rch{padding-top:calc(var(--header-h) + 1.4rem)}
+  .rch-ansichten{margin-left:0;width:100%;gap:1.1rem}
+  .rch-ansichten .kz{display:none}
+  .rch-stelle{grid-template-columns:minmax(0,1fr)}
+  .rch-zitat{grid-row:auto;display:flex;flex-wrap:wrap;gap:.2rem .9rem;align-items:baseline}
+  .rch-zitat button,.rch-zitat .art{margin-top:0;display:inline}
+  .rch-los{display:none}
+  .rch-taste{display:none}
+}
+@media (prefers-reduced-motion:reduce){.rch-toast,.rch-laden i{transition:none}}
+
+/* ══ Erste Ansicht „Eine Zeile“ (23.10.2026) ═══════════════════════════
+   Titel und Feld stehen auf der Mittelachse, vor und nach dem Suchen an
+   derselben Stelle: beim Tippen springt nichts. Ohne Anfrage
+   (body.rch-ruhe) zeigt die Seite nur Titel, Feld, Bereich und Beispiele;
+   Ansichten, Status und Bandliste kommen mit der ersten Anfrage. Keine
+   runden Schaltflaechen: Bereiche sind Kaestchen, Wahl ist Unterstreichung.
+   Steht am Ende der Datei, damit es die Grundregeln oben schlaegt. */
+.rch{padding-top:calc(var(--header-h) + clamp(2.6rem,8vh,5rem))}
+.rch-kopf{max-width:52rem;margin:0 auto;gap:.75rem}
+.rch-titel{flex-direction:column;align-items:center;gap:.55rem;text-align:center}
+.rch-titel h1{font-size:clamp(2.7rem,5.4vw,3.9rem)}
+.rch-unter{font-variant-numeric:lining-nums}
+.rch-titel .rch-unter{font-size:.92rem}
+
+/* Feld: eine Zeile auf einer Linie, kein Kasten */
+.rch-feld{margin-top:1.4rem;gap:0;align-items:center;border-bottom:1.5px solid var(--text-ink);transition:border-color .2s}
+.rch-feld:focus-within{border-bottom-color:var(--accent-gold)}
+.rch-eingabe{border:0;background:transparent;border-radius:0}
+.rch-eingabe input,.rch-spiegel{font-family:var(--font-body);font-size:1.32rem;line-height:1.5;padding:.5rem 2.4rem .6rem .1rem;
+  font-kerning:none;font-variant-ligatures:none;font-feature-settings:"kern" 0,"liga" 0,"clig" 0;font-variant-numeric:lining-nums}
+.rch-eingabe input{border-radius:0}
+.rch-eingabe input::placeholder{font-size:1.25rem;font-style:italic;color:var(--text-muted)}
+.rch-taste{font-family:var(--font-body);font-size:.72rem;right:.4rem;border-radius:1px}
+.rch-los{border:0;border-radius:0;background:none;padding:.4rem .1rem .4rem 1rem;align-self:stretch;font-size:.95rem;font-weight:500;font-variant-caps:all-small-caps;letter-spacing:.12em;color:var(--text-ink);white-space:nowrap}
+.rch-los::after{content:" ↵";letter-spacing:0;color:var(--text-muted)}
+.rch-los:hover{color:var(--accent)}
+.rch-lesart{text-align:center;min-height:1.4em}
+.rch-fehler{border-left:0;border-top:1px solid var(--accent);background:none;text-align:center;padding:.4rem 0}
+
+/* Bereich: Kaestchen statt Kapseln */
+.rch-leiste{gap:.6rem 1.6rem}
+.rch-arten{align-items:center;gap:.4rem 1.35rem}
+.rch-leiste-lab{font-size:.92rem;color:var(--text-muted)}
+.rch-chip{border:0;border-radius:0;padding:.25rem 0;gap:.55rem;align-items:center;font-size:.92rem;color:var(--text-muted)}
+.rch-chip::before{content:"";flex:none;width:.7em;height:.7em;border:1px solid var(--text-muted);transition:background-color .15s,border-color .15s}
+.rch-chip[aria-pressed="true"]{color:var(--text-ink)}
+.rch-chip[aria-pressed="true"]::before{background:var(--text-ink);border-color:var(--text-ink)}
+.rch-chip:hover::before{border-color:var(--text-ink)}
+.rch-chip:focus-visible{outline:2px solid var(--accent-gold);outline-offset:3px}
+.rch-baende-knopf{font:inherit;font-size:.92rem;background:none;border:0;border-bottom:1px solid var(--rule);padding:.2rem 0;color:var(--text-ink);cursor:pointer;font-variant-numeric:lining-nums}
+.rch-baende-knopf::after{content:" ▾";color:var(--text-muted)}
+.rch-baende-knopf[aria-expanded="true"]::after{content:" ▴"}
+.rch-baende-knopf:hover{border-bottom-color:var(--accent)}
+body:not(.rch-ruhe) .rch-baende-knopf{display:none}
+.rch-ansichten .kz{font-family:var(--font-body);font-variant-numeric:lining-nums}
+
+/* Ruhe: nur das Noetige */
+.rch-ruhe .rch-leiste{justify-content:center}
+.rch-ruhe .rch-ansichten,.rch-ruhe .rch-status{display:none}
+.rch-ruhe .rch-koerper{grid-template-columns:minmax(0,1fr);max-width:52rem;margin:2.6rem auto 0}
+.rch-ruhe .rch-baende{display:none;position:static;max-height:none;overflow:visible}
+.rch-ruhe.rch-baende-auf .rch-baende{display:block;border-block:1px solid var(--rule);padding:.9rem 0 .7rem;margin-bottom:2rem}
+.rch-ruhe .rch-baende summary{display:none!important}
+.rch-ruhe .rch-baende-liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(21rem,1fr));gap:0 2.4rem}
+.rch-ruhe .rch-band{grid-template-columns:3.4rem minmax(0,1fr);padding:.38rem .4rem}
+.rch-ruhe .rch-band .c{display:none}
+.rch-ruhe .rch-band .t{font-size:.88rem;color:var(--text-body);white-space:normal;overflow:visible}
+.rch-ruhe .rch-band .s{font-size:.86rem}
+.rch-ruhe .rch-laden{max-width:52rem;margin-inline:auto}
+
+/* Beispiele und Zuletzt als Text */
+.rch-hilfe{align-items:center;text-align:center;gap:1.7rem;padding-top:.2rem}
+.rch-hilfe h2,.rch-syntax h3{font-family:var(--font-body);font-variant:normal;font-variant-caps:all-small-caps;letter-spacing:.16em;font-size:.86rem;font-weight:500}
+.rch-beispiele{justify-content:center;gap:.5rem 1.7rem}
+.rch-beispiele button{font-family:var(--font-body);font-style:italic;font-size:1.04rem;border:0;border-bottom:1px dotted var(--text-muted);background:none;border-radius:0;padding:.1rem 0;color:var(--text-body);font-variant-numeric:lining-nums}
+.rch-beispiele button:hover{color:var(--text-ink);border-bottom:1px solid var(--accent)}
+.rch-zuletzt{justify-content:center;gap:.4rem 1.5rem}
+.rch-zuletzt a{font-family:var(--font-body);font-style:italic;font-size:.98rem;color:var(--text-body);border-bottom:1px dotted var(--text-muted)}
+.rch-zuletzt a:hover{text-decoration:none;color:var(--text-ink);border-bottom:1px solid var(--accent)}
+
+/* Die Suchsprache: aufklappbar */
+.rch-sprache{width:100%}
+.rch-sprache > summary{display:inline-flex;gap:.4rem;cursor:pointer;list-style:none;font-size:.95rem;color:var(--text-muted);border-bottom:1px solid var(--rule);padding-bottom:.1rem}
+.rch-sprache > summary::-webkit-details-marker{display:none}
+.rch-sprache > summary::after{content:"▾"}
+.rch-sprache[open] > summary::after{content:"▴"}
+.rch-sprache > summary:hover{color:var(--text-ink);border-bottom-color:var(--accent)}
+.rch-sprache[open] .rch-syntax{margin-top:1.8rem;text-align:left}
+.rch-sprache .rch-unter{margin-top:1.4rem;text-align:left}
+.rch-syntax dt{font-family:var(--font-body);font-size:.92rem;font-weight:500;font-variant-numeric:lining-nums}
+.rch-syntax dd i{font-family:var(--font-body);font-style:italic;font-size:.86rem}
+
+/* Ecken statt Kapseln, eine Schrift statt Schreibmaschine */
+.rch-form,.rch-filter{border-radius:2px}
+.rch-band .s,.rch-zitat,.rch-kwic .z,.rch-streifen-kopf b,.rch-toast span{font-family:var(--font-body);font-variant-numeric:lining-nums tabular-nums}
+.rch-band .s{font-size:.8rem}
+.rch-zitat{font-size:.86rem}
+.rch-kwic .z{font-size:.8rem}
+.rch-vt svg .lab{font-family:var(--font-body)}
+.rch-text .seitenwechsel{font-family:var(--font-body);font-variant-numeric:lining-nums;font-size:.7rem}
+
+@media (max-width:640px){
+  .rch{padding-top:calc(var(--header-h) + 1.8rem)}
+  .rch-eingabe input,.rch-spiegel{font-size:1.12rem}
+  .rch-eingabe input::placeholder{font-size:1.06rem}
+  .rch-ruhe .rch-leiste{justify-content:flex-start}
+  .rch-leiste-lab{width:100%}
+  .rch-hilfe{text-align:left;align-items:flex-start}
+  .rch-beispiele,.rch-zuletzt{justify-content:flex-start}
+}
+
+/* ══ Proportionen (Oktober 2026) ═══════════════════════════════════════
+   Eine Sprache fuer alle Bedienelemente statt fuenf: eine Wahl ist ein
+   hohles Kaestchen (gefuellt, wenn an), was oeffnet oder fuehrt ist ein Wort
+   auf einer Haarlinie, das Aktuelle traegt die Linie in Gold. Rot bleibt der
+   einen Handlung vorbehalten. Nur 1-px-Linien. Vor dem Suchen steht der
+   Block in der Mitte des Fensters; danach rueckt der Titel als eine Zeile
+   neben das Feld, und die Treffer beginnen weit oben. */
+.rch-feld{border-bottom-width:1px}
+.rch-taste{display:none}
+.rch-los::after{content:none}
+.rch-eingabe input,.rch-spiegel{padding-right:.4rem}
+
+/* Kaestchen: hohl, 0.6 em, an = ein kleineres volles Quadrat darin */
+.rch-chip::before{width:.6em;height:.6em;border:1px solid var(--text-muted);background:transparent;box-shadow:none}
+.rch-chip[aria-pressed="true"]::before{border-color:var(--text-ink);background:var(--text-ink);box-shadow:inset 0 0 0 2px var(--bg-desktop)}
+
+/* Woerter auf der Haarlinie, ohne Dreiecke */
+.rch-baende-knopf::after,.rch-baende-knopf[aria-expanded="true"]::after{content:none}
+.rch-baende-knopf[aria-expanded="true"]{border-bottom-color:var(--accent-gold)}
+.rch-sprache > summary::after,.rch-sprache[open] > summary::after{content:none}
+.rch-sprache[open] > summary{border-bottom-color:var(--accent-gold);color:var(--text-ink)}
+.rch-beispiele button,.rch-zuletzt a{border-bottom:1px solid var(--rule)}
+.rch-beispiele button:hover,.rch-zuletzt a:hover{border-bottom:1px solid var(--accent-gold)}
+.rch-ansichten button[aria-selected="true"]{border-bottom-color:var(--accent-gold)}
+.rch-kwic-leiste button[aria-pressed="true"]{border-bottom-color:var(--accent-gold)}
+.rch-form{border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:.12rem 0;margin-right:.9rem}
+.rch-form:hover{border-bottom-color:var(--accent-gold)}
+.rch-filter{border:0;border-bottom:1px solid var(--accent-gold);border-radius:0;padding:.05rem 0}
+
+/* Etiketten: 13.5 px, 0.20 em */
+.rch-hilfe h2,.rch-syntax h3,.rch-baende .kopf{font-size:.77rem;letter-spacing:.2em}
+
+/* Vor dem Suchen: mittig im Fenster; der Ladestreifen bleibt unsichtbar */
+.rch-ruhe .rch{min-height:calc(100svh - 1px);display:flex;flex-direction:column;justify-content:center;padding-top:var(--header-h);padding-bottom:4rem;box-sizing:border-box}
+.rch-ruhe .rch-kopf,.rch-ruhe .rch-koerper{width:100%}
+.rch-ruhe .rch-laden{opacity:0}
+
+/* Nach dem Suchen: Titel als eine Zeile neben dem Feld */
+@media (min-width:900px){
+  body:not(.rch-ruhe) .rch{padding-top:calc(var(--header-h) + 2rem)}
+  body:not(.rch-ruhe) .rch-kopf{max-width:none;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:2.5rem;align-items:end}
+  body:not(.rch-ruhe) .rch-titel{grid-column:1;grid-row:1;align-items:flex-start;text-align:left;padding-bottom:.55rem}
+  body:not(.rch-ruhe) .rch-titel h1{font-size:1.93rem;line-height:1}
+  body:not(.rch-ruhe) .rch-titel .rch-unter{display:none}
+  body:not(.rch-ruhe) .rch-feld{grid-column:2;grid-row:1;margin-top:0}
+  body:not(.rch-ruhe) .rch-kopf > :not(.rch-titel):not(.rch-feld){grid-column:1 / -1}
+  body:not(.rch-ruhe) .rch-lesart{text-align:left}
+  body:not(.rch-ruhe) .rch-leiste{justify-content:flex-start}
+}
+
+/* Bandspalte: breiter, Titel umbrechen statt „…“, Balken 2 px */
+.rch-koerper{grid-template-columns:17.5rem minmax(0,1fr)}
+.rch-band .t{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.35}
+.rch-band .bar{height:2px}
+@media (max-width:900px){.rch-koerper{grid-template-columns:minmax(0,1fr)}}
+
+/* Gruppenkoepfe der Treffer: Source Serif in Kapitaelchen statt duenner Cormorant */
+.rch-gruppe h2{font-family:var(--font-body);font-weight:500;font-size:1.2rem;font-variant-caps:all-small-caps;letter-spacing:.08em;font-variant-numeric:lining-nums}
+/* Telefon: nicht mittig, sonst schiebt sich der Titel unter die Kopfzeile, wenn der Block hoeher als das Fenster ist */
+@media (max-width:640px){.rch-ruhe .rch{display:block;min-height:0;padding-top:calc(var(--header-h) + 1.8rem)}}
+
+/* Mittig, aber nie unter die Kopfzeile (Rueckmeldung 23.10.2026): mit
+   „Zuletzt gesucht“ wurde der Block hoeher als das Fenster, und
+   justify-content:center schob den Ueberstand nach oben unter den Kopf.
+   Automatische Raender zentrieren genauso, laufen aber nur nach unten ueber;
+   dazu ein fester Mindestabstand zum Kopf. */
+.rch-ruhe .rch{justify-content:flex-start;padding-top:calc(var(--header-h) + 3rem)}
+.rch-ruhe .rch > .rch-kopf{margin-top:auto}
+.rch-ruhe .rch > .rch-koerper{margin-bottom:auto}
+@media (max-width:640px){.rch-ruhe .rch{padding-top:calc(var(--header-h) + 1.8rem)}}

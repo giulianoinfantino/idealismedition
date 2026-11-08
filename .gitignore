@@ -1,0 +1,5 @@
+.vercel/
+site/.vercel/
+.DS_Store
+# Suchdaten sind Kopien aus den Editionen (werkzeug/sammle.py), 33 MB
+site/assets/suche/

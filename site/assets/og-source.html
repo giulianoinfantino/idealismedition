@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>OG</title>
+<!-- Vorschaubild fuer geteilte Links (og:image), 1200 × 630: das Titelblatt der Startseite.
+     Gerendert mit Chrome bei doppelter Dichte und auf 1200 × 630 verkleinert (assets/og.png). -->
+<style>
+@font-face { font-family:'Cormorant Garamond'; font-weight:400; src:url(fonts/CormorantGaramond-400-latin.woff2) format('woff2'); }
+@font-face { font-family:'Cormorant Garamond'; font-style:italic; font-weight:400; src:url(fonts/CormorantGaramond-400-italic-latin.woff2) format('woff2'); }
+@font-face { font-family:'Source Serif 4'; font-weight:200 900; src:url(fonts/SourceSerif4-Variable-roman.woff2) format('woff2'); }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1200px; height:630px; background:#1c1b20; font-family:'Source Serif 4',Georgia,serif; -webkit-font-smoothing:antialiased; }
+.frame { position:absolute; inset:22px; border:1px solid #3a3840; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding-bottom:40px; }
+.vorname { font-size:17px; font-weight:500; letter-spacing:.42em; margin-right:-.42em; text-transform:uppercase; color:#b0a89b; }
+.name { font-family:'Cormorant Garamond',Georgia,serif; font-weight:400; font-size:116px; line-height:.92; color:#f0ede4; margin:12px 0 22px; }
+.name span { display:block; }
+.zier { display:flex; align-items:center; gap:20px; }
+.zier i { width:92px; height:1px; background:#4c4a52; }
+.zier svg { width:46px; height:30px; overflow:visible; }
+.zier circle { fill:none; stroke:#cbaa5c; stroke-width:1.6px; vector-effect:non-scaling-stroke; }
+.nach { margin-top:24px; font-size:14px; font-weight:500; letter-spacing:.34em; margin-right:-.34em; text-transform:uppercase; color:#b0a89b; }
+.gw { margin-top:8px; font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:42px; line-height:1.1; color:#e8e3da; }
+.gw b { font-style:normal; font-weight:400; color:#cbaa5c; font-size:.7em; margin:0 .35em; }
+.fuss { position:absolute; left:0; right:0; bottom:28px; text-align:center; font-size:13px; font-weight:500; letter-spacing:.3em; margin-right:-.3em; text-transform:uppercase; color:#8f887d; font-variant-numeric:lining-nums; }
+.fuss b { color:#cbaa5c; font-weight:500; }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="vorname">Edition</div>
+  <div class="name"><span>Deutscher</span><span>Idealismus</span></div>
+  <div class="zier"><i></i><svg viewBox="0 0 200 120"><circle cx="100" cy="44" r="34"/><circle cx="80" cy="72" r="34"/><circle cx="120" cy="72" r="34"/></svg><i></i></div>
+  <div class="nach">Die Werke von</div>
+  <div class="gw">Fichte<b>·</b>Schelling<b>·</b>Hegel</div>
+  <div class="fuss"><b>idealismedition.com</b> · Eine Recherche über 31 Bände</div>
+</div>
+</body>
+</html>
