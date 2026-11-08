@@ -1,201 +1,49 @@
-/* Edition Deutscher Idealismus — was das Portal ueber die Startseite der Editionen hinaus braucht.
-   Grundlage sind style.css und start.css der Editionen, unveraendert uebernommen. */
+/* Edition Deutscher Idealismus: Startseite und einfache Seiten. Grundlage ist style.css der Editionen.
+   Die Startseite ist schlicht: Titel, drei Bildnisse (zugleich die Wege in die Editionen), ein Suchfeld.
+   Keine Bewegung, keine Zier. */
 
-/* ── Buehne ──────────────────────────────────────────────────────────────
-   Titel, Ringe, dann die drei Bildnisse unter Boegen, in der Folge der Systeme.
-   Fichte grau und gedaempft: seine Edition ist in Vorbereitung.
-   Beim Laden: die Goldlinie jedes Bogens zieht sich von unten hoch (--zug),
-   das Bild tritt aus dem Dunkel (unscharf -> scharf), eines nach dem anderen.
-   Danach atmet jedes Bild langsam; der Zeiger fuehrt einen Lichtkegel und
-   neigt die Bilder ein wenig (portal.js setzt --lx/--ly und --rx/--ry/--dx/--dy). */
-@property --zug{syntax:'<percentage>';inherits:false;initial-value:0%}
+.p{max-width:52rem;margin:0 auto;padding:calc(var(--header-h) + clamp(2.5rem,9vh,6rem)) 1.25rem clamp(3rem,8vh,5rem);text-align:center}
+.p h1{font-family:var(--font-display);font-weight:400;font-size:clamp(2rem,4vw,2.7rem);line-height:1.1;color:var(--text-ink)}
+.p-unter{margin:.7rem auto 0;max-width:36rem;font-size:.95rem;line-height:1.6;color:var(--text-muted)}
 
-.ei-buehne{--lx:50%;--ly:42%;isolation:isolate;overflow:hidden;
-  background:radial-gradient(ellipse 70% 55% at 50% 52%,color-mix(in oklab,var(--bg-desktop) 82%,#fff6e0) 0%,var(--bg-desktop) 72%)}
-.ei-buehne::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:radial-gradient(circle 34rem at var(--lx) var(--ly),color-mix(in oklab,var(--accent-gold) 9%,transparent),transparent 70%);
-  transition:background-position .4s}
-.ei-buehne::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23k)'/%3E%3C/svg%3E")}
+.p-drei{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,4vw,2.5rem);max-width:40rem;margin:clamp(2.5rem,7vh,4rem) auto 0}
+.p-bild{display:flex;flex-direction:column;align-items:center;color:inherit;text-decoration:none}
+.p-bild:hover{text-decoration:none}
+.p-bild picture,.p-bild img{display:block;width:100%;height:auto}
+.p-bild img{aspect-ratio:77/100;object-fit:cover;filter:grayscale(1);border-radius:2px}
+.p-wer{margin-top:.8rem;font-size:1.02rem;color:var(--text-ink)}
+.p-bild:hover .p-wer{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.p-leise{margin-top:.15rem;font-size:.76rem;color:var(--text-muted);font-variant-numeric:lining-nums}
 
-.ei-mitte{grid-column:1/-1;grid-row:2;align-self:center;display:flex;flex-direction:column;align-items:center;width:100%;
-  --luecke:clamp(.7rem,3.2vw,3.2rem);
-  --breite:min(calc(35vh * .77),calc((100vw - 2.6rem - 2 * var(--luecke)) / 3),300px)}
-.ei-kopf{margin:0;display:flex;flex-direction:column;align-items:center;font-weight:400;text-align:center;
-  animation:ei-auftritt 1.2s cubic-bezier(.2,.6,.2,1) both}
-.ei-name{font-family:var(--font-display);font-weight:400;font-size:clamp(2.4rem,min(5vw,8.2vh),4.3rem);line-height:1;color:var(--text-ink);margin-top:.22em;letter-spacing:.004em}
-.ei-zier{margin:clamp(.5rem,1.6vh,1rem) 0 clamp(1rem,3vh,2rem);animation:ei-auftritt 1.2s .15s cubic-bezier(.2,.6,.2,1) both}
+.p-suche{display:flex;max-width:30rem;margin:clamp(2.5rem,7vh,4rem) auto 0;border:1px solid var(--rule);border-radius:2px}
+.p-suche:focus-within{border-color:var(--text-muted)}
+.p-suche input{flex:1;min-width:0;background:none;border:0;outline:none;padding:.65rem .9rem;font:inherit;font-size:.98rem;color:var(--text-ink)}
+.p-suche input::placeholder{color:var(--text-muted)}
+.p-suche button{background:none;border:0;border-left:1px solid var(--rule);padding:0 1rem;font:inherit;font-size:.86rem;color:var(--text-body);cursor:pointer}
+.p-suche button:hover{color:var(--text-ink)}
 
-.ei-galerie{list-style:none;margin:0;padding:0;display:flex;justify-content:center;align-items:flex-start;gap:var(--luecke)}
-.ei-bild{width:var(--breite)}
-.ei-bild-link{display:block;color:inherit;text-decoration:none;outline:none}
-.ei-bild-link:hover{text-decoration:none}
-.ei-rahmen{--rx:0deg;--ry:0deg;--dx:0px;--dy:0px;position:relative;display:block;aspect-ratio:77/100;border-radius:999px 999px 3px 3px;overflow:hidden;
-  background:#121116;box-shadow:0 2.2rem 3.5rem -2rem rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.035);
-  transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .7s cubic-bezier(.2,.6,.2,1),box-shadow .5s,opacity .5s}
-/* Goldlinie innen, wie die Leiste eines Rahmens; zieht sich beim Laden von unten hoch */
-.ei-rahmen::after{content:"";position:absolute;inset:clamp(4px,.55vw,9px);z-index:2;border:1px solid color-mix(in oklab,var(--accent-gold) 62%,transparent);
-  border-radius:999px 999px 2px 2px;pointer-events:none;
-  -webkit-mask:linear-gradient(to top,#000 var(--zug),transparent calc(var(--zug) + 14%));mask:linear-gradient(to top,#000 var(--zug),transparent calc(var(--zug) + 14%));
-  animation:ei-zug 1.7s calc(.45s + var(--i) * .2s) cubic-bezier(.55,0,.25,1) forwards;transition:border-color .4s}
-/* Glanz auf dem Glas: einmal beim Laden, dann bei jedem Zeigen */
-.ei-rahmen::before{content:"";position:absolute;inset:-20%;z-index:1;pointer-events:none;
-  background:linear-gradient(105deg,transparent 42%,rgba(255,248,230,.10) 50%,transparent 58%);transform:translateX(-70%);
-  animation:ei-glanz 2.4s calc(1.4s + var(--i) * .2s) cubic-bezier(.3,0,.2,1) both}
-.ei-tiefe{position:absolute;inset:-4%;display:block;transform:translate(var(--dx),var(--dy));transition:transform .9s cubic-bezier(.2,.6,.2,1)}
-.ei-tiefe picture,.ei-tiefe img{display:block;width:100%;height:100%}
-.ei-tiefe img{object-fit:cover;--schluss:saturate(.92) contrast(1.03);
-  opacity:0;animation:ei-entwickeln 2s calc(.7s + var(--i) * .24s) cubic-bezier(.2,.6,.2,1) forwards,ei-atmen 22s calc(2.8s + var(--i) * 3s) ease-in-out infinite alternate}
-.ei-bild--kommt .ei-tiefe img{--schluss:grayscale(1) brightness(.6) contrast(.92)}
-.ei-bild--kommt .ei-rahmen::after{border-color:color-mix(in oklab,var(--text-muted) 38%,transparent);border-style:dashed}
+.p-fuss{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 2rem;max-width:52rem;margin:0 auto;
+  padding:1.5rem 1.25rem 2.5rem;border-top:1px solid var(--rule);font-size:.76rem;color:var(--text-muted)}
+.p-fuss p{margin:0}
+.p-fuss a{color:var(--text-muted)}
+.p-fuss a:hover{color:var(--text-ink);text-decoration:none}
+.p-fuss nav{display:flex;flex-wrap:wrap;gap:.3rem 1.2rem}
 
-.ei-unter{display:flex;flex-direction:column;align-items:center;margin:clamp(.6rem,1.8vh,1rem) calc(var(--luecke) / -2) 0;text-align:center;
-  animation:ei-auftritt 1.1s calc(1.5s + var(--i) * .2s) cubic-bezier(.2,.6,.2,1) both}
-.ei-wer{font-family:var(--font-display);font-style:italic;font-size:clamp(1.25rem,2.1vw,1.85rem);line-height:1.1;color:var(--text-ink);transition:color .3s}
-.ei-leben{margin-top:.2rem;font-size:.72rem;letter-spacing:.12em;color:var(--text-muted);font-variant-numeric:lining-nums}
-.ei-was{margin-top:.35rem;padding-bottom:.15rem;white-space:nowrap;font-size:.7rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-gold);
-  border-bottom:1px solid transparent;transition:border-color .3s}
-.ei-bild--kommt .ei-wer{color:var(--text-muted)}
-.ei-bild--kommt .ei-was{color:var(--text-muted);font-style:italic;text-transform:none;letter-spacing:.04em;font-size:.82rem;font-weight:400}
-
-/* Zeigen: das gezeigte Bild hell, die anderen treten zurueck, sein Ring leuchtet */
-.ei-galerie:has(.ei-bild-link:is(:hover,:focus-visible)) .ei-bild:not(:has(.ei-bild-link:is(:hover,:focus-visible))) .ei-rahmen{opacity:.5}
-.ei-bild-link:is(:hover,:focus-visible) .ei-rahmen{box-shadow:0 2.6rem 4rem -2rem rgba(0,0,0,.9),0 0 0 1px color-mix(in oklab,var(--accent-gold) 30%,transparent)}
-.ei-bild-link:is(:hover,:focus-visible) .ei-rahmen::after{border-color:var(--accent-gold)}
-.ei-bild--kommt .ei-bild-link:is(:hover,:focus-visible) .ei-rahmen::after{border-color:color-mix(in oklab,var(--text-muted) 75%,transparent)}
-.ei-bild-link:is(:hover,:focus-visible) .ei-rahmen::before{animation:ei-glanz 1.6s cubic-bezier(.3,0,.2,1) both}
-.ei-bild-link:is(:hover,:focus-visible) .ei-was{border-bottom-color:var(--accent)}
-.ei-bild--kommt .ei-bild-link:is(:hover,:focus-visible) .ei-was{border-bottom-color:transparent}
-.ei-bild-link:focus-visible .ei-rahmen{outline:2px solid var(--accent-gold);outline-offset:4px}
-.ei-buehne .ring{transition:stroke .3s,stroke-width .3s,opacity .3s}
-.ei-buehne:has(.ei-bild[data-ring="a"] .ei-bild-link:is(:hover,:focus-visible)) .ring-a,
-.ei-buehne:has(.ei-bild[data-ring="b"] .ei-bild-link:is(:hover,:focus-visible)) .ring-b,
-.ei-buehne:has(.ei-bild[data-ring="c"] .ei-bild-link:is(:hover,:focus-visible)) .ring-c{stroke:var(--accent);stroke-width:2px}
-
-@keyframes ei-zug{to{--zug:100%}}
-@keyframes ei-entwickeln{0%{opacity:0;filter:blur(14px) brightness(.25);transform:scale(1.07)}100%{opacity:1;filter:var(--schluss);transform:scale(1)}}
-@keyframes ei-atmen{from{scale:1}to{scale:1.045}}
-@keyframes ei-glanz{from{transform:translateX(-70%)}to{transform:translateX(70%)}}
-@keyframes ei-auftritt{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-
-/* Schmale Bilder: die Ausgabe faellt weg, es bleiben Name, Lebensdaten und Bandzahl */
-.ei-bild{container-type:inline-size}
-@container (max-width:250px){.ei-was-lang{display:none}}
-/* Niedrige Fenster: alles eine Stufe kleiner, damit die Buehne auf den ersten Schirm passt */
-@media (max-height:780px) and (min-width:900px){
-  .ei-mitte{--breite:min(calc(31vh * .77),calc((100vw - 2.6rem - 2 * var(--luecke)) / 3),300px)}
-  .ei-name{font-size:clamp(2.1rem,min(4.4vw,7.2vh),3.5rem)}
-  .ei-zier{margin:.35rem 0 .9rem}
-  .ei-buehne .st-entdecken{display:none}
-}
-@media (max-width:899px){
-  .ei-mitte{grid-column:1;--breite:min(calc(34vh * .77),calc((100vw - 2.4rem - 2 * var(--luecke)) / 3),230px)}
-}
-@media (max-width:700px){
-  .ei-was-lang{display:none}
-  .ei-leben{font-size:.64rem;letter-spacing:.06em}
-  .ei-was{font-size:.62rem;letter-spacing:.1em}
-  .ei-bild--kommt .ei-was{font-size:.72rem}
-}
-@media (prefers-reduced-motion:reduce){
-  .ei-kopf,.ei-zier,.ei-unter,.ei-rahmen::before{animation:none}
-  .ei-rahmen::after{animation:none;--zug:100%}
-  .ei-tiefe img{animation:none;opacity:1;filter:var(--schluss)}
-  .ei-rahmen,.ei-tiefe{transition:none}
+@media (max-width:560px){
+  .p-drei{gap:.7rem}
+  .p-trenn{display:none}
+  .p-leise [data-baende]{display:block}
+  .p-wer{font-size:.92rem}
+  .p-leise{font-size:.68rem}
 }
 
-/* Kennzahlen: drei statt vier */
-.ei-zahlen{grid-template-columns:repeat(3,minmax(0,1fr))}
-@media (max-width:700px){
-  .ei-zahlen{grid-template-columns:1fr 1fr}
-  .ei-zahlen div:nth-child(3){grid-column:1 / -1;border-left:0;padding-left:0;border-top:1px solid var(--rule)}
-}
-
-/* Suchfeld auf der Startseite */
-.ei-suche{display:flex;gap:.6rem;max-width:42rem}
-.ei-suche input{flex:1;min-width:0;font-family:var(--font-body);font-size:1.05rem;padding:.8rem 1.1rem;border:1px solid var(--rule);border-radius:var(--radius);background:var(--bg-page);color:var(--text-body);transition:border-color .2s}
-.ei-suche input:focus{border-color:var(--accent-gold);outline:none}
-.ei-suche button{font-family:var(--font-body);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1.5rem;border:1px solid var(--accent-gold);border-radius:var(--radius);background:transparent;color:var(--text-ink);cursor:pointer;transition:background .2s,color .2s}
-.ei-suche button:hover,.ei-suche button:focus-visible{background:var(--accent-gold);color:var(--bg-paper)}
-.ei-beispiele{display:flex;flex-wrap:wrap;align-items:baseline;gap:.35rem 1.1rem;margin:1rem 0 0;font-size:.9rem}
-.ei-beispiele span{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted)}
-.ei-beispiele a{color:var(--text-body);border-bottom:1px solid var(--rule)}
-.ei-beispiele a:hover{color:var(--text-ink);border-bottom-color:var(--accent);text-decoration:none}
-
-/* Die Editionen: links Name, Ausgabe und Wege, rechts die Baende */
-.ei-edition{grid-template-columns:16rem minmax(0,1fr);gap:2rem;padding-top:1.2rem;scroll-margin-top:calc(var(--header-h) + 1rem)}
-.ei-edition + .ei-edition{margin-top:1.4rem}
-.ei-edition-kopf{display:grid;gap:.55rem;align-content:start}
-.ei-edition .st-gruppe-name{font-family:var(--font-display);font-size:1.9rem;font-weight:500;line-height:1.05;color:var(--text-ink)}
-.ei-edition .st-gruppe-zahl{margin-top:.35rem;font-family:var(--font-body);font-size:.8rem;line-height:1.4}
-.ei-ausgabe{margin:0;font-size:.84rem;line-height:1.5;color:var(--text-muted)}
-.ei-ausgabe em{color:var(--text-body)}
-.ei-stand{margin:0;font-size:.8rem;letter-spacing:.06em;color:var(--accent-gold)}
-.ei-vorbereitung{margin:0;max-width:34rem;font-size:.95rem;line-height:1.7;color:var(--text-muted);align-self:start}
-@media (max-width:860px){.ei-edition{grid-template-columns:minmax(0,1fr);gap:1rem}}
-
-/* Wege: Kapitaelchen mit Linie, wie die Wege des Titelblatts */
+/* Einfache Seiten (Unterstuetzen, 404) */
 .ei-wege{display:flex;flex-wrap:wrap;gap:.2rem 1.1rem;margin:.2rem 0 0}
-.ei-wege a{font-size:.86rem;font-weight:500;font-variant-caps:all-small-caps;letter-spacing:.1em;color:var(--text-ink);padding:.2rem 0;border-bottom:1px solid var(--rule);transition:border-color .2s}
-.ei-wege a:hover,.ei-wege a:focus-visible{border-bottom-color:var(--accent);text-decoration:none}
-.ei-wege-gross a{font-size:1rem}
-
-.ei-spalten h3{font-family:var(--font-display);font-size:1.3rem;font-weight:500;color:var(--text-ink)}
-
-/* Unterstuetzen */
+.ei-wege a{font-size:.86rem;color:var(--text-ink);padding:.2rem 0;border-bottom:1px solid var(--rule)}
+.ei-wege a:hover{border-bottom-color:var(--accent);text-decoration:none}
 .ei-mitglied{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin:2rem 0 2.5rem}
-.ei-knopf{display:inline-block;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.6rem;border:1px solid var(--accent-gold);border-radius:var(--radius);color:var(--text-ink);transition:background .2s,color .2s}
-.ei-knopf:hover,.ei-knopf:focus-visible{background:var(--accent-gold);color:var(--bg-paper);text-decoration:none}
-@media (min-width:861px){.ei-edition-kopf{position:sticky;top:calc(var(--header-h) + 1.4rem)}}
+.ei-knopf{display:inline-block;font-size:.86rem;padding:.7rem 1.3rem;border:1px solid var(--rule);border-radius:2px;color:var(--text-ink)}
+.ei-knopf:hover{border-color:var(--text-muted);text-decoration:none}
 
-/* Im schmalen Kopf ist fuer drei Wege kein Platz; „Unterstuetzen“ steht dann im Titelblatt und im Fuss. */
+/* Im schmalen Kopf ist fuer drei Wege kein Platz; „Unterstuetzen“ steht dann im Fuss. */
 @media (max-width:600px){.sitenav li.nav-weit{display:none}}
-
-/* Fichte: Sämmtliche und Nachgelassene Werke in einer Liste, darum das Sigel (SW I, NW III) als Nummer */
-#fichte .st-band{grid-template-columns:3.4rem minmax(0,1fr) auto}
-#fichte .st-band-nr{font-size:.92rem;white-space:nowrap}
-
-/* ── Stille Startseite (08.11.2026) ─────────────────────────────────────────
-   Erster Bildschirm: Titel, Ringe, Bildnisse, ein Suchfeld. Darunter drei Karten und eine Zeile. */
-.ei-still .ei-buehne{grid-template-rows:1fr;padding-bottom:clamp(1.5rem,5vh,3rem)}
-.ei-still .ei-mitte{grid-row:1}
-.ei-feld{display:flex;align-items:center;gap:.4rem;width:min(30rem,86vw);margin-top:clamp(1.6rem,4.5vh,2.8rem);
-  border-bottom:1px solid var(--rule);transition:border-color .3s;animation:ei-auftritt 1.1s 2.1s cubic-bezier(.2,.6,.2,1) both}
-.ei-feld:focus-within{border-bottom-color:var(--accent-gold)}
-.ei-feld input{flex:1;min-width:0;background:none;border:0;outline:none;padding:.55rem .1rem .45rem;
-  font-family:var(--font-display);font-size:clamp(1.1rem,1.9vw,1.35rem);color:var(--text-ink);text-align:center}
-.ei-feld input::placeholder{color:var(--text-muted);font-style:italic}
-.ei-feld input::-webkit-search-cancel-button{display:none}
-.ei-feld button{background:none;border:0;color:var(--accent-gold);font-size:1.15rem;line-height:1;padding:.3rem .2rem;cursor:pointer;transition:transform .2s}
-.ei-feld button:hover{transform:translateX(3px)}
-.ei-leise{margin:.8rem 0 0;font-size:.74rem;letter-spacing:.06em;color:var(--text-muted);font-variant-numeric:lining-nums;
-  animation:ei-auftritt 1.1s 2.3s cubic-bezier(.2,.6,.2,1) both}
-.ei-still .ei-unter .ei-leben{margin-top:.25rem}
-
-.ei-drei{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,3vw,2.4rem);
-  max-width:60rem;margin:0 auto;padding:clamp(3rem,9vh,5.5rem) max(1.25rem,env(safe-area-inset-left,0px)) clamp(2rem,6vh,3.5rem)}
-.ei-karte{display:flex;flex-direction:column;gap:.2rem;padding:1.3rem 0 1.1rem;border-top:1px solid var(--rule);color:inherit;text-decoration:none;transition:border-color .3s}
-.ei-karte:hover{border-top-color:var(--accent-gold);text-decoration:none}
-.ei-karte-name{font-family:var(--font-display);font-size:1.9rem;font-weight:400;line-height:1.05;color:var(--text-ink)}
-.ei-karte-leben{font-size:.74rem;letter-spacing:.1em;color:var(--text-muted);font-variant-numeric:lining-nums}
-.ei-karte-ausgabe{margin-top:.6rem;font-family:var(--font-display);font-style:italic;font-size:1.08rem;color:var(--text-body)}
-.ei-karte-stand{font-size:.78rem;color:var(--text-muted)}
-.ei-karte-weg{margin-top:.8rem;font-size:.78rem;font-weight:500;font-variant-caps:all-small-caps;letter-spacing:.12em;color:var(--accent-gold)}
-.ei-karte-weg span{display:inline-block;transition:transform .2s}
-.ei-karte:hover .ei-karte-weg span{transform:translateX(3px)}
-.ei-schluss{max-width:60rem;margin:0 auto;padding:0 max(1.25rem,env(safe-area-inset-left,0px)) clamp(3rem,8vh,5rem);
-  font-size:.86rem;line-height:1.7;color:var(--text-muted)}
-.ei-schluss a{color:var(--text-body);border-bottom:1px solid var(--rule)}
-.ei-schluss a:hover{color:var(--text-ink);border-bottom-color:var(--accent);text-decoration:none}
-.ei-fuss{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.8rem 2rem;max-width:60rem;margin:0 auto;
-  padding:1.6rem max(1.25rem,env(safe-area-inset-left,0px)) 2.4rem;border-top:1px solid var(--rule);font-size:.76rem;color:var(--text-muted)}
-.ei-fuss a{color:var(--text-muted)}
-.ei-fuss a:hover{color:var(--accent);text-decoration:none}
-.ei-fuss nav{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem}
-.ei-fuss nav a{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
-@media (max-width:760px){
-  .ei-drei{grid-template-columns:minmax(0,1fr);gap:0}
-  .ei-karte{padding:1rem 0}
-}
-@media (prefers-reduced-motion:reduce){.ei-feld,.ei-leise{animation:none}}
-@media (max-width:899px){.ei-still .ei-buehne{min-height:auto;padding-top:clamp(2rem,6vh,3.5rem)}}

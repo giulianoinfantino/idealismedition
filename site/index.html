@@ -29,11 +29,10 @@
   <link rel="preload" href="assets/bildnisse/schelling.webp" as="image" type="image/webp" imagesrcset="assets/bildnisse/schelling.webp 1x, assets/bildnisse/schelling@2x.webp 2x">
   <link rel="stylesheet" href="assets/fonts.css">
   <link rel="stylesheet" href="assets/style.css">
-  <link rel="stylesheet" href="assets/start.css">
   <link rel="stylesheet" href="assets/portal.css">
   <script src="assets/themefarbe.js"></script>
 </head>
-<body class="startseite">
+<body class="startseite-still">
 
 <a href="#inhalt" class="skip-link">Zum Inhalt springen</a>
 
@@ -54,101 +53,35 @@
   </nav>
 </header>
 
-<main id="inhalt" class="st ei-still">
-
-<!-- ═══ BUEHNE ═══ Still: der Titel, die Ringe, die drei Bildnisse in der Folge der Systeme, ein Suchfeld.
-     Mehr steht auf dem ersten Bildschirm nicht. Die Ringe gehoeren zu den Bildern (oben Fichte, links Schelling,
-     rechts Hegel) und leuchten mit ihnen auf. Bewegung und Lichtkegel: portal.css, portal.js. -->
-<section class="st-titel ei-buehne" aria-labelledby="st-titel">
-  <div class="ei-mitte">
-    <h1 id="st-titel" class="ei-kopf">
-      <span class="st-vorname">Edition</span>
-      <span class="ei-name">Deutscher Idealismus</span>
-    </h1>
-    <div class="st-zier ei-zier" aria-hidden="true">
-      <span class="st-zier-linie"></span>
-      <svg class="ringe-mark hero-crest st-zier-ringe" viewBox="0 0 200 120">
-        <g class="ringe-spin">
-          <circle class="ring ring-a" cx="100" cy="44" r="34" vector-effect="non-scaling-stroke"/>
-          <circle class="ring ring-b" cx="80" cy="72" r="34" vector-effect="non-scaling-stroke"/>
-          <circle class="ring ring-c" cx="120" cy="72" r="34" vector-effect="non-scaling-stroke"/>
-        </g>
-      </svg>
-      <span class="st-zier-linie"></span>
-    </div>
-    <ol class="ei-galerie" aria-label="Die Editionen">
-      <li class="ei-bild" data-ring="a" style="--i:0">
-        <a class="ei-bild-link" href="https://www.fichteedition.com/" aria-label="Fichte: zur Edition der Sämmtlichen und Nachgelassenen Werke">
-          <span class="ei-rahmen"><span class="ei-tiefe"><picture>
-            <source type="image/webp" srcset="assets/bildnisse/fichte.webp 1x, assets/bildnisse/fichte@2x.webp 2x">
-            <img src="assets/bildnisse/fichte.jpg" srcset="assets/bildnisse/fichte@2x.jpg 2x" width="340" height="442" alt="Johann Gottlieb Fichte, Lithographie von Johann Friedrich Jugel nach Heinrich Anton Dähling" decoding="async">
-          </picture></span></span>
-          <span class="ei-unter">
-            <span class="ei-wer">Fichte</span>
-            <span class="ei-leben">1762–1814</span>
-            
-          </span>
-        </a>
-      </li>
-      <li class="ei-bild" data-ring="b" style="--i:1">
-        <a class="ei-bild-link" href="https://www.schellingedition.com/" aria-label="Schelling: zur Edition der Sämmtlichen Werke">
-          <span class="ei-rahmen"><span class="ei-tiefe"><picture>
-            <source type="image/webp" srcset="assets/bildnisse/schelling.webp 1x, assets/bildnisse/schelling@2x.webp 2x">
-            <img src="assets/bildnisse/schelling.jpg" srcset="assets/bildnisse/schelling@2x.jpg 2x" width="340" height="442" alt="Friedrich Wilhelm Joseph Schelling, Gemälde von Joseph Karl Stieler, 1835" decoding="async" fetchpriority="high">
-          </picture></span></span>
-          <span class="ei-unter">
-            <span class="ei-wer">Schelling</span>
-            <span class="ei-leben">1775–1854</span>
-            
-          </span>
-        </a>
-      </li>
-      <li class="ei-bild" data-ring="c" style="--i:2">
-        <a class="ei-bild-link" href="https://www.hegeledition.com/" aria-label="Hegel: zur Edition der Gesammelten Werke">
-          <span class="ei-rahmen"><span class="ei-tiefe"><picture>
-            <source type="image/webp" srcset="assets/bildnisse/hegel.webp 1x, assets/bildnisse/hegel@2x.webp 2x">
-            <img src="assets/bildnisse/hegel.jpg" srcset="assets/bildnisse/hegel@2x.jpg 2x" width="340" height="442" alt="Georg Wilhelm Friedrich Hegel, Gemälde von Jakob Schlesinger, 1831" decoding="async">
-          </picture></span></span>
-          <span class="ei-unter">
-            <span class="ei-wer">Hegel</span>
-            <span class="ei-leben">1770–1831</span>
-            
-          </span>
-        </a>
-      </li>
-    </ol>
-    <form class="ei-feld" action="recherche" method="get" role="search">
-      <input type="search" name="q" placeholder="In allen Bänden suchen" aria-label="In allen Bänden suchen" spellcheck="false" autocapitalize="off" autocorrect="off">
-      <button type="submit" aria-label="Suchen">→</button>
-    </form>
-    <p class="ei-leise">
-<!-- zahlen:anfang -->
-      42 Bände · 20&#8239;141 Seiten · 6,4&nbsp;Mio. Wörter
-<!-- zahlen:ende -->
-    </p>
-  </div>
-</section>
-
-<section class="ei-drei" id="editionen" aria-label="Die Editionen">
-<!-- editionen:anfang -->
-<a class="ei-karte" id="fichte" href="https://www.fichteedition.com/"><span class="ei-karte-name">Fichte</span><span class="ei-karte-leben">1762–1814</span><span class="ei-karte-ausgabe">Sämmtliche und Nachgelassene Werke</span><span class="ei-karte-stand">11 Bände · Fassung 0.1</span><span class="ei-karte-weg">Zur Edition <span aria-hidden="true">→</span></span></a>
-<a class="ei-karte" id="schelling" href="https://www.schellingedition.com/"><span class="ei-karte-name">Schelling</span><span class="ei-karte-leben">1775–1854</span><span class="ei-karte-ausgabe">Sämmtliche Werke</span><span class="ei-karte-stand">14 Bände · Fassung 0.7</span><span class="ei-karte-weg">Zur Edition <span aria-hidden="true">→</span></span></a>
-<a class="ei-karte" id="hegel" href="https://www.hegeledition.com/"><span class="ei-karte-name">Hegel</span><span class="ei-karte-leben">1770–1831</span><span class="ei-karte-ausgabe">Gesammelte Werke</span><span class="ei-karte-stand">17 Bände · Fassung 0.8</span><span class="ei-karte-weg">Zur Edition <span aria-hidden="true">→</span></span></a>
-<!-- editionen:ende -->
-</section>
-
-<p class="ei-schluss">Frei zugänglich, ohne Bezahlschranke. Jeder Band ist am Druck geprüft und liegt als TEI-Datei vor, unter <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC&nbsp;BY&nbsp;4.0</a>. <a href="unterstuetzen">Unterstützen</a></p>
+<main id="inhalt" class="p">
+  <h1>Edition Deutscher Idealismus</h1>
+  <p class="p-unter">Die Werke Fichtes, Schellings und Hegels in digitalen Editionen, frei zugänglich.</p>
+  <nav class="p-drei" id="editionen" aria-label="Die Editionen">
+    <a class="p-bild" href="https://www.fichteedition.com/">
+      <picture><source type="image/webp" srcset="assets/bildnisse/fichte.webp 1x, assets/bildnisse/fichte@2x.webp 2x"><img src="assets/bildnisse/fichte.jpg" width="340" height="442" alt="Johann Gottlieb Fichte" decoding="async"></picture>
+      <span class="p-wer">Fichte</span>
+      <span class="p-leise">1762–1814<span class="p-trenn"> · </span><span data-baende="fichte">11 Bände</span></span>
+    </a>
+    <a class="p-bild" href="https://www.schellingedition.com/">
+      <picture><source type="image/webp" srcset="assets/bildnisse/schelling.webp 1x, assets/bildnisse/schelling@2x.webp 2x"><img src="assets/bildnisse/schelling.jpg" width="340" height="442" alt="Friedrich Wilhelm Joseph Schelling" decoding="async"></picture>
+      <span class="p-wer">Schelling</span>
+      <span class="p-leise">1775–1854<span class="p-trenn"> · </span><span data-baende="schelling">14 Bände</span></span>
+    </a>
+    <a class="p-bild" href="https://www.hegeledition.com/">
+      <picture><source type="image/webp" srcset="assets/bildnisse/hegel.webp 1x, assets/bildnisse/hegel@2x.webp 2x"><img src="assets/bildnisse/hegel.jpg" width="340" height="442" alt="Georg Wilhelm Friedrich Hegel" decoding="async"></picture>
+      <span class="p-wer">Hegel</span>
+      <span class="p-leise">1770–1831<span class="p-trenn"> · </span><span data-baende="hegel">17 Bände</span></span>
+    </a>
+  </nav>
+  <form class="p-suche" action="recherche" method="get" role="search">
+    <input type="search" name="q" placeholder="In allen 42 Bänden suchen" aria-label="In allen Bänden suchen" spellcheck="false" autocapitalize="off" autocorrect="off">
+    <button type="submit">Suchen</button>
+  </form>
 </main>
 
-<footer class="ei-fuss">
-  <p>Digitale Editionen von <a href="https://giulianoinfantino.com" rel="me">Giuliano Infantino</a></p>
-  <nav>
-    <a href="recherche">Recherche</a>
-    <a href="unterstuetzen">Unterstützen</a>
-    <a href="datenschutz">Datenschutz</a>
-    <a href="impressum">Impressum</a>
-  </nav>
+<footer class="p-fuss">
+  <p>Digitale Editionen von <a href="https://giulianoinfantino.com" rel="me">Giuliano Infantino</a>. Texte gemeinfrei, Daten unter <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC&nbsp;BY&nbsp;4.0</a>.</p>
+  <nav><a href="recherche">Recherche</a><a href="unterstuetzen">Unterstützen</a><a href="datenschutz">Datenschutz</a><a href="impressum">Impressum</a></nav>
 </footer>
-<script src="assets/portal.js" defer></script>
 </body>
 </html>

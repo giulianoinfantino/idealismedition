@@ -121,9 +121,11 @@ def main():
     nw = sum(woerter.values())
     mio = f'{nw / 1e6:.1f}'.replace('.', ',')
     zahlen = f'      {nb} Bände · {zahl(ns)} Seiten · {mio}&nbsp;Mio. Wörter'
+    # Startseite: Bandzahlen unter den Bildnissen und im Suchfeld
     i = (S / 'index.html').read_text(encoding='utf-8')
-    i = ersetze(i, 'zahlen', zahlen)
-    i = ersetze(i, 'editionen', '\n'.join(edition_html(e) for e in EDITIONEN))
+    for e in da:
+        i = re.sub(rf'(<span data-baende="{e["id"]}">)\d+ Bände', rf'\g<1>{len(e["werke"])} Bände', i)
+    i = re.sub(r'placeholder="In allen \d+ Bänden suchen"', f'placeholder="In allen {nb} Bänden suchen"', i)
     (S / 'index.html').write_text(i, encoding='utf-8')
     r = (S / 'recherche.html').read_text(encoding='utf-8')
     r = re.sub(r'(<p class="rch-unter" id="rch-unter">)[^<]*', rf'\g<1>Volltext von Fichte, Schelling und Hegel · {nb} Bände', r, count=1)
