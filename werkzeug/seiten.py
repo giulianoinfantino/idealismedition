@@ -5,7 +5,7 @@
 import pathlib
 
 S = pathlib.Path.home() / 'idealismus/site'
-KOFI = 'https://ko-fi.com/s/61ec9b5c32'
+KOFI = 'https://ko-fi.com/idealismedition'
 
 RINGE = ('<svg class="ringe-mark site-title-rings" viewBox="0 0 200 120" aria-hidden="true">'
          '<circle class="ring ring-a" cx="100" cy="44" r="34" vector-effect="non-scaling-stroke"/>'
@@ -14,8 +14,8 @@ RINGE = ('<svg class="ringe-mark site-title-rings" viewBox="0 0 200 120" aria-hi
 
 
 def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False):
-    nav = [('/#editionen', 'Editionen', ''), ('/recherche', 'Recherche', 'recherche'), ('/unterstuetzen', 'Unterstützen', 'unterstuetzen')]
-    navhtml = '\n'.join(f'      <li' + (' class="nav-weit"' if k == 'unterstuetzen' else '') + f'><a href="{h}"' + (' class="current" aria-current="page"' if k and k == aktuell else '') + f'>{t}</a></li>' for h, t, k in nav)
+    nav = [('/#editionen', 'Ausgaben', ''), ('/recherche', 'Recherche', 'recherche'), (KOFI, 'Unterstützen', 'unterstuetzen')]
+    navhtml = '\n'.join(f'      <li' + (' class="nav-weit"' if k == 'unterstuetzen' else '') + f'><a href="{h}"' + (' target="_blank" rel="noopener"' if h.startswith('http') else '') + (' class="current" aria-current="page"' if k and k == aktuell else '') + f'>{t}</a></li>' for h, t, k in nav)
     kanon = '' if ohne_index else f'\n  <link rel="canonical" href="https://www.idealismedition.com/{datei.removesuffix(".html").removesuffix("index")}">'
     (S / datei).write_text(f'''<!DOCTYPE html>
 <html lang="de">
@@ -61,7 +61,7 @@ def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False):
     <a href="https://www.fichteedition.com/">Fichte-Edition</a>
     <a href="https://www.schellingedition.com/">Schelling-Edition</a>
     <a href="https://www.hegeledition.com/">Hegel-Edition</a>
-    <a href="/unterstuetzen">Unterstützen</a>
+    <a href="{KOFI}" target="_blank" rel="noopener">Unterstützen</a>
     <a href="/datenschutz">Datenschutz</a>
     <a href="/impressum">Impressum</a>
   </nav>
@@ -79,7 +79,7 @@ seite('unterstuetzen.html', 'Unterstützen', f'''
 <main class="legal-container">
   <div class="legal-kicker">Unterstützen</div>
   <h1>Mitglied werden</h1>
-  <p class="legal-lead">Die Editionen sind frei zugänglich, ohne Bezahlschranke und ohne Konto, und sollen es bleiben. Wer die Arbeit mittragen will, kann Mitglied werden.</p>
+  <p class="legal-lead">Die Ausgaben sind frei zugänglich, ohne Bezahlschranke und ohne Konto, und sollen es bleiben. Wer die Arbeit mittragen will, kann Mitglied werden.</p>
 
   <div class="ei-mitglied">
     <a class="ei-knopf" href="{KOFI}" target="_blank" rel="noopener">Mitglied werden über Ko-fi</a>
@@ -87,7 +87,7 @@ seite('unterstuetzen.html', 'Unterstützen', f'''
 
   <section class="legal-section">
     <h2>Was die Mitgliedschaft ist</h2>
-    <p>Eine freiwillige Unterstützung der Arbeit an den Editionen. Sie öffnet nichts, was nicht ohnehin offen ist: Lesen, Suchen und die Daten bleiben für alle gleich.</p>
+    <p>Eine freiwillige Unterstützung der Arbeit an den Ausgaben. Sie öffnet nichts, was nicht ohnehin offen ist: Lesen, Suchen und die Daten bleiben für alle gleich.</p>
   </section>
 
   <section class="legal-section">
@@ -99,7 +99,7 @@ seite('unterstuetzen.html', 'Unterstützen', f'''
     <h2>Friends of the Edition</h2>
     <p>Mitglieder werden, wenn sie es wünschen, unter den <a href="https://www.hegeledition.com/friends">Friends of the Edition</a> genannt.</p>
   </section>
-</main>''', beschreibung='Die Editionen sind frei zugänglich. Wer die Arbeit mittragen will, kann Mitglied werden.', aktuell='unterstuetzen')
+</main>''', beschreibung='Die Ausgaben sind frei zugänglich. Wer die Arbeit mittragen will, kann Mitglied werden.', aktuell='unterstuetzen')
 
 seite('impressum.html', 'Impressum', f'''
 <main class="legal-container">
@@ -179,7 +179,7 @@ seite('datenschutz.html', 'Datenschutz', '''
 
   <section class="legal-section">
     <h2>4. Verweise auf andere Websites</h2>
-    <p>Die Treffer der Recherche und die Bandtitel führen in die Editionen auf www.fichteedition.com, schellingedition.com und hegeledition.com; dort gelten deren Datenschutzhinweise. Für die Mitgliedschaft wird auf Ko-fi verwiesen. Es handelt sich um einfache Links: Erst wenn Sie einen anklicken, verlassen Sie diese Website.</p>
+    <p>Die Treffer der Recherche und die Bandtitel führen in die Ausgaben auf www.fichteedition.com, schellingedition.com und hegeledition.com; dort gelten deren Datenschutzhinweise. Für die Mitgliedschaft wird auf Ko-fi verwiesen. Es handelt sich um einfache Links: Erst wenn Sie einen anklicken, verlassen Sie diese Website.</p>
   </section>
 
   <section class="legal-section">

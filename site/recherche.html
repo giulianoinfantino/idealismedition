@@ -42,9 +42,9 @@
   </a>
   <nav class="sitenav" aria-label="Hauptnavigation">
     <ul>
-      <li><a href="/#editionen">Editionen</a></li>
+      <li><a href="/#editionen">Ausgaben</a></li>
       <li><a href="recherche" class="current" aria-current="page">Recherche</a></li>
-      <li class="nav-weit"><a href="unterstuetzen">Unterstützen</a></li>
+      <li class="nav-weit"><a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a></li>
     </ul>
   </nav>
 </header>
@@ -54,7 +54,7 @@
   <div class="rch-kopf">
     <div class="rch-titel">
       <h1>Recherche</h1>
-      <p class="rch-unter" id="rch-unter">Volltext von Fichte, Schelling und Hegel · 41 Bände</p>
+      <p class="rch-unter" id="rch-unter">Volltext von Fichte, Schelling und Hegel</p>
     </div>
 
     <form class="rch-feld" id="rch-form" role="search" autocomplete="off">
@@ -188,7 +188,7 @@
     <a href="https://www.fichteedition.com/">Fichte-Edition</a>
     <a href="https://www.schellingedition.com/">Schelling-Edition</a>
     <a href="https://www.hegeledition.com/">Hegel-Edition</a>
-    <a href="unterstuetzen">Unterstützen</a>
+    <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a>
     <a href="datenschutz">Datenschutz</a>
     <a href="impressum">Impressum</a>
   </nav>
@@ -350,7 +350,7 @@
     var lw = letztesWort(), ul = $('rch-vorschlag');
     vorschlagListe = (m.liste || []).filter(function (x) { return !lw || x.form.toLowerCase() !== lw.wort.toLowerCase() || m.liste.length > 1; });
     if (!lw || !vorschlagListe.length || document.activeElement !== input) { schliesseVorschlag(); return; }
-    ul.innerHTML = '<li class="kopf" role="presentation">Wörter der Edition</li>' + vorschlagListe.map(function (x, i) {
+    ul.innerHTML = '<li class="kopf" role="presentation">Wörter der Ausgabe</li>' + vorschlagListe.map(function (x, i) {
       return '<li role="option" id="rv-' + i + '" data-i="' + i + '" aria-selected="false"><span>' + esc(x.form) + '</span><span class="n">' + zahl(x.n) + '</span></li>';
     }).join('');
     ul.hidden = false; input.setAttribute('aria-expanded', 'true');
@@ -635,7 +635,7 @@
     results.innerHTML = '';
     if (S.ansicht === 'stellen') { stellenGeladen = 0; gruppenOffen = letzteAntwort.gruppen.slice(); fordereStellen(); }
     else if (S.ansicht === 'konkordanz') { kwicGeladen = 0; baueKwicRahmen(); fordereKwic(); }
-    else if (S.ansicht === 'vergleich') { results.innerHTML = '<p class="qv-warte">Die drei Editionen werden verglichen …</p>'; worker.postMessage({ typ: 'vergleich', id: anfrage }); }
+    else if (S.ansicht === 'vergleich') { results.innerHTML = '<p class="qv-warte">Die drei Ausgaben werden verglichen …</p>'; worker.postMessage({ typ: 'vergleich', id: anfrage }); }
     else zeichneVerteilung();
   }
 

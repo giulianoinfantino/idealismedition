@@ -12,7 +12,7 @@
   function vergleich(m, ziel) {
     var c = C(), esc = c.esc, zahl = c.zahl;
     var max = Math.max.apply(null, m.editionen.map(function (e) { return e.dichte; }).concat([0.0001]));
-    ziel.innerHTML = '<div class="qv-kopf"><p>Wie oft und in welchem Umfeld die drei das Gesuchte gebrauchen. Die Häufigkeit ist an der Länge jeder Edition gemessen; das Begriffsumfeld sind die Wörter, die in der Nähe der Stellen deutlich öfter stehen als sonst bei diesem Autor.</p></div>' +
+    ziel.innerHTML = '<div class="qv-kopf"><p>Wie oft und in welchem Umfeld die drei das Gesuchte gebrauchen. Die Häufigkeit ist an der Länge jeder Ausgabe gemessen; das Begriffsumfeld sind die Wörter, die in der Nähe der Stellen deutlich öfter stehen als sonst bei diesem Autor.</p></div>' +
       '<div class="qv">' + m.editionen.map(function (e) {
         var leer = !e.stellen;
         return '<section class="qv-spalte' + (leer ? ' qv-leer' : '') + '">' +
@@ -62,7 +62,7 @@
     if (!feld || !c) return;
     var d = m.daten, zahl = c.zahl;
     function zelle(n, anfrage, ed, gleich) {
-      if (gleich) return '<td class="qb-gleich" aria-label="dieselbe Edition">—</td>';
+      if (gleich) return '<td class="qb-gleich" aria-label="dieselbe Ausgabe">—</td>';
       return '<td>' + (n ? '<button type="button" data-qb-q="' + anfrage + '" data-qb-ed="' + ed + '">' + zahl(n) + '</button>' : '<span class="qb-null">0</span>') + '</td>';
     }
     var kopf = '<tr><th></th>' + d.editionen.map(function (ed) { return '<th scope="col">bei ' + NAME[ed] + '</th>'; }).join('') + '</tr>';

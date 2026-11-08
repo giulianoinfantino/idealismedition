@@ -20,7 +20,7 @@ def ers(alt, neu, n=1):
 
 
 # ── Kopf ─────────────────────────────────────────────────────────────────
-ers('<title>Recherche — Schelling Digitale Edition</title>', '<title>Recherche · Edition Deutscher Idealismus</title>')
+ers('<title>Recherche — Digitale Schelling-Edition</title>', '<title>Recherche · Edition Deutscher Idealismus</title>')
 ers('content="Volltextsuche über Schellings Werke nach dem Text der Sämmtlichen Werke: zitiert bis zur Druckzeile, mit Konkordanz, Verteilung über die Bände, Phrasen, Nähe und Orthographie-Ausgleich."',
     'content="Eine Volltextsuche über die Werke Schellings und Hegels: zitiert bis zur Druckzeile, mit Konkordanz, Verteilung über die Bände, Phrasen, Nähe und Orthographie-Ausgleich."')
 ers('https://www.schellingedition.com/search.html', 'https://www.idealismedition.com/recherche', 2)
@@ -35,10 +35,11 @@ ers('<a href="index.html" class="site-title" aria-label="Digitale Schelling-Edit
 ers('<span class="site-title-hegel">SCHELLING</span>', '<span class="site-title-hegel">IDEALISMUS</span>')
 ers('''      <li><a href="index.html">Sammlung</a></li>
       <li><a href="text.html">Lektüre</a></li>
-      <li><a href="search.html" class="current" aria-current="page">Recherche</a></li>''',
-    '''      <li><a href="/#editionen">Editionen</a></li>
+      <li><a href="search.html" class="current" aria-current="page">Recherche</a></li>
+      <li class="nav-weit"><a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a></li>''',
+    '''      <li><a href="/#editionen">Ausgaben</a></li>
       <li><a href="recherche" class="current" aria-current="page">Recherche</a></li>
-      <li class="nav-weit"><a href="unterstuetzen">Unterstützen</a></li>''')
+      <li class="nav-weit"><a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a></li>''')
 
 # ── Feld und Hilfe ───────────────────────────────────────────────────────
 ers('>Anmerkungen des Drucks <span class="n"></span></button>', '>Anmerkungen <span class="n"></span></button>')
@@ -56,10 +57,11 @@ ers('„und“, „oder“, „nicht“ in Kleinbuchstaben sind Wörter.</p>',
     '„und“, „oder“, „nicht“ in Kleinbuchstaben sind Wörter. Bei Hegel wird nur Hegels Text durchsucht, nie der Apparat der Herausgeber.</p>')
 
 # ── Fuss und Skripte ─────────────────────────────────────────────────────
-ers('''  <div>Digitale Schelling-Edition · Forschungsportal</div>
+ers('''  <div>Digitale Schelling-Edition</div>
   <nav>
+    <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a>
     <a href="neuigkeiten.html">Neuigkeiten</a>
-    <a href="editionsrichtlinien.html">Editionsrichtlinien</a>
+    <a href="editionsrichtlinien.html">Richtlinien</a>
     <a href="urheberrecht.html">Urheberrecht</a>
     <a href="datenschutz.html">Datenschutz</a>
     <a href="impressum.html">Impressum</a>
@@ -69,7 +71,7 @@ ers('''  <div>Digitale Schelling-Edition · Forschungsportal</div>
     <a href="https://www.fichteedition.com/">Fichte-Edition</a>
     <a href="https://www.schellingedition.com/">Schelling-Edition</a>
     <a href="https://www.hegeledition.com/">Hegel-Edition</a>
-    <a href="unterstuetzen">Unterstützen</a>
+    <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a>
     <a href="datenschutz">Datenschutz</a>
     <a href="impressum">Impressum</a>
   </nav>''')
@@ -154,7 +156,7 @@ ers("    } else if (m.typ === 'fehler') {",
     "    } else if (m.typ === 'vergleich') {\n      if (m.id === anfrage && S.ansicht === 'vergleich') Quer.vergleich(m, results);\n    } else if (m.typ === 'parallel') {\n      if (m.id === anfrage) Quer.parallel(m, results);\n    } else if (m.typ === 'bezuege') {\n      Quer.bezuege(m);\n    } else if (m.typ === 'fehler') {")
 ers("S.ansicht = ['stellen', 'konkordanz', 'verteilung'].indexOf(p.get('ansicht')) >= 0", "S.ansicht = ['stellen', 'konkordanz', 'verteilung', 'vergleich'].indexOf(p.get('ansicht')) >= 0")
 ers("    else zeichneVerteilung();",
-    "    else if (S.ansicht === 'vergleich') { results.innerHTML = '<p class=\"qv-warte\">Die drei Editionen werden verglichen …</p>'; worker.postMessage({ typ: 'vergleich', id: anfrage }); }\n    else zeichneVerteilung();")
+    "    else if (S.ansicht === 'vergleich') { results.innerHTML = '<p class=\"qv-warte\">Die drei Ausgaben werden verglichen …</p>'; worker.postMessage({ typ: 'vergleich', id: anfrage }); }\n    else zeichneVerteilung();")
 ers("""'">Lesefassung</a></div>' +""", """'">Lesefassung</a><button type="button" class="qp-knopf" data-parallel="' + s.i + '" title="Ähnliche Stellen bei Fichte, Schelling und Hegel">Parallelstellen</button></div>' +""")
 ers("    else if (e.key === '3') setzeAnsicht('verteilung');", "    else if (e.key === '3') setzeAnsicht('verteilung');\n    else if (e.key === '4') setzeAnsicht('vergleich');")
 ers("  var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };", """  // Querverweise: was recherche-quer.js von der Seite braucht
