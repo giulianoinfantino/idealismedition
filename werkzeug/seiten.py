@@ -256,12 +256,18 @@ seite('privacy.html', 'Datenschutz', '''
   </section>
 
   <section class="legal-section">
-    <h2>4. Verweise auf andere Websites</h2>
+    <h2>4. Rückmeldungen</h2>
+    <p>Über den Link „Rückmeldung“ im Fuß jeder Seite und „Fehler melden“ im Leser können Sie uns schreiben. Übermittelt wird nur, wenn Sie auf „Senden“ klicken: Ihre Nachricht, eine freiwillige E-Mail-Adresse für eine Antwort, die Seite und gegebenenfalls die Textstelle, auf die sich die Nachricht bezieht, und die Sprache der Seite; keine IP-Adresse und keine Kennung.</p>
+    <p>Die Nachricht geht über eine Funktion der Website www.idealismedition.com (betrieben bei Vercel Inc.) an GitHub (GitHub, Inc., USA) und wird dort als Eintrag in einem nicht öffentlichen Verzeichnis gespeichert, das nur der Verantwortliche einsehen kann. GitHub nimmt am EU-US Data Privacy Framework teil. Die Angaben dienen allein der Bearbeitung Ihres Hinweises und werden gelöscht, sobald er erledigt ist, spätestens nach zwei Jahren. Rechtsgrundlage ist Ihre Einwilligung durch das Senden (Art. 6 Abs. 1 lit. a DSGVO); Sie können jederzeit die Löschung verlangen.</p>
+  </section>
+
+  <section class="legal-section">
+    <h2>5. Verweise auf andere Websites</h2>
     <p>Die Treffer der Recherche und die Bandtitel führen in die Ausgaben auf www.fichteedition.com, schellingedition.com und hegeledition.com; dort gelten deren Datenschutzhinweise. Für die Mitgliedschaft wird auf Ko-fi verwiesen. Es handelt sich um einfache Links: Erst wenn Sie einen anklicken, verlassen Sie diese Website.</p>
   </section>
 
   <section class="legal-section">
-    <h2>5. Ihre Rechte</h2>
+    <h2>6. Ihre Rechte</h2>
     <p>Sie haben im Rahmen der gesetzlichen Bestimmungen das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie auf Beschwerde bei einer Datenschutzaufsichtsbehörde. Fragen richten Sie bitte an giulianoinfantino[at]icloud.com.</p>
   </section>
 </main>''')

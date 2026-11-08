@@ -138,3 +138,6 @@
     },
   };
 })();
+
+/* Rückmeldung (assets/rueckmeldung.js, seit 08.11.2026): Fußlink und Formular auf jeder Seite, die diese Datei lädt */
+(function () { var s = document.createElement('script'); s.src = '/assets/rueckmeldung.js'; s.async = true; document.head.appendChild(s); })();
