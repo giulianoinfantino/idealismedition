@@ -15,6 +15,11 @@
 const TEAM = 'team_4OooSwx5VknXGD0Nn2LAi83y';
 const PROJEKT = 'prj_h4lATLWuIDsDvUyf21sYDpcZgnjz';   // idealismedition
 const TAGE = 30;
+// Web Analytics zaehlt erst seit dem Abend des 8.11.2026. Fuer die Tage bis dahin zaehlt die Grafik aus den
+// Server-Protokollen: verschiedene Adressen, die Seiten (text/html, 200) abgerufen haben, ohne erkannte Bots.
+// Die Protokolle reichen nur kurz zurueck; der am 8.11. abends gezogene Wert steht darum fest darunter.
+const PROTOKOLL_BIS = '2026-11-08';
+const PROTOKOLL_STAND = { '2026-11-08': 102 };
 
 // Die 30 Tage bis einschliesslich heute (UTC), als "JJJJ-MM-TT".
 function tage() {
@@ -58,6 +63,27 @@ async function websiteBesucher(liste) {
   return liste.map(t => jeTag[t] || 0);
 }
 
+async function protokollBesucher(tag) {
+  const token = process.env.VERCEL_API_TOKEN;
+  const ende = new Date(`${tag}T00:00:00.000Z`); ende.setUTCDate(ende.getUTCDate() + 1);
+  const r = await fetch(`https://api.vercel.com/v2/observability/query?teamId=${TEAM}`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      scope: { type: 'project', ownerId: TEAM, projectIds: [PROJEKT] },
+      metric: 'vercel.request.count', aggregation: 'sum',
+      startTime: `${tag}T00:00:00.000Z`, endTime: ende.toISOString(), granularity: { days: 1 },
+      groupBy: ['client_ip', 'bot_category'],
+      filter: "content_type eq 'text/html; charset=utf-8' and http_status eq 200", limit: 500
+    })
+  });
+  if (!r.ok) return 0;
+  const a = await r.json();
+  const ips = new Set();
+  for (const z of a.data || []) if ((z.vercel_request_count_sum || 0) > 0 && !z.bot_category) ips.add(z.client_ip);
+  return ips.size;   // nur die Zahl; Adressen werden nicht gespeichert
+}
+
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=86400');
   const liste = tage();
@@ -65,6 +91,11 @@ module.exports = async (req, res) => {
   if (!web) {
     res.status(200).json({ available: false });
     return;
+  }
+  for (let i = 0; i < liste.length; i++) {
+    if (!(liste[i] in PROTOKOLL_STAND)) continue;   // nur die Tage vor dem Start der Messung
+    const live = await protokollBesucher(liste[i]).catch(() => 0);
+    web[i] = Math.max(web[i], live, PROTOKOLL_STAND[liste[i]] || 0);
   }
   res.status(200).json({
     available: true,
