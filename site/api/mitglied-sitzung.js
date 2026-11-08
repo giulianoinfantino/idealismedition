@@ -11,6 +11,9 @@ module.exports = async (req, res) => {
   const stufe = STUFEN[d && d.stufe] ? d.stufe : null;
   if (!stufe) return res.status(400).json({ ok: false, grund: 'stufe' });
   const en = d.sprache === 'en', s = STUFEN[stufe];
+  // Zurück auf die Seite, von der der Aufruf kam: www.idealismedition.com, oder eine Vorschau auf vercel.app (Testkauf)
+  const host = String(req.headers['x-forwarded-host'] || req.headers.host || '');
+  const basis = /^[a-z0-9-]+\.vercel\.app$/.test(host) ? 'https://' + host : 'https://www.idealismedition.com';
   if (!process.env.STRIPE_PUBLISHABLE_KEY) return res.status(503).json({ ok: false, grund: 'nicht eingerichtet' });
   try {
     const preisId = await preis(stufe);
@@ -18,7 +21,7 @@ module.exports = async (req, res) => {
       ui_mode: 'embedded',
       mode: 'subscription',
       locale: en ? 'en' : 'de',
-      return_url: `https://www.idealismedition.com${en ? '' : '/de'}/support?danke={CHECKOUT_SESSION_ID}`,
+      return_url: `${basis}${en ? '' : '/de'}/support?danke={CHECKOUT_SESSION_ID}`,
       'line_items[0][quantity]': '1',
       'line_items[0][price]': preisId,
       'custom_fields[0][key]': 'friends',
