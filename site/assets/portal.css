@@ -4,6 +4,9 @@
 
 .p{max-width:52rem;margin:0 auto;padding:calc(var(--header-h) + clamp(2.5rem,9vh,6rem)) 1.25rem clamp(3rem,8vh,5rem);text-align:center}
 .p h1{font-family:var(--font-display);font-weight:400;font-size:clamp(2rem,4vw,2.7rem);line-height:1.1;color:var(--text-ink)}
+.p-von{margin:.45rem auto 0;font-size:.88rem;color:var(--text-muted)}
+.p-von a{color:var(--text-ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+.p-von a:hover{text-decoration-color:var(--accent-gold)}
 .p-unter{margin:.7rem auto 0;max-width:36rem;font-size:.95rem;line-height:1.6;color:var(--text-muted)}
 
 .p-drei{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,4vw,2.5rem);max-width:40rem;margin:clamp(2.5rem,7vh,4rem) auto 0}

@@ -2,6 +2,11 @@
 """Übersetzungen für den Auftakt der Startseiten eintragen (nur offene Einträge).  auftakt_en.py <repo>"""
 import json, pathlib, re, sys
 ERS = [
+    (r'^eingerichtet von (<a href="https://giulianoinfantino\.com" rel="me">Giuliano Infantino</a>)$', r'Prepared by \1'),
+    (r'^Von (<a href="https://giulianoinfantino\.com" rel="me">Giuliano Infantino</a>)$', r'Created by \1'),
+    (r'^Digitale Ausgabe nach dem Text der <em>Sämmtlichen und Nachgelassenen Werke</em>$', 'Digital edition based on the text of the <em>Sämmtliche und Nachgelassene Werke</em>'),
+    (r'^Digitale Ausgabe nach dem Text der <em>Sämmtlichen Werke</em>$', 'Digital edition based on the text of the <em>Sämmtliche Werke</em>'),
+    (r'^Digitale Ausgabe nach dem Text der <em>Gesammelten Werke</em>$', 'Digital edition based on the text of the <em>Gesammelte Werke</em>'),
     (r'(https://www\.(?:idealism|fichte|schelling|hegel)edition\.com)/de/', r'\1/'),
     (r'Digitale Ausgabe nach dem Text der <em>Sämmtlichen und Nachgelassenen Werke</em>, eingerichtet von Giuliano Infantino',
      'Digital edition based on the text of the <em>Sämmtliche und Nachgelassene Werke</em>, prepared by Giuliano Infantino'),

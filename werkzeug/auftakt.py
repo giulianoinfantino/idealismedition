@@ -37,7 +37,8 @@ def main(site, wer):
     </picture>
     <h1 id="st-titel" class="st-person-name"><span class="st-person-vor">{p['vor']}</span> {p['name']}</h1>
     <p class="st-person-leben">{p['leben']}</p>
-    <p class="st-person-ausgabe">Digitale Ausgabe nach dem Text der <em>{p['werk']}</em>, eingerichtet von Giuliano Infantino</p>
+    <p class="st-person-ausgabe">Digitale Ausgabe nach dem Text der <em>{p['werk']}</em></p>
+    <p class="st-person-von">eingerichtet von <a href="https://giulianoinfantino.com" rel="me">Giuliano Infantino</a></p>
     <p class="st-person-wege"><a href="text.html">Lesen</a> · <a href="search.html">Recherche</a></p>''' + (f'''
     <a class="st-neu st-neu-klein" href="{neu_m.group(1)}"><span class="st-neu-marke">{neu_m.group(2)}</span><span class="st-neu-text">{neu_m.group(3)}</span><span class="st-neu-pfeil" aria-hidden="true">→</span></a>''' if neu_m else '') + f'''
   </div>
