@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""recherche.html aus der Suchseite der Schelling-Edition ableiten (beide Editionen haben dieselbe Suchseite).
+"""search.html aus der Suchseite der Schelling-Edition ableiten (beide Editionen haben dieselbe Suchseite).
 
 Die Suchseite der Editionen bleibt die Quelle; hier wird nur ersetzt, was das Portal anders braucht:
 Kopf und Fuss, Bandliste nach Editionen, Links in die Edition, aus der eine Stelle stammt.
@@ -8,7 +8,7 @@ Kopf und Fuss, Bandliste nach Editionen, Links in die Edition, aus der eine Stel
 import pathlib, sys
 
 QUELLE = pathlib.Path.home() / 'schelling/site/de/search.html'   # deutsche Seiten liegen seit der englischen Fassung unter de/
-ZIEL = pathlib.Path.home() / 'idealismus/site/de/recherche.html'
+ZIEL = pathlib.Path.home() / 'idealismus/site/de/search.html'
 t = QUELLE.read_text(encoding='utf-8')
 
 
@@ -38,8 +38,8 @@ ers('''      <li><a href="index.html">Sammlung</a></li>
       <li><a href="search.html" class="current" aria-current="page">Recherche</a></li>
       <li class="nav-weit"><a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a></li>''',
     '''      <li><a href="/#editionen">Ausgaben</a></li>
-      <li><a href="recherche" class="current" aria-current="page">Recherche</a></li>
-      <li class="nav-weit"><a href="/unterstuetzen">Unterstützen</a></li>''')
+      <li><a href="search" class="current" aria-current="page">Recherche</a></li>
+      <li class="nav-weit"><a href="/support">Unterstützen</a></li>''')
 
 # ── Feld und Hilfe ───────────────────────────────────────────────────────
 ers('>Anmerkungen des Drucks <span class="n"></span></button>', '>Anmerkungen <span class="n"></span></button>')
@@ -60,27 +60,27 @@ ers('„und“, „oder“, „nicht“ in Kleinbuchstaben sind Wörter.</p>',
 ers('''  <div>Digitale Schelling-Edition</div>
   <nav>
     <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a>
-    <a href="neuigkeiten.html">Neuigkeiten</a>
-    <a href="editionsrichtlinien.html">Richtlinien</a>
-    <a href="urheberrecht.html">Urheberrecht</a>
-    <a href="datenschutz.html">Datenschutz</a>
-    <a href="impressum.html">Impressum</a>
+    <a href="news.html">Neuigkeiten</a>
+    <a href="guidelines.html">Richtlinien</a>
+    <a href="copyright.html">Urheberrecht</a>
+    <a href="privacy.html">Datenschutz</a>
+    <a href="legal-notice.html">Impressum</a>
   </nav>''',
     '''  <div>Edition Deutscher Idealismus · Fichte, Schelling, Hegel</div>
   <nav>
     <a href="https://www.fichteedition.com/">Fichte-Edition</a>
     <a href="https://www.schellingedition.com/">Schelling-Edition</a>
     <a href="https://www.hegeledition.com/">Hegel-Edition</a>
-    <a href="/unterstuetzen">Unterstützen</a>
-    <a href="datenschutz">Datenschutz</a>
-    <a href="impressum">Impressum</a>
+    <a href="/support">Unterstützen</a>
+    <a href="privacy">Datenschutz</a>
+    <a href="legal-notice">Impressum</a>
   </nav>''')
 ers('<script src="assets/edition-data.js"></script>', '<script src="assets/baende.js"></script>')
 ers('''<script>if("serviceWorker"in navigator)navigator.serviceWorker.register("/sw.js")</script>
 <script src="assets/auswahl.js" defer></script>
 <script src="assets/kopieren.js" defer></script>
 <script src="assets/cookie-notice.js" defer></script>
-<!-- Reichweitenmessung: cookielos, ohne dauerhafte Kennung. Siehe datenschutz.html -->
+<!-- Reichweitenmessung: cookielos, ohne dauerhafte Kennung. Siehe privacy.html -->
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>''',
     '<script src="assets/auswahl.js" defer></script>')
@@ -185,8 +185,8 @@ ers('        <div id="rch-zuletzt-feld" hidden>', '        <div class="qb-feld" 
 ers('<script src="assets/recherche-kern.js"></script>', '<script src="assets/recherche-kern.js"></script>\n<script src="assets/recherche-quer.js"></script>')
 
 # Was nach dem Ersetzen nicht mehr vorkommen darf: Seiten der Edition, die es im Portal nicht gibt
-for rest in ('search.html', 'index.html', 'text.html', 'neuigkeiten.html', 'edition-data', 'Gesammelten Werke'):
+for rest in ('search.html', 'index.html', 'text.html', 'news.html', 'edition-data', 'Gesammelten Werke'):
     if rest in t:
         sys.exit(f'übrig: {rest}')
 ZIEL.write_text(t, encoding='utf-8')
-print('recherche.html geschrieben')
+print('search.html geschrieben')

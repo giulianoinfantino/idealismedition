@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8">
-  <script>/*sprache*/try{if(localStorage.getItem('sprache')==='de'&&!/[?&]en\b/.test(location.search))location.replace('/de'+(location.pathname==='/'?'/':location.pathname)+location.search+location.hash)}catch(e){}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <link rel="alternate" hreflang="en" href="https://www.idealismedition.com/recherche">
-  <link rel="alternate" hreflang="de" href="https://www.idealismedition.com/de/recherche">
-  <link rel="alternate" hreflang="x-default" href="https://www.idealismedition.com/recherche">
-  <title>Search · Edition Deutscher Idealismus</title>
-  <meta name="description" content="A full-text search across the works of Schelling and Hegel: cited to the printed line, with concordance, distribution across the volumes, phrases, proximity, and spelling normalization.">
-  <link rel="canonical" href="https://www.idealismedition.com/recherche">
+  <link rel="alternate" hreflang="en" href="https://www.idealismedition.com/search">
+  <link rel="alternate" hreflang="de" href="https://www.idealismedition.com/de/search">
+  <link rel="alternate" hreflang="x-default" href="https://www.idealismedition.com/search">
+  <title>Recherche · Edition Deutscher Idealismus</title>
+  <meta name="description" content="Eine Volltextsuche über die Werke Schellings und Hegels: zitiert bis zur Druckzeile, mit Konkordanz, Verteilung über die Bände, Phrasen, Nähe und Orthographie-Ausgleich.">
+  <link rel="canonical" href="https://www.idealismedition.com/de/search">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Search · Edition Deutscher Idealismus">
-  <meta property="og:description" content="A full-text search across Schelling and Hegel: cited to the line, with concordance and distribution.">
+  <meta property="og:title" content="Recherche · Edition Deutscher Idealismus">
+  <meta property="og:description" content="Eine Volltextsuche über Schelling und Hegel: zitiert bis zur Zeile, mit Konkordanz und Verteilung.">
   <meta property="og:url" content="https://www.idealismedition.com/recherche">
   <meta property="og:image" content="https://www.idealismedition.com/assets/og.png">
   <meta property="og:image:width" content="1200">
@@ -29,46 +28,50 @@
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/recherche.css">
   <link rel="stylesheet" href="assets/recherche-portal.css">
-  <script src="assets/en/nur-eines.js"></script>
-<script src="assets/en/themefarbe.js"></script>
+  <script src="assets/nur-eines.js"></script>
+<script src="assets/themefarbe.js"></script>
 </head>
 <body class="search-page recherche rch-ruhe">
 
-<a href="#search-input" class="skip-link">Skip to search</a>
+<a href="#search-input" class="skip-link">Zur Suche springen</a>
 
 <header class="site-header" id="site-header" role="banner">
-  <a href="/" class="site-title" aria-label="Edition Deutscher Idealismus, home page">
+  <a href="/de/" class="site-title" aria-label="Edition Deutscher Idealismus, Startseite">
     <svg class="ringe-mark site-title-rings" viewBox="0 0 200 120" aria-hidden="true"><circle class="ring ring-a" cx="100" cy="44" r="34" vector-effect="non-scaling-stroke"/><circle class="ring ring-b" cx="80" cy="72" r="34" vector-effect="non-scaling-stroke"/><circle class="ring ring-c" cx="120" cy="72" r="34" vector-effect="non-scaling-stroke"/></svg>
-    <span class="site-title-rows"> <span class="site-title-hegel">IDEALISMUS</span> <span class="site-title-edition">edition</span> </span> </a>
-  <nav class="sitenav" aria-label="Main navigation">
+    <span class="site-title-rows">
+      <span class="site-title-hegel">IDEALISMUS</span>
+      <span class="site-title-edition">edition</span>
+    </span>
+  </a>
+  <nav class="sitenav" aria-label="Hauptnavigation">
     <ul>
-      <li><a href="/#editionen">Editions</a></li>
-      <li><a href="recherche" class="current" aria-current="page">Search</a></li>
-      <li class="nav-weit"><a href="/unterstuetzen">Support</a></li>
+      <li><a href="/de/#editionen">Ausgaben</a></li>
+      <li><a href="search" class="current" aria-current="page">Recherche</a></li>
+      <li class="nav-weit"><a href="/de/support">Unterstützen</a></li>
     </ul>
   </nav>
-  <div class="kopf-rechts"><a class="sprache-schalter" href="/de/recherche" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsche Fassung" onclick="try{localStorage.setItem('sprache','de')}catch(e){};this.href='/de'+(location.pathname==='/'?'/':location.pathname)+location.search+location.hash">DE</a></div>
+  <div class="kopf-rechts"><a class="sprache-schalter" href="/search?en" hreflang="en" lang="en" title="English" aria-label="English version" onclick="try{localStorage.setItem('sprache','en')}catch(e){};this.href=location.pathname.replace(/^\/de/,'')+location.search+location.hash">EN</a></div>
 </header>
 
 <main class="rch" id="search-main">
 
   <div class="rch-kopf">
     <div class="rch-titel">
-      <h1>Search</h1>
-      <p class="rch-unter" id="rch-unter">Full text of Fichte, Schelling, and Hegel · 41 volumes</p>
+      <h1>Recherche</h1>
+      <p class="rch-unter" id="rch-unter">Volltext von Fichte, Schelling und Hegel · 41 Bände</p>
     </div>
 
     <form class="rch-feld" id="rch-form" role="search" autocomplete="off">
       <div class="rch-eingabe" id="rch-eingabe">
         <div class="rch-spiegel" id="rch-spiegel" aria-hidden="true"></div>
         <input type="text" id="search-input" name="q" spellcheck="false" autocapitalize="off" autocorrect="off"
-               placeholder="Word, phrase, or expression · key /"
-               aria-label="Search query" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="rch-vorschlag"
-               title="Keyboard shortcut: “/” jumps here from anywhere on the page">
+               placeholder="Wort, Wendung oder Ausdruck  ·  Taste /"
+               aria-label="Suchanfrage" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="rch-vorschlag"
+               title="Tastenkürzel: „/“ springt von überall auf der Seite hierher">
         <kbd class="rch-taste" aria-hidden="true">/</kbd>
       </div>
-      <button type="submit" class="rch-los">Search</button>
-      <ul class="rch-vorschlag" id="rch-vorschlag" role="listbox" aria-label="Suggestions" hidden></ul>
+      <button type="submit" class="rch-los">Suchen</button>
+      <ul class="rch-vorschlag" id="rch-vorschlag" role="listbox" aria-label="Vorschläge" hidden></ul>
     </form>
 
     <p class="rch-lesart" id="rch-lesart" aria-live="polite"></p>
@@ -76,103 +79,105 @@
     <div class="rch-formen" id="rch-formen" hidden></div>
 
     <div class="rch-leiste">
-      <div class="rch-arten" role="group" aria-label="Search in">
-        <span class="rch-leiste-lab" aria-hidden="true">Search in</span>
-        <button type="button" class="rch-chip" data-art="t" aria-pressed="true">Main text <span class="n"></span></button>
-        <button type="button" class="rch-chip" data-art="n" aria-pressed="true">Notes <span class="n"></span></button>
-        <button type="button" class="rch-chip" data-art="h" aria-pressed="true">Headings <span class="n"></span></button>
+      <div class="rch-arten" role="group" aria-label="Suchen in">
+        <span class="rch-leiste-lab" aria-hidden="true">Suchen in</span>
+        <button type="button" class="rch-chip" data-art="t" aria-pressed="true">Haupttext <span class="n"></span></button>
+        <button type="button" class="rch-chip" data-art="n" aria-pressed="true">Anmerkungen <span class="n"></span></button>
+        <button type="button" class="rch-chip" data-art="h" aria-pressed="true">Überschriften <span class="n"></span></button>
       </div>
-      <button type="button" class="rch-baende-knopf" id="rch-baende-knopf" aria-expanded="false" aria-controls="rch-baende">All volumes</button>
-      <div class="rch-ansichten" role="tablist" aria-label="View">
-        <button type="button" role="tab" id="tab-stellen" data-ansicht="stellen" aria-selected="true" aria-controls="search-results">Passages<span class="kz">1</span></button>
-        <button type="button" role="tab" id="tab-konkordanz" data-ansicht="konkordanz" aria-selected="false" aria-controls="search-results">Concordance<span class="kz">2</span></button>
-        <button type="button" role="tab" id="tab-verteilung" data-ansicht="verteilung" aria-selected="false" aria-controls="search-results">Distribution<span class="kz">3</span></button>
-        <button type="button" role="tab" id="tab-vergleich" data-ansicht="vergleich" aria-selected="false" aria-controls="search-results">Comparison<span class="kz">4</span></button>
+      <button type="button" class="rch-baende-knopf" id="rch-baende-knopf" aria-expanded="false" aria-controls="rch-baende">Alle Bände</button>
+      <div class="rch-ansichten" role="tablist" aria-label="Ansicht">
+        <button type="button" role="tab" id="tab-stellen" data-ansicht="stellen" aria-selected="true" aria-controls="search-results">Stellen<span class="kz">1</span></button>
+        <button type="button" role="tab" id="tab-konkordanz" data-ansicht="konkordanz" aria-selected="false" aria-controls="search-results">Konkordanz<span class="kz">2</span></button>
+        <button type="button" role="tab" id="tab-verteilung" data-ansicht="verteilung" aria-selected="false" aria-controls="search-results">Verteilung<span class="kz">3</span></button>
+        <button type="button" role="tab" id="tab-vergleich" data-ansicht="vergleich" aria-selected="false" aria-controls="search-results">Vergleich<span class="kz">4</span></button>
       </div>
     </div>
   </div>
 
   <div class="rch-status">
-    <span id="search-status" aria-live="polite">The volumes are loaded as soon as you enter the search field.</span> <span class="rch-aktionen" id="rch-aktionen" hidden> <span id="rch-seitenfilter"></span>
-      <label>Sort
-        <select id="rch-ordnung" aria-label="Order of passages">
-          <option value="werk">by work</option>
-          <option value="dichte">by hit density</option>
+    <span id="search-status" aria-live="polite">Die Bände werden geladen, sobald Sie ins Suchfeld gehen.</span>
+    <span class="rch-aktionen" id="rch-aktionen" hidden>
+      <span id="rch-seitenfilter"></span>
+      <label>Ordnung
+        <select id="rch-ordnung" aria-label="Ordnung der Stellen">
+          <option value="werk">Werkfolge</option>
+          <option value="dichte">Trefferdichte</option>
         </select>
       </label>
-      <button type="button" id="rch-zitate" title="Copy all passages to the clipboard as citation lines">Copy citations</button>
-      <button type="button" id="rch-csv" title="Save as table (CSV, for Excel and LibreOffice)">CSV</button>
+      <button type="button" id="rch-zitate" title="Alle Stellen als Zitatzeilen in die Zwischenablage">Zitate kopieren</button>
+      <button type="button" id="rch-csv" title="Als Tabelle speichern (CSV, für Excel und LibreOffice)">CSV</button>
     </span>
   </div>
   <div class="rch-laden" id="rch-laden" hidden><i></i></div>
 
   <div class="rch-koerper">
     <details class="rch-baende" id="rch-baende" open>
-      <summary id="rch-baende-summary">Volumes</summary>
-      <div class="kopf"><span>Volumes</span><button type="button" id="rch-alle" hidden>all</button></div>
+      <summary id="rch-baende-summary">Bände</summary>
+      <div class="kopf"><span>Bände</span><button type="button" id="rch-alle" hidden>alle</button></div>
       <div class="rch-baende-liste" id="rch-baende-liste"></div>
     </details>
 
     <section class="rch-ergebnis" id="search-results" role="tabpanel" aria-labelledby="tab-stellen" tabindex="-1">
       <div class="rch-hilfe" id="search-guide">
         <div>
-          <h2>For example</h2>
+          <h2>Zum Beispiel</h2>
           <div class="rch-beispiele">
-            <button type="button" data-q="&quot;intellectuelle Anschauung&quot;" title="exact word sequence">„intellectuelle Anschauung“</button>
-            <button type="button" data-q="Indifferenz" title="one word, in all spellings">Indifferenz</button>
-            <button type="button" data-q="Nicht-Ich" title="one word">Nicht-Ich</button>
-            <button type="button" data-q="Schöpfung NEAR/8 Freiheit" title="Proximity">Schöpfung NEAR/8 Freiheit</button>
-            <button type="button" data-q="*seyn" title="Word ending: Daseyn, Fürsichseyn …">*seyn</button>
+            <button type="button" data-q="&quot;intellectuelle Anschauung&quot;" title="genaue Wortfolge">„intellectuelle Anschauung“</button>
+            <button type="button" data-q="Indifferenz" title="ein Wort, in allen Schreibungen">Indifferenz</button>
+            <button type="button" data-q="Nicht-Ich" title="ein Wort">Nicht-Ich</button>
+            <button type="button" data-q="Schöpfung NEAR/8 Freiheit" title="Nähe">Schöpfung NEAR/8 Freiheit</button>
+            <button type="button" data-q="*seyn" title="Wortende: Daseyn, Fürsichseyn …">*seyn</button>
           </div>
         </div>
         <div class="qb-feld" id="qb" hidden></div>
         <div id="rch-zuletzt-feld" hidden>
-          <h2>Recent searches</h2>
+          <h2>Zuletzt gesucht</h2>
           <div class="rch-zuletzt" id="rch-zuletzt"></div>
         </div>
         <details class="rch-sprache" id="rch-sprache">
-        <summary>The search language</summary>
+        <summary>Die Suchsprache</summary>
         <div class="rch-syntax">
           <section>
-            <h3>Words</h3>
+            <h3>Wörter</h3>
             <dl>
-              <dt>Seyn</dt><dd>the whole word; the modern spelling is searched as well<i>Sein finds Seyn · Teil finds Theil</i></dd>
-              <dt>=Seyn</dt><dd>only exactly this spelling</dd>
-              <dt>dialekt*</dt><dd>beginning of word<i>Dialektik, dialektisch</i></dd>
-              <dt>*seyn</dt><dd>end of word<i>Daseyn, Fürsichseyn</i></dd>
-              <dt>ver*ung</dt><dd>any letters in the middle; <code>?</code> stands for exactly one</dd>
-              <dt>"…"</dt><dd>exact word sequence, also across a page break</dd>
+              <dt>Seyn</dt><dd>das ganze Wort; die heutige Schreibung wird mitgesucht<i>Sein findet Seyn · Teil findet Theil</i></dd>
+              <dt>=Seyn</dt><dd>nur genau diese Schreibung</dd>
+              <dt>dialekt*</dt><dd>Wortanfang<i>Dialektik, dialektisch</i></dd>
+              <dt>*seyn</dt><dd>Wortende<i>Daseyn, Fürsichseyn</i></dd>
+              <dt>ver*ung</dt><dd>beliebige Buchstaben in der Mitte; <code>?</code> steht für genau einen</dd>
+              <dt>"…"</dt><dd>genaue Wortfolge, auch über den Seitenwechsel</dd>
             </dl>
           </section>
           <section>
-            <h3>Combining</h3>
+            <h3>Verknüpfen</h3>
             <dl>
-              <dt>AND · UND</dt><dd>both words in the same passage; a space is enough</dd>
-              <dt>OR · ODER</dt><dd>at least one</dd>
-              <dt>NOT · NICHT</dt><dd>excludes<i>Maaß NOT Maaßstab</i></dd>
-              <dt>( … )</dt><dd>groups<i>(Begriff OR Idee) AND Urtheil</i></dd>
+              <dt>AND · UND</dt><dd>beide Wörter in derselben Stelle; ein Leerzeichen genügt</dd>
+              <dt>OR · ODER</dt><dd>mindestens eines</dd>
+              <dt>NOT · NICHT</dt><dd>schließt aus<i>Maaß NOT Maaßstab</i></dd>
+              <dt>( … )</dt><dd>gruppiert<i>(Begriff OR Idee) AND Urtheil</i></dd>
             </dl>
           </section>
           <section>
-            <h3>Proximity</h3>
+            <h3>Nähe</h3>
             <dl>
-              <dt>NEAR/n · NAH/n</dt><dd>at most <em>n</em> words apart, in any order</dd>
-              <dt>BEFORE/n · VOR/n</dt><dd>the second word follows the first after at most <em>n</em> words</dd>
-              <dt>SENTENCE · SATZ</dt><dd>both in the same sentence</dd>
+              <dt>NEAR/n · NAH/n</dt><dd>höchstens <em>n</em> Wörter voneinander, in beliebiger Folge</dd>
+              <dt>BEFORE/n · VOR/n</dt><dd>das zweite Wort folgt dem ersten nach höchstens <em>n</em> Wörtern</dd>
+              <dt>SENTENCE · SATZ</dt><dd>beide im selben Satz</dd>
             </dl>
           </section>
           <section>
-            <h3>Keys</h3>
+            <h3>Tasten</h3>
             <dl>
-              <dt>/</dt><dd>to the search field</dd>
-              <dt>j · k</dt><dd>to the next, previous passage</dd>
-              <dt>Enter</dt><dd>open passage in Print layout</dd>
-              <dt>c</dt><dd>copy citation of the passage</dd>
-              <dt>1 · 2 · 3</dt><dd>Passages, Concordance, Distribution</dd>
+              <dt>/</dt><dd>ins Suchfeld</dd>
+              <dt>j · k</dt><dd>zur nächsten, vorigen Stelle</dd>
+              <dt>Enter</dt><dd>Stelle im Druckbild öffnen</dd>
+              <dt>c</dt><dd>Zitat der Stelle kopieren</dd>
+              <dt>1 · 2 · 3</dt><dd>Stellen, Konkordanz, Verteilung</dd>
             </dl>
           </section>
         </div>
-        <p class="rch-unter">Operators apply only in capitals; lowercase “und”, “oder”, “nicht” are treated as words. In Hegel, only Hegel’s text is searched, never the editors’ apparatus.</p>
+        <p class="rch-unter">Operatoren gelten in Großbuchstaben; „und“, „oder“, „nicht“ in Kleinbuchstaben sind Wörter. Bei Hegel wird nur Hegels Text durchsucht, nie der Apparat der Herausgeber.</p>
         </details>
       </div>
     </section>
@@ -184,19 +189,24 @@
 <footer class="site-footer" id="search-footer">
   <div>Edition Deutscher Idealismus · Fichte, Schelling, Hegel</div>
   <nav>
-    <a href="https://www.fichteedition.com/">Fichte Edition</a> <a href="https://www.schellingedition.com/">Schelling Edition</a> <a href="https://www.hegeledition.com/">Hegel Edition</a> <a href="/unterstuetzen">Support</a> <a href="datenschutz">Privacy</a> <a href="impressum">Legal notice</a>
+    <a href="https://www.fichteedition.com/">Fichte-Edition</a>
+    <a href="https://www.schellingedition.com/">Schelling-Edition</a>
+    <a href="https://www.hegeledition.com/">Hegel-Edition</a>
+    <a href="/de/support">Unterstützen</a>
+    <a href="privacy">Datenschutz</a>
+    <a href="legal-notice">Impressum</a>
   </nav>
 </footer>
 
-<script src="assets/en/ortho.js"></script>
+<script src="assets/ortho.js"></script>
 <script src="assets/baende.js"></script>
-<script src="assets/en/recherche-kern.js"></script>
-<script src="assets/en/recherche-quer.js"></script>
+<script src="assets/recherche-kern.js"></script>
+<script src="assets/recherche-quer.js"></script>
 <script>
 (function () {
   'use strict';
   // ══════════════════════════════════════════════════════════════════════
-  //  Recherche — die Seite. Rechnen tut der Worker (assets/en/recherche-worker.js);
+  //  Recherche — die Seite. Rechnen tut der Worker (assets/recherche-worker.js);
   //  hier wird nur gelesen, gezeichnet und verbunden.
   // ══════════════════════════════════════════════════════════════════════
   var H = window.HegelRecherche;
@@ -231,12 +241,12 @@
   function starte() {
     if (ladeStart) return;
     ladeStart = true;
-    try { worker = new Worker('assets/en/recherche-portal-worker.js'); }
-    catch (e) { status.textContent = 'The search requires a browser with Web Workers.'; return; }
+    try { worker = new Worker('assets/recherche-portal-worker.js'); }
+    catch (e) { status.textContent = 'Die Suche braucht einen Browser mit Web Workers.'; return; }
     worker.onmessage = empfange;
-    worker.onerror = function () { status.textContent = 'The search could not be started. Please reload the page.'; };
+    worker.onerror = function () { status.textContent = 'Die Suche konnte nicht gestartet werden. Bitte die Seite neu laden.'; };
     $('rch-laden').hidden = false;
-    status.textContent = 'Loading the volumes …';
+    status.textContent = 'Lade die Bände …';
     worker.postMessage({ typ: 'lade' });
   }
 
@@ -244,15 +254,15 @@
     var m = e.data;
     if (m.typ === 'fortschritt') {
       $('rch-laden').firstElementChild.style.width = (m.fertig / m.gesamt * 100) + '%';
-      status.textContent = 'Loading the volumes … ' + m.fertig + ' of ' + m.gesamt;
+      status.textContent = 'Lade die Bände … ' + m.fertig + ' von ' + m.gesamt;
     } else if (m.typ === 'bereit') {
       bereit = true;
       BANDLISTE = m.baende;
       $('rch-laden').hidden = true;
-      $('rch-unter').textContent = 'Full text of Fichte, Schelling, and Hegel · ' + m.baende.length + ' volumes · ' + zahl(m.woerter) + ' words';
+      $('rch-unter').textContent = 'Volltext von Fichte, Schelling und Hegel · ' + m.baende.length + ' Bände · ' + zahl(m.woerter) + ' Wörter';
       zeichneBaende(null);
       worker.postMessage({ typ: 'bezuege' });
-      if (S.q) suche(false); else status.textContent = 'Bereit. ' + zahl(m.woerter) + ' words in ' + m.baende.length + ' volumes.';
+      if (S.q) suche(false); else status.textContent = 'Bereit. ' + zahl(m.woerter) + ' Wörter in ' + m.baende.length + ' Bänden.';
     } else if (m.typ === 'ergebnis') {
       if (m.id !== anfrage) return;
       zeigeErgebnis(m);
@@ -275,7 +285,7 @@
       Quer.bezuege(m);
     } else if (m.typ === 'fehler') {
       $('rch-laden').hidden = true;
-      status.textContent = 'Error: ' + m.text;
+      status.textContent = 'Fehler: ' + m.text;
     }
   }
 
@@ -293,9 +303,9 @@
     spiegel.innerHTML = out + ' ';
     spiegel.scrollLeft = input.scrollLeft;
     var l = H.lesart(g.ast);
-    $('rch-lesart').innerHTML = q.trim() ? (l ? 'Searched for: ' + esc(l).replace(/„([^“]*)“/g, '“<b>$1</b>”') : '') : '';
+    $('rch-lesart').innerHTML = q.trim() ? (l ? 'Gesucht: ' + esc(l).replace(/„([^“]*)“/g, '„<b>$1</b>“') : '') : '';
     var fe = $('rch-fehler');
-    if (q.trim() && g.fehler.length) { fe.textContent = g.fehler[0].text + (g.ast ? ' Searching for what could be parsed.' : ''); fe.hidden = false; }
+    if (q.trim() && g.fehler.length) { fe.textContent = g.fehler[0].text + (g.ast ? ' Gesucht wird, was sich lesen ließ.' : ''); fe.hidden = false; }
     else fe.hidden = true;
     return g;
   }
@@ -344,7 +354,7 @@
     var lw = letztesWort(), ul = $('rch-vorschlag');
     vorschlagListe = (m.liste || []).filter(function (x) { return !lw || x.form.toLowerCase() !== lw.wort.toLowerCase() || m.liste.length > 1; });
     if (!lw || !vorschlagListe.length || document.activeElement !== input) { schliesseVorschlag(); return; }
-    ul.innerHTML = '<li class="kopf" role="presentation">Words in the edition</li>' + vorschlagListe.map(function (x, i) {
+    ul.innerHTML = '<li class="kopf" role="presentation">Wörter der Ausgabe</li>' + vorschlagListe.map(function (x, i) {
       return '<li role="option" id="rv-' + i + '" data-i="' + i + '" aria-selected="false"><span>' + esc(x.form) + '</span><span class="n">' + zahl(x.n) + '</span></li>';
     }).join('');
     ul.hidden = false; input.setAttribute('aria-expanded', 'true');
@@ -460,7 +470,7 @@
     $('rch-aktionen').hidden = true;
     $('rch-formen').hidden = true;
     document.querySelectorAll('.rch-chip .n').forEach(function (n) { n.textContent = ''; });
-    status.textContent = bereit ? 'Bereit.' : 'The volumes load as soon as you enter the search field.';
+    status.textContent = bereit ? 'Bereit.' : 'Die Bände werden geladen, sobald Sie ins Suchfeld gehen.';
     zeichneBaende(null);
   }
   var hilfe = $('search-guide');
@@ -470,14 +480,14 @@
     if (m.leer) {
       results.innerHTML = '';
       results.appendChild(hilfe);
-      status.textContent = m.fehler && m.fehler.length ? 'The query contains no search term.' : '';
+      status.textContent = m.fehler && m.fehler.length ? 'Die Anfrage enthält kein Suchwort.' : '';
       return;
     }
     var g = m.gesamt;
     status.innerHTML = g.stellen
-      ? '<b>' + zahl(g.stellen) + '</b> ' + (g.stellen === 1 ? 'passage' : 'passages') + ' on ' + zahl(g.seiten) + ' ' + (g.seiten === 1 ? 'page' : 'pages') +
-        ' in ' + g.baende + ' ' + (g.baende === 1 ? 'volume' : 'volumes') + ' · ' + zahl(g.vorkommen) + ' Vorkommen'
-      : 'No passage found.';
+      ? '<b>' + zahl(g.stellen) + '</b> ' + (g.stellen === 1 ? 'Stelle' : 'Stellen') + ' auf ' + zahl(g.seiten) + ' ' + (g.seiten === 1 ? 'Seite' : 'Seiten') +
+        ' in ' + g.baende + ' ' + (g.baende === 1 ? 'Band' : 'Bänden') + ' · ' + zahl(g.vorkommen) + ' Vorkommen'
+      : 'Keine Stelle gefunden.';
     $('rch-aktionen').hidden = !g.stellen;
     document.querySelectorAll('.rch-chip').forEach(function (c) { c.querySelector('.n').textContent = zahl(m.arten[c.dataset.art] || 0); });
     zeichneFormen(m.formen);
@@ -488,12 +498,12 @@
   }
 
   function keineTreffer() {
-    results.innerHTML = '<div class="rch-leer"><p>No passage for <strong>' + esc(S.q) + '</strong>' +
-      (S.baende.length ? ' in the selected volumes' : '') + '.</p><ul>' +
-      '<li>A word means the whole word. For longer forms, try <code>' + esc(S.q.split(/\s+/)[0].replace(/[^\p{L}\p{N}]/gu, '')) + '*</code> versuchen.</li>' +
-      '<li>Historical spellings are searched as well (Sein finds Seyn); typos are not.</li>' +
-      (S.baende.length ? '<li><a href="#" data-aktion="alle">Search in all volumes</a></li>' : '') +
-      (!(S.arten.t && S.arten.n && S.arten.h) ? '<li><a href="#" data-aktion="arten">Also search in notes and headings</a></li>' : '') +
+    results.innerHTML = '<div class="rch-leer"><p>Keine Stelle für <strong>' + esc(S.q) + '</strong>' +
+      (S.baende.length ? ' in den gewählten Bänden' : '') + '.</p><ul>' +
+      '<li>Ein Wort meint das ganze Wort. Für Fortsetzungen <code>' + esc(S.q.split(/\s+/)[0].replace(/[^\p{L}\p{N}]/gu, '')) + '*</code> versuchen.</li>' +
+      '<li>Historische Schreibungen werden mitgesucht (Sein findet Seyn), Tippfehler nicht.</li>' +
+      (S.baende.length ? '<li><a href="#" data-aktion="alle">In allen Bänden suchen</a></li>' : '') +
+      (!(S.arten.t && S.arten.n && S.arten.h) ? '<li><a href="#" data-aktion="arten">Auch in Anmerkungen und Überschriften suchen</a></li>' : '') +
       '</ul></div>';
   }
   results.addEventListener('click', function (e) {
@@ -510,10 +520,10 @@
     var zeigen = (formen || []).filter(function (f) { return f.formen.length > 1 || f.formen.some(function (x) { return x.aus; }); });
     if (!zeigen.length) { feld.hidden = true; feld.innerHTML = ''; return; }
     feld.innerHTML = zeigen.map(function (f) {
-      return '<span class="wofuer">Forms of “' + esc(f.roh) + '”</span>' + f.formen.map(function (x) {
-        return '<button type="button" class="rch-form" data-form="' + esc(x.key) + '" aria-pressed="' + (x.aus ? 'false' : 'true') + '" title="' + (x.aus ? 'include again' : 'exclude this form') + '">' +
+      return '<span class="wofuer">Formen zu „' + esc(f.roh) + '“</span>' + f.formen.map(function (x) {
+        return '<button type="button" class="rch-form" data-form="' + esc(x.key) + '" aria-pressed="' + (x.aus ? 'false' : 'true') + '" title="' + (x.aus ? 'wieder einschließen' : 'diese Form ausschließen') + '">' +
           esc(x.form) + ' <span class="n">' + zahl(x.n) + '</span></button>';
-      }).join('') + (f.weitere ? '<span class="wofuer">and ' + f.weitere + ' weitere</span>' : '');
+      }).join('') + (f.weitere ? '<span class="wofuer">und ' + f.weitere + ' weitere</span>' : '');
     }).join('<span class="trenn"></span>');
     feld.hidden = false;
   }
@@ -574,7 +584,7 @@
       if (ed !== vorige) {
         vorige = ed;
         var alle = baendeVon(ed), gewaehlt = alle.length && alle.every(function (w) { return S.baende.indexOf(w) >= 0; });
-        kopf = '<button type="button" class="ei-bandkopf" data-ed="' + ed + '" aria-pressed="' + gewaehlt + '" title="only the volumes of this edition">' +
+        kopf = '<button type="button" class="ei-bandkopf" data-ed="' + ed + '" aria-pressed="' + gewaehlt + '" title="nur die Bände dieser Edition">' +
           esc(EDITIONEN[ed] ? EDITIONEN[ed].name : ed) + '<span>' + esc(EDITIONEN[ed] ? EDITIONEN[ed].ausgabe : '') + '</span></button>';
       }
       var an = S.baende.indexOf(b.work) >= 0;
@@ -586,9 +596,9 @@
     }).join('');
     $('rch-alle').hidden = !S.baende.length;
     var gesamt = BANDLISTE.length || baende.length;
-    $('rch-baende-knopf').textContent = S.baende.length ? (S.baende.length === 1 ? '1 volume selected' : S.baende.length + ' volumes selected') : 'All ' + gesamt + ' volumes';
+    $('rch-baende-knopf').textContent = S.baende.length ? (S.baende.length === 1 ? '1 Band gewählt' : S.baende.length + ' Bände gewählt') : 'Alle ' + gesamt + ' Bände';
     var mit = jeBand ? jeBand.filter(function (b) { return b.stellen; }).length : 0;
-    $('rch-baende-summary').textContent = S.baende.length ? 'Volumes: ' + S.baende.length + ' selected' : jeBand ? 'Volumes · ' + mit + ' with hits' : 'Volumes';
+    $('rch-baende-summary').textContent = S.baende.length ? 'Bände: ' + S.baende.length + ' gewählt' : jeBand ? 'Bände · ' + mit + ' mit Treffern' : 'Bände';
   }
   $('rch-baende-liste').addEventListener('click', function (e) {
     var k = e.target.closest('.ei-bandkopf');
@@ -614,7 +624,7 @@
   function zeichneSeitenfilter() {
     var f = $('rch-seitenfilter');
     f.innerHTML = S.seiten ? '<span class="rch-filter">' + esc(sigVon(S.seiten.work)) + ', S. ' + S.seiten.von + '–' + S.seiten.bis +
-      '<button type="button" aria-label="Clear page range" id="rch-seiten-weg">×</button></span>' : '';
+      '<button type="button" aria-label="Seitenbereich aufheben" id="rch-seiten-weg">×</button></span>' : '';
     var x = $('rch-seiten-weg');
     if (x) x.addEventListener('click', function () { S.seiten = null; suche(true); });
   }
@@ -629,7 +639,7 @@
     results.innerHTML = '';
     if (S.ansicht === 'stellen') { stellenGeladen = 0; gruppenOffen = letzteAntwort.gruppen.slice(); fordereStellen(); }
     else if (S.ansicht === 'konkordanz') { kwicGeladen = 0; baueKwicRahmen(); fordereKwic(); }
-    else if (S.ansicht === 'vergleich') { results.innerHTML = '<p class="qv-warte">Comparing the three editions …</p>'; worker.postMessage({ typ: 'vergleich', id: anfrage }); }
+    else if (S.ansicht === 'vergleich') { results.innerHTML = '<p class="qv-warte">Die drei Ausgaben werden verglichen …</p>'; worker.postMessage({ typ: 'vergleich', id: anfrage }); }
     else zeichneVerteilung();
   }
 
@@ -648,7 +658,7 @@
     m.stellen.forEach(function (s) {
       while (gruppenOffen.length && gruppenOffen[0].ab === s.i) {
         var g = gruppenOffen.shift();
-        html += '<div class="rch-gruppe"><h2><span class="ei-autor">' + esc(edName(g.work)) + '</span> ' + esc(g.sig) + '</h2><span>' + esc(g.title) + ' · ' + zahl(g.n) + ' ' + (g.n === 1 ? 'passage' : 'passages') + '</span></div>';
+        html += '<div class="rch-gruppe"><h2><span class="ei-autor">' + esc(edName(g.work)) + '</span> ' + esc(g.sig) + '</h2><span>' + esc(g.title) + ' · ' + zahl(g.n) + ' ' + (g.n === 1 ? 'Stelle' : 'Stellen') + '</span></div>';
       }
       html += stelleHtml(s);
     });
@@ -699,25 +709,25 @@
     if (!p) return;
     var art = p.closest('.rch-stelle');
     if (p.dataset.offen) { var q = art && art.querySelector('.qp'); if (q) q.remove(); delete p.dataset.offen; p.textContent = 'Parallelstellen'; return; }
-    p.disabled = true; p.textContent = 'Searching for parallel passages …';
+    p.disabled = true; p.textContent = 'Parallelstellen werden gesucht …';
     worker.postMessage({ typ: 'parallel', id: anfrage, i: +p.dataset.parallel });
   });
-  var ARTNAME = { n: 'Note', h: 'Heading' };
+  var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };
   function stelleHtml(s) {
     return '<article class="rch-stelle" tabindex="-1" data-i="' + s.i + '" data-zitat="' + esc(s.zitat) + '" data-druck="' + esc(leserLink(s, true)) + '">' +
       '<div class="rch-zitat">' + (S.ordnung === 'dichte' ? '<span class="ei-autor">' + esc(edName(s.work)) + '</span> ' : '') + esc(s.zitat) + (ARTNAME[s.art] ? '<span class="art">' + ARTNAME[s.art] + '</span>' : '') +
       '<button type="button" data-kopie="' + esc(s.zitat) + '">Zitat kopieren</button></div>' +
       (s.abschnitt ? '<div class="rch-pfad">' + esc(s.abschnitt) + '</div>' : '') +
       '<p class="rch-text">' + s.html + '</p>' +
-      '<div class="rch-wege"><a href="' + esc(leserLink(s, true)) + '">Open in print layout →</a><a href="' + esc(leserLink(s, false)) + '">Lesefassung</a><button type="button" class="qp-knopf" data-parallel="' + s.i + '" title="Similar passages in Fichte, Schelling, and Hegel">Parallel passages</button></div>' +
+      '<div class="rch-wege"><a href="' + esc(leserLink(s, true)) + '">Im Druckbild öffnen →</a><a href="' + esc(leserLink(s, false)) + '">Lesefassung</a><button type="button" class="qp-knopf" data-parallel="' + s.i + '" title="Ähnliche Stellen bei Fichte, Schelling und Hegel">Parallelstellen</button></div>' +
       '</article>';
   }
 
   // Konkordanz
   var kwicGeladen = 0, KW = 200;
   function baueKwicRahmen() {
-    results.innerHTML = '<div class="rch-kwic-leiste" role="group" aria-label="Sort concordance"><span>Sort by</span>' +
-      '<button type="button" data-ko="werk">Order of works</button><button type="button" data-ko="links">Word before</button><button type="button" data-ko="rechts">Word after</button>' +
+    results.innerHTML = '<div class="rch-kwic-leiste" role="group" aria-label="Konkordanz ordnen"><span>Ordnen nach</span>' +
+      '<button type="button" data-ko="werk">Werkfolge</button><button type="button" data-ko="links">Wort davor</button><button type="button" data-ko="rechts">Wort danach</button>' +
       '<span id="rch-kwic-zahl"></span><button type="button" id="rch-kwic-csv">Als CSV</button></div>' +
       '<div class="rch-kwic-rahmen"><table class="rch-kwic"><colgroup><col class="cz"><col><col class="cw"><col></colgroup><tbody id="rch-kwic-body"></tbody></table></div>';
     results.querySelectorAll('[data-ko]').forEach(function (b) {
@@ -741,7 +751,7 @@
         '<td class="l"><span>' + esc(z.links) + '</span></td><td class="w"><mark>' + esc(z.wort) + '</mark></td><td class="r">' + esc(z.rechts) + '</td></tr>';
     }).join(''));
     kwicGeladen += m.zeilen.length;
-    $('rch-kwic-zahl').textContent = zahl(m.gesamt) + ' lines' + (m.sortierbar ? '' : ' · zu viele, um sie zu ordnen');
+    $('rch-kwic-zahl').textContent = zahl(m.gesamt) + ' Zeilen' + (m.sortierbar ? '' : ' · zu viele, um sie zu ordnen');
     if (!m.sortierbar) results.querySelectorAll('[data-ko="links"],[data-ko="rechts"]').forEach(function (b) { b.disabled = true; });
     var marke = results.querySelector('.rch-marke');
     if (kwicGeladen < m.gesamt) {
@@ -762,14 +772,14 @@
     var schritt = feineSkala(max), oben = Math.ceil(max / schritt) * schritt;
     var X0 = 64, W = 560, zeile = 22, Y0 = 8, h = Y0 + jb.length * zeile + 26;
     var x = function (v) { return X0 + v / oben * W; };
-    var svg = '<svg viewBox="0 0 680 ' + h + '" role="img" aria-label="Frequency per 10,000 words in each volume">';
+    var svg = '<svg viewBox="0 0 680 ' + h + '" role="img" aria-label="Häufigkeit je 10 000 Wörter in jedem Band">';
     for (var t = 0; t <= oben + 1e-9; t += schritt) {
       svg += '<line class="gitter" x1="' + x(t) + '" y1="' + (Y0 - 2) + '" x2="' + x(t) + '" y2="' + (h - 22) + '"/>' +
         '<text x="' + x(t) + '" y="' + (h - 6) + '" text-anchor="middle">' + zahlKurz(t) + '</text>';
     }
     jb.forEach(function (b, i) {
       var y = Y0 + i * zeile, w = Math.max(b.vorkommen ? 1.5 : 0, x(b.dichte) - X0);
-      svg += '<g class="zeile" data-work="' + b.work + '" tabindex="0" role="button" aria-label="' + esc(b.sig) + ': ' + zahlKomma(b.dichte) + ' per 10,000 words, ' + b.vorkommen + ' occurrences; show passages">' +
+      svg += '<g class="zeile" data-work="' + b.work + '" tabindex="0" role="button" aria-label="' + esc(b.sig) + ': ' + zahlKomma(b.dichte) + ' je 10 000 Wörter, ' + b.vorkommen + ' Vorkommen; Stellen zeigen">' +
         '<rect x="0" y="' + y + '" width="680" height="' + zeile + '" fill="transparent"/>' +
         '<text class="lab" x="' + (X0 - 10) + '" y="' + (y + 14.5) + '" text-anchor="end">' + esc(b.sig) + '</text>' +
         '<rect class="balken" x="' + X0 + '" y="' + (y + 4) + '" width="' + w.toFixed(1) + '" height="13" rx="1"/>' +
@@ -788,8 +798,8 @@
       return '<div><div class="rch-streifen-kopf"><span><b>' + esc(b.sig) + '</b>' + esc(b.title) + '</span><span>' + zahl(b.vorkommen) + ' Vorkommen</span></div>' +
         '<div class="rch-streifen">' + zellen + '</div><div class="rch-streifen-fuss"><span>S. ' + b.von + '</span><span>S. ' + b.bis + '</span></div></div>';
     }).join('');
-    results.innerHTML = '<div class="rch-vt"><div><h3>Per 10,000 words</h3><p class="unter">How often the query matches, measured against the length of each volume; occurrences in parentheses. A click shows the passages in that volume.</p>' + svg + '</div>' +
-      (topo ? '<div><h3>Within the volume</h3><p class="unter">Each volume from its first page to its last, in forty sections. A click on a section shows its passages.</p><div class="rch-topo">' + topo + '</div></div>' : '') + '</div>';
+    results.innerHTML = '<div class="rch-vt"><div><h3>Je 10 000 Wörter</h3><p class="unter">Wie oft die Anfrage trifft, gemessen an der Länge jedes Bandes; in Klammern die Vorkommen. Ein Klick zeigt die Stellen des Bandes.</p>' + svg + '</div>' +
+      (topo ? '<div><h3>Im Band</h3><p class="unter">Jeder Band von seiner ersten bis zur letzten Seite, in vierzig Abschnitten. Ein Klick auf einen Abschnitt zeigt seine Stellen.</p><div class="rch-topo">' + topo + '</div></div>' : '') + '</div>';
     results.querySelectorAll('.zeile').forEach(function (g) {
       function los() { S.baende = [g.dataset.work]; S.seiten = null; S.ansicht = 'stellen'; malAnsicht(); suche(true); }
       g.addEventListener('click', los);
@@ -825,7 +835,7 @@
       document.body.appendChild(ta); ta.select();
       var ok = false; try { ok = document.execCommand('copy'); } catch (_) {}
       ta.remove();
-      toast(ok ? meldung : 'Copying not possible', ok ? mono : null);
+      toast(ok ? meldung : 'Kopieren nicht möglich', ok ? mono : null);
     }
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { toast(meldung, mono); }, ersatz);
     else ersatz();
@@ -906,6 +916,6 @@
 })();
 </script>
 
-<script src="assets/en/auswahl.js" defer></script>
+<script src="assets/auswahl.js" defer></script>
 </body>
 </html>

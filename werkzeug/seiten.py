@@ -32,7 +32,7 @@ RINGE = ('<svg class="ringe-mark site-title-rings" viewBox="0 0 200 120" aria-hi
 
 
 def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False):
-    nav = [('/#editionen', 'Ausgaben', ''), ('/recherche', 'Recherche', 'recherche'), ('/unterstuetzen', 'Unterstützen', 'unterstuetzen')]
+    nav = [('/#editionen', 'Ausgaben', ''), ('/search', 'Recherche', 'recherche'), ('/support', 'Unterstützen', 'unterstuetzen')]
     navhtml = '\n'.join(f'      <li' + (' class="nav-weit"' if k == 'unterstuetzen' else '') + f'><a href="{h}"' + (' target="_blank" rel="noopener"' if h.startswith('http') else '') + (' class="current" aria-current="page"' if k and k == aktuell else '') + f'>{t}</a></li>' for h, t, k in nav)
     kanon = '' if ohne_index else f'\n  <link rel="canonical" href="https://www.idealismedition.com/{datei.removesuffix(".html").removesuffix("index")}">'
     (S / 'de' / datei).write_text(f'''<!DOCTYPE html>
@@ -79,9 +79,9 @@ def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False):
     <a href="https://www.fichteedition.com/">Fichte-Edition</a>
     <a href="https://www.schellingedition.com/">Schelling-Edition</a>
     <a href="https://www.hegeledition.com/">Hegel-Edition</a>
-    <a href="/unterstuetzen">Unterstützen</a>
-    <a href="/datenschutz">Datenschutz</a>
-    <a href="/impressum">Impressum</a>
+    <a href="/support">Unterstützen</a>
+    <a href="/privacy">Datenschutz</a>
+    <a href="/legal-notice">Impressum</a>
   </nav>
 </footer>
 </body>
@@ -93,7 +93,7 @@ ANSCHRIFT = '''Giuliano Infantino<br>
       Brüdergasse 29<br>
       53111 Bonn'''
 
-seite('unterstuetzen.html', 'Unterstützen', f'''
+seite('support.html', 'Unterstützen', f'''
 <main class="legal-container legal-container--wide">
   <div class="legal-kicker">Unterstützen</div>
   <h1>Mitglied werden</h1>
@@ -120,7 +120,7 @@ seite('unterstuetzen.html', 'Unterstützen', f'''
   </section>
 </main>''', beschreibung='Die Ausgaben sind frei zugänglich. Wer die Arbeit mittragen will, kann Mitglied werden.', aktuell='unterstuetzen')
 
-seite('impressum.html', 'Impressum', f'''
+seite('legal-notice.html', 'Impressum', f'''
 <main class="legal-container">
   <div class="legal-kicker">Rechtliche Angaben</div>
   <h1>Impressum</h1>
@@ -169,7 +169,7 @@ seite('impressum.html', 'Impressum', f'''
   </section>
 </main>''')
 
-seite('datenschutz.html', 'Datenschutz', '''
+seite('privacy.html', 'Datenschutz', '''
 <main class="legal-container">
   <div class="legal-kicker">Datenschutzhinweise</div>
   <h1>Datenschutz</h1>
@@ -213,7 +213,7 @@ seite('404.html', 'Seite nicht gefunden', '''
     <div class="error-code">404</div>
     <h1 class="error-title">Seite nicht gefunden</h1>
     <p class="error-text">Die angeforderte Seite gibt es nicht oder nicht mehr.</p>
-    <p class="ei-wege" style="justify-content:center"><a href="/">Zur Startseite</a><a href="/recherche">Recherche</a></p>
+    <p class="ei-wege" style="justify-content:center"><a href="/">Zur Startseite</a><a href="/search">Recherche</a></p>
   </div>
 </main>''', ohne_index=True)
 

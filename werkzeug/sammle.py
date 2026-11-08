@@ -127,13 +127,13 @@ def main():
         i = re.sub(rf'(<span data-baende="{e["id"]}">)\d+ Bände', rf'\g<1>{len(e["werke"])} Bände', i)
     i = re.sub(r'placeholder="In allen \d+ Bänden suchen"', f'placeholder="In allen {nb} Bänden suchen"', i)
     (S / 'de' / 'index.html').write_text(i, encoding='utf-8')
-    r = (S / 'de' / 'recherche.html').read_text(encoding='utf-8')
+    r = (S / 'de' / 'search.html').read_text(encoding='utf-8')
     r = re.sub(r'(<p class="rch-unter" id="rch-unter">)[^<]*', rf'\g<1>Volltext von Fichte, Schelling und Hegel · {nb} Bände', r, count=1)
-    (S / 'de' / 'recherche.html').write_text(r, encoding='utf-8')
+    (S / 'de' / 'search.html').write_text(r, encoding='utf-8')
 
     # Sitemap
     heute = datetime.date.today().isoformat()
-    urls = [('/', 1.0), ('/recherche', 0.9), ('/unterstuetzen', 0.5), ('/impressum', 0.2), ('/datenschutz', 0.2)]
+    urls = [('/', 1.0), ('/search', 0.9), ('/support', 0.5), ('/legal-notice', 0.2), ('/privacy', 0.2)]
     urls += [('/de' + u if u != '/' else '/de/', round(max(0.1, p - 0.1), 1)) for u, p in list(urls)]   # Deutsch unter /de/
     (S / 'sitemap.xml').write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

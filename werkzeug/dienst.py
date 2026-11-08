@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lokaler Dienst wie bei Vercel mit cleanUrls: /recherche liefert recherche.html. Nur 127.0.0.1.
+"""Lokaler Dienst wie bei Vercel mit cleanUrls: /recherche liefert search.html. Nur 127.0.0.1.
   python3 werkzeug/dienst.py [port]"""
 import http.server, os, pathlib, sys
 WURZEL = pathlib.Path(__file__).resolve().parent.parent / 'site'

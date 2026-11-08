@@ -12,6 +12,86 @@
       "source": "/suche",
       "destination": "/recherche",
       "permanent": true
+    },
+    {
+      "source": "/recherche",
+      "destination": "/search",
+      "permanent": true
+    },
+    {
+      "source": "/recherche.html",
+      "destination": "/search",
+      "permanent": true
+    },
+    {
+      "source": "/de/recherche",
+      "destination": "/de/search",
+      "permanent": true
+    },
+    {
+      "source": "/de/recherche.html",
+      "destination": "/de/search",
+      "permanent": true
+    },
+    {
+      "source": "/unterstuetzen",
+      "destination": "/support",
+      "permanent": true
+    },
+    {
+      "source": "/unterstuetzen.html",
+      "destination": "/support",
+      "permanent": true
+    },
+    {
+      "source": "/de/unterstuetzen",
+      "destination": "/de/support",
+      "permanent": true
+    },
+    {
+      "source": "/de/unterstuetzen.html",
+      "destination": "/de/support",
+      "permanent": true
+    },
+    {
+      "source": "/datenschutz",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/datenschutz.html",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/de/datenschutz",
+      "destination": "/de/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/de/datenschutz.html",
+      "destination": "/de/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/impressum",
+      "destination": "/legal-notice",
+      "permanent": true
+    },
+    {
+      "source": "/impressum.html",
+      "destination": "/legal-notice",
+      "permanent": true
+    },
+    {
+      "source": "/de/impressum",
+      "destination": "/de/legal-notice",
+      "permanent": true
+    },
+    {
+      "source": "/de/impressum.html",
+      "destination": "/de/legal-notice",
+      "permanent": true
     }
   ],
   "headers": [

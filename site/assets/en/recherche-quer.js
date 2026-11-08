@@ -1,5 +1,5 @@
 /* Recherche des Portals: Querverweise zwischen den drei Editionen, gezeichnet auf der Suchseite.
- * Die Seite (recherche.html) reicht ihre Hilfsmittel als window.QuerCtx herein: esc, zahl, leserLink, edName,
+ * Die Seite (search.html) reicht ihre Hilfsmittel als window.QuerCtx herein: esc, zahl, leserLink, edName,
  * sucheMit(anfrage, edition), sucheInBand(werk). Gerechnet wird im Worker (recherche-portal-worker.js). */
 (function () {
   'use strict';

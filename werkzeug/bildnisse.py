@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Die drei Bildnisse der Startseite zuschneiden und angleichen: gleiche Augenlinie, gleiche Kopfgroesse, gleiches Format.
 
-Quellen (gemeinfrei, Wikimedia Commons; Nachweis in impressum.html), in quellen/bilder/:
+Quellen (gemeinfrei, Wikimedia Commons; Nachweis in legal-notice.html), in quellen/bilder/:
   fichte-daehling-jugel.jpg     Lithographie von J. F. Jugel nach dem Gemaelde von H. A. Daehling (1808)
   schelling-stieler-1835.png    Joseph Karl Stieler, 1835 (aus der Schelling-Edition)
   hegel-schlesinger-1831.jpg    Jakob Schlesinger, 1831 (aus der Hegel-Edition)

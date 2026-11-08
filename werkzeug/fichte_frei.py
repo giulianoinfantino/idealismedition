@@ -29,14 +29,14 @@ ers('index.html', 'Die Volltextsuche geht über die Bände beider Editionen zugl
     'Die Volltextsuche geht über die Bände aller drei Editionen zugleich, Fichte neben Schelling und Hegel.')
 ers('index.html', 'sie fließt in die Bände, die noch fehlen, als nächstes in Fichte.',
     'sie fließt in die weitere Prüfung der Texte und in neue Bände.')
-ers('index.html', 'legen die Richtlinien jeder Edition offen: <a href="https://www.hegeledition.com/editionsrichtlinien">Hegel</a>, <a href="https://www.schellingedition.com/editionsrichtlinien">Schelling</a>.',
-    f'legen die Richtlinien jeder Edition offen: <a href="{FICHTE_URL}/editionsrichtlinien.html">Fichte</a>, <a href="https://www.schellingedition.com/editionsrichtlinien">Schelling</a>, <a href="https://www.hegeledition.com/editionsrichtlinien">Hegel</a>.')
-ers('index.html', '<a href="recherche?q=Indifferenz">Indifferenz</a>', '<a href="recherche?q=Indifferenz">Indifferenz</a>\n    <a href="recherche?q=Nicht-Ich">Nicht-Ich</a>')
+ers('index.html', 'legen die Richtlinien jeder Edition offen: <a href="https://www.hegeledition.com/guidelines">Hegel</a>, <a href="https://www.schellingedition.com/guidelines">Schelling</a>.',
+    f'legen die Richtlinien jeder Edition offen: <a href="{FICHTE_URL}/editionsrichtlinien.html">Fichte</a>, <a href="https://www.schellingedition.com/guidelines">Schelling</a>, <a href="https://www.hegeledition.com/guidelines">Hegel</a>.')
+ers('index.html', '<a href="search?q=Indifferenz">Indifferenz</a>', '<a href="search?q=Indifferenz">Indifferenz</a>\n    <a href="search?q=Nicht-Ich">Nicht-Ich</a>')
 # Fichtes Ring im Zeichen nicht mehr leise
 ers('assets/portal.css', '/* Fichtes Ring im Zeichen ist noch leise */\n.ei-zier .ring-a{opacity:.45}\n', '')
 # Fuss der Startseite: alle drei Editionen
-ers('index.html', '    <a href="https://www.schellingedition.com/">Schelling-Edition</a>\n    <a href="https://www.hegeledition.com/">Hegel-Edition</a>\n    <a href="recherche">Recherche</a>',
-    f'    <a href="{FICHTE_URL}/">Fichte-Edition</a>\n    <a href="https://www.schellingedition.com/">Schelling-Edition</a>\n    <a href="https://www.hegeledition.com/">Hegel-Edition</a>\n    <a href="recherche">Recherche</a>')
+ers('index.html', '    <a href="https://www.schellingedition.com/">Schelling-Edition</a>\n    <a href="https://www.hegeledition.com/">Hegel-Edition</a>\n    <a href="search">Recherche</a>',
+    f'    <a href="{FICHTE_URL}/">Fichte-Edition</a>\n    <a href="https://www.schellingedition.com/">Schelling-Edition</a>\n    <a href="https://www.hegeledition.com/">Hegel-Edition</a>\n    <a href="search">Recherche</a>')
 # Recherche und einfache Seiten
 w = P / 'werkzeug/recherche_seite.py'; t = w.read_text(encoding='utf-8')
 t = t.replace("Volltext der Gesammelten Werke · ' + m.baende.length\", \"Volltext von Schelling und Hegel · ' + m.baende.length\"",
