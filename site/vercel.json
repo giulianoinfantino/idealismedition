@@ -4,13 +4,8 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/search",
-      "destination": "/recherche",
-      "permanent": true
-    },
-    {
       "source": "/suche",
-      "destination": "/recherche",
+      "destination": "/search",
       "permanent": true
     },
     {
