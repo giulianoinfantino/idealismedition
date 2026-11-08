@@ -6,6 +6,24 @@ import pathlib
 
 S = pathlib.Path.home() / 'idealismus/site'
 KOFI = 'https://ko-fi.com/idealismedition'
+KOFI_STUFEN = KOFI + '/tiers'
+
+# Mitgliedsstufen: Name, Preis, fuer wen, welche Ringe gold (a oben, b links, c rechts wie im Zeichen)
+STUFEN = [('Reader', '1,99', 'Für Studierende und alle, die mit kleinem Budget lesen.', 'a'),
+          ('Fellow', '3,99', 'Für Promovierende und Postdocs, die mit den Texten arbeiten.', 'ab'),
+          ('Scholar', '5,99', 'Für Professorinnen und Professoren, die die Ausgaben in Forschung und Lehre nutzen.', 'abc')]
+
+
+def stufe(name, preis, wer, an):
+    ringe = ''.join(f'<circle{" class=\"an\"" if k in an else ""} cx="{x}" cy="{y}" r="34"/>'
+                    for k, x, y in (('a', 100, 44), ('b', 80, 72), ('c', 120, 72)))
+    return f'''    <li class="ei-stufe">
+      <svg viewBox="0 0 200 120" aria-hidden="true">{ringe}</svg>
+      <h2>{name}</h2>
+      <p class="ei-preis">{preis}&nbsp;€ im Monat</p>
+      <p class="ei-wer">{wer}</p>
+      <a class="ei-knopf" href="{KOFI_STUFEN}" target="_blank" rel="noopener">{name} werden</a>
+    </li>'''
 
 RINGE = ('<svg class="ringe-mark site-title-rings" viewBox="0 0 200 120" aria-hidden="true">'
          '<circle class="ring ring-a" cx="100" cy="44" r="34" vector-effect="non-scaling-stroke"/>'
@@ -14,7 +32,7 @@ RINGE = ('<svg class="ringe-mark site-title-rings" viewBox="0 0 200 120" aria-hi
 
 
 def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False):
-    nav = [('/#editionen', 'Ausgaben', ''), ('/recherche', 'Recherche', 'recherche'), (KOFI, 'Unterstützen', 'unterstuetzen')]
+    nav = [('/#editionen', 'Ausgaben', ''), ('/recherche', 'Recherche', 'recherche'), ('/unterstuetzen', 'Unterstützen', 'unterstuetzen')]
     navhtml = '\n'.join(f'      <li' + (' class="nav-weit"' if k == 'unterstuetzen' else '') + f'><a href="{h}"' + (' target="_blank" rel="noopener"' if h.startswith('http') else '') + (' class="current" aria-current="page"' if k and k == aktuell else '') + f'>{t}</a></li>' for h, t, k in nav)
     kanon = '' if ohne_index else f'\n  <link rel="canonical" href="https://www.idealismedition.com/{datei.removesuffix(".html").removesuffix("index")}">'
     (S / datei).write_text(f'''<!DOCTYPE html>
@@ -61,7 +79,7 @@ def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False):
     <a href="https://www.fichteedition.com/">Fichte-Edition</a>
     <a href="https://www.schellingedition.com/">Schelling-Edition</a>
     <a href="https://www.hegeledition.com/">Hegel-Edition</a>
-    <a href="{KOFI}" target="_blank" rel="noopener">Unterstützen</a>
+    <a href="/unterstuetzen">Unterstützen</a>
     <a href="/datenschutz">Datenschutz</a>
     <a href="/impressum">Impressum</a>
   </nav>
@@ -76,14 +94,15 @@ ANSCHRIFT = '''Giuliano Infantino<br>
       53111 Bonn'''
 
 seite('unterstuetzen.html', 'Unterstützen', f'''
-<main class="legal-container">
+<main class="legal-container legal-container--wide">
   <div class="legal-kicker">Unterstützen</div>
   <h1>Mitglied werden</h1>
   <p class="legal-lead">Die Ausgaben sind frei zugänglich, ohne Bezahlschranke und ohne Konto, und sollen es bleiben. Wer die Arbeit mittragen will, kann Mitglied werden.</p>
 
-  <div class="ei-mitglied">
-    <a class="ei-knopf" href="{KOFI}" target="_blank" rel="noopener">Mitglied werden über Ko-fi</a>
-  </div>
+  <ul class="ei-stufen">
+{chr(10).join(stufe(*x) for x in STUFEN)}
+  </ul>
+  <p class="ei-hinweis">Die Stufen unterscheiden sich nur im Betrag; wählen Sie, was zu Ihnen passt. Bezahlt wird auf Ko-fi, wo sich die Mitgliedschaft jederzeit beenden lässt. Lieber einmalig? <a href="{KOFI}" target="_blank" rel="noopener">Auch das geht dort.</a></p>
 
   <section class="legal-section">
     <h2>Was die Mitgliedschaft ist</h2>

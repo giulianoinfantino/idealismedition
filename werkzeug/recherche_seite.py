@@ -36,10 +36,10 @@ ers('<span class="site-title-hegel">SCHELLING</span>', '<span class="site-title-
 ers('''      <li><a href="index.html">Sammlung</a></li>
       <li><a href="text.html">Lektüre</a></li>
       <li><a href="search.html" class="current" aria-current="page">Recherche</a></li>
-      <li class="nav-weit"><a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a></li>''',
+      <li class="nav-weit"><a href="/unterstuetzen">Unterstützen</a></li>''',
     '''      <li><a href="/#editionen">Ausgaben</a></li>
       <li><a href="recherche" class="current" aria-current="page">Recherche</a></li>
-      <li class="nav-weit"><a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a></li>''')
+      <li class="nav-weit"><a href="/unterstuetzen">Unterstützen</a></li>''')
 
 # ── Feld und Hilfe ───────────────────────────────────────────────────────
 ers('>Anmerkungen des Drucks <span class="n"></span></button>', '>Anmerkungen <span class="n"></span></button>')
@@ -59,7 +59,7 @@ ers('„und“, „oder“, „nicht“ in Kleinbuchstaben sind Wörter.</p>',
 # ── Fuss und Skripte ─────────────────────────────────────────────────────
 ers('''  <div>Digitale Schelling-Edition</div>
   <nav>
-    <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a>
+    <a href="/unterstuetzen">Unterstützen</a>
     <a href="neuigkeiten.html">Neuigkeiten</a>
     <a href="editionsrichtlinien.html">Richtlinien</a>
     <a href="urheberrecht.html">Urheberrecht</a>
@@ -71,7 +71,7 @@ ers('''  <div>Digitale Schelling-Edition</div>
     <a href="https://www.fichteedition.com/">Fichte-Edition</a>
     <a href="https://www.schellingedition.com/">Schelling-Edition</a>
     <a href="https://www.hegeledition.com/">Hegel-Edition</a>
-    <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a>
+    <a href="/unterstuetzen">Unterstützen</a>
     <a href="datenschutz">Datenschutz</a>
     <a href="impressum">Impressum</a>
   </nav>''')

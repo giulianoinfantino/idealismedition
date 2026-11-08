@@ -47,3 +47,16 @@
 
 /* Im schmalen Kopf ist fuer drei Wege kein Platz; „Unterstuetzen“ steht dann im Fuss. */
 @media (max-width:600px){.sitenav li.nav-weit{display:none}}
+
+/* Mitgliedsstufen auf Unterstuetzen: drei gleich gebaute Karten, das Zeichen fuellt sich Ring um Ring */
+.ei-stufen{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2.2rem 0 1rem;padding:0}
+.ei-stufe{display:flex;flex-direction:column;align-items:center;text-align:center;padding:1.6rem 1.1rem 1.3rem;border:1px solid var(--rule);border-radius:2px}
+.ei-stufe svg{width:4.2rem;height:auto}
+.ei-stufe circle{fill:none;stroke:var(--text-muted);stroke-opacity:.35;stroke-width:3.2}
+.ei-stufe circle.an{stroke:var(--accent-gold);stroke-opacity:1;stroke-width:4}
+.legal-container .ei-stufe h2{font-family:var(--font-display);font-weight:400;font-size:1.55rem;line-height:1.1;color:var(--text-ink);margin:1rem 0 .3rem}
+.ei-preis{font-size:.9rem;color:var(--text-ink);font-variant-numeric:lining-nums;margin:0}
+.ei-wer{font-size:.84rem;line-height:1.55;color:var(--text-muted);margin:.7rem 0 1.2rem}
+.ei-stufe .ei-knopf{margin-top:auto;padding:.55rem 1.1rem;white-space:nowrap}
+.ei-hinweis{font-size:.82rem;line-height:1.6;color:var(--text-muted);margin:0 0 2.6rem}
+@media (max-width:640px){.ei-stufen{grid-template-columns:1fr}}
