@@ -22,7 +22,7 @@ def stufe(name, preis, wer, an):
       <h2>{name}</h2>
       <p class="ei-preis">{preis}&nbsp;€ im Monat</p>
       <p class="ei-wer">{wer}</p>
-      <a class="ei-knopf" href="{KOFI_STUFEN}" target="_blank" rel="noopener">{name} werden</a>
+      <a class="ei-knopf ei-stufe-knopf" href="{KOFI_STUFEN}" data-name="{name}" data-betrag="{preis}" data-an="{an}">{name} werden</a>
     </li>'''
 
 RINGE = ('<svg class="ringe-mark site-title-rings" viewBox="0 0 200 120" aria-hidden="true">'
@@ -161,15 +161,18 @@ seite('support.html', 'Unterstützen', f'''
   <ul class="ei-stufen">
 {chr(10).join(stufe(*x) for x in STUFEN)}
   </ul>
-  <p class="ei-hinweis">Die Stufen unterscheiden sich nur im Betrag; wählen Sie, was zu Ihnen passt. Bezahlt wird auf Ko-fi, wo sich die Mitgliedschaft jederzeit beenden lässt. Lieber einmalig? <a href="{KOFI}" target="_blank" rel="noopener">Auch das geht dort.</a></p>
+  <p class="ei-hinweis">Die Stufen unterscheiden sich nur im Betrag; wählen Sie, was zu Ihnen passt. Bezahlt wird über Ko-fi, direkt hier auf der Seite, und die Mitgliedschaft lässt sich jederzeit beenden. <button type="button" class="ei-einmalig" data-name="" data-betrag="">Lieber einmalig unterstützen</button></p>
+  <p class="ei-hinweis ei-leise">Ein Klick auf eine Stufe lädt das Zahlfeld von Ko-fi; erst dann gehen Daten an Ko-fi (siehe <a href="/privacy">Datenschutz</a>).</p>
 
-  <section class="ei-kofi" id="kofi">
-    <h2>Direkt hier unterstützen</h2>
-    <p class="ei-hinweis">Einmalig oder monatlich, ohne die Seite zu verlassen. Das Zahlfeld von Ko-fi lädt erst, wenn Sie klicken; erst dann gehen Daten an Ko-fi (siehe <a href="/privacy">Datenschutz</a>).</p>
-    <button type="button" class="ei-knopf" id="kofi-laden">Zahlfeld von Ko-fi laden</button>
-    <div class="ei-kofi-feld" id="kofi-feld" hidden></div>
-    <p class="ei-hinweis ei-kofi-ersatz" id="kofi-ersatz" hidden>Bleibt das Feld leer, lässt Ko-fi das Einbetten in Ihrem Browser nicht zu. <a href="{KOFI}" target="_blank" rel="noopener">Dann direkt auf Ko-fi unterstützen.</a></p>
-  </section>
+  <dialog class="ei-kofi-fenster" id="kofi-fenster" aria-labelledby="kofi-titel">
+    <div class="ei-kofi-kopf" tabindex="-1" autofocus>
+      <svg viewBox="0 0 200 120" aria-hidden="true" id="kofi-ringe"><circle cx="100" cy="44" r="34"/><circle cx="80" cy="72" r="34"/><circle cx="120" cy="72" r="34"/></svg>
+      <div><h2 id="kofi-titel"></h2><p class="ei-kofi-schritt" id="kofi-schritt"></p></div>
+      <button type="button" class="ei-kofi-zu" id="kofi-zu" aria-label="Schließen">×</button>
+    </div>
+    <div class="ei-kofi-feld" id="kofi-feld"></div>
+    <p class="ei-kofi-fuss">Bleibt das Feld leer, lässt Ko-fi das Einbetten in Ihrem Browser nicht zu: <a href="{KOFI_STUFEN}" target="_blank" rel="noopener">dann direkt auf Ko-fi</a>.</p>
+  </dialog>
 
   <section class="legal-section">
     <h2>Was die Mitgliedschaft ist</h2>
@@ -187,15 +190,31 @@ seite('support.html', 'Unterstützen', f'''
   </section>
 </main>''', beschreibung='Die Ausgaben sind frei zugänglich. Wer die Arbeit mittragen will, kann Mitglied werden.', aktuell='unterstuetzen',
       fuss='''<script>
-/* Ko-fi-Zahlfeld erst nach dem Klick laden (Zwei-Klick-Lösung): vorher geht keine Anfrage an Ko-fi */
-document.getElementById('kofi-laden').addEventListener('click', function () {
-  var f = document.getElementById('kofi-feld'), i = document.createElement('iframe');
-  i.src = 'https://ko-fi.com/idealismedition/?hidefeed=true&widget=true&embed=true&preview=true';
-  i.title = 'Ko-fi'; i.height = '712'; i.loading = 'eager';
-  i.style.cssText = 'border:0;width:100%;max-width:34rem;background:#f9f9f9;border-radius:3px';
-  f.appendChild(i); f.hidden = false; this.remove();
-  document.getElementById('kofi-ersatz').hidden = false;
-});
+/* Ko-fi direkt auf der Seite: die Stufe öffnet ein Fenster mit dem Zahlfeld von Ko-fi. Das Zahlfeld lädt erst mit
+   diesem Klick (vorher keine Anfrage an Ko-fi) und bleibt danach geladen. */
+(function () {
+  var fenster = document.getElementById('kofi-fenster'), feld = document.getElementById('kofi-feld');
+  var EN = document.documentElement.lang === 'en';
+  function oeffnen(name, betrag, an) {
+    if (!feld.firstChild) {
+      var i = document.createElement('iframe');
+      i.src = 'https://ko-fi.com/idealismedition/?hidefeed=true&widget=true&embed=true&preview=true';
+      i.title = 'Ko-fi'; i.height = '690';
+      feld.appendChild(i);
+    }
+    document.getElementById('kofi-titel').textContent = name ? (EN ? 'Become a ' + name : name + ' werden') : (EN ? 'Support once' : 'Einmalig unterstützen');
+    document.getElementById('kofi-schritt').textContent = name
+      ? (EN ? 'Enter ' + betrag.replace(',', '.') + ' € below and tick “Make this monthly”.' : 'Unten ' + betrag + ' € eintragen und „Make this monthly“ anhaken.')
+      : (EN ? 'Choose any amount below.' : 'Unten einen beliebigen Betrag wählen.');
+    document.querySelectorAll('#kofi-ringe circle').forEach(function (c, k) { c.classList.toggle('an', (an || '').indexOf('abc'[k]) >= 0); });
+    if (fenster.showModal) fenster.showModal(); else fenster.setAttribute('open', '');
+  }
+  document.querySelectorAll('.ei-stufe-knopf, .ei-einmalig').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); oeffnen(a.dataset.name, a.dataset.betrag, a.dataset.an); });
+  });
+  document.getElementById('kofi-zu').addEventListener('click', function () { fenster.close(); });
+  fenster.addEventListener('click', function (e) { if (e.target === fenster) fenster.close(); });
+})();
 </script>
 ''')
 
@@ -283,7 +302,7 @@ seite('privacy.html', 'Datenschutz', '''
 
   <section class="legal-section">
     <h2>5. Zahlfeld von Ko-fi (nur nach Klick)</h2>
-    <p>Auf der Seite „Unterstützen“ lässt sich das Zahlfeld von Ko-fi (Ko-fi Labs Limited, Vereinigtes Königreich) in die Seite laden. Das geschieht erst, wenn Sie auf „Zahlfeld von Ko-fi laden“ klicken; vorher wird nichts von Ko-fi geladen. Nach dem Klick ruft Ihr Browser Inhalte von Servern von Ko-fi ab. Dabei erhält Ko-fi Ihre IP-Adresse und technische Angaben zu Ihrem Browser und kann Cookies setzen. Zahlungen wickelt Ko-fi über Zahlungsdienstleister wie PayPal und Stripe ab; dafür gilt die Datenschutzerklärung von Ko-fi. Rechtsgrundlage ist Ihre Einwilligung durch den Klick (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG); sie gilt nur für diesen Seitenaufruf.</p>
+    <p>Auf der Seite „Unterstützen“ lässt sich das Zahlfeld von Ko-fi (Ko-fi Labs Limited, Vereinigtes Königreich) in die Seite laden. Das geschieht erst, wenn Sie eine der Stufen oder „Lieber einmalig unterstützen“ anklicken; vorher wird nichts von Ko-fi geladen. Nach dem Klick ruft Ihr Browser Inhalte von Servern von Ko-fi ab. Dabei erhält Ko-fi Ihre IP-Adresse und technische Angaben zu Ihrem Browser und kann Cookies setzen. Zahlungen wickelt Ko-fi über Zahlungsdienstleister wie PayPal und Stripe ab; dafür gilt die Datenschutzerklärung von Ko-fi. Rechtsgrundlage ist Ihre Einwilligung durch den Klick (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG); sie gilt nur für diesen Seitenaufruf.</p>
   </section>
 
   <section class="legal-section">

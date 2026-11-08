@@ -112,3 +112,24 @@
 button.ei-knopf{background:none;font:inherit;font-size:.86rem;cursor:pointer}
 .ei-kofi-feld{margin-top:1rem}
 .ei-kofi-ersatz{margin-top:.6rem}
+
+/* Ko-fi im Fenster (seit 08.11.2026 abends): die Stufe öffnet das Zahlfeld direkt auf der Seite */
+.ei-einmalig{background:none;border:0;padding:0;font:inherit;color:var(--text-ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;cursor:pointer}
+.ei-einmalig:hover{text-decoration-color:var(--accent-gold)}
+.ei-leise{font-size:.8rem;color:var(--text-muted);margin-top:-.4rem}
+.ei-kofi-fenster{margin:auto;width:min(34rem,calc(100vw - 1.5rem));max-height:calc(100vh - 2rem);padding:0;border:1px solid var(--rule);border-radius:4px;
+  background:var(--bg-paper);color:var(--text-body);box-shadow:0 24px 70px rgba(0,0,0,.45);overflow:auto}
+.ei-kofi-fenster::backdrop{background:rgba(10,10,14,.6);backdrop-filter:blur(2px)}
+.ei-kofi-kopf{display:grid;grid-template-columns:3rem 1fr auto;gap:1rem;align-items:center;padding:1.1rem 1.2rem 1rem;border-bottom:1px solid var(--rule)}
+.ei-kofi-kopf svg{width:3rem;height:auto}
+.ei-kofi-kopf circle{fill:none;stroke:var(--text-muted);stroke-opacity:.35;stroke-width:3.2}
+.ei-kofi-kopf circle.an{stroke:var(--accent-gold);stroke-opacity:1;stroke-width:4}
+.ei-kofi-kopf h2{font-family:var(--font-display);font-weight:400;font-size:1.45rem;line-height:1.1;color:var(--text-ink);margin:0}
+.ei-kofi-schritt{margin:.25rem 0 0;font-size:.84rem;color:var(--text-muted)}
+.ei-kofi-zu{align-self:start;background:none;border:0;font-size:1.5rem;line-height:1;color:var(--text-muted);cursor:pointer;padding:.1rem .3rem}
+.ei-kofi-zu:hover{color:var(--text-ink)}
+.ei-kofi-feld{background:#f9f9f9}
+.ei-kofi-feld iframe{display:block;width:100%;border:0}
+.ei-kofi-fuss{margin:0;padding:.7rem 1.2rem .9rem;font-size:.76rem;color:var(--text-muted);border-top:1px solid var(--rule)}
+.ei-kofi-fuss a{color:var(--text-muted);text-decoration:underline}
+.ei-kofi-kopf:focus{outline:none}

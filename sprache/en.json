@@ -1084,7 +1084,13 @@
   "Einmalig oder monatlich, ohne die Seite zu verlassen. Das Zahlfeld von Ko-fi lädt erst, wenn Sie klicken; erst dann gehen Daten an Ko-fi (siehe <a href=\"/privacy\">Datenschutz</a>).": "Once or monthly, without leaving the page. The Ko-fi payment panel loads only when you click; only then is data sent to Ko-fi (see <a href=\"/privacy\">Privacy</a>).",
   "Zahlfeld von Ko-fi laden": "Load the Ko-fi payment panel",
   "Mitglieder werden, wenn sie es wünschen, unter den Friends of the Edition genannt.": "Members who wish are named among the Friends of the Edition.",
-  "Bleibt das Feld leer, lässt Ko-fi das Einbetten in Ihrem Browser nicht zu. <a href=\"https://ko-fi.com/idealismedition\" target=\"_blank\" rel=\"noopener\">Dann direkt auf Ko-fi unterstützen.</a>": "If the panel stays empty, Ko-fi does not allow embedding in your browser. <a href=\"https://ko-fi.com/idealismedition\" target=\"_blank\" rel=\"noopener\">Then support us directly on Ko-fi.</a>"
+  "Bleibt das Feld leer, lässt Ko-fi das Einbetten in Ihrem Browser nicht zu. <a href=\"https://ko-fi.com/idealismedition\" target=\"_blank\" rel=\"noopener\">Dann direkt auf Ko-fi unterstützen.</a>": "If the panel stays empty, Ko-fi does not allow embedding in your browser. <a href=\"https://ko-fi.com/idealismedition\" target=\"_blank\" rel=\"noopener\">Then support us directly on Ko-fi.</a>",
+  "Die Stufen unterscheiden sich nur im Betrag; wählen Sie, was zu Ihnen passt. Bezahlt wird über Ko-fi, direkt hier auf der Seite, und die Mitgliedschaft lässt sich jederzeit beenden.": "The tiers differ only in amount; choose what suits you. Payment goes through Ko-fi, right here on this page, and you can end your membership at any time.",
+  "Lieber einmalig unterstützen": "Prefer to support once",
+  "Ein Klick auf eine Stufe lädt das Zahlfeld von Ko-fi; erst dann gehen Daten an Ko-fi (siehe <a href=\"/privacy\">Datenschutz</a>).": "Clicking a tier loads the Ko-fi payment panel; only then is data sent to Ko-fi (see <a href=\"/privacy\">Privacy</a>).",
+  "Bleibt das Feld leer, lässt Ko-fi das Einbetten in Ihrem Browser nicht zu: <a href=\"https://ko-fi.com/idealismedition/tiers\" target=\"_blank\" rel=\"noopener\">dann direkt auf Ko-fi</a>.": "If the panel stays empty, Ko-fi does not allow embedding in your browser: <a href=\"https://ko-fi.com/idealismedition/tiers\" target=\"_blank\" rel=\"noopener\">then go directly to Ko-fi</a>.",
+  "Schließen": "Close",
+  "Auf der Seite „Unterstützen“ lässt sich das Zahlfeld von Ko-fi (Ko-fi Labs Limited, Vereinigtes Königreich) in die Seite laden. Das geschieht erst, wenn Sie eine der Stufen oder „Lieber einmalig unterstützen“ anklicken; vorher wird nichts von Ko-fi geladen. Nach dem Klick ruft Ihr Browser Inhalte von Servern von Ko-fi ab. Dabei erhält Ko-fi Ihre IP-Adresse und technische Angaben zu Ihrem Browser und kann Cookies setzen. Zahlungen wickelt Ko-fi über Zahlungsdienstleister wie PayPal und Stripe ab; dafür gilt die Datenschutzerklärung von Ko-fi. Rechtsgrundlage ist Ihre Einwilligung durch den Klick (Art. {0} Abs. {1} lit. a DSGVO, § {2} Abs. {3} TDDDG); sie gilt nur für diesen Seitenaufruf.": "On the “Support” page, the Ko-fi payment panel (Ko-fi Labs Limited, United Kingdom) can be loaded into the page. This happens only when you click one of the tiers or “Prefer to support once”; before that, nothing is loaded from Ko-fi. After the click, your browser retrieves content from Ko-fi’s servers. Ko-fi thereby receives your IP address and technical information about your browser and may set cookies. Ko-fi processes payments through payment providers such as PayPal and Stripe; Ko-fi’s privacy policy applies to this. The legal basis is your consent given by the click (Art. {0}({1})(a) GDPR, § {2}({3}) TDDDG); it applies only to this page view."
  },
  "js": {
   "Digitale Ausgabe von Fichtes Werken nach dem Text der Sämmtlichen und Nachgelassenen Werke, hg. von I. H. Fichte (1834–1846): frei lesbar, durchsuchbar, am Scan geprüft.": "Digital edition of Fichte’s works based on the text of the Sämmtliche Werke and Nachgelassene Werke, ed. I. H. Fichte (1834–1846): freely readable, searchable, checked against the scan.",
@@ -1408,6 +1414,11 @@
   "~“.": "~”.",
   " mit gebeugten Formen": " with inflected forms",
   "Verhältniß~": "Verhältniß~",
-  "Verhältnis~": "Verhältnis~"
+  "Verhältnis~": "Verhältnis~",
+  " werden": " werden",
+  "Einmalig unterstützen": "Einmalig unterstützen",
+  " € below and tick “Make this monthly”.": " € below and tick “Make this monthly”.",
+  " € eintragen und „Make this monthly“ anhaken.": " € eintragen und „Make this monthly“ anhaken.",
+  "Unten einen beliebigen Betrag wählen.": "Unten einen beliebigen Betrag wählen."
  }
 }

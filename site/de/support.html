@@ -53,32 +53,35 @@
       <h2>Reader</h2>
       <p class="ei-preis">1,99&nbsp;€ im Monat</p>
       <p class="ei-wer">Für Studierende und alle, die mit kleinem Budget lesen.</p>
-      <a class="ei-knopf" href="https://ko-fi.com/idealismedition/tiers" target="_blank" rel="noopener">Reader werden</a>
+      <a class="ei-knopf ei-stufe-knopf" href="https://ko-fi.com/idealismedition/tiers" data-name="Reader" data-betrag="1,99" data-an="a">Reader werden</a>
     </li>
     <li class="ei-stufe">
       <svg viewBox="0 0 200 120" aria-hidden="true"><circle class="an" cx="100" cy="44" r="34"/><circle class="an" cx="80" cy="72" r="34"/><circle cx="120" cy="72" r="34"/></svg>
       <h2>Fellow</h2>
       <p class="ei-preis">3,99&nbsp;€ im Monat</p>
       <p class="ei-wer">Für Promovierende und Postdocs, die mit den Texten arbeiten.</p>
-      <a class="ei-knopf" href="https://ko-fi.com/idealismedition/tiers" target="_blank" rel="noopener">Fellow werden</a>
+      <a class="ei-knopf ei-stufe-knopf" href="https://ko-fi.com/idealismedition/tiers" data-name="Fellow" data-betrag="3,99" data-an="ab">Fellow werden</a>
     </li>
     <li class="ei-stufe">
       <svg viewBox="0 0 200 120" aria-hidden="true"><circle class="an" cx="100" cy="44" r="34"/><circle class="an" cx="80" cy="72" r="34"/><circle class="an" cx="120" cy="72" r="34"/></svg>
       <h2>Scholar</h2>
       <p class="ei-preis">5,99&nbsp;€ im Monat</p>
       <p class="ei-wer">Für Professorinnen und Professoren, die die Ausgaben in Forschung und Lehre nutzen.</p>
-      <a class="ei-knopf" href="https://ko-fi.com/idealismedition/tiers" target="_blank" rel="noopener">Scholar werden</a>
+      <a class="ei-knopf ei-stufe-knopf" href="https://ko-fi.com/idealismedition/tiers" data-name="Scholar" data-betrag="5,99" data-an="abc">Scholar werden</a>
     </li>
   </ul>
-  <p class="ei-hinweis">Die Stufen unterscheiden sich nur im Betrag; wählen Sie, was zu Ihnen passt. Bezahlt wird auf Ko-fi, wo sich die Mitgliedschaft jederzeit beenden lässt. Lieber einmalig? <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Auch das geht dort.</a></p>
+  <p class="ei-hinweis">Die Stufen unterscheiden sich nur im Betrag; wählen Sie, was zu Ihnen passt. Bezahlt wird über Ko-fi, direkt hier auf der Seite, und die Mitgliedschaft lässt sich jederzeit beenden. <button type="button" class="ei-einmalig" data-name="" data-betrag="">Lieber einmalig unterstützen</button></p>
+  <p class="ei-hinweis ei-leise">Ein Klick auf eine Stufe lädt das Zahlfeld von Ko-fi; erst dann gehen Daten an Ko-fi (siehe <a href="/de/privacy">Datenschutz</a>).</p>
 
-  <section class="ei-kofi" id="kofi">
-    <h2>Direkt hier unterstützen</h2>
-    <p class="ei-hinweis">Einmalig oder monatlich, ohne die Seite zu verlassen. Das Zahlfeld von Ko-fi lädt erst, wenn Sie klicken; erst dann gehen Daten an Ko-fi (siehe <a href="/de/privacy">Datenschutz</a>).</p>
-    <button type="button" class="ei-knopf" id="kofi-laden">Zahlfeld von Ko-fi laden</button>
-    <div class="ei-kofi-feld" id="kofi-feld" hidden></div>
-    <p class="ei-hinweis ei-kofi-ersatz" id="kofi-ersatz" hidden>Bleibt das Feld leer, lässt Ko-fi das Einbetten in Ihrem Browser nicht zu. <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Dann direkt auf Ko-fi unterstützen.</a></p>
-  </section>
+  <dialog class="ei-kofi-fenster" id="kofi-fenster" aria-labelledby="kofi-titel">
+    <div class="ei-kofi-kopf" tabindex="-1" autofocus>
+      <svg viewBox="0 0 200 120" aria-hidden="true" id="kofi-ringe"><circle cx="100" cy="44" r="34"/><circle cx="80" cy="72" r="34"/><circle cx="120" cy="72" r="34"/></svg>
+      <div><h2 id="kofi-titel"></h2><p class="ei-kofi-schritt" id="kofi-schritt"></p></div>
+      <button type="button" class="ei-kofi-zu" id="kofi-zu" aria-label="Schließen">×</button>
+    </div>
+    <div class="ei-kofi-feld" id="kofi-feld"></div>
+    <p class="ei-kofi-fuss">Bleibt das Feld leer, lässt Ko-fi das Einbetten in Ihrem Browser nicht zu: <a href="https://ko-fi.com/idealismedition/tiers" target="_blank" rel="noopener">dann direkt auf Ko-fi</a>.</p>
+  </dialog>
 
   <section class="legal-section">
     <h2>Was die Mitgliedschaft ist</h2>
@@ -108,15 +111,31 @@
   </nav>
 </footer>
 <script>
-/* Ko-fi-Zahlfeld erst nach dem Klick laden (Zwei-Klick-Lösung): vorher geht keine Anfrage an Ko-fi */
-document.getElementById('kofi-laden').addEventListener('click', function () {
-  var f = document.getElementById('kofi-feld'), i = document.createElement('iframe');
-  i.src = 'https://ko-fi.com/idealismedition/?hidefeed=true&widget=true&embed=true&preview=true';
-  i.title = 'Ko-fi'; i.height = '712'; i.loading = 'eager';
-  i.style.cssText = 'border:0;width:100%;max-width:34rem;background:#f9f9f9;border-radius:3px';
-  f.appendChild(i); f.hidden = false; this.remove();
-  document.getElementById('kofi-ersatz').hidden = false;
-});
+/* Ko-fi direkt auf der Seite: die Stufe öffnet ein Fenster mit dem Zahlfeld von Ko-fi. Das Zahlfeld lädt erst mit
+   diesem Klick (vorher keine Anfrage an Ko-fi) und bleibt danach geladen. */
+(function () {
+  var fenster = document.getElementById('kofi-fenster'), feld = document.getElementById('kofi-feld');
+  var EN = document.documentElement.lang === 'en';
+  function oeffnen(name, betrag, an) {
+    if (!feld.firstChild) {
+      var i = document.createElement('iframe');
+      i.src = 'https://ko-fi.com/idealismedition/?hidefeed=true&widget=true&embed=true&preview=true';
+      i.title = 'Ko-fi'; i.height = '690';
+      feld.appendChild(i);
+    }
+    document.getElementById('kofi-titel').textContent = name ? (EN ? 'Become a ' + name : name + ' werden') : (EN ? 'Support once' : 'Einmalig unterstützen');
+    document.getElementById('kofi-schritt').textContent = name
+      ? (EN ? 'Enter ' + betrag.replace(',', '.') + ' € below and tick “Make this monthly”.' : 'Unten ' + betrag + ' € eintragen und „Make this monthly“ anhaken.')
+      : (EN ? 'Choose any amount below.' : 'Unten einen beliebigen Betrag wählen.');
+    document.querySelectorAll('#kofi-ringe circle').forEach(function (c, k) { c.classList.toggle('an', (an || '').indexOf('abc'[k]) >= 0); });
+    if (fenster.showModal) fenster.showModal(); else fenster.setAttribute('open', '');
+  }
+  document.querySelectorAll('.ei-stufe-knopf, .ei-einmalig').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); oeffnen(a.dataset.name, a.dataset.betrag, a.dataset.an); });
+  });
+  document.getElementById('kofi-zu').addEventListener('click', function () { fenster.close(); });
+  fenster.addEventListener('click', function (e) { if (e.target === fenster) fenster.close(); });
+})();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
