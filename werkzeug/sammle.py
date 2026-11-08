@@ -3,7 +3,7 @@
 
 Quellen sind die Ordner, aus denen die Editionen ausgeliefert werden, nie die Arbeitsordner mit gesperrten Baenden:
   Schelling  ~/schelling/site
-  Hegel      ~/hegel-umfrage-wt   (ohne GW 16, das bis 31.12.2026 geschuetzt ist)
+  Hegel      ~/hegel-umfrage-wt   (ohne GW 13 und GW 16, bis 31.12.2026 gesperrt)
 
 Aufruf nach jeder Freigabe einer Edition:  python3 werkzeug/sammle.py
 """
@@ -13,7 +13,7 @@ HOME = pathlib.Path.home()
 P = HOME / 'idealismus'
 S = P / 'site'
 SUCHE = S / 'assets/suche'
-GESPERRT = {'gw-16'}          # § 70 UrhG bis 31.12.2026, siehe Hegel-Edition
+GESPERRT = {'gw-13', 'gw-16'}   # § 70 UrhG bis 31.12.2026 (GW 13: Erscheinen 2000/2001 strittig), siehe Hegel-Edition
 # Die Fichte-Edition (Domain seit 08.11.2026)
 FICHTE_URL = 'https://www.fichteedition.com'
 
