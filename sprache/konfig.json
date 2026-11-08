@@ -1,0 +1,25 @@
+{
+ "site": "site",
+ "basis": "https://www.idealismedition.com",
+ "absolut": true,
+ "js": [
+  "recherche-kern.js",
+  "recherche-worker.js",
+  "recherche-portal-worker.js",
+  "recherche-quer.js",
+  "ortho.js",
+  "auswahl.js",
+  "nur-eines.js",
+  "themefarbe.js"
+ ],
+ "rechtlich": [
+  "impressum.html",
+  "datenschutz.html"
+ ],
+ "ersetzen": [
+  [
+   "-mal so oft wie sonst",
+   "× as often as usual"
+  ]
+ ]
+}

@@ -111,8 +111,10 @@
       window.HEGEL_THEMA.weiter();
       beschriften(knopf);
     });
+    var rechts = kopf.querySelector('.kopf-rechts');   // rechts neben dem Sprachumschalter
     var nav = kopf.querySelector('.sitenav');
-    if (nav && nav.parentNode === kopf) kopf.insertBefore(knopf, nav.nextSibling);
+    if (rechts) rechts.appendChild(knopf);
+    else if (nav && nav.parentNode === kopf) kopf.insertBefore(knopf, nav.nextSibling);
     else kopf.appendChild(knopf);
   }
 

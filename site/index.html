@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8">
+  <script>/*sprache*/try{if(localStorage.getItem('sprache')==='de'&&!/[?&]en\b/.test(location.search))location.replace('/de'+(location.pathname==='/'?'/':location.pathname)+location.search+location.hash)}catch(e){}</script>
   <meta name="author" content="Giuliano Infantino">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="alternate" hreflang="en" href="https://www.idealismedition.com/">
+  <link rel="alternate" hreflang="de" href="https://www.idealismedition.com/de/">
+  <link rel="alternate" hreflang="x-default" href="https://www.idealismedition.com/">
   <title>Edition Deutscher Idealismus · Fichte, Schelling, Hegel</title>
-  <meta name="description" content="Frei zugängliche digitale Ausgaben der Werke Fichtes, Schellings und Hegels, mit einer gemeinsamen Volltextsuche über alle Bände, zitiert bis zur Zeile.">
+  <meta name="description" content="Freely accessible digital editions of the works of Fichte, Schelling, and Hegel, with a shared full-text search across all volumes, cited to the line.">
   <link rel="canonical" href="https://www.idealismedition.com/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Edition Deutscher Idealismus">
-  <meta property="og:description" content="Fichte, Schelling, Hegel: die Werke in digitalen Ausgaben, mit einer gemeinsamen Recherche über alle Bände.">
+  <meta property="og:description" content="Fichte, Schelling, Hegel: the works in digital editions, with a shared search across all volumes.">
   <meta property="og:url" content="https://www.idealismedition.com/">
   <meta property="og:image" content="https://www.idealismedition.com/assets/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="de_DE">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:site_name" content="Edition Deutscher Idealismus">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://www.idealismedition.com/assets/og.png">
@@ -30,58 +35,41 @@
   <link rel="stylesheet" href="assets/fonts.css">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/portal.css">
-  <script src="assets/themefarbe.js"></script>
+  <script src="assets/en/themefarbe.js"></script>
 </head>
 <body class="startseite-still">
 
-<a href="#inhalt" class="skip-link">Zum Inhalt springen</a>
+<a href="#inhalt" class="skip-link">Skip to content</a>
 
 <header class="site-header" id="site-header" role="banner">
-  <a href="/" class="site-title" aria-label="Edition Deutscher Idealismus, Startseite">
+  <a href="/" class="site-title" aria-label="Edition Deutscher Idealismus, home page">
     <svg class="ringe-mark site-title-rings" viewBox="0 0 200 120" aria-hidden="true"><circle class="ring ring-a" cx="100" cy="44" r="34" vector-effect="non-scaling-stroke"/><circle class="ring ring-b" cx="80" cy="72" r="34" vector-effect="non-scaling-stroke"/><circle class="ring ring-c" cx="120" cy="72" r="34" vector-effect="non-scaling-stroke"/></svg>
-    <span class="site-title-rows">
-      <span class="site-title-hegel">IDEALISMUS</span>
-      <span class="site-title-edition">edition</span>
-    </span>
-  </a>
-  <nav class="sitenav" aria-label="Hauptnavigation">
+    <span class="site-title-rows"> <span class="site-title-hegel">IDEALISMUS</span> <span class="site-title-edition">edition</span> </span> </a>
+  <nav class="sitenav" aria-label="Main navigation">
     <ul>
-      <li><a href="#editionen">Ausgaben</a></li>
-      <li><a href="recherche">Recherche</a></li>
-      <li class="nav-weit"><a href="/unterstuetzen">Unterstützen</a></li>
+      <li><a href="#editionen">Editions</a></li>
+      <li><a href="recherche">Search</a></li>
+      <li class="nav-weit"><a href="/unterstuetzen">Support</a></li>
     </ul>
   </nav>
+  <div class="kopf-rechts"><a class="sprache-schalter" href="/de/" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsche Fassung" onclick="try{localStorage.setItem('sprache','de')}catch(e){};this.href='/de'+(location.pathname==='/'?'/':location.pathname)+location.search+location.hash">DE</a></div>
 </header>
 
 <main id="inhalt" class="p">
   <h1>Edition Deutscher Idealismus</h1>
-  <p class="p-unter">Die Werke Fichtes, Schellings und Hegels in digitalen Ausgaben, frei zugänglich.</p>
-  <nav class="p-drei" id="editionen" aria-label="Die Ausgaben">
-    <a class="p-bild" href="https://www.fichteedition.com/">
-      <picture><source type="image/webp" srcset="assets/bildnisse/fichte.webp 1x, assets/bildnisse/fichte@2x.webp 2x"><img src="assets/bildnisse/fichte.jpg" width="340" height="442" alt="Johann Gottlieb Fichte" decoding="async"></picture>
-      <span class="p-wer">Fichte</span>
-      <span class="p-leise">1762–1814<span class="p-trenn"> · </span><span data-baende="fichte">11 Bände</span></span>
-    </a>
-    <a class="p-bild" href="https://www.schellingedition.com/">
-      <picture><source type="image/webp" srcset="assets/bildnisse/schelling.webp 1x, assets/bildnisse/schelling@2x.webp 2x"><img src="assets/bildnisse/schelling.jpg" width="340" height="442" alt="Friedrich Wilhelm Joseph Schelling" decoding="async"></picture>
-      <span class="p-wer">Schelling</span>
-      <span class="p-leise">1775–1854<span class="p-trenn"> · </span><span data-baende="schelling">14 Bände</span></span>
-    </a>
-    <a class="p-bild" href="https://www.hegeledition.com/">
-      <picture><source type="image/webp" srcset="assets/bildnisse/hegel.webp 1x, assets/bildnisse/hegel@2x.webp 2x"><img src="assets/bildnisse/hegel.jpg" width="340" height="442" alt="Georg Wilhelm Friedrich Hegel" decoding="async"></picture>
-      <span class="p-wer">Hegel</span>
-      <span class="p-leise">1770–1831<span class="p-trenn"> · </span><span data-baende="hegel">16 Bände</span></span>
-    </a>
+  <p class="p-unter">The works of Fichte, Schelling, and Hegel in digital editions, freely accessible.</p>
+  <nav class="p-drei" id="editionen" aria-label="The editions">
+    <a class="p-bild" href="https://www.fichteedition.com/"> <picture><source type="image/webp" srcset="assets/bildnisse/fichte.webp 1x, assets/bildnisse/fichte@2x.webp 2x"><img src="assets/bildnisse/fichte.jpg" width="340" height="442" alt="Johann Gottlieb Fichte" decoding="async"></picture> <span class="p-wer">Fichte</span> <span class="p-leise">1762–1814<span class="p-trenn"> · </span><span data-baende="fichte">11 volumes</span></span> </a> <a class="p-bild" href="https://www.schellingedition.com/"> <picture><source type="image/webp" srcset="assets/bildnisse/schelling.webp 1x, assets/bildnisse/schelling@2x.webp 2x"><img src="assets/bildnisse/schelling.jpg" width="340" height="442" alt="Friedrich Wilhelm Joseph Schelling" decoding="async"></picture> <span class="p-wer">Schelling</span> <span class="p-leise">1775–1854<span class="p-trenn"> · </span><span data-baende="schelling">14 volumes</span></span> </a> <a class="p-bild" href="https://www.hegeledition.com/"> <picture><source type="image/webp" srcset="assets/bildnisse/hegel.webp 1x, assets/bildnisse/hegel@2x.webp 2x"><img src="assets/bildnisse/hegel.jpg" width="340" height="442" alt="Georg Wilhelm Friedrich Hegel" decoding="async"></picture> <span class="p-wer">Hegel</span> <span class="p-leise">1770–1831<span class="p-trenn"> · </span><span data-baende="hegel">16 volumes</span></span> </a>
   </nav>
   <form class="p-suche" action="recherche" method="get" role="search">
-    <input type="search" name="q" placeholder="In allen 41 Bänden suchen" aria-label="In allen Bänden suchen" spellcheck="false" autocapitalize="off" autocorrect="off">
-    <button type="submit">Suchen</button>
+    <input type="search" name="q" placeholder="Search all 41 volumes" aria-label="Search all volumes" spellcheck="false" autocapitalize="off" autocorrect="off">
+    <button type="submit">Search</button>
   </form>
 </main>
 
 <footer class="p-fuss">
-  <p>Digitale Ausgaben von <a href="https://giulianoinfantino.com" rel="me">Giuliano Infantino</a>. Texte gemeinfrei, Daten unter <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC&nbsp;BY&nbsp;4.0</a>.</p>
-  <nav><a href="/unterstuetzen">Unterstützen</a><a href="recherche">Recherche</a><a href="datenschutz">Datenschutz</a><a href="impressum">Impressum</a></nav>
+  <p>Digital editions by <a href="https://giulianoinfantino.com" rel="me">Giuliano Infantino</a>. Texts in the public domain, data under <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC&nbsp;BY&nbsp;4.0</a>.</p>
+  <nav><a href="/unterstuetzen">Support</a><a href="recherche">Search</a><a href="datenschutz">Privacy</a><a href="impressum">Legal notice</a></nav>
 </footer>
 </body>
 </html>

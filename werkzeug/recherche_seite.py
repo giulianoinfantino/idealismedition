@@ -7,8 +7,8 @@ Kopf und Fuss, Bandliste nach Editionen, Links in die Edition, aus der eine Stel
 """
 import pathlib, sys
 
-QUELLE = pathlib.Path.home() / 'schelling/site/search.html'
-ZIEL = pathlib.Path.home() / 'idealismus/site/recherche.html'
+QUELLE = pathlib.Path.home() / 'schelling/site/de/search.html'   # deutsche Seiten liegen seit der englischen Fassung unter de/
+ZIEL = pathlib.Path.home() / 'idealismus/site/de/recherche.html'
 t = QUELLE.read_text(encoding='utf-8')
 
 
@@ -23,7 +23,7 @@ def ers(alt, neu, n=1):
 ers('<title>Recherche — Digitale Schelling-Edition</title>', '<title>Recherche · Edition Deutscher Idealismus</title>')
 ers('content="Volltextsuche über Schellings Werke nach dem Text der Sämmtlichen Werke: zitiert bis zur Druckzeile, mit Konkordanz, Verteilung über die Bände, Phrasen, Nähe und Orthographie-Ausgleich."',
     'content="Eine Volltextsuche über die Werke Schellings und Hegels: zitiert bis zur Druckzeile, mit Konkordanz, Verteilung über die Bände, Phrasen, Nähe und Orthographie-Ausgleich."')
-ers('https://www.schellingedition.com/search.html', 'https://www.idealismedition.com/recherche', 2)
+ers('https://www.schellingedition.com/search.html', 'https://www.idealismedition.com/recherche')   # og:url; canonical und hreflang setzt englisch.py
 ers('content="Recherche — Digitale Schelling-Edition"', 'content="Recherche · Edition Deutscher Idealismus"')
 ers('content="Volltextsuche über Schellings Werke nach dem Text der Sämmtlichen Werke: zitiert bis zur Zeile, mit Konkordanz und Verteilung."',
     'content="Eine Volltextsuche über Schelling und Hegel: zitiert bis zur Zeile, mit Konkordanz und Verteilung."')
@@ -36,7 +36,7 @@ ers('<span class="site-title-hegel">SCHELLING</span>', '<span class="site-title-
 ers('''      <li><a href="index.html">Sammlung</a></li>
       <li><a href="text.html">Lektüre</a></li>
       <li><a href="search.html" class="current" aria-current="page">Recherche</a></li>
-      <li class="nav-weit"><a href="/unterstuetzen">Unterstützen</a></li>''',
+      <li class="nav-weit"><a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a></li>''',
     '''      <li><a href="/#editionen">Ausgaben</a></li>
       <li><a href="recherche" class="current" aria-current="page">Recherche</a></li>
       <li class="nav-weit"><a href="/unterstuetzen">Unterstützen</a></li>''')
@@ -59,7 +59,7 @@ ers('„und“, „oder“, „nicht“ in Kleinbuchstaben sind Wörter.</p>',
 # ── Fuss und Skripte ─────────────────────────────────────────────────────
 ers('''  <div>Digitale Schelling-Edition</div>
   <nav>
-    <a href="/unterstuetzen">Unterstützen</a>
+    <a href="https://ko-fi.com/idealismedition" target="_blank" rel="noopener">Unterstützen</a>
     <a href="neuigkeiten.html">Neuigkeiten</a>
     <a href="editionsrichtlinien.html">Richtlinien</a>
     <a href="urheberrecht.html">Urheberrecht</a>

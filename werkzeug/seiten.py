@@ -35,7 +35,7 @@ def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False):
     nav = [('/#editionen', 'Ausgaben', ''), ('/recherche', 'Recherche', 'recherche'), ('/unterstuetzen', 'Unterstützen', 'unterstuetzen')]
     navhtml = '\n'.join(f'      <li' + (' class="nav-weit"' if k == 'unterstuetzen' else '') + f'><a href="{h}"' + (' target="_blank" rel="noopener"' if h.startswith('http') else '') + (' class="current" aria-current="page"' if k and k == aktuell else '') + f'>{t}</a></li>' for h, t, k in nav)
     kanon = '' if ohne_index else f'\n  <link rel="canonical" href="https://www.idealismedition.com/{datei.removesuffix(".html").removesuffix("index")}">'
-    (S / datei).write_text(f'''<!DOCTYPE html>
+    (S / 'de' / datei).write_text(f'''<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="utf-8">

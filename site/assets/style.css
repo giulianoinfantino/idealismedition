@@ -1135,3 +1135,10 @@ img.figur{display:block;max-width:100%;margin:.8em auto;mix-blend-mode:multiply}
 /* Zitate gegen die allgemeinen Absatzregeln des Lesers durchsetzen (die setzen Blocksatz mit hoeherer Spezifitaet) */
 body .page-card .text-unit.type-quote,body.feinsatz .page-card .text-unit.type-quote{text-align:center;text-align-last:center;text-indent:0;hyphens:manual;-webkit-hyphens:manual}
 body .page-card .text-unit.type-quote .dipl-line-text{text-align:center}
+
+/* Rechts in der Kopfleiste: Sprachumschalter EN | DE und der Knopf für hell/dunkel. */
+.kopf-rechts{justify-self:end;display:flex;align-items:center;gap:0.5rem}
+.kopf-rechts .thema-schalter{margin-left:0}
+.sprache-schalter{height:2rem;min-width:2.3rem;padding:0 0.45rem;display:flex;align-items:center;justify-content:center;font-size:0.68rem;letter-spacing:0.14em;border:1px solid var(--rule);border-radius:3px;color:var(--text-muted);text-decoration:none;transition:color 0.2s,border-color 0.2s}
+.sprache-schalter:hover{color:var(--accent-gold);border-color:var(--accent-gold);text-decoration:none}
+@media (max-width:600px){.kopf-rechts{gap:0.35rem}.sprache-schalter{min-width:2rem;padding:0 0.3rem}}

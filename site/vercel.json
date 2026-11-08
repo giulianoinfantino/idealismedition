@@ -3,10 +3,44 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/search", "destination": "/recherche", "permanent": true },
-    { "source": "/suche", "destination": "/recherche", "permanent": true }
+    {
+      "source": "/search",
+      "destination": "/recherche",
+      "permanent": true
+    },
+    {
+      "source": "/suche",
+      "destination": "/recherche",
+      "permanent": true
+    }
   ],
   "headers": [
-    { "source": "/assets/fonts/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }
+    {
+      "source": "/assets/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/de/assets/:pfad*",
+      "destination": "/assets/:pfad*"
+    },
+    {
+      "source": "/de/api/:pfad*",
+      "destination": "/api/:pfad*"
+    },
+    {
+      "source": "/de/favicon.ico",
+      "destination": "/favicon.ico"
+    },
+    {
+      "source": "/de/manifest.json",
+      "destination": "/manifest.json"
+    }
   ]
 }

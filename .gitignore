@@ -4,3 +4,6 @@ site/.vercel/
 # Suchdaten sind Kopien aus den Editionen (werkzeug/sammle.py), 33 MB
 site/assets/suche/
 .vercel
+site/de/assets
+site/de/api
+werkzeug/__pycache__/
