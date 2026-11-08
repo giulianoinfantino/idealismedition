@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Die einfachen Seiten des Portals mit gemeinsamem Kopf und Fuss schreiben: unterstuetzen, impressum, datenschutz, 404.
+"""Die einfachen Seiten des Portals mit gemeinsamem Kopf und Fuss schreiben: analysen, unterstuetzen, impressum, datenschutz, 404.
   python3 werkzeug/seiten.py
 """
 import pathlib
@@ -31,8 +31,9 @@ RINGE = ('<svg class="ringe-mark site-title-rings" viewBox="0 0 200 120" aria-hi
          '<circle class="ring ring-c" cx="120" cy="72" r="34" vector-effect="non-scaling-stroke"/></svg>')
 
 
-def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False):
-    nav = [('/#editionen', 'Ausgaben', ''), ('/search', 'Recherche', 'recherche'), ('/support', 'Unterstützen', 'unterstuetzen')]
+def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False, kopf='', fuss=''):
+    nav = [('/#editionen', 'Ausgaben', ''), ('/search', 'Recherche', 'recherche'), ('/analyses', 'Analysen', 'analysen'),
+           ('/support', 'Unterstützen', 'unterstuetzen')]
     navhtml = '\n'.join(f'      <li' + (' class="nav-weit"' if k == 'unterstuetzen' else '') + f'><a href="{h}"' + (' target="_blank" rel="noopener"' if h.startswith('http') else '') + (' class="current" aria-current="page"' if k and k == aktuell else '') + f'>{t}</a></li>' for h, t, k in nav)
     kanon = '' if ohne_index else f'\n  <link rel="canonical" href="https://www.idealismedition.com/{datei.removesuffix(".html").removesuffix("index")}">'
     (S / 'de' / datei).write_text(f'''<!DOCTYPE html>
@@ -51,7 +52,7 @@ def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False):
   <link rel="preload" href="/assets/fonts/SourceSerif4-Variable-roman.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/fonts.css">
   <link rel="stylesheet" href="/assets/style.css">
-  <link rel="stylesheet" href="/assets/portal.css">
+  <link rel="stylesheet" href="/assets/portal.css">{kopf}
   <script src="/assets/themefarbe.js"></script>
 </head>
 <body>
@@ -84,7 +85,7 @@ def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False):
     <a href="/legal-notice">Impressum</a>
   </nav>
 </footer>
-<script defer src="/_vercel/insights/script.js"></script>
+{fuss}<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
 ''', encoding='utf-8')
@@ -93,6 +94,63 @@ def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False):
 ANSCHRIFT = '''Giuliano Infantino<br>
       Brüdergasse 29<br>
       53111 Bonn'''
+
+seite('analyses.html', 'Analysen', '''
+<main class="legal-container legal-container--wide an">
+  <div class="legal-kicker">Analysen</div>
+  <h1>Der Wortschatz der drei</h1>
+  <p class="legal-lead">Was sich am Volltext der 41 Bände ablesen lässt: wann ein Begriff aufkommt und wieder zurücktritt, welche Wörter jeden der drei kennzeichnen und was sie im Druck hervorheben.</p>
+
+  <section class="an-abschnitt" id="begriffsgeschichte">
+    <h2>Begriffsgeschichte</h2>
+    <p class="an-unter">Wie oft ein Wort in den Schriften eines Jahrfünfts steht, je 10&#8239;000 Wörter. Gezählt werden alle Schreibungen und Beugungsformen, also <i>Begriff</i>, <i>Begriffe</i> und <i>Begriffs</i> zusammen.</p>
+    <form class="p-suche an-form" id="an-form" role="search">
+      <input type="search" id="an-wort" name="wort" value="Freiheit" aria-label="Wort" spellcheck="false" autocapitalize="off" autocorrect="off">
+      <button type="submit">Zeigen</button>
+    </form>
+    <p class="an-beispiele"><span>Zum Beispiel</span>
+      <button type="button" data-wort="Freiheit">Freiheit</button>
+      <button type="button" data-wort="Anschauung">Anschauung</button>
+      <button type="button" data-wort="Reflexion">Reflexion</button>
+      <button type="button" data-wort="Potenz">Potenz</button>
+      <button type="button" data-wort="Bild">Bild</button>
+      <button type="button" data-wort="Anerkennung">Anerkennung</button>
+      <button type="button" data-wort="Offenbarung">Offenbarung</button>
+      <button type="button" data-wort="Dialektik">Dialektik</button>
+    </p>
+    <h3 class="an-kurve-kopf"><span id="an-kurve-wort">Freiheit</span></h3>
+    <figure class="zk" id="an-kurve"></figure>
+    <p class="an-hinweis" id="an-kurve-hinweis" hidden></p>
+    <p class="an-weiter"><a id="an-recherche" href="/search?q=Freiheit&amp;ansicht=zeit">In der Recherche über die Jahre verteilen</a>, auch für Wortfolgen und seltene Wörter, mit den Werken dazu.</p>
+  </section>
+
+  <section class="an-abschnitt" id="wortschatz">
+    <h2>Kennzeichnender Wortschatz</h2>
+    <p class="an-unter">Wörter, die einer der drei deutlich öfter gebraucht als die beiden anderen, geordnet nach der Stärke des Unterschieds. Der Balken zeigt, wie oft das Wort bei ihm steht, der Strich, wie oft bei den anderen; die Zahl sagt, wievielmal so oft. Ein Wort öffnet seine Begriffsgeschichte.</p>
+    <div class="an-umschalter" role="group" aria-label="Wortart">
+      <button type="button" data-art="begriffe" aria-pressed="true">Substantive</button>
+      <button type="button" data-art="stil" aria-pressed="false">Andere Wörter</button>
+    </div>
+    <div class="an-spalten" id="an-vokabular"></div>
+  </section>
+
+  <section class="an-abschnitt" id="hervorhebungen">
+    <h2>Hervorhebungen</h2>
+    <p class="an-unter">Gesperrt oder kursiv gesetzte Wörter, wie die Drucke sie wiedergeben. Welche Wörter am häufigsten hervorgehoben sind und welche fast immer, wenn sie vorkommen.</p>
+    <div class="an-kacheln" id="an-hv-zahlen"></div>
+    <div class="an-spalten" id="an-hv-listen"></div>
+  </section>
+
+  <section class="legal-section an-grundlage">
+    <h2>Grundlage</h2>
+    <p>Maschinell ausgezählt aus dem Text der Recherche, Haupttext und Anmerkungen ohne Überschriften, nach ihrem Schreibungsausgleich: <i>daß</i> und <i>dass</i>, <i>Seyn</i> und <i>Sein</i> zählen als dasselbe Wort. Die Zahlen sind so genau wie die Texterfassung, die noch in der offenen Beta ist. Hegels Exzerpte (GW 3 und ein Abschnitt von GW 5) bleiben außer Betracht, weil sie fremde Texte wiedergeben.</p>
+    <p>Jahre: bei Druckschriften das Jahr des Erscheinens, bei Vorlesungen das Jahr, in dem sie gehalten wurden, beim Nachlass das der Niederschrift; Sammelrubriken stehen bei einem mittleren Jahr. Manches geben die Ausgaben in späterer Fassung, etwa die Enzyklopädie von 1827 und 1830 oder die zweite Auflage von Schellings Ideen. Ein Jahrfünft, in dem von einem der drei weniger als 20&#8239;000 Wörter vorliegen, bleibt in der Kurve frei.</p>
+    <p>Kennzeichnend heißt: Das Wort steht bei einem Autor mindestens 40-mal und, auf die Länge der Texte gerechnet, öfter als bei den beiden anderen zusammengenommen; geordnet ist nach dem Log-Likelihood-Test von Dunning. Beugungsformen der Substantive sind zusammengefasst. Hervorhebungen sind nach den TEI-Daten der Ausgaben gezählt; die Sprecher in Schellings Bruno sind ausgenommen. Stand: <span id="an-stand"></span>.</p>
+  </section>
+</main>''', beschreibung='Begriffsgeschichte, kennzeichnender Wortschatz und Hervorhebungen bei Fichte, Schelling und Hegel, ausgezählt aus dem Volltext der 41 Bände.',
+      aktuell='analysen',
+      kopf='\n  <link rel="stylesheet" href="/assets/zeitkurve.css">',
+      fuss='<script src="/assets/ortho.js" defer></script>\n<script src="/assets/zeitkurve.js" defer></script>\n<script src="/assets/analysen.js" defer></script>\n')
 
 seite('support.html', 'Unterstützen', f'''
 <main class="legal-container legal-container--wide">

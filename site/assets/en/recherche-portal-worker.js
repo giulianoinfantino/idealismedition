@@ -3,6 +3,9 @@
  *   vergleich {id}       -> vergleich  je Edition: Stellen, Vorkommen, Dichte, staerkste Baende, Begriffsumfeld, dichteste Stellen
  *   parallel  {id, i}    -> parallel   die aehnlichsten Stellen zur Stelle i, in jeder Edition (gemeinsame seltene Begriffe)
  *   bezuege   {}         -> bezuege    wer nennt wen, und die gemeinsamen Gewaehrsleute
+ *   zeit      {id}       -> zeit       je Werk Jahr, Gattung, Woerter und Vorkommen (Begriffsgeschichte)
+ * Dazu ein Filter der Suche nach Jahr und Gattung: suche {..., jahre: {von, bis}, gattung: 'dvne'}.
+ * Jahr und Gattung je Werk stehen in suche/jahre.json (werkzeug/jahre.py).
  * Alles rechnet auf den Indizes, die der Kern ohnehin baut (Formen, Normalformen, Positionen, Ketten).
  */
 'use strict';
@@ -233,8 +236,98 @@ function bezuege() {
   post({ typ: 'bezuege', daten: BEZUG });
 }
 
+// ── Jahr und Gattung ────────────────────────────────────────────────────
+var JAHRE = null, jahreLadung = null, SEG = {}, WSEG = {};
+function ladeJahre() {
+  if (!jahreLadung) jahreLadung = fetch(new URL('jahre.json', new URL('../suche/', self.location.href)))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) { JAHRE = d; }, function () { JAHRE = null; });
+  return jahreLadung;
+}
+/** Je Einheit des Bandes die Nummer des Werks in JAHRE.baende[w]. */
+function segVon(w) {
+  if (SEG[w]) return SEG[w];
+  var b = BAND[w], liste = (JAHRE && JAHRE.baende[w]) || [[0, null, '', '']], a = new Int16Array(b.units.length), s = 0;
+  for (var i = 0; i < a.length; i++) { while (s + 1 < liste.length && liste[s + 1][0] <= i) s++; a[i] = s; }
+  return (SEG[w] = a);
+}
+/** Woerter je Werk, einmal gezaehlt. */
+function woerterVon(w) {
+  if (WSEG[w]) return WSEG[w];
+  var b = BAND[w], sv = segVon(w), n = new Array(((JAHRE && JAHRE.baende[w]) || [0]).length).fill(0);
+  for (var p = 0; p < b.woerter; p++) n[sv[b.tU[p]]]++;
+  return (WSEG[w] = n);
+}
+function werkDaten(w, s) { var l = JAHRE && JAHRE.baende[w]; return l && l[s] || [0, null, '', '']; }
+function erlaubt(f, e) {
+  if (!f) return true;
+  if (f.jahre && (e[1] == null || e[1] < f.jahre.von || e[1] > f.jahre.bis)) return false;
+  return !f.gattung || f.gattung.indexOf(e[2]) >= 0;
+}
+// Der Filter gilt fuer die laufende Suche: der Kern fragt je Band H.suche, hier fallen die Stellen
+// aus Werken ausserhalb des Zeitraums oder der Gattung weg (Zaehlung, Leiste und Verteilung folgen).
+var FILTER = null;
+var KERN_SUCHE = H.suche;
+H.suche = function (b, ast, opts) {
+  var r = KERN_SUCHE(b, ast, opts);
+  if (!FILTER || !JAHRE || !JAHRE.baende[b.work]) return r;
+  var sv = segVon(b.work), w = b.work;
+  r.stellen = r.stellen.filter(function (st) {
+    var u = st.pos.length ? b.tU[st.pos[0]] : b.ketten[st.kette].units[0];
+    return erlaubt(FILTER, werkDaten(w, sv[u]));
+  });
+  return r;
+};
+var SUCHE_BASIS = suche;
+suche = function (m) {
+  var j = m.jahre && isFinite(m.jahre.von) && isFinite(m.jahre.bis) ? { von: +m.jahre.von, bis: +m.jahre.bis } : null;
+  var g = typeof m.gattung === 'string' && /^[dvne]+$/.test(m.gattung) ? m.gattung : '';
+  FILTER = j || g ? { jahre: j, gattung: g } : null;
+  try { SUCHE_BASIS(m); if (aktuell) aktuell.filter = FILTER; } finally { FILTER = null; }
+};
+
+// ── Zeit: je Werk Jahr, Gattung, Woerter, Vorkommen ─────────────────────
+function zeit(m) {
+  if (!aktuell || aktuell.id !== m.id) return;
+  var werke = [], idx = {}, f = aktuell.filter;
+  REIHE.forEach(function (w) {
+    var liste = JAHRE && JAHRE.baende[w];
+    if (!liste) return;
+    var b = BAND[w], wz = woerterVon(w), sv = segVon(w), ed = edVon(w);
+    liste.forEach(function (e, s) {
+      if (!erlaubt(f, e)) return;
+      // gedruckte Seiten des Werks, fuer die Suche in diesem Werk
+      var von = null, bis = null;
+      for (var i = e[0]; i < b.units.length && sv[i] === s; i++) {
+        var bu = b.units[i].buch;
+        if (typeof bu === 'number') { if (von == null) von = bu; bis = bu; }
+      }
+      var x = { ed: ed, work: w, sig: b.sig, titel: e[3], jahr: e[1], gattung: e[2], woerter: wz[s], stellen: 0, n: 0, von: von, bis: bis };
+      idx[w + '|' + s] = x; werke.push(x);
+    });
+  });
+  aktuell.treffer.forEach(function (t) {
+    var b = BAND[t.w], sv = segVon(t.w), l = t.st.laeufe || [];
+    var u = t.st.pos.length ? b.tU[t.st.pos[0]] : b.ketten[t.st.kette].units[0];
+    var x = idx[t.w + '|' + sv[u]];
+    if (x) { x.stellen++; x.n += l.length || 1; }
+  });
+  post({ typ: 'zeit', id: m.id, werke: werke, filter: f || null });
+}
+
 self.onmessage = function (e) {
+  // Erst die Jahre, dann alles in der Folge, in der es kam (die Jahre sind nach dem ersten Mal sofort da)
+  ladeJahre().then(function () { verarbeite(e); });
+};
+function verarbeite(e) {
   var m = e.data;
+  if (m.typ === 'zeit') {
+    (ladung || lade()).then(function () {
+      try { if (REIHE.length && BAND[REIHE[REIHE.length - 1]]) zeit(m); }
+      catch (err) { post({ typ: 'fehler', text: String(err && err.message || err) }); }
+    });
+    return;
+  }
   if (m.typ === 'parallel' || m.typ === 'vergleich' || m.typ === 'bezuege') {
     (ladung || lade()).then(function () {
       try {
@@ -247,4 +340,4 @@ self.onmessage = function (e) {
     return;
   }
   GRUND(e);
-};
+}

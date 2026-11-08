@@ -47,6 +47,9 @@ ERSETZEN = [
     ("' Vorkommen'", "' occurrences'"),
     ("'Alle ' + gesamt", "'All ' + gesamt"),
     ("'Fehler beim Senden. Bitte versuchen Sie es erneut.'", "'Sending failed. Please try again.'"),
+    # Zahlen in der Bedienung englisch setzen: 2,636 statt 2.636, 4.5 statt 4,5
+    ("toLocaleString('de-DE')", "toLocaleString('en-US')"),
+    ("v.toFixed(2)).replace('.', ',');", "v.toFixed(2));"),
 ]
 JSLIT = re.compile(r"'((?:[^'\\\n]|\\.)*)'|\"((?:[^\"\\\n]|\\.)*)\"|`((?:[^`\\]|\\.)*)`", re.S)
 

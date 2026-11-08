@@ -42,6 +42,7 @@ ers('''      <li><a href="index.html">Sammlung</a></li>
       <li class="nav-weit"><a href="https://www.idealismedition.com/de/support">Unterstützen</a></li>''',
     '''      <li><a href="/#editionen">Ausgaben</a></li>
       <li><a href="search" class="current" aria-current="page">Recherche</a></li>
+      <li><a href="/analyses">Analysen</a></li>
       <li class="nav-weit"><a href="/support">Unterstützen</a></li>''')
 
 # ── Feld und Hilfe ───────────────────────────────────────────────────────
@@ -144,7 +145,7 @@ ers("""  $('rch-baende-liste').addEventListener('click', function (e) {
       return;
     }
     var b = e.target.closest('.rch-band');""")
-ers("  <link rel=\"stylesheet\" href=\"assets/recherche.css\">", "  <link rel=\"stylesheet\" href=\"assets/recherche.css\">\n  <link rel=\"stylesheet\" href=\"assets/recherche-portal.css\">")
+ers("  <link rel=\"stylesheet\" href=\"assets/recherche.css\">", "  <link rel=\"stylesheet\" href=\"assets/recherche.css\">\n  <link rel=\"stylesheet\" href=\"assets/recherche-portal.css\">\n  <link rel=\"stylesheet\" href=\"assets/zeitkurve.css\">")
 
 ers("""      '<div class="rch-zitat">' + esc(s.zitat) +""",
     """      '<div class="rch-zitat">' + (S.ordnung === 'dichte' ? '<span class="ei-autor">' + esc(edName(s.work)) + '</span> ' : '') + esc(s.zitat) +""")
@@ -152,16 +153,16 @@ ers("""      '<div class="rch-zitat">' + esc(s.zitat) +""",
 # ── Querverweise (recherche-quer.js, recherche-portal-worker.js) ──────────
 ers("try { worker = new Worker('assets/recherche-worker.js'); }", "try { worker = new Worker('assets/recherche-portal-worker.js'); }")
 ers('<button type="button" role="tab" id="tab-verteilung" data-ansicht="verteilung" aria-selected="false" aria-controls="search-results">Verteilung<span class="kz">3</span></button>',
-    '<button type="button" role="tab" id="tab-verteilung" data-ansicht="verteilung" aria-selected="false" aria-controls="search-results">Verteilung<span class="kz">3</span></button>\n        <button type="button" role="tab" id="tab-vergleich" data-ansicht="vergleich" aria-selected="false" aria-controls="search-results">Vergleich<span class="kz">4</span></button>')
+    '<button type="button" role="tab" id="tab-verteilung" data-ansicht="verteilung" aria-selected="false" aria-controls="search-results">Verteilung<span class="kz">3</span></button>\n        <button type="button" role="tab" id="tab-vergleich" data-ansicht="vergleich" aria-selected="false" aria-controls="search-results">Vergleich<span class="kz">4</span></button>\n        <button type="button" role="tab" id="tab-zeit" data-ansicht="zeit" aria-selected="false" aria-controls="search-results">Zeit<span class="kz">5</span></button>')
 ers("      zeichneBaende(null);\n      if (S.q) suche(false); else status.textContent",
     "      zeichneBaende(null);\n      worker.postMessage({ typ: 'bezuege' });\n      if (S.q) suche(false); else status.textContent")
 ers("    } else if (m.typ === 'fehler') {",
-    "    } else if (m.typ === 'vergleich') {\n      if (m.id === anfrage && S.ansicht === 'vergleich') Quer.vergleich(m, results);\n    } else if (m.typ === 'parallel') {\n      if (m.id === anfrage) Quer.parallel(m, results);\n    } else if (m.typ === 'bezuege') {\n      Quer.bezuege(m);\n    } else if (m.typ === 'fehler') {")
-ers("S.ansicht = ['stellen', 'konkordanz', 'verteilung'].indexOf(p.get('ansicht')) >= 0", "S.ansicht = ['stellen', 'konkordanz', 'verteilung', 'vergleich'].indexOf(p.get('ansicht')) >= 0")
+    "    } else if (m.typ === 'vergleich') {\n      if (m.id === anfrage && S.ansicht === 'vergleich') Quer.vergleich(m, results);\n    } else if (m.typ === 'zeit') {\n      if (m.id === anfrage && S.ansicht === 'zeit') Quer.zeit(m, results);\n    } else if (m.typ === 'parallel') {\n      if (m.id === anfrage) Quer.parallel(m, results);\n    } else if (m.typ === 'bezuege') {\n      Quer.bezuege(m);\n    } else if (m.typ === 'fehler') {")
+ers("S.ansicht = ['stellen', 'konkordanz', 'verteilung'].indexOf(p.get('ansicht')) >= 0", "S.ansicht = ['stellen', 'konkordanz', 'verteilung', 'vergleich', 'zeit'].indexOf(p.get('ansicht')) >= 0")
 ers("    else zeichneVerteilung();",
-    "    else if (S.ansicht === 'vergleich') { results.innerHTML = '<p class=\"qv-warte\">Die drei Ausgaben werden verglichen …</p>'; worker.postMessage({ typ: 'vergleich', id: anfrage }); }\n    else zeichneVerteilung();")
+    "    else if (S.ansicht === 'vergleich') { results.innerHTML = '<p class=\"qv-warte\">Die drei Ausgaben werden verglichen …</p>'; worker.postMessage({ typ: 'vergleich', id: anfrage }); }\n    else if (S.ansicht === 'zeit') { results.innerHTML = '<p class=\"qv-warte\">Die Stellen werden über die Jahre verteilt …</p>'; worker.postMessage({ typ: 'zeit', id: anfrage }); }\n    else zeichneVerteilung();")
 ers("""'">Lesefassung</a></div>' +""", """'">Lesefassung</a><button type="button" class="qp-knopf" data-parallel="' + s.i + '" title="Ähnliche Stellen bei Fichte, Schelling und Hegel">Parallelstellen</button></div>' +""")
-ers("    else if (e.key === '3') setzeAnsicht('verteilung');", "    else if (e.key === '3') setzeAnsicht('verteilung');\n    else if (e.key === '4') setzeAnsicht('vergleich');")
+ers("    else if (e.key === '3') setzeAnsicht('verteilung');", "    else if (e.key === '3') setzeAnsicht('verteilung');\n    else if (e.key === '4') setzeAnsicht('vergleich');\n    else if (e.key === '5') setzeAnsicht('zeit');")
 ers("  var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };", """  // Querverweise: was recherche-quer.js von der Seite braucht
   function sucheMit(q, ed) {
     input.value = q; spiegeln(); S.q = q; S.aus = []; S.seiten = null; S.baende = ed ? baendeVon(ed) : [];
@@ -170,6 +171,10 @@ ers("  var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };", """  // Querverwei
   window.QuerCtx = {
     esc: esc, zahl: zahl, leserLink: leserLink, edName: edName, sucheMit: sucheMit,
     sucheInBand: function (w) { S.baende = [w]; S.seiten = null; S.ansicht = 'stellen'; malAnsicht(); suche(true); window.scrollTo(0, 0); },
+    sucheInWerk: function (w, von, bis) {
+      S.baende = [w]; S.seiten = von != null ? { work: w, von: von, bis: bis } : null;
+      S.ansicht = 'stellen'; malAnsicht(); suche(true); window.scrollTo(0, 0);
+    },
     sucheNah: function (wort, ed) {
       var einfach = /^[\\p{L}\\p{N}*?=-]+$/u.test(S.q);
       sucheMit(einfach ? S.q + ' NEAR/8 ' + wort : '(' + S.q + ') ' + wort, ed);
@@ -183,9 +188,63 @@ ers("  var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };", """  // Querverwei
     p.disabled = true; p.textContent = 'Parallelstellen werden gesucht …';
     worker.postMessage({ typ: 'parallel', id: anfrage, i: +p.dataset.parallel });
   });
+  // Zeit und Gattung
+  var GATTUNGEN = 'dvne';
+  function malZeit() {
+    $('rch-von').value = S.jahre ? S.jahre.von : '';
+    $('rch-bis').value = S.jahre ? S.jahre.bis : '';
+    document.querySelectorAll('.rch-gattung').forEach(function (b) {
+      b.setAttribute('aria-pressed', !S.gattung || S.gattung.indexOf(b.dataset.g) >= 0 ? 'true' : 'false');
+    });
+    $('rch-zeit-alle').hidden = !S.jahre && !S.gattung;
+  }
+  function neuGefiltert() { malZeit(); if (S.q) suche(true); else schreibeAdresse(true); }
+  ['rch-von', 'rch-bis'].forEach(function (id) {
+    $(id).addEventListener('change', function () {
+      var v = parseInt($('rch-von').value, 10), b = parseInt($('rch-bis').value, 10);
+      if (!v && !b) S.jahre = null;
+      else { v = v || 1780; b = b || 1860; S.jahre = v <= b ? { von: v, bis: b } : { von: b, bis: v }; }
+      neuGefiltert();
+    });
+  });
+  document.querySelectorAll('.rch-gattung').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var g = b.dataset.g, an = S.gattung || GATTUNGEN;
+      an = an.indexOf(g) >= 0 ? an.replace(g, '') : an + g;
+      if (!an) return;   // nie gar nichts
+      an = GATTUNGEN.split('').filter(function (x) { return an.indexOf(x) >= 0; }).join('');
+      S.gattung = an === GATTUNGEN ? '' : an;
+      neuGefiltert();
+    });
+  });
+  $('rch-zeit-alle').addEventListener('click', function () { S.jahre = null; S.gattung = ''; neuGefiltert(); });
   var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };""")
 ers('        <div id="rch-zuletzt-feld" hidden>', '        <div class="qb-feld" id="qb" hidden></div>\n        <div id="rch-zuletzt-feld" hidden>')
-ers('<script src="assets/recherche-kern.js"></script>', '<script src="assets/recherche-kern.js"></script>\n<script src="assets/recherche-quer.js"></script>\n<script src="assets/parallel-start.js" defer></script>')
+ers('<script src="assets/recherche-kern.js"></script>', '<script src="assets/recherche-kern.js"></script>\n<script src="assets/zeitkurve.js"></script>\n<script src="assets/recherche-quer.js"></script>\n<script src="assets/parallel-start.js" defer></script>')
+
+# ── Zeit und Gattung: Filter der Suche (der Worker kennt Jahr und Gattung je Werk, suche/jahre.json) ──
+ers("aus: [], seiten: null, kwicOrdnung: 'werk'", "aus: [], seiten: null, kwicOrdnung: 'werk', jahre: null, gattung: ''")
+ers("if (S.seiten) p.set('seiten', S.seiten.work + ':' + S.seiten.von + '-' + S.seiten.bis);",
+    "if (S.seiten) p.set('seiten', S.seiten.work + ':' + S.seiten.von + '-' + S.seiten.bis);\n    if (S.jahre) p.set('jahre', S.jahre.von + '-' + S.jahre.bis);\n    if (S.gattung) p.set('gattung', S.gattung);")
+ers("S.seiten = sm ? { work: sm[1], von: +sm[2], bis: +sm[3] } : null;",
+    "S.seiten = sm ? { work: sm[1], von: +sm[2], bis: +sm[3] } : null;\n    var jm = /^(\\d{4})-(\\d{4})$/.exec(p.get('jahre') || '');\n    S.jahre = jm ? { von: +jm[1], bis: +jm[2] } : null;\n    S.gattung = /^[dvne]{1,3}$/.test(p.get('gattung') || '') ? p.get('gattung') : '';")
+ers("malArten(); malAnsicht(); spiegeln();", "malArten(); malAnsicht(); malZeit(); spiegeln();")
+ers("aus: S.aus, seiten: S.seiten, ordnung: S.ordnung });", "aus: S.aus, seiten: S.seiten, ordnung: S.ordnung, jahre: S.jahre, gattung: S.gattung });")
+ers('<div class="kopf"><span>Bände</span><button type="button" id="rch-alle" hidden>alle</button></div>',
+    """<div class="rch-zeit" id="rch-zeit">
+        <div class="kopf"><span>Zeit</span><button type="button" id="rch-zeit-alle" hidden>alle</button></div>
+        <div class="rch-zeit-jahre">
+          <label>von <input type="number" id="rch-von" min="1780" max="1860" step="1" placeholder="1785" inputmode="numeric"></label>
+          <label>bis <input type="number" id="rch-bis" min="1780" max="1860" step="1" placeholder="1854" inputmode="numeric"></label>
+        </div>
+        <div class="rch-zeit-gattung" role="group" aria-label="Gattung">
+          <button type="button" class="rch-gattung" data-g="d" aria-pressed="true">Druckschriften</button>
+          <button type="button" class="rch-gattung" data-g="v" aria-pressed="true">Vorlesungen</button>
+          <button type="button" class="rch-gattung" data-g="n" aria-pressed="true">Nachlass</button>
+          <button type="button" class="rch-gattung" data-g="e" aria-pressed="true">Exzerpte</button>
+        </div>
+      </div>
+      <div class="kopf"><span>Bände</span><button type="button" id="rch-alle" hidden>alle</button></div>""")
 
 # Was nach dem Ersetzen nicht mehr vorkommen darf: Seiten der Edition, die es im Portal nicht gibt
 for rest in ('search.html', 'index.html', 'text.html', 'news.html', 'edition-data', 'Gesammelten Werke'):

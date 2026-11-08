@@ -11,7 +11,9 @@
   "auswahl.js",
   "nur-eines.js",
   "themefarbe.js",
-  "nutzung.js"
+  "nutzung.js",
+  "zeitkurve.js",
+  "analysen.js"
  ],
  "rechtlich": [
   "legal-notice.html",
@@ -21,6 +23,46 @@
   [
    "-mal so oft wie sonst",
    "× as often as usual"
+  ],
+  [
+   "'Reihen'",
+   "'Series'"
+  ],
+  [
+   "'Keine datierten Schriften'",
+   "'No dated writings'"
+  ],
+  [
+   "'Als Tabelle'",
+   "'As a table'"
+  ],
+  [
+   "'Jahre'",
+   "'Years'"
+  ],
+  [
+   "' Vorkommen, '",
+   "' occurrences, '"
+  ],
+  [
+   "v: 'Vorlesung', n: 'Nachlass', e: 'Exzerpt' }",
+   "v: 'Lecture', n: 'Manuscript', e: 'Excerpt' }"
+  ],
+  [
+   "'<h3 class=\"qz-titel\">Die Werke</h3>'",
+   "'<h3 class=\"qz-titel\">The works</h3>'"
+  ],
+  [
+   "<th scope=\"col\">Jahr</th><th scope=\"col\">Werk</th><th scope=\"col\">Gattung</th>",
+   "<th scope=\"col\">Year</th><th scope=\"col\">Work</th><th scope=\"col\">Genre</th>"
+  ],
+  [
+   "'nur hier'",
+   "'only here'"
+  ],
+  [
+   "<h4>Fast immer hervorgehoben</h4>",
+   "<h4>Almost always emphasized</h4>"
   ]
  ]
 }

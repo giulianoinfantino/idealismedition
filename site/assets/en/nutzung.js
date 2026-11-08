@@ -15,7 +15,7 @@
   var MONATE = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
   var SVGNS = 'http://www.w3.org/2000/svg';
 
-  function zahl(n) { return Number(n).toLocaleString('de-DE'); }
+  function zahl(n) { return Number(n).toLocaleString('en-US'); }
   function datum(tag) {
     var t = tag.split('-');
     return Number(t[2]) + '. ' + MONATE[Number(t[1]) - 1];

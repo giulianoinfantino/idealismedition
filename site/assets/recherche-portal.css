@@ -71,3 +71,31 @@
 .qb-gleich,.qb-null{color:color-mix(in oklab,var(--text-muted) 60%,transparent)}
 
 .qv-stelle mark,.qp-stelle mark{background:color-mix(in oklab,var(--accent-gold) 28%,transparent);color:inherit;padding:0 .05em;border-radius:2px}
+
+/* Zeit und Gattung über der Bandliste (Filter der Suche) */
+.rch-zeit{margin:0 0 1.2rem}
+.rch-zeit-jahre{display:flex;gap:.8rem;font-size:.84rem;color:var(--text-muted)}
+.rch-zeit-jahre label{display:flex;align-items:baseline;gap:.35rem}
+.rch-zeit-jahre input{width:4.2rem;font:inherit;font-size:.86rem;font-variant-numeric:lining-nums tabular-nums;color:var(--text-ink);background:none;border:0;border-bottom:1px solid var(--rule);padding:.1rem .1rem;-moz-appearance:textfield;appearance:textfield}
+.rch-zeit-jahre input::-webkit-inner-spin-button,.rch-zeit-jahre input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.rch-zeit-jahre input:focus{outline:none;border-bottom-color:var(--accent-gold)}
+.rch-zeit-jahre input::placeholder{color:var(--text-muted);opacity:.6}
+.rch-zeit-gattung{display:flex;flex-wrap:wrap;gap:.3rem .5rem;margin-top:.6rem}
+.rch-gattung{font:inherit;font-size:.78rem;background:none;border:1px solid var(--rule);border-radius:2px;padding:.12rem .45rem;color:var(--text-muted);cursor:pointer}
+.rch-gattung[aria-pressed="true"]{color:var(--text-ink);border-color:var(--text-muted)}
+.rch-gattung:hover{border-color:var(--accent-gold)}
+
+/* Ansicht „Zeit“: Kurve und Werke */
+.qz-kurve{margin:1.2rem 0 0}
+.qz-titel{font-size:.77rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin:2.2rem 0 .6rem}
+.qz-werke{width:100%;border-collapse:collapse;font-size:.86rem}
+.qz-werke th{font-weight:400;font-size:.76rem;color:var(--text-muted);text-align:left;padding:.3rem .6rem .3rem 0;border-bottom:1px solid var(--rule)}
+.qz-werke td{padding:.32rem .6rem .32rem 0;border-bottom:1px solid var(--rule);vertical-align:baseline}
+.qz-werke .z{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.qz-werke .j{font-variant-numeric:tabular-nums;color:var(--text-muted);white-space:nowrap}
+.qz-werke .g{color:var(--text-muted);font-size:.8rem;white-space:nowrap}
+.qz-werk{display:inline;background:none;border:0;padding:0;font:inherit;text-align:left;color:var(--text-body);cursor:pointer}
+.qz-werk .zk-feld{width:.6rem;height:.6rem;margin-right:.45rem;vertical-align:baseline}
+.qz-werk .s{color:var(--text-muted)}
+.qz-werk:hover .t{text-decoration:underline;text-decoration-color:var(--accent-gold);text-underline-offset:3px}
+@media (max-width:640px){.qz-werke .g{display:none}}

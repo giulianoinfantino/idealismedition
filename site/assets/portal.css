@@ -63,3 +63,45 @@
 .ei-stufe .ei-knopf{margin-top:auto;padding:.55rem 1.1rem;white-space:nowrap}
 .ei-hinweis{font-size:.82rem;line-height:1.6;color:var(--text-muted);margin:0 0 2.6rem}
 @media (max-width:640px){.ei-stufen{grid-template-columns:1fr}}
+
+/* Analysen (analyses.html, assets/analysen.js): Begriffsgeschichte, Wortschatz, Hervorhebungen.
+   Schlicht wie die übrigen einfachen Seiten; Farbe tragen nur die Marken der drei Autoren. */
+.an-abschnitt{margin:3rem 0 0;padding-top:2.2rem;border-top:1px solid var(--rule)}
+.an-abschnitt h2{font-family:var(--font-display);font-weight:400;font-size:1.6rem;line-height:1.15;color:var(--text-ink);margin:0 0 .5rem}
+.an-unter{max-width:40rem;font-size:.92rem;line-height:1.6;color:var(--text-muted);margin:0 0 1.2rem}
+.an-form{margin:0 0 .7rem;max-width:26rem}
+.an-beispiele{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem .9rem;margin:0 0 1.6rem;font-size:.84rem;color:var(--text-muted)}
+.an-beispiele button,.an-wort{background:none;border:0;padding:0;font:inherit;color:var(--text-ink);cursor:pointer;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+.an-beispiele button:hover,.an-wort:hover{text-decoration-color:var(--accent-gold)}
+.an-kurve-kopf{font-family:var(--font-display);font-weight:400;font-size:1.3rem;color:var(--text-ink);margin:0 0 .6rem}
+.an-hinweis{font-size:.88rem;color:var(--text-muted);margin:.6rem 0 0}
+.an-weiter{font-size:.86rem;color:var(--text-muted);margin:1.1rem 0 0}
+.an-weiter a{color:var(--text-ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+.an-umschalter{display:inline-flex;border:1px solid var(--rule);border-radius:2px;margin:0 0 1.4rem}
+.an-umschalter button{background:none;border:0;padding:.35rem .9rem;font:inherit;font-size:.82rem;color:var(--text-muted);cursor:pointer}
+.an-umschalter button+button{border-left:1px solid var(--rule)}
+.an-umschalter button[aria-pressed="true"]{color:var(--text-ink);background:var(--bg-subtle)}
+.an-spalten{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem 2rem}
+.an-spalte h3{font-size:1rem;font-weight:400;color:var(--text-ink);margin:0 0 .5rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule)}
+.an-spalte h4{font-size:.74rem;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin:1.1rem 0 .4rem}
+.an-liste,.an-hv{list-style:none;margin:0;padding:0;font-size:.86rem}
+.an-liste li{display:grid;grid-template-columns:minmax(0,1fr) 4.2rem 3.9rem;align-items:center;column-gap:.6rem;padding:.16rem 0}
+.an-liste .an-wort{text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.an-balken{position:relative;height:.5rem}
+.an-balken i{position:absolute;left:0;top:0;bottom:0;width:auto;height:auto;border-radius:0 2px 2px 0}
+.an-balken b{position:absolute;top:-.15rem;bottom:-.15rem;width:2px;margin-left:-1px;background:var(--text-ink)}
+.an-zahl{text-align:right;font-variant-numeric:tabular-nums;color:var(--text-muted);font-size:.8rem;white-space:nowrap}
+.an-hv li{display:flex;justify-content:space-between;gap:.8rem;padding:.12rem 0}
+.an-kacheln{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;margin:0 0 1.8rem}
+.an-kachel{display:flex;flex-direction:column}
+.an-kachel-name{font-size:.86rem;color:var(--text-muted)}
+.an-kachel b{font-family:var(--font-display);font-weight:400;font-size:2.4rem;line-height:1.1;color:var(--text-ink);font-variant-numeric:lining-nums tabular-nums}
+.an-leise{font-size:.8rem;color:var(--text-muted)}
+.an-grundlage{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--rule)}
+.an-grundlage p{font-size:.84rem;color:var(--text-muted)}
+@media (max-width:720px){
+  .an-spalten{grid-template-columns:1fr}
+  .an-kacheln{gap:1rem}
+  .an-kachel b{font-size:1.8rem}
+}
+.an.legal-container--wide{max-width:60rem}

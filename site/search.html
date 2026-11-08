@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/recherche.css">
   <link rel="stylesheet" href="assets/recherche-portal.css">
+  <link rel="stylesheet" href="assets/zeitkurve.css">
   <script src="assets/en/nur-eines.js"></script>
 <script src="assets/en/themefarbe.js"></script>
 </head>
@@ -44,6 +45,7 @@
     <ul>
       <li><a href="/#editionen">Editions</a></li>
       <li><a href="search" class="current" aria-current="page">Search</a></li>
+      <li><a href="/analyses">Analyses</a></li>
       <li class="nav-weit"><a href="/support">Support</a></li>
     </ul>
   </nav>
@@ -88,6 +90,7 @@
         <button type="button" role="tab" id="tab-konkordanz" data-ansicht="konkordanz" aria-selected="false" aria-controls="search-results">Concordance<span class="kz">2</span></button>
         <button type="button" role="tab" id="tab-verteilung" data-ansicht="verteilung" aria-selected="false" aria-controls="search-results">Distribution<span class="kz">3</span></button>
         <button type="button" role="tab" id="tab-vergleich" data-ansicht="vergleich" aria-selected="false" aria-controls="search-results">Comparison<span class="kz">4</span></button>
+        <button type="button" role="tab" id="tab-zeit" data-ansicht="zeit" aria-selected="false" aria-controls="search-results">Time<span class="kz">5</span></button>
       </div>
     </div>
   </div>
@@ -109,6 +112,19 @@
   <div class="rch-koerper">
     <details class="rch-baende" id="rch-baende" open>
       <summary id="rch-baende-summary">Volumes</summary>
+      <div class="rch-zeit" id="rch-zeit">
+        <div class="kopf"><span>Time</span><button type="button" id="rch-zeit-alle" hidden>all</button></div>
+        <div class="rch-zeit-jahre">
+          <label>from <input type="number" id="rch-von" min="1780" max="1860" step="1" placeholder="1785" inputmode="numeric"></label>
+          <label>to <input type="number" id="rch-bis" min="1780" max="1860" step="1" placeholder="1854" inputmode="numeric"></label>
+        </div>
+        <div class="rch-zeit-gattung" role="group" aria-label="Genre">
+          <button type="button" class="rch-gattung" data-g="d" aria-pressed="true">Published works</button>
+          <button type="button" class="rch-gattung" data-g="v" aria-pressed="true">Lectures</button>
+          <button type="button" class="rch-gattung" data-g="n" aria-pressed="true">Manuscripts</button>
+          <button type="button" class="rch-gattung" data-g="e" aria-pressed="true">Excerpts</button>
+        </div>
+      </div>
       <div class="kopf"><span>Volumes</span><button type="button" id="rch-alle" hidden>all</button></div>
       <div class="rch-baende-liste" id="rch-baende-liste"></div>
     </details>
@@ -191,6 +207,7 @@
 <script src="assets/en/ortho.js"></script>
 <script src="assets/baende.js"></script>
 <script src="assets/en/recherche-kern.js"></script>
+<script src="assets/en/zeitkurve.js"></script>
 <script src="assets/en/recherche-quer.js"></script>
 <script src="assets/parallel-start.js" defer></script>
 <script>
@@ -206,7 +223,7 @@
 
   var S = {
     q: '', baende: [], arten: { t: 1, n: 1, h: 1 }, ansicht: 'stellen', ordnung: 'werk',
-    aus: [], seiten: null, kwicOrdnung: 'werk'
+    aus: [], seiten: null, kwicOrdnung: 'werk', jahre: null, gattung: ''
   };
   var BANDLISTE = (window.HEGEL_EDITION_BAENDE || []);
   // Jede Stelle gehoert einer Edition; die Kennung des Bandes sagt welcher (sw- Schelling, gw- Hegel).
@@ -226,7 +243,7 @@
   var STUECK = 30;
 
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
-  function zahl(n) { return Number(n).toLocaleString('de-DE'); }
+  function zahl(n) { return Number(n).toLocaleString('en-US'); }
 
   // ── Worker ──────────────────────────────────────────────────────────
   function starte() {
@@ -270,6 +287,8 @@
       zeigeVorschlag(m);
     } else if (m.typ === 'vergleich') {
       if (m.id === anfrage && S.ansicht === 'vergleich') Quer.vergleich(m, results);
+    } else if (m.typ === 'zeit') {
+      if (m.id === anfrage && S.ansicht === 'zeit') Quer.zeit(m, results);
     } else if (m.typ === 'parallel') {
       if (m.id === anfrage) Quer.parallel(m, results);
     } else if (m.typ === 'bezuege') {
@@ -414,6 +433,8 @@
     if (S.ordnung !== 'werk') p.set('ordnung', S.ordnung);
     if (S.aus.length) p.set('ohne', S.aus.join(','));
     if (S.seiten) p.set('seiten', S.seiten.work + ':' + S.seiten.von + '-' + S.seiten.bis);
+    if (S.jahre) p.set('jahre', S.jahre.von + '-' + S.jahre.bis);
+    if (S.gattung) p.set('gattung', S.gattung);
     var url = location.pathname + (p.toString() ? '?' + p.toString() : '');
     if (url === location.pathname + location.search) return;
     history[neu ? 'pushState' : 'replaceState'](null, '', url);
@@ -425,14 +446,17 @@
     if (!S.baende.length && p.get('ed')) S.baende = baendeVon(p.get('ed'));
     var a = p.get('in');
     S.arten = a ? { t: a.indexOf('t') >= 0 ? 1 : 0, n: a.indexOf('n') >= 0 ? 1 : 0, h: a.indexOf('h') >= 0 ? 1 : 0 } : { t: 1, n: 1, h: 1 };
-    S.ansicht = ['stellen', 'konkordanz', 'verteilung', 'vergleich'].indexOf(p.get('ansicht')) >= 0 ? p.get('ansicht') : 'stellen';
+    S.ansicht = ['stellen', 'konkordanz', 'verteilung', 'vergleich', 'zeit'].indexOf(p.get('ansicht')) >= 0 ? p.get('ansicht') : 'stellen';
     S.ordnung = p.get('ordnung') === 'dichte' ? 'dichte' : 'werk';
     S.aus = (p.get('ohne') || '').split(',').filter(Boolean);
     var sm = /^([\w-]+):(\d+)-(\d+)$/.exec(p.get('seiten') || '');
     S.seiten = sm ? { work: sm[1], von: +sm[2], bis: +sm[3] } : null;
+    var jm = /^(\d{4})-(\d{4})$/.exec(p.get('jahre') || '');
+    S.jahre = jm ? { von: +jm[1], bis: +jm[2] } : null;
+    S.gattung = /^[dvne]{1,3}$/.test(p.get('gattung') || '') ? p.get('gattung') : '';
     input.value = S.q;
     $('rch-ordnung').value = S.ordnung;
-    malArten(); malAnsicht(); spiegeln();
+    malArten(); malAnsicht(); malZeit(); spiegeln();
   }
   window.addEventListener('popstate', function () { leseAdresse(); if (S.q) { starte(); suche(false); } else leer(); });
 
@@ -445,7 +469,7 @@
     if (!bereit) return;   // wird nach „bereit“ nachgeholt
     anfrage++;
     worker.postMessage({ typ: 'suche', id: anfrage, q: S.q, baende: S.baende, arten: S.arten,
-                         aus: S.aus, seiten: S.seiten, ordnung: S.ordnung });
+                         aus: S.aus, seiten: S.seiten, ordnung: S.ordnung, jahre: S.jahre, gattung: S.gattung });
   }
 
   // Ohne Anfrage zeigt die Seite nur Titel, Feld, Bereich und Beispiele
@@ -631,6 +655,7 @@
     if (S.ansicht === 'stellen') { stellenGeladen = 0; gruppenOffen = letzteAntwort.gruppen.slice(); fordereStellen(); }
     else if (S.ansicht === 'konkordanz') { kwicGeladen = 0; baueKwicRahmen(); fordereKwic(); }
     else if (S.ansicht === 'vergleich') { results.innerHTML = '<p class="qv-warte">Comparing the three editions …</p>'; worker.postMessage({ typ: 'vergleich', id: anfrage }); }
+    else if (S.ansicht === 'zeit') { results.innerHTML = '<p class="qv-warte">Spreading the passages over the years …</p>'; worker.postMessage({ typ: 'zeit', id: anfrage }); }
     else zeichneVerteilung();
   }
 
@@ -690,6 +715,10 @@
   window.QuerCtx = {
     esc: esc, zahl: zahl, leserLink: leserLink, edName: edName, sucheMit: sucheMit,
     sucheInBand: function (w) { S.baende = [w]; S.seiten = null; S.ansicht = 'stellen'; malAnsicht(); suche(true); window.scrollTo(0, 0); },
+    sucheInWerk: function (w, von, bis) {
+      S.baende = [w]; S.seiten = von != null ? { work: w, von: von, bis: bis } : null;
+      S.ansicht = 'stellen'; malAnsicht(); suche(true); window.scrollTo(0, 0);
+    },
     sucheNah: function (wort, ed) {
       var einfach = /^[\p{L}\p{N}*?=-]+$/u.test(S.q);
       sucheMit(einfach ? S.q + ' NEAR/8 ' + wort : '(' + S.q + ') ' + wort, ed);
@@ -703,6 +732,36 @@
     p.disabled = true; p.textContent = 'Searching for parallel passages …';
     worker.postMessage({ typ: 'parallel', id: anfrage, i: +p.dataset.parallel });
   });
+  // Zeit und Gattung
+  var GATTUNGEN = 'dvne';
+  function malZeit() {
+    $('rch-von').value = S.jahre ? S.jahre.von : '';
+    $('rch-bis').value = S.jahre ? S.jahre.bis : '';
+    document.querySelectorAll('.rch-gattung').forEach(function (b) {
+      b.setAttribute('aria-pressed', !S.gattung || S.gattung.indexOf(b.dataset.g) >= 0 ? 'true' : 'false');
+    });
+    $('rch-zeit-alle').hidden = !S.jahre && !S.gattung;
+  }
+  function neuGefiltert() { malZeit(); if (S.q) suche(true); else schreibeAdresse(true); }
+  ['rch-von', 'rch-bis'].forEach(function (id) {
+    $(id).addEventListener('change', function () {
+      var v = parseInt($('rch-von').value, 10), b = parseInt($('rch-bis').value, 10);
+      if (!v && !b) S.jahre = null;
+      else { v = v || 1780; b = b || 1860; S.jahre = v <= b ? { von: v, bis: b } : { von: b, bis: v }; }
+      neuGefiltert();
+    });
+  });
+  document.querySelectorAll('.rch-gattung').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var g = b.dataset.g, an = S.gattung || GATTUNGEN;
+      an = an.indexOf(g) >= 0 ? an.replace(g, '') : an + g;
+      if (!an) return;   // nie gar nichts
+      an = GATTUNGEN.split('').filter(function (x) { return an.indexOf(x) >= 0; }).join('');
+      S.gattung = an === GATTUNGEN ? '' : an;
+      neuGefiltert();
+    });
+  });
+  $('rch-zeit-alle').addEventListener('click', function () { S.jahre = null; S.gattung = ''; neuGefiltert(); });
   var ARTNAME = { n: 'Note', h: 'Heading' };
   function stelleHtml(s) {
     return '<article class="rch-stelle" tabindex="-1" data-i="' + s.i + '" data-zitat="' + esc(s.zitat) + '" data-druck="' + esc(leserLink(s, true)) + '">' +
@@ -807,8 +866,8 @@
     var roh = max / 5, p = Math.pow(10, Math.floor(Math.log10(roh))), n = roh / p;
     return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p;
   }
-  function zahlKomma(v) { return (v >= 10 ? v.toFixed(0) : v >= 1 ? v.toFixed(1) : v.toFixed(2)).replace('.', ','); }
-  function zahlKurz(v) { return Number(v.toPrecision(6)).toLocaleString('de-DE'); }
+  function zahlKomma(v) { return (v >= 10 ? v.toFixed(0) : v >= 1 ? v.toFixed(1) : v.toFixed(2)); }
+  function zahlKurz(v) { return Number(v.toPrecision(6)).toLocaleString('en-US'); }
 
   // ── Kopieren, Export ────────────────────────────────────────────────
   var toastZeit = null;
@@ -878,6 +937,7 @@
     else if (e.key === '2') setzeAnsicht('konkordanz');
     else if (e.key === '3') setzeAnsicht('verteilung');
     else if (e.key === '4') setzeAnsicht('vergleich');
+    else if (e.key === '5') setzeAnsicht('zeit');
     else if (e.key === 'c' || e.key === 'Enter') {
       var s = document.activeElement && document.activeElement.closest && document.activeElement.closest('.rch-stelle');
       if (!s || document.activeElement !== s) return;

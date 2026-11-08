@@ -1,0 +1,44 @@
+/* Zeitkurve (assets/zeitkurve.js): Seite „Analysen“ und Ansicht „Zeit“ der Recherche.
+   Drei Reihen, je Modus gegen den Untergrund (--bg-desktop) gerechnet: Helligkeitsband, Farbsehschwäche
+   (alle Paare), Normalsicht, Kontrast. Dunkel bestehen alle drei 3:1; hell liegen Schelling und Hegel
+   darunter, darum stehen die Namen immer als Text an der Linie und die Zahlen in der Tabelle.
+   Fest nach Autor, nie nach Rang: Fichte Blau, Schelling Orange, Hegel Grün. */
+:root{--zk-fichte:#3987e5;--zk-schelling:#d95926;--zk-hegel:#199e70}
+:root[data-theme="hell"]{--zk-fichte:#2a78d6;--zk-schelling:#eb6834;--zk-hegel:#1baf7a}
+
+.zk{position:relative;margin:0}
+.zk-legende{list-style:none;display:flex;flex-wrap:wrap;gap:.35rem 1.6rem;margin:0 0 .9rem;padding:0;font-size:.85rem;color:var(--text-muted)}
+.zk-legende-eintrag{display:inline-flex;align-items:center;gap:.45rem}
+.zk-legende-name{color:var(--text-ink)}
+.zk-legende-zahl{font-variant-numeric:tabular-nums}
+.zk-feld{display:inline-block;width:.75rem;height:.75rem;border-radius:2px;flex:none}
+.zk-feld.zk-fichte{background:var(--zk-fichte)}
+.zk-feld.zk-schelling{background:var(--zk-schelling)}
+.zk-feld.zk-hegel{background:var(--zk-hegel)}
+.zk-svg{display:block;width:100%;height:auto;overflow:visible;font-family:var(--font-body)}
+.zk-gitter line{stroke:var(--rule);stroke-width:1;shape-rendering:crispEdges}
+.zk-gitter text,.zk-achse text{fill:var(--text-muted);font-size:11px;font-variant-numeric:tabular-nums}
+.zk-grundlinie{stroke:var(--text-muted);stroke-width:1;opacity:.6;shape-rendering:crispEdges}
+.zk-linie{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.zk-punkt{stroke:var(--bg-desktop);stroke-width:2}
+.zk-reihe.zk-fichte .zk-linie{stroke:var(--zk-fichte)} .zk-reihe.zk-fichte .zk-punkt{fill:var(--zk-fichte)}
+.zk-reihe.zk-schelling .zk-linie{stroke:var(--zk-schelling)} .zk-reihe.zk-schelling .zk-punkt{fill:var(--zk-schelling)}
+.zk-reihe.zk-hegel .zk-linie{stroke:var(--zk-hegel)} .zk-reihe.zk-hegel .zk-punkt{fill:var(--zk-hegel)}
+.zk-name{fill:var(--text-body);font-size:12px;paint-order:stroke;stroke:var(--bg-desktop);stroke-width:4px;stroke-linejoin:round}
+.zk-faden{stroke:var(--text-muted);stroke-width:1;stroke-dasharray:2 3}
+.zk-ziele rect{fill:transparent;outline:none;cursor:crosshair}
+.zk-ziele rect:focus-visible{fill:var(--text-muted);fill-opacity:.08}
+.zk-tip{position:absolute;z-index:5;min-width:13rem;max-width:20rem;padding:.55rem .7rem;background:var(--bg-paper);border:1px solid var(--rule);border-radius:2px;box-shadow:0 4px 14px var(--shadow-med);font-size:.8rem;line-height:1.45;color:var(--text-body);pointer-events:none}
+.zk-tip-kopf{color:var(--text-ink);font-variant-numeric:tabular-nums;margin-bottom:.25rem}
+.zk-tip-zeile{display:grid;grid-template-columns:auto auto 1fr;column-gap:.45rem;align-items:baseline}
+.zk-tip-zeile .zk-feld{align-self:center}
+.zk-tip-zeile b{font-weight:600;color:var(--text-ink);font-variant-numeric:tabular-nums;text-align:right}
+.zk-tip-text{grid-column:2/4;color:var(--text-muted);font-variant-numeric:tabular-nums;margin-bottom:.15rem}
+.zk-tip-leer{color:var(--text-muted)}
+.zk-details{margin-top:.8rem;font-size:.82rem;color:var(--text-muted)}
+.zk-details summary{cursor:pointer;width:max-content}
+.zk-tabelle{border-collapse:collapse;margin-top:.6rem;font-variant-numeric:tabular-nums}
+.zk-tabelle th,.zk-tabelle td{padding:.2rem .9rem .2rem 0;text-align:right;border-bottom:1px solid var(--rule);font-weight:400}
+.zk-tabelle th[scope="row"],.zk-tabelle thead th:first-child{text-align:left}
+.zk-tabelle thead th{color:var(--text-ink)}
+@media (forced-colors:active){.zk-linie{stroke:CanvasText}.zk-punkt{fill:CanvasText}}

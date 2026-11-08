@@ -106,6 +106,11 @@ def main():
     stand = max(e['stand'] for e in da)
     (SUCHE / 'index.json').write_text(json.dumps({'v': 1, 'stand': stand, 'baende': baende}, ensure_ascii=False), encoding='utf-8')
     woerter = json.loads(subprocess.check_output(['node', str(P / 'werkzeug/woerter.mjs'), str(SUCHE)], text=True))
+    # Jahr und Gattung je Werk (Begriffsgeschichte, Zeitfilter der Recherche)
+    sys.path.insert(0, str(P / 'werkzeug')); import jahre
+    if jahre.bauen(SUCHE)[1]: sys.exit('jahre.py: Werke ohne Jahr, siehe oben')
+    # Seite „Analysen“: Wortschatz, Hervorhebungen, Zeitreihen (assets/analysen.json, assets/zeitreihen.json)
+    subprocess.run(['node', str(P / 'werkzeug/analysen.mjs')], check=True, stdout=subprocess.DEVNULL)
 
     # Bandliste und Editionen fuer die Recherche, bevor der Worker geladen hat
     eds = {e['id']: {'name': e['name'], 'url': e.get('url', ''), 'ausgabe': KURZ[e['id']]} for e in EDITIONEN}
@@ -133,7 +138,7 @@ def main():
 
     # Sitemap
     heute = datetime.date.today().isoformat()
-    urls = [('/', 1.0), ('/search', 0.9), ('/support', 0.5), ('/legal-notice', 0.2), ('/privacy', 0.2)]
+    urls = [('/', 1.0), ('/search', 0.9), ('/analyses', 0.7), ('/support', 0.5), ('/legal-notice', 0.2), ('/privacy', 0.2)]
     urls += [('/de' + u if u != '/' else '/de/', round(max(0.1, p - 0.1), 1)) for u, p in list(urls)]   # Deutsch unter /de/
     (S / 'sitemap.xml').write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

@@ -1,6 +1,6 @@
 /* Recherche des Portals: Querverweise zwischen den drei Editionen, gezeichnet auf der Suchseite.
  * Die Seite (search.html) reicht ihre Hilfsmittel als window.QuerCtx herein: esc, zahl, leserLink, edName,
- * sucheMit(anfrage, edition), sucheInBand(werk). Gerechnet wird im Worker (recherche-portal-worker.js). */
+ * sucheMit(anfrage, edition), sucheInBand(werk), sucheInWerk(werk, von, bis). Die Zeitkurve zeichnet zeitkurve.js. Gerechnet wird im Worker (recherche-portal-worker.js). */
 (function () {
   'use strict';
   var NAME = { fichte: 'Fichte', schelling: 'Schelling', hegel: 'Hegel' };
@@ -32,6 +32,44 @@
           }).join('')) +
           '</section>';
       }).join('') + '</div>';
+  }
+
+  // ── Zeit: die Stellen über die Jahre, je Jahrfünft und Autor, darunter die Werke ──
+  var GATTUNG = { d: 'Druckschrift', v: 'Vorlesung', n: 'Nachlass', e: 'Exzerpt' };
+  var EDS = ['fichte', 'schelling', 'hegel'];
+  function zeit(m, ziel) {
+    var c = C(), esc = c.esc, zahl = c.zahl;
+    var VON = 1785, SCHRITT = 5, NJ = 14, MIN = 20000;
+    var reihen = EDS.map(function (ed) {
+      var n = [], w = [];
+      for (var j = 0; j < NJ; j++) { n.push(0); w.push(0); }
+      return { id: ed, name: NAME[ed], n: n, w: w };
+    });
+    m.werke.forEach(function (x) {
+      if (x.gattung === 'e' || x.jahr == null) return;   // Exzerpte geben fremde Texte wieder
+      var j = Math.floor((x.jahr - VON) / SCHRITT), r = reihen[EDS.indexOf(x.ed)];
+      if (!r || j < 0 || j >= NJ) return;
+      r.n[j] += x.n; r.w[j] += x.woerter;
+    });
+    var liste = m.werke.filter(function (x) { return x.n; }).sort(function (a, b) {
+      return (a.jahr == null ? 9999 : a.jahr) - (b.jahr == null ? 9999 : b.jahr) || EDS.indexOf(a.ed) - EDS.indexOf(b.ed);
+    });
+    ziel.innerHTML = '<div class="qv-kopf"><p>Die Stellen nach dem Jahr der Schriften, je 10 000 Wörter eines Jahrfünfts: bei Druckschriften das Jahr des Erscheinens, bei Vorlesungen das Jahr, in dem sie gehalten wurden, beim Nachlass das der Niederschrift. Exzerpte zählen in der Kurve nicht mit.</p></div>' +
+      '<figure class="zk qz-kurve" id="qz-kurve"></figure>' +
+      '<h3 class="qz-titel">Die Werke</h3>' +
+      '<table class="qz-werke"><thead><tr><th scope="col">Jahr</th><th scope="col">Werk</th><th scope="col">Gattung</th>' +
+      '<th scope="col" class="z">Vorkommen</th><th scope="col" class="z">je 10 000 Wörter</th></tr></thead><tbody>' +
+      liste.map(function (x) {
+        var d = x.woerter ? x.n / x.woerter * 1e4 : 0;
+        return '<tr><td class="j">' + (x.jahr == null ? '–' : x.jahr) + '</td>' +
+          '<td><button type="button" class="qz-werk" data-qz-werk="' + esc(x.work) + '"' + (x.von != null ? ' data-von="' + x.von + '" data-bis="' + x.bis + '"' : '') + '>' +
+          '<span class="zk-feld zk-' + x.ed + '" aria-hidden="true"></span><span class="s">' + esc(NAME[x.ed]) + ', ' + esc(x.sig) + '</span> <span class="t">' + esc(x.titel) + '</span></button></td>' +
+          '<td class="g">' + esc(GATTUNG[x.gattung] || '') + '</td><td class="z">' + zahl(x.n) + '</td><td class="z">' + Zeitkurve.dichte(d) + '</td></tr>';
+      }).join('') + '</tbody></table>';
+    var fig = document.getElementById('qz-kurve');
+    if (!Zeitkurve.zeichne(fig, { von: VON, schritt: SCHRITT, n: NJ, min: MIN, reihen: reihen })) {
+      fig.outerHTML = '<p class="qv-nichts">Keine Stelle in datierten Schriften.</p>';
+    }
   }
 
   // ── Parallelstellen unter einer Stelle ──
@@ -89,7 +127,9 @@
     if (bd) { e.preventDefault(); c.sucheInBand(bd.dataset.qvBand); return; }
     var n = e.target.closest('[data-qv-nah]');
     if (n) { e.preventDefault(); c.sucheNah(n.dataset.qvNah, n.dataset.qvEd); return; }
+    var zw = e.target.closest('[data-qz-werk]');
+    if (zw) { e.preventDefault(); c.sucheInWerk(zw.dataset.qzWerk, zw.dataset.von ? +zw.dataset.von : null, zw.dataset.bis ? +zw.dataset.bis : null); return; }
   });
 
-  window.Quer = { vergleich: vergleich, parallel: parallel, bezuege: bezuege };
+  window.Quer = { vergleich: vergleich, parallel: parallel, bezuege: bezuege, zeit: zeit };
 })();
