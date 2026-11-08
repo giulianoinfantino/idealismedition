@@ -24,7 +24,8 @@ def main(site, wer):
     neu_m = re.search(r'<a class="st-neu" href="([^"]+)"><span class="st-neu-marke">([^<]*)</span><span class="st-neu-text">([^<]*)</span>', t)
     zahlen = re.search(r'<div class="st-wrap" id="zahlen">.*?</div>\n</div>\n', t, re.S) or re.search(r'<div class="st-wrap" id="zahlen">.*?</dl>\s*</div>\n', t, re.S)
     katalog = re.search(r'(<div class="st-katalog" id="katalog">.*?<!-- katalog:ende -->\s*</div>)', t, re.S).group(1)
-    b = t.index('</section>', t.index('id="baende"')) + len('</section>')
+    # Ende des alten Abschnitts „Die Bände“: nach dem Katalog (der selbst <section>-Gruppen enthält) das nächste </section>
+    b = t.index('</section>', t.index('<!-- katalog:ende -->', t.index('id="baende"'))) + len('</section>')
     neu = f'''<!-- ═══ AUFTAKT ═══ Wie im Portal: links das Bildnis (Graustufen, aus ~/idealismus/site/assets/bildnisse),
      rechts alle Bände. Darunter die Kennzahlen und was die Ausgabe ist. (auftakt.py, 08.11.2026) -->
 <section class="st-auftakt" aria-labelledby="st-titel">
