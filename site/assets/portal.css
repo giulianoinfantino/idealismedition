@@ -71,8 +71,6 @@
 .ei-buehne:has(.ei-bild[data-ring="a"] .ei-bild-link:is(:hover,:focus-visible)) .ring-a,
 .ei-buehne:has(.ei-bild[data-ring="b"] .ei-bild-link:is(:hover,:focus-visible)) .ring-b,
 .ei-buehne:has(.ei-bild[data-ring="c"] .ei-bild-link:is(:hover,:focus-visible)) .ring-c{stroke:var(--accent);stroke-width:2px}
-/* Fichtes Ring im Zeichen ist noch leise */
-.ei-zier .ring-a{opacity:.45}
 
 @keyframes ei-zug{to{--zug:100%}}
 @keyframes ei-entwickeln{0%{opacity:0;filter:blur(14px) brightness(.25);transform:scale(1.07)}100%{opacity:1;filter:var(--schluss);transform:scale(1)}}
@@ -152,3 +150,7 @@
 
 /* Im schmalen Kopf ist fuer drei Wege kein Platz; „Unterstuetzen“ steht dann im Titelblatt und im Fuss. */
 @media (max-width:600px){.sitenav li.nav-weit{display:none}}
+
+/* Fichte: Sämmtliche und Nachgelassene Werke in einer Liste, darum das Sigel (SW I, NW III) als Nummer */
+#fichte .st-band{grid-template-columns:3.4rem minmax(0,1fr) auto}
+#fichte .st-band-nr{font-size:.92rem;white-space:nowrap}

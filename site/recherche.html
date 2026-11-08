@@ -54,7 +54,7 @@
   <div class="rch-kopf">
     <div class="rch-titel">
       <h1>Recherche</h1>
-      <p class="rch-unter" id="rch-unter">Volltext von Schelling und Hegel · 31 Bände</p>
+      <p class="rch-unter" id="rch-unter">Volltext von Fichte, Schelling und Hegel · 42 Bände</p>
     </div>
 
     <form class="rch-feld" id="rch-form" role="search" autocomplete="off">
@@ -120,6 +120,7 @@
           <div class="rch-beispiele">
             <button type="button" data-q="&quot;intellectuelle Anschauung&quot;" title="genaue Wortfolge">„intellectuelle Anschauung“</button>
             <button type="button" data-q="Indifferenz" title="ein Wort, in allen Schreibungen">Indifferenz</button>
+            <button type="button" data-q="Nicht-Ich" title="ein Wort">Nicht-Ich</button>
             <button type="button" data-q="Schöpfung NEAR/8 Freiheit" title="Nähe">Schöpfung NEAR/8 Freiheit</button>
             <button type="button" data-q="*seyn" title="Wortende: Daseyn, Fürsichseyn …">*seyn</button>
           </div>
@@ -182,6 +183,7 @@
 <footer class="site-footer" id="search-footer">
   <div>Edition Deutscher Idealismus · Fichte, Schelling, Hegel</div>
   <nav>
+    <a href="https://fichteedition.vercel.app/">Fichte-Edition</a>
     <a href="https://www.schellingedition.com/">Schelling-Edition</a>
     <a href="https://www.hegeledition.com/">Hegel-Edition</a>
     <a href="unterstuetzen">Unterstützen</a>
@@ -250,7 +252,7 @@
       bereit = true;
       BANDLISTE = m.baende;
       $('rch-laden').hidden = true;
-      $('rch-unter').textContent = 'Volltext von Schelling und Hegel · ' + m.baende.length + ' Bände · ' + zahl(m.woerter) + ' Wörter';
+      $('rch-unter').textContent = 'Volltext von Fichte, Schelling und Hegel · ' + m.baende.length + ' Bände · ' + zahl(m.woerter) + ' Wörter';
       zeichneBaende(null);
       if (S.q) suche(false); else status.textContent = 'Bereit. ' + zahl(m.woerter) + ' Wörter in ' + m.baende.length + ' Bänden.';
     } else if (m.typ === 'ergebnis') {

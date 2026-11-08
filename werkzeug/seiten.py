@@ -58,6 +58,7 @@ def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False):
 <footer class="site-footer">
   <div>Edition Deutscher Idealismus · Fichte, Schelling, Hegel</div>
   <nav>
+    <a href="https://fichteedition.vercel.app/">Fichte-Edition</a>
     <a href="https://www.schellingedition.com/">Schelling-Edition</a>
     <a href="https://www.hegeledition.com/">Hegel-Edition</a>
     <a href="/unterstuetzen">Unterstützen</a>
@@ -91,7 +92,7 @@ seite('unterstuetzen.html', 'Unterstützen', f'''
 
   <section class="legal-section">
     <h2>Wofür</h2>
-    <p>Für die Bände, die noch fehlen, als nächstes Fichtes <em>Sämmtliche Werke</em>, und für die Prüfung der vorhandenen am Druck.</p>
+    <p>Für die weitere Prüfung der Texte am Druck und für neue Bände.</p>
   </section>
 
   <section class="legal-section">
@@ -145,7 +146,7 @@ seite('impressum.html', 'Impressum', f'''
       <li>Friedrich Wilhelm Joseph Schelling, Gemälde von Joseph Karl Stieler (1835) (<a href="https://commons.wikimedia.org/wiki/Category:Friedrich_Wilhelm_Joseph_Schelling" target="_blank" rel="noopener">Wikimedia&nbsp;Commons</a>);</li>
       <li>Georg Wilhelm Friedrich Hegel, Gemälde von Jakob Schlesinger (1831) (<a href="https://commons.wikimedia.org/wiki/File:1831_Schlesinger_Philosoph_Georg_Friedrich_Wilhelm_Hegel_anagoria.JPG" target="_blank" rel="noopener">Wikimedia&nbsp;Commons</a>).</li>
     </ul>
-    <p>Die Aufnahmen sind dort als gemeinfrei ausgewiesen; für originalgetreue Vervielfältigungen gemeinfreier visueller Werke schließt § 68 UrhG ein eigenes Schutzrecht aus. Für die Startseite sind sie zugeschnitten und im Ton angeglichen, das Bildnis Fichtes in Grau, solange seine Edition in Vorbereitung ist.</p>
+    <p>Die Aufnahmen sind dort als gemeinfrei ausgewiesen; für originalgetreue Vervielfältigungen gemeinfreier visueller Werke schließt § 68 UrhG ein eigenes Schutzrecht aus. Für die Startseite sind sie zugeschnitten und im Ton angeglichen.</p>
   </section>
 </main>''')
 
@@ -178,7 +179,7 @@ seite('datenschutz.html', 'Datenschutz', '''
 
   <section class="legal-section">
     <h2>4. Verweise auf andere Websites</h2>
-    <p>Die Treffer der Recherche und die Bandtitel führen in die Editionen auf hegeledition.com und schellingedition.com; dort gelten deren Datenschutzhinweise. Für die Mitgliedschaft wird auf Ko-fi verwiesen. Es handelt sich um einfache Links: Erst wenn Sie einen anklicken, verlassen Sie diese Website.</p>
+    <p>Die Treffer der Recherche und die Bandtitel führen in die Editionen auf fichteedition.vercel.app, schellingedition.com und hegeledition.com; dort gelten deren Datenschutzhinweise. Für die Mitgliedschaft wird auf Ko-fi verwiesen. Es handelt sich um einfache Links: Erst wenn Sie einen anklicken, verlassen Sie diese Website.</p>
   </section>
 
   <section class="legal-section">

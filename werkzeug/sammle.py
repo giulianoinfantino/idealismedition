@@ -14,10 +14,13 @@ P = HOME / 'idealismus'
 S = P / 'site'
 SUCHE = S / 'assets/suche'
 GESPERRT = {'gw-16'}          # § 70 UrhG bis 31.12.2026, siehe Hegel-Edition
+# Bis die Domain gekauft ist, liegt die Fichte-Edition unter vercel.app
+FICHTE_URL = 'https://fichteedition.vercel.app'
 
 EDITIONEN = [
     dict(id='fichte', name='Fichte', voll='Johann Gottlieb Fichte', leben='1762–1814',
-         ausgabe='Sämmtliche Werke', hg='herausgegeben von I. H. Fichte, Berlin 1845–1846'),
+         ausgabe='Sämmtliche Werke', hg='und Nachgelassene Werke, herausgegeben von I. H. Fichte, Berlin 1845–1846 und Bonn 1834–1835',
+         url=FICHTE_URL, quelle=HOME / 'fichte/site', praefix='f'),
     dict(id='schelling', name='Schelling', voll='Friedrich Wilhelm Joseph Schelling', leben='1775–1854',
          ausgabe='Sämmtliche Werke', hg='herausgegeben von K. F. A. Schelling, Stuttgart und Augsburg 1856–1861',
          url='https://www.schellingedition.com', quelle=HOME / 'schelling/site', praefix='sw-'),
@@ -58,7 +61,7 @@ def titel(t):
 def band_html(e, w):
     name, jahr = titel(w['title'])
     return ('<li class="st-band">'
-            f'<span class="st-band-nr" aria-hidden="true">{esc(w["band"])}</span>'
+            f'<span class="st-band-nr" aria-hidden="true">{esc(w["siglum"] if e["id"] == "fichte" else w["band"])}</span>'
             f'<a class="st-band-titel" href="{e["url"]}/text?work={esc(w["work_id"])}">'
             f'<span class="st-vh">{e["name"]}, {esc(w["siglum"])}: </span>{esc(name)}'
             + (f' <span class="st-band-jahr">{esc(jahr)}</span>' if jahr else '') + '</a>'
@@ -129,7 +132,7 @@ def main():
     i = ersetze(i, 'editionen', '\n'.join(edition_html(e) for e in EDITIONEN))
     (S / 'index.html').write_text(i, encoding='utf-8')
     r = (S / 'recherche.html').read_text(encoding='utf-8')
-    r = re.sub(r'(<p class="rch-unter" id="rch-unter">)[^<]*', rf'\g<1>Volltext von Schelling und Hegel · {nb} Bände', r, count=1)
+    r = re.sub(r'(<p class="rch-unter" id="rch-unter">)[^<]*', rf'\g<1>Volltext von Fichte, Schelling und Hegel · {nb} Bände', r, count=1)
     (S / 'recherche.html').write_text(r, encoding='utf-8')
 
     # Sitemap

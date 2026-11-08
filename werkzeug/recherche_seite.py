@@ -42,13 +42,14 @@ ers('''      <li><a href="index.html">Sammlung</a></li>
 
 # ── Feld und Hilfe ───────────────────────────────────────────────────────
 ers('>Anmerkungen des Drucks <span class="n"></span></button>', '>Anmerkungen <span class="n"></span></button>')
-ers('<p class="rch-unter" id="rch-unter">Volltext der Gesammelten Werke · 17 Bände</p>', '<p class="rch-unter" id="rch-unter">Volltext von Schelling und Hegel</p>')
+ers('<p class="rch-unter" id="rch-unter">Volltext der Sämmtlichen Werke · 14 Bände</p>', '<p class="rch-unter" id="rch-unter">Volltext von Fichte, Schelling und Hegel</p>')
 ers('''            <button type="button" data-q="&quot;das reine Seyn&quot;" title="genaue Wortfolge">„das reine Seyn“</button>
             <button type="button" data-q="Begriff* NEAR/10 Objectivität" title="Nähe, mit Wortanfang">Begriff* NEAR/10 Objectivität</button>
             <button type="button" data-q="*seyn" title="Wortende: Daseyn, Fürsichseyn …">*seyn</button>
             <button type="button" data-q="=Seyn" title="nur diese Schreibung">=Seyn</button>''',
     '''            <button type="button" data-q="&quot;intellectuelle Anschauung&quot;" title="genaue Wortfolge">„intellectuelle Anschauung“</button>
             <button type="button" data-q="Indifferenz" title="ein Wort, in allen Schreibungen">Indifferenz</button>
+            <button type="button" data-q="Nicht-Ich" title="ein Wort">Nicht-Ich</button>
             <button type="button" data-q="Schöpfung NEAR/8 Freiheit" title="Nähe">Schöpfung NEAR/8 Freiheit</button>
             <button type="button" data-q="*seyn" title="Wortende: Daseyn, Fürsichseyn …">*seyn</button>''')
 ers('„und“, „oder“, „nicht“ in Kleinbuchstaben sind Wörter.</p>',
@@ -65,6 +66,7 @@ ers('''  <div>Digitale Schelling-Edition · Forschungsportal</div>
   </nav>''',
     '''  <div>Edition Deutscher Idealismus · Fichte, Schelling, Hegel</div>
   <nav>
+    <a href="https://fichteedition.vercel.app/">Fichte-Edition</a>
     <a href="https://www.schellingedition.com/">Schelling-Edition</a>
     <a href="https://www.hegeledition.com/">Hegel-Edition</a>
     <a href="unterstuetzen">Unterstützen</a>
@@ -97,7 +99,7 @@ ers("  var BANDLISTE = (window.HEGEL_EDITION_BAENDE || []);",
     var ed = edVon(S.baende[0]), alle = baendeVon(ed);
     return alle.length === S.baende.length && S.baende.every(function (w) { return edVon(w) === ed; }) ? ed : null;
   }""")
-ers("Volltext der Gesammelten Werke · ' + m.baende.length", "Volltext von Schelling und Hegel · ' + m.baende.length")
+ers("Volltext der Sämmtlichen Werke · ' + m.baende.length", "Volltext von Fichte, Schelling und Hegel · ' + m.baende.length")
 ers("var ZL = 'hegel-recherche-zuletzt';", "var ZL = 'idealismus-recherche-zuletzt';")
 ers("    if (S.baende.length) p.set('work', S.baende.join(','));",
     "    var ganz = ganzeEdition();\n    if (ganz) p.set('ed', ganz); else if (S.baende.length) p.set('work', S.baende.join(','));")
@@ -109,7 +111,7 @@ ers("""    return 'text.html?' + p.toString() + '#page-' + s.ziel.pdf;""",
 ers("var ARTNAME = { n: 'Anmerkung des Drucks', h: 'Überschrift' };", "var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };")
 ers("""html += '<div class="rch-gruppe"><h2>' + esc(g.sig) + '</h2>""",
     """html += '<div class="rch-gruppe"><h2><span class="ei-autor">' + esc(edName(g.work)) + '</span> ' + esc(g.sig) + '</h2>""")
-ers("var name = 'hegel-' + (m.art", "var name = 'idealismus-' + (m.art")
+ers("var name = 'schelling-' + (m.art", "var name = 'idealismus-' + (m.art")
 # Bandliste: vor jeder Edition ein Kopf, der ihre Baende auf einmal waehlt
 ers("""    liste.innerHTML = baende.map(function (b) {
       var an = S.baende.indexOf(b.work) >= 0;""",
