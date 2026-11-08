@@ -211,7 +211,9 @@ class Repo:
     # ── Auszug ─────────────────────────────────────────────────────────
     def ohne_de(self, t):
         """Absolute /de/-Links der deutschen Seiten (Portal) für die Übersetzung zurück auf die Wurzel."""
-        return re.sub(r'href="/de/', 'href="/', t) if self.k.get('absolut') else t
+        if not self.k.get('absolut'): return t
+        t = re.sub(r'(href="https://www\.(?:idealism|fichte|schelling|hegel)edition\.com)/de/', r'\1/', t)
+        return re.sub(r'href="/de/', 'href="/', t)
 
     def schluessel_seite(self, t):
         t = self.ohne_de(ohne_umschalter(t))
@@ -286,6 +288,8 @@ class Repo:
             t = re.sub(r'<link rel="canonical" href="[^"]*">', f'<link rel="canonical" href="{url_en}">', t)
         else:
             t = re.sub(r'<link rel="canonical" href="[^"]*">', f'<link rel="canonical" href="{url_de}">', t)
+            # Von deutschen Seiten aus öffnen auch die anderen Ausgaben und das Portal deutsch
+            t = re.sub(r'(<a\b[^>]*href="https://www\.(?:idealism|fichte|schelling|hegel)edition\.com)/(?!de/)', r'\1/de/', t)
             if self.k.get('absolut'):
                 # Seiten mit absoluten Links (Portal): interne Ziele der deutschen Seiten nach /de/
                 t = re.sub(r'href="/(?!de/|de"|assets/|api/|_vercel/|favicon)([^"]*)"', lambda m: f'href="/de/{m.group(1)}"', t)
@@ -318,6 +322,9 @@ class Repo:
         for alt, neu in ERSETZEN + [tuple(x) for x in self.k.get('ersetzen', [])]:
             t = t.replace(alt, neu)
         t = re.sub(r'(\d)&nbsp;%', r'\1%', t)
+        if seite:
+            # Links auf die deutschen Fassungen unserer Seiten führen auf englischen Seiten ins Englische
+            t = re.sub(r'(<a\b[^>]*href="https://www\.(?:idealism|fichte|schelling|hegel)edition\.com)/de/', r'\1/', t)
         return zahlen_im_text(t) if seite else t
 
     def bauen(self):
