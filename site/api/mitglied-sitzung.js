@@ -24,6 +24,7 @@ module.exports = async (req, res) => {
       'custom_fields[0][key]': 'friends',
       'custom_fields[0][type]': 'text',
       'custom_fields[0][optional]': 'true',
+      'custom_fields[0][text][maximum_length]': '60',
       'custom_fields[0][label][type]': 'custom',
       'custom_fields[0][label][custom]': en ? 'Name for the Friends of the Edition (optional)' : 'Name bei den Friends of the Edition (freiwillig)',
       'subscription_data[metadata][stufe]': stufe,

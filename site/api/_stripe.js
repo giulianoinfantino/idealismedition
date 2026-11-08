@@ -22,7 +22,13 @@ async function stripe(pfad, { methode = 'GET', felder = null, einmalig = null } 
 // Der Monatspreis einer Stufe, über seinen lookup_key gefunden. Fehlt er (erster Aufruf, oder ein neues Konto),
 // legt die Funktion Produkt und Preis einmal an; der Idempotenzschlüssel verhindert Doppel bei gleichzeitigen Aufrufen.
 // So muss im Stripe-Dashboard nichts vorbereitet werden, und es entsteht nicht je Bezahlvorgang ein neues Produkt.
+const GEMERKT = {};   // Preis-IDs je Stufe, solange die Funktion warm bleibt (spart eine Abfrage je Bezahlvorgang)
 async function preis(stufe) {
+  if (GEMERKT[stufe]) return GEMERKT[stufe];
+  GEMERKT[stufe] = await preisSuchen(stufe);
+  return GEMERKT[stufe];
+}
+async function preisSuchen(stufe) {
   const s = STUFEN[stufe];
   const l = await stripe('prices?active=true&lookup_keys[]=' + encodeURIComponent(s.schluessel));
   if (l.data && l.data.length) return l.data[0].id;
@@ -36,4 +42,9 @@ async function preis(stufe) {
   } });
   return p.id;
 }
-module.exports = { STUFEN, stripe, preis };
+// Der freiwillige Name aus dem Bezahlvorgang eines Abos (Zusatzfeld „friends“ der Checkout-Sitzung)
+function friendsName(sitzung) {
+  const f = ((sitzung && sitzung.custom_fields) || []).find(x => x.key === 'friends');
+  return f && f.text && f.text.value ? String(f.text.value).trim().slice(0, 60) : '';
+}
+module.exports = { STUFEN, stripe, preis, friendsName };
