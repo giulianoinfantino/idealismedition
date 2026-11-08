@@ -99,3 +99,17 @@
 .qz-werk .s{color:var(--text-muted)}
 .qz-werk:hover .t{text-decoration:underline;text-decoration-color:var(--accent-gold);text-underline-offset:3px}
 @media (max-width:640px){.qz-werke .g{display:none}}
+
+/* Telefon: fünf Ansichten passen nicht in eine Zeile. Die Reihe rollt in sich, statt die Seite zu verbreitern;
+   die Werkliste der Zeit-Ansicht bricht ihre Spaltenköpfe um */
+@media (max-width:640px){
+  .rch-ansichten{gap:.85rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .rch-ansichten::-webkit-scrollbar{display:none}
+  .rch-ansichten button{white-space:nowrap;flex:none}
+}
+.qz-werke th{white-space:normal}
+.qz-werke{table-layout:auto;word-break:normal;overflow-wrap:anywhere}
+
+/* „Nur Hervorhebungen“: ein Schalter neben den Arten, durch einen Strich abgesetzt */
+.rch-chip-hervor{margin-left:.4rem;padding-left:1rem !important;border-left:1px solid var(--rule) !important}
+.rch-spiegel .s-flexion{color:var(--accent-gold)}

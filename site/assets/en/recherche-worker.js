@@ -8,7 +8,8 @@
  *
  * Nachrichten (alle mit `typ`):
  *   lade                         -> fortschritt …, bereit
- *   suche   {id, q, baende, arten, aus, seiten, ordnung}  -> ergebnis
+ *   suche   {id, q, baende, arten, aus, seiten, ordnung, hervor}  -> ergebnis
+ *           (hervor: true = nur Woerter im Sperrsatz; Zahlen, Formen und Stellen folgen)
  *   stellen {id, von, bis}       -> stellen
  *   kwic    {id, von, bis, ordnung} -> kwic
  *   export  {id, art}            -> export
@@ -78,6 +79,7 @@ function suche(m) {
   if (!gelesen.ast) { aktuell = null; post(antwort); return; }
   var arten = m.arten || { t: 1, h: 1, n: 1 };
   var wahl = m.baende && m.baende.length ? m.baende : null;
+  var hervor = m.hervor === true;
   var t0 = Date.now();
 
   var artZahl = { t: 0, h: 0, n: 0 };
@@ -87,7 +89,7 @@ function suche(m) {
     var seiten = m.seiten && m.seiten.work === w ? [m.seiten.von, m.seiten.bis] : null;
     // Mit allen Arten suchen und erst danach filtern: so kennt die Leiste
     // die Zahl jeder Art, auch der abgewaehlten.
-    var r = H.suche(b, gelesen.ast, { arten: ALLE, aus: m.aus || [], seiten: seiten });
+    var r = H.suche(b, gelesen.ast, { arten: ALLE, aus: m.aus || [], seiten: seiten, hervor: hervor });
     var gewaehltB = !wahl || wahl.indexOf(w) >= 0;
     r.stellen = r.stellen.filter(function (st) {
       var a = b.ketten[st.kette].art;
@@ -114,7 +116,7 @@ function suche(m) {
     // Formen der Blaetter zaehlen (nach Formtext, denn die Nummern gelten je Band)
     var zuBlatt = new Map();
     r.blaetter.forEach(function (bl) {
-      var schl = bl.n.t + '|' + bl.n.v + '|' + (bl.n.exakt ? 1 : 0);
+      var schl = bl.n.t + '|' + bl.n.v + '|' + (bl.n.exakt ? 1 : 0) + (bl.n.flex ? '~' : '');
       if (!blattZahl.has(schl)) blattZahl.set(schl, { roh: bl.n.roh.replace(/^=/, ''), exakt: !!bl.n.exakt, formen: new Map(), knoten: bl.n });
       bl.ids.forEach(function (id) { zuBlatt.set(id, schl); });
     });
@@ -132,6 +134,7 @@ function suche(m) {
   });
 
   // ausgeschlossene Formen mit ihrer Zahl im ganzen Bestand nachtragen
+  // (mit `hervor` nur ihre Vorkommen im Sperrsatz)
   var aus = m.aus || [];
   var formen = [];
   blattZahl.forEach(function (bl) {
@@ -141,7 +144,7 @@ function suche(m) {
       var n = 0, anz = fk, passt = false;
       REIHE.forEach(function (w) {
         var b = BAND[w], ids = H.formenVon(b, bl.knoten, null), id = b.formIx.get(fk);
-        if (id !== undefined && ids.indexOf(id) >= 0) { passt = true; n += b.zahl[id]; anz = b.anzeige[id]; }
+        if (id !== undefined && ids.indexOf(id) >= 0) { passt = true; n += H.zahlVon(b, id, hervor); anz = b.anzeige[id]; }
       });
       if (passt) liste.push({ key: fk, form: anz, n: n, aus: true });
     });

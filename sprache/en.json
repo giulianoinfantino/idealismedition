@@ -1067,7 +1067,14 @@
   "Vorlesungen": "Lectures",
   "Nachlass": "Manuscripts",
   "Exzerpte": "Excerpts",
-  "Gattung": "Genre"
+  "Gattung": "Genre",
+  "Nur Hervorhebungen": "Emphasis only",
+  "Begriff~": "Begriff~",
+  "auch die gebeugten Formen<i>Begriffe, Begriffs, Begriffes, Begriffen</i>": "also the inflected forms<i>Begriffe, Begriffs, Begriffes, Begriffen</i>",
+  "Schalter unter dem Feld: nur Wörter, die der Druck sperrt oder kursiv setzt": "Switch below the field: only words the print sets letter-spaced or in italics",
+  "Stellen, Konkordanz, Verteilung, Vergleich, Zeit": "Passages, Concordance, Distribution, Comparison, Time",
+  "Nur Wörter, die der Druck sperrt oder kursiv setzt": "Only words the print sets letter-spaced or in italics",
+  "mit gebeugten Formen: Begriffe, Begriffs …": "with inflected forms: Begriffe, Begriffs …"
  },
  "js": {
   "Digitale Ausgabe von Fichtes Werken nach dem Text der Sämmtlichen und Nachgelassenen Werke, hg. von I. H. Fichte (1834–1846): frei lesbar, durchsuchbar, am Scan geprüft.": "Digital edition of Fichte’s works based on the text of the Sämmtliche Werke and Nachgelassene Werke, ed. I. H. Fichte (1834–1846): freely readable, searchable, checked against the scan.",
@@ -1379,6 +1386,18 @@
   "Die Zeitreihen konnten nicht geladen werden.": "The time series could not be loaded.",
   "<span class=\"an-leise\">eines von ": "<span class=\"an-leise\">one in ",
   " Wörtern</span></div>": " words</span></div>",
-  "<h4>Am häufigsten hervorgehoben</h4><ol class=\"an-hv\">": "<h4>Most often emphasized</h4><ol class=\"an-hv\">"
+  "<h4>Am häufigsten hervorgehoben</h4><ol class=\"an-hv\">": "<h4>Most often emphasized</h4><ol class=\"an-hv\">",
+  "Wort~": "Wort~",
+  "„~“ gehört ohne Leerzeichen ans Ende eines Wortes, etwa „Begriff~“.": "“~” goes at the end of a word, without a space, e.g. “Begriff~”.",
+  "„~“ gilt nur für ganze Wörter, nicht für das Muster „": "“~” only applies to whole words, not to the pattern “",
+  "“.": "”.",
+  "„=“ und „~“ schließen sich aus: „=": "“=” and “~” exclude each other: “=",
+  "“ sucht genau diese Schreibung, „": "” finds exactly this spelling, “",
+  "~“ auch die gebeugten Formen.": "~” also the inflected forms.",
+  "„~“ gehört ans Ende des Wortes: „": "“~” belongs at the end of the word: “",
+  "~“.": "~”.",
+  " mit gebeugten Formen": " with inflected forms",
+  "Verhältniß~": "Verhältniß~",
+  "Verhältnis~": "Verhältnis~"
  }
 }

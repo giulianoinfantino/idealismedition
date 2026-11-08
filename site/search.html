@@ -83,6 +83,7 @@
         <button type="button" class="rch-chip" data-art="t" aria-pressed="true">Main text <span class="n"></span></button>
         <button type="button" class="rch-chip" data-art="n" aria-pressed="true">Notes <span class="n"></span></button>
         <button type="button" class="rch-chip" data-art="h" aria-pressed="true">Headings <span class="n"></span></button>
+        <button type="button" class="rch-chip rch-chip-hervor" id="rch-hervor" aria-pressed="false" title="Only words the print sets letter-spaced or in italics">Emphasis only</button>
       </div>
       <button type="button" class="rch-baende-knopf" id="rch-baende-knopf" aria-expanded="false" aria-controls="rch-baende">All volumes</button>
       <div class="rch-ansichten" role="tablist" aria-label="View">
@@ -139,6 +140,7 @@
             <button type="button" data-q="Nicht-Ich" title="one word">Nicht-Ich</button>
             <button type="button" data-q="Schöpfung NEAR/8 Freiheit" title="Proximity">Schöpfung NEAR/8 Freiheit</button>
             <button type="button" data-q="*seyn" title="Word ending: Daseyn, Fürsichseyn …">*seyn</button>
+            <button type="button" data-q="Begriff~" title="with inflected forms: Begriffe, Begriffs …">Begriff~</button>
           </div>
         </div>
         <div class="qb-feld" id="qb" hidden></div>
@@ -154,10 +156,12 @@
             <dl>
               <dt>Seyn</dt><dd>the whole word; the modern spelling is searched as well<i>Sein finds Seyn · Teil finds Theil</i></dd>
               <dt>=Seyn</dt><dd>only exactly this spelling</dd>
+              <dt>Begriff~</dt><dd>also the inflected forms<i>Begriffe, Begriffs, Begriffes, Begriffen</i></dd>
               <dt>dialekt*</dt><dd>beginning of word<i>Dialektik, dialektisch</i></dd>
               <dt>*seyn</dt><dd>end of word<i>Daseyn, Fürsichseyn</i></dd>
               <dt>ver*ung</dt><dd>any letters in the middle; <code>?</code> stands for exactly one</dd>
               <dt>"…"</dt><dd>exact word sequence, also across a page break</dd>
+              <dt>Emphasis only</dt><dd>Switch below the field: only words the print sets letter-spaced or in italics</dd>
             </dl>
           </section>
           <section>
@@ -184,7 +188,7 @@
               <dt>j · k</dt><dd>to the next, previous passage</dd>
               <dt>Enter</dt><dd>open passage in Print layout</dd>
               <dt>c</dt><dd>copy citation of the passage</dd>
-              <dt>1 · 2 · 3</dt><dd>Passages, Concordance, Distribution</dd>
+              <dt>1 – 5</dt><dd>Passages, Concordance, Distribution, Comparison, Time</dd>
             </dl>
           </section>
         </div>
@@ -223,7 +227,7 @@
 
   var S = {
     q: '', baende: [], arten: { t: 1, n: 1, h: 1 }, ansicht: 'stellen', ordnung: 'werk',
-    aus: [], seiten: null, kwicOrdnung: 'werk', jahre: null, gattung: ''
+    aus: [], seiten: null, kwicOrdnung: 'werk', jahre: null, gattung: '', hervor: false
   };
   var BANDLISTE = (window.HEGEL_EDITION_BAENDE || []);
   // Jede Stelle gehoert einer Edition; die Kennung des Bandes sagt welcher (sw- Schelling, gw- Hegel).
@@ -435,6 +439,7 @@
     if (S.seiten) p.set('seiten', S.seiten.work + ':' + S.seiten.von + '-' + S.seiten.bis);
     if (S.jahre) p.set('jahre', S.jahre.von + '-' + S.jahre.bis);
     if (S.gattung) p.set('gattung', S.gattung);
+    if (S.hervor) p.set('hervor', '1');
     var url = location.pathname + (p.toString() ? '?' + p.toString() : '');
     if (url === location.pathname + location.search) return;
     history[neu ? 'pushState' : 'replaceState'](null, '', url);
@@ -454,9 +459,11 @@
     var jm = /^(\d{4})-(\d{4})$/.exec(p.get('jahre') || '');
     S.jahre = jm ? { von: +jm[1], bis: +jm[2] } : null;
     S.gattung = /^[dvne]{1,3}$/.test(p.get('gattung') || '') ? p.get('gattung') : '';
+    S.hervor = p.get('hervor') === '1';
     input.value = S.q;
     $('rch-ordnung').value = S.ordnung;
     malArten(); malAnsicht(); malZeit(); spiegeln();
+    $('rch-hervor').setAttribute('aria-pressed', S.hervor ? 'true' : 'false');
   }
   window.addEventListener('popstate', function () { leseAdresse(); if (S.q) { starte(); suche(false); } else leer(); });
 
@@ -469,7 +476,7 @@
     if (!bereit) return;   // wird nach „bereit“ nachgeholt
     anfrage++;
     worker.postMessage({ typ: 'suche', id: anfrage, q: S.q, baende: S.baende, arten: S.arten,
-                         aus: S.aus, seiten: S.seiten, ordnung: S.ordnung, jahre: S.jahre, gattung: S.gattung });
+                         aus: S.aus, seiten: S.seiten, ordnung: S.ordnung, jahre: S.jahre, gattung: S.gattung, hervor: S.hervor });
   }
 
   // Ohne Anfrage zeigt die Seite nur Titel, Feld, Bereich und Beispiele
@@ -504,7 +511,7 @@
         ' in ' + g.baende + ' ' + (g.baende === 1 ? 'volume' : 'volumes') + ' · ' + zahl(g.vorkommen) + ' occurrences'
       : 'No passage found.';
     $('rch-aktionen').hidden = !g.stellen;
-    document.querySelectorAll('.rch-chip').forEach(function (c) { c.querySelector('.n').textContent = zahl(m.arten[c.dataset.art] || 0); });
+    document.querySelectorAll('.rch-chip[data-art]').forEach(function (c) { c.querySelector('.n').textContent = zahl(m.arten[c.dataset.art] || 0); });
     zeichneFormen(m.formen);
     zeichneBaende(m.jeBand);
     zeichneSeitenfilter();
@@ -552,9 +559,9 @@
 
   // ── Arten, Ansicht, Ordnung ─────────────────────────────────────────
   function malArten() {
-    document.querySelectorAll('.rch-chip').forEach(function (c) { c.setAttribute('aria-pressed', S.arten[c.dataset.art] ? 'true' : 'false'); });
+    document.querySelectorAll('.rch-chip[data-art]').forEach(function (c) { c.setAttribute('aria-pressed', S.arten[c.dataset.art] ? 'true' : 'false'); });
   }
-  document.querySelectorAll('.rch-chip').forEach(function (c) {
+  document.querySelectorAll('.rch-chip[data-art]').forEach(function (c) {
     c.addEventListener('click', function () {
       var a = c.dataset.art;
       S.arten[a] = S.arten[a] ? 0 : 1;
@@ -762,6 +769,11 @@
     });
   });
   $('rch-zeit-alle').addEventListener('click', function () { S.jahre = null; S.gattung = ''; neuGefiltert(); });
+  // Nur Hervorhebungen: gesperrte oder kursive Wörter des Drucks
+  $('rch-hervor').addEventListener('click', function () {
+    S.hervor = !S.hervor; this.setAttribute('aria-pressed', S.hervor ? 'true' : 'false');
+    if (S.q) suche(true); else schreibeAdresse(true);
+  });
   var ARTNAME = { n: 'Note', h: 'Heading' };
   function stelleHtml(s) {
     return '<article class="rch-stelle" tabindex="-1" data-i="' + s.i + '" data-zitat="' + esc(s.zitat) + '" data-druck="' + esc(leserLink(s, true)) + '">' +

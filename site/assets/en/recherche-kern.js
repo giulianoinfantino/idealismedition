@@ -19,6 +19,20 @@
  * Wer Fortsetzungen will, schreibt `*seyn`, `seyn*` oder `*seyn*`. Bis Oktober
  * 2026 suchte die Seite Teilzeichenketten: „Seyn“ traf 10 892 Einheiten, als
  * Wort steht es in 6 348.
+ *
+ * ## Gebeugte Formen: `Begriff~`
+ *
+ * Die Tilde haengt Endungen an (`ENDUNGEN`), sie beschneidet nichts:
+ * `Begriff~` findet Begriff, Begriffe, Begriffs, Begriffes, Begriffen. Die
+ * gefundenen Formen stehen in der Formenliste wie alle anderen und lassen sich
+ * einzeln abwaehlen.
+ *
+ * ## Nur Hervorhebungen
+ *
+ * Im Text stehen Sperrsatz und Kursive zwischen Sternen (`*Wesen*`). Jedes
+ * Wort merkt sich in `tH`, ob es darin steht: ungerade viele Sterne vor ihm
+ * in seiner Einheit, dieselbe Regel, nach der `setze` auszeichnet. Mit
+ * `hervor: true` zaehlen nur diese Woerter.
  */
 (function (global) {
   'use strict';
@@ -56,11 +70,13 @@
     // Woerter, Kette fuer Kette — so liegen sie im Index hintereinander.
     var cap = 1 << 16, n = 0;
     var tS = new Int32Array(cap), tE = new Int32Array(cap), tU = new Int32Array(cap),
-        tK = new Int32Array(cap), tF = new Int32Array(cap), tSatz = new Int32Array(cap);
+        tK = new Int32Array(cap), tF = new Int32Array(cap), tSatz = new Int32Array(cap),
+        tH = new Uint8Array(cap);   // 1 = Wort steht im Sperrsatz (zwischen Sternen)
     function wachse() {
       cap *= 2;
       function g(a) { var b = new Int32Array(cap); b.set(a); return b; }
       tS = g(tS); tE = g(tE); tU = g(tU); tK = g(tK); tF = g(tF); tSatz = g(tSatz);
+      var h = new Uint8Array(cap); h.set(tH); tH = h;
     }
     var formIx = new Map(), formen = [], anzeige = [], zahl = [];
     var satz = 0;
@@ -71,10 +87,14 @@
       for (var j = 0; j < kt.units.length; j++) {
         var ui = kt.units[j], ut = units[ui].text;
         units[ui].t0 = n;
+        // Sperrsatz: jeder Stern vor dem Wort schaltet um. Gesprungen wird von
+        // Stern zu Stern, die meisten Einheiten haben keinen.
+        var stern = ut.indexOf('*'), em = 0;
         WORT.lastIndex = 0;
         var m;
         while ((m = WORT.exec(ut)) !== null) {
           var w = m[0], s = m.index;
+          while (stern >= 0 && stern < s) { em ^= 1; stern = ut.indexOf('*', stern + 1); }
           // Satzgrenze: . ! ? zwischen zwei Woertern, danach ein Grossbuchstabe,
           // und das Wort davor keine Abkuerzung („d. h.“, „S. 5“, „§. 43“, „II.“).
           if (n > kt.t0) {
@@ -85,7 +105,7 @@
           var f = w.toLowerCase(), id = formIx.get(f);
           if (id === undefined) { id = formen.length; formIx.set(f, id); formen.push(f); anzeige.push(w); zahl.push(0); }
           zahl[id]++;
-          tS[n] = s; tE[n] = s + w.length; tU[n] = ui; tK[n] = ki; tF[n] = id; tSatz[n] = satz;
+          tS[n] = s; tE[n] = s + w.length; tU[n] = ui; tK[n] = ki; tF[n] = id; tSatz[n] = satz; tH[n] = em;
           n++;
           vorEnde = s + w.length; vorText = ut; vorWort = f;
         }
@@ -108,7 +128,7 @@
     return {
       work: d.work, sig: d.sig, title: d.title, secs: d.secs,
       units: units, ketten: ketten, woerter: n,
-      tS: tS, tE: tE, tU: tU, tK: tK, tF: tF, tSatz: tSatz,
+      tS: tS, tE: tE, tU: tU, tK: tK, tF: tF, tSatz: tSatz, tH: tH,
       formen: formen, anzeige: anzeige, zahl: zahl, post: post, keys: keys, nachKey: nachKey, formIx: formIx,
       seiteVon: bmin, seiteBis: bmax
     };
@@ -154,7 +174,8 @@
     toks.forEach(function (t) {
       var o = opArt(t.t);
       teile.push({ von: t.pos, bis: t.end, art: o ? 'op' : t.t === '(' || t.t === ')' ? 'klammer' :
-        t.t.charAt(0) === '"' ? 'phrase' : t.t.charAt(0) === '=' ? 'exakt' : /[*?]/.test(t.t) ? 'muster' : 'wort' });
+        t.t.charAt(0) === '"' ? 'phrase' : t.t.charAt(0) === '=' ? 'exakt' : /[*?]/.test(t.t) ? 'muster' :
+        t.t.indexOf('~') >= 0 ? 'flexion' : 'wort' });
     });
 
     function istBinaer(t) { var o = t && opArt(t.t); return o && o.op !== 'not'; }
@@ -238,13 +259,25 @@
     function wortKnoten(roh, t) {
       var exakt = roh.charAt(0) === '=';
       var w = exakt ? roh.slice(1) : roh;
+      // `Wort~`: auch die gebeugten Formen. Passt nicht zu `=` und nicht zu
+      // Mustern; dann gilt die Anfrage ohne Tilde.
+      var flex = w.indexOf('~') >= 0;
       // nur Buchstaben, Ziffern und die Platzhalter
       w = w.replace(/[^\p{L}\p{N}*?]/gu, '');
-      if (!w) return null;
+      if (!w) { if (flex) fehl('“~” goes at the end of a word, without a space, e.g. “Begriff~”.', t); return null; }
       if (/[*?]/.test(w)) {
         var buchst = w.replace(/[*?]/g, '');
         if (buchst.length < 2) { fehl('The pattern “' + roh + '” needs at least two letters.', t); return null; }
+        if (flex) { roh = roh.replace(/~/g, ''); fehl('“~” only applies to whole words, not to the pattern “' + roh + '”.', t); }
         return { t: 'muster', v: w.toLowerCase(), exakt: exakt, roh: roh };
+      }
+      if (flex && exakt) {
+        fehl('“=” and “~” exclude each other: “=' + w + '” finds exactly this spelling, “' + w + '~” also the inflected forms.', t);
+        return { t: 'wort', v: w.toLowerCase(), exakt: true, roh: '=' + w };
+      }
+      if (flex) {
+        if (!/~[^\p{L}\p{N}]*$/u.test(roh)) fehl('“~” belongs at the end of the word: “' + w + '~”.', t);
+        return { t: 'wort', v: w.toLowerCase(), exakt: false, flex: true, roh: w + '~' };
       }
       return { t: 'wort', v: w.toLowerCase(), exakt: exakt, roh: roh };
     }
@@ -266,7 +299,8 @@
     tief = tief || 0;
     function gruppe(x) { return lesart(x, tief + 1); }
     switch (n.t) {
-      case 'wort': return '„' + n.roh.replace(/^=/, '') + '“' + (n.exakt ? ' in genau dieser Schreibung' : '');
+      case 'wort': return '„' + n.roh.replace(/^=/, '').replace(/~$/, '') + '“' + (n.exakt ? ' in genau dieser Schreibung' : '') +
+        (n.flex ? ' with inflected forms' : '');
       case 'muster':
         var v = n.roh.replace(/^=/, '');
         var a = v.charAt(0) === '*', e = v.charAt(v.length - 1) === '*', kern = v.replace(/^\*|\*$/g, '');
@@ -276,7 +310,9 @@
           if (a) return 'a word ending in “' + kern + '”';
         }
         return 'a word matching the pattern “' + v + '“';
-      case 'phrase': return 'the phrase “' + n.roh + '“';
+      case 'phrase':
+        var gebeugt = n.w.filter(function (x) { return x.flex; }).map(function (x) { return '„' + x.roh.replace(/~$/, '') + '“'; });
+        return 'the phrase “' + n.roh.replace(/~/g, '') + '“' + (gebeugt.length ? ', ' + gebeugt.join(' and ') + ' with inflected forms' : '');
       case 'and':
         if (n.r.t === 'not') return gruppe(n.l) + ', but not ' + lesart(n.r.c, tief + 1);
         return gruppe(n.l) + ' and ' + gruppe(n.r);
@@ -312,18 +348,31 @@
     return out + key(stueck);
   }
 
+  // `Wort~`: die Endungen, die angehaengt werden. Woerter auf -nis verdoppeln
+  // dabei das s (Verhältnis, Verhältnisse); ohne die zweite Liste faende
+  // `Verhältniß~` die Mehrzahl, `Verhältnis~` nicht.
+  var ENDUNGEN = ['e', 'es', 's', 'en', 'n', 'er', 'ern', 'em'];   // -em für Adjektive: absolut~ findet absolutem
+  var ENDUNGEN_NIS = ['se', 'ses', 'sen'];
+
   /** Die Formen-Nummern eines Wortknotens in einem Band (gemerkt je Band). */
   function formenVon(band, n, aus) {
     var merk = band._formen || (band._formen = new Map());
-    var schl = n.t + '|' + n.v + '|' + (n.exakt ? 1 : 0) + '|' + (aus ? aus.join(',') : '');
+    var schl = n.t + '|' + n.v + '|' + (n.exakt ? 1 : 0) + (n.flex ? '~' : '') + '|' + (aus ? aus.join(',') : '');
     var hit = merk.get(schl);
     if (hit) return hit;
     var ids = [];
     if (n.t === 'wort') {
       if (n.exakt) { var id = band.formIx.get(n.v); if (id !== undefined) ids.push(id); }
       else {
-        var ks = [key(n.v)];
-        O.varianten(n.v).forEach(function (x) { var kx = key(x.toLowerCase()); if (ks.indexOf(kx) < 0) ks.push(kx); });
+        var ks = [], dazu = function (kx) { if (ks.indexOf(kx) < 0) ks.push(kx); };
+        [n.v].concat(O.varianten(n.v).map(function (x) { return x.toLowerCase(); })).forEach(function (b) {
+          var kb = key(b);
+          dazu(kb);
+          if (!n.flex) return;
+          // Normalisiert wird vor und nach dem Anhaengen: die Regeln sehen auf
+          // den naechsten Buchstaben („Werth“ + e wird „werte“, nicht „werthe“).
+          (/nis$/.test(kb) ? ENDUNGEN.concat(ENDUNGEN_NIS) : ENDUNGEN).forEach(function (e) { dazu(kb + e); dazu(key(b + e)); });
+        });
         ks.forEach(function (kx) { var l = band.nachKey.get(kx); if (l) ids = ids.concat(l); });
       }
     } else {
@@ -348,10 +397,20 @@
     return out.sort();
   }
 
+  /** Vorkommen einer Form im Band; mit `hervor` nur die im Sperrsatz. */
+  function zahlVon(band, id, hervor) {
+    if (!hervor) return band.zahl[id];
+    var P = band.post[id], tH = band.tH, z = 0;
+    for (var i = 0; i < P.length; i++) z += tH[P[i]];
+    return z;
+  }
+
   // Ergebnis eines Knotens: Map kette -> sortierte Positionen (Array).
-  function nachKetten(band, pos) {
+  // Mit `nurH` (dem `tH` des Bandes) bleiben nur Woerter im Sperrsatz.
+  function nachKetten(band, pos, nurH) {
     var m = new Map(), tK = band.tK;
     for (var i = 0; i < pos.length; i++) {
+      if (nurH && !nurH[pos[i]]) continue;
       var k = tK[pos[i]], l = m.get(k);
       if (l) l.push(pos[i]); else m.set(k, [pos[i]]);
     }
@@ -371,7 +430,7 @@
       case 'wort': case 'muster': {
         var ids = formenVon(band, n, ctx.aus);
         ctx.blaetter.push({ n: n, ids: ids });
-        return nachKetten(band, positionen(band, ids));
+        return nachKetten(band, positionen(band, ids), ctx.hervor);
       }
       case 'phrase': {
         var sets = n.w.map(function (w) {
@@ -381,12 +440,14 @@
           ids.forEach(function (i) { f[i] = 1; });
           return { ids: ids, f: f };
         });
-        var erst = positionen(band, sets[0].ids), out = [], L = n.w.length;
+        // mit `hervor`: jedes Wort der Folge muss im Sperrsatz stehen
+        var erst = positionen(band, sets[0].ids), out = [], L = n.w.length, tH = ctx.hervor;
         for (var i = 0; i < erst.length; i++) {
           var p = erst[i], k = band.tK[p], ok = true;
+          if (tH && !tH[p]) continue;
           for (var j = 1; j < L; j++) {
             var q = p + j;
-            if (q >= band.woerter || band.tK[q] !== k || !sets[j].f[band.tF[q]]) { ok = false; break; }
+            if (q >= band.woerter || band.tK[q] !== k || !sets[j].f[band.tF[q]] || (tH && !tH[q])) { ok = false; break; }
           }
           if (ok) for (j = 0; j < L; j++) out.push(p + j);
         }
@@ -404,7 +465,7 @@
         return m2;
       }
       case 'not': {
-        var c = werte(band, n.c, { aus: ctx.aus, blaetter: [] }), m3 = new Map();
+        var c = werte(band, n.c, { arten: ctx.arten, aus: ctx.aus, hervor: ctx.hervor, blaetter: [] }), m3 = new Map();
         for (var ki = 0; ki < band.ketten.length; ki++) if (!c.has(ki) && ctx.arten[band.ketten[ki].art]) m3.set(ki, []);
         return m3;
       }
@@ -435,10 +496,12 @@
   }
 
   /** Wertet `ast` in einem Band aus.
-   *  opt: { arten: {t,h,n}, aus: [formen], seiten: [von,bis] | null }
+   *  opt: { arten: {t,h,n}, aus: [formen], seiten: [von,bis] | null, hervor: true | false }
+   *  `hervor: true`: jedes Suchwort trifft nur im Sperrsatz, eine Wortfolge nur,
+   *  wenn alle ihre Woerter darin stehen; NEAR, AND, OR, NOT rechnen damit weiter.
    *  -> { stellen: [{kette, pos:[...]}], blaetter } */
   function suche(band, ast, opt) {
-    var ctx = { arten: opt.arten, aus: opt.aus || [], blaetter: [] };
+    var ctx = { arten: opt.arten, aus: opt.aus || [], blaetter: [], hervor: opt.hervor === true ? band.tH : null };
     var m = werte(band, ast, ctx);
     var stellen = [];
     m.forEach(function (pos, k) {
@@ -623,6 +686,6 @@
   global.HegelRecherche = {
     baueBand: baueBand, lies: lies, lesart: lesart, suche: suche, laeufe: laeufe,
     zitat: zitat, zitatStelle: zitatStelle, leserZiel: leserZiel, ortVon: ortVon,
-    ausschnitt: ausschnitt, kwic: kwic, setze: setze, formenVon: formenVon, key: key
+    ausschnitt: ausschnitt, kwic: kwic, setze: setze, formenVon: formenVon, zahlVon: zahlVon, key: key
   };
 })(typeof self !== 'undefined' ? self : typeof window !== 'undefined' ? window : globalThis);
