@@ -50,34 +50,36 @@
       <h2>Reader</h2>
       <p class="ei-preis">1.99&nbsp;€ per month</p>
       <p class="ei-wer">For students and anyone reading on a small budget.</p>
-      <a class="ei-knopf ei-stufe-knopf" href="https://ko-fi.com/idealismedition/tiers" data-name="Reader" data-betrag="1,99" data-an="a">Become a Reader</a>
+      <a class="ei-knopf ei-stufe-knopf" href="#mitglied" data-stufe="reader" data-name="Reader" data-betrag="1,99" data-an="a">Become a Reader</a>
     </li>
     <li class="ei-stufe">
       <svg viewBox="0 0 200 120" aria-hidden="true"><circle class="an" cx="100" cy="44" r="34"/><circle class="an" cx="80" cy="72" r="34"/><circle cx="120" cy="72" r="34"/></svg>
       <h2>Fellow</h2>
       <p class="ei-preis">3.99&nbsp;€ per month</p>
       <p class="ei-wer">For doctoral students and postdocs who work with the texts.</p>
-      <a class="ei-knopf ei-stufe-knopf" href="https://ko-fi.com/idealismedition/tiers" data-name="Fellow" data-betrag="3,99" data-an="ab">Become a Fellow</a>
+      <a class="ei-knopf ei-stufe-knopf" href="#mitglied" data-stufe="fellow" data-name="Fellow" data-betrag="3,99" data-an="ab">Become a Fellow</a>
     </li>
     <li class="ei-stufe">
       <svg viewBox="0 0 200 120" aria-hidden="true"><circle class="an" cx="100" cy="44" r="34"/><circle class="an" cx="80" cy="72" r="34"/><circle class="an" cx="120" cy="72" r="34"/></svg>
       <h2>Scholar</h2>
       <p class="ei-preis">5.99&nbsp;€ per month</p>
       <p class="ei-wer">For professors who use the editions in research and teaching.</p>
-      <a class="ei-knopf ei-stufe-knopf" href="https://ko-fi.com/idealismedition/tiers" data-name="Scholar" data-betrag="5,99" data-an="abc">Become a Scholar</a>
+      <a class="ei-knopf ei-stufe-knopf" href="#mitglied" data-stufe="scholar" data-name="Scholar" data-betrag="5,99" data-an="abc">Become a Scholar</a>
     </li>
   </ul>
-  <p class="ei-hinweis">The tiers differ only in amount; choose what suits you. Payment goes through Ko-fi, right here on this page, and you can end your membership at any time. <button type="button" class="ei-einmalig" data-name="" data-betrag="">Prefer to support once</button></p>
-  <p class="ei-hinweis ei-leise">Clicking a tier loads the Ko-fi payment panel; only then is data sent to Ko-fi (see <a href="/privacy">Privacy</a>).</p>
+  <p class="ei-hinweis">The tiers differ only in amount; choose what suits you. Payment goes securely through Stripe, right here on this page; you can end your membership at any time.</p>
+  <p class="ei-hinweis ei-leise">Clicking a tier loads the Stripe payment form; only then is data sent to Stripe (see <a href="/privacy">Privacy</a>).</p>
+  <p class="ei-danke" id="ei-danke" hidden>Thank you! Your membership is set up. Stripe will send a confirmation by email.</p>
 
-  <dialog class="ei-kofi-fenster" id="kofi-fenster" aria-labelledby="kofi-titel">
+  <dialog class="ei-kofi-fenster" id="kasse-fenster" aria-labelledby="kasse-titel">
     <div class="ei-kofi-kopf" tabindex="-1" autofocus>
-      <svg viewBox="0 0 200 120" aria-hidden="true" id="kofi-ringe"><circle cx="100" cy="44" r="34"/><circle cx="80" cy="72" r="34"/><circle cx="120" cy="72" r="34"/></svg>
-      <div><h2 id="kofi-titel"></h2><p class="ei-kofi-schritt" id="kofi-schritt"></p></div>
-      <button type="button" class="ei-kofi-zu" id="kofi-zu" aria-label="Close">×</button>
+      <svg viewBox="0 0 200 120" aria-hidden="true" id="kasse-ringe"><circle cx="100" cy="44" r="34"/><circle cx="80" cy="72" r="34"/><circle cx="120" cy="72" r="34"/></svg>
+      <div><h2 id="kasse-titel"></h2><p class="ei-kofi-schritt" id="kasse-preis"></p></div>
+      <button type="button" class="ei-kofi-zu" id="kasse-zu" aria-label="Close">×</button>
     </div>
-    <div class="ei-kofi-feld" id="kofi-feld"></div>
-    <p class="ei-kofi-fuss">If the panel stays empty, Ko-fi does not allow embedding in your browser: <a href="https://ko-fi.com/idealismedition/tiers" target="_blank" rel="noopener">then go directly to Ko-fi</a>.</p>
+    <div class="ei-kasse" id="kasse"></div>
+    <p class="ei-kasse-meldung" id="kasse-meldung" hidden></p>
+    <p class="ei-kofi-fuss">Payment goes through Stripe; we never see your card or account details. Cancel monthly.</p>
   </dialog>
 
   <section class="legal-section">
@@ -93,6 +95,8 @@
   <section class="legal-section">
     <h2>Friends of the Edition</h2>
     <p>Members who wish are named among the Friends of the Edition.</p>
+    <p class="ei-zahl" id="ei-zahl" hidden></p>
+    <ul class="ei-friends" id="ei-friends" hidden></ul>
   </section>
 </main>
 
@@ -103,30 +107,58 @@
   </nav>
 </footer>
 <script>
-/* Ko-fi direkt auf der Seite: die Stufe öffnet ein Fenster mit dem Zahlfeld von Ko-fi. Das Zahlfeld lädt erst mit
-   diesem Klick (vorher keine Anfrage an Ko-fi) und bleibt danach geladen. */
+/* Mitgliedschaft mit Stripe, direkt auf der Seite: die Stufe öffnet ein Fenster mit Stripes eingebettetem Bezahlfeld
+   (api/mitglied-sitzung.js). Stripe.js lädt erst mit diesem Klick. Nach dem Bezahlen kehrt Stripe mit ?danke= zurück. */
 (function () {
-  var fenster = document.getElementById('kofi-fenster'), feld = document.getElementById('kofi-feld');
   var EN = document.documentElement.lang === 'en';
-  function oeffnen(name, betrag, an) {
-    if (!feld.firstChild) {
-      var i = document.createElement('iframe');
-      i.src = 'https://ko-fi.com/idealismedition/?hidefeed=true&widget=true&embed=true&preview=true';
-      i.title = 'Ko-fi'; i.height = '690';
-      feld.appendChild(i);
-    }
-    document.getElementById('kofi-titel').textContent = name ? (EN ? 'Become a ' + name : name + ' werden') : (EN ? 'Support once' : 'Einmalig unterstützen');
-    document.getElementById('kofi-schritt').textContent = name
-      ? (EN ? 'Enter ' + betrag.replace(',', '.') + ' € below and tick “Make this monthly”.' : 'Unten ' + betrag + ' € eintragen und „Make this monthly“ anhaken.')
-      : (EN ? 'Choose any amount below.' : 'Unten einen beliebigen Betrag wählen.');
-    document.querySelectorAll('#kofi-ringe circle').forEach(function (c, k) { c.classList.toggle('an', (an || '').indexOf('abc'[k]) >= 0); });
-    if (fenster.showModal) fenster.showModal(); else fenster.setAttribute('open', '');
+  var fenster = document.getElementById('kasse-fenster'), feld = document.getElementById('kasse'), meldung = document.getElementById('kasse-meldung');
+  var kasse = null, stripeLaedt = null;
+  function ladeStripe() {
+    if (!stripeLaedt) stripeLaedt = new Promise(function (ok, nein) {
+      var sc = document.createElement('script'); sc.src = 'https://js.stripe.com/v3/'; sc.onload = ok; sc.onerror = nein; document.head.appendChild(sc);
+    });
+    return stripeLaedt;
   }
-  document.querySelectorAll('.ei-stufe-knopf, .ei-einmalig').forEach(function (a) {
-    a.addEventListener('click', function (e) { e.preventDefault(); oeffnen(a.dataset.name, a.dataset.betrag, a.dataset.an); });
+  function zeige(t) { meldung.textContent = t; meldung.hidden = !t; }
+  function oeffnen(a) {
+    document.getElementById('kasse-titel').textContent = EN ? 'Become a ' + a.dataset.name : a.dataset.name + ' werden';
+    document.getElementById('kasse-preis').textContent = EN ? '€' + a.dataset.betrag.replace(',', '.') + ' a month, cancel any time' : a.dataset.betrag + ' € im Monat, jederzeit kündbar';
+    document.querySelectorAll('#kasse-ringe circle').forEach(function (c, k) { c.classList.toggle('an', (a.dataset.an || '').indexOf('abc'[k]) >= 0); });
+    if (fenster.showModal) fenster.showModal(); else fenster.setAttribute('open', '');
+    if (kasse) { kasse.destroy(); kasse = null; }
+    feld.textContent = ''; zeige(EN ? 'Loading the payment form …' : 'Das Bezahlfeld wird geladen …');
+    var antwort;
+    fetch('/api/mitglied-sitzung', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ stufe: a.dataset.stufe, sprache: EN ? 'en' : 'de' }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!j.ok) throw new Error(j.grund); antwort = j; return ladeStripe(); })
+      .then(function () { return Stripe(antwort.publishableKey).initEmbeddedCheckout({ fetchClientSecret: function () { return Promise.resolve(antwort.clientSecret); } }); })
+      .then(function (k) { kasse = k; zeige(''); k.mount('#kasse'); })
+      .catch(function () { zeige(EN ? 'The payment form could not be loaded. Please try again later.' : 'Das Bezahlfeld ließ sich nicht laden. Bitte später noch einmal.'); });
+  }
+  document.querySelectorAll('.ei-stufe-knopf').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); oeffnen(a); });
   });
-  document.getElementById('kofi-zu').addEventListener('click', function () { fenster.close(); });
+  document.getElementById('kasse-zu').addEventListener('click', function () { fenster.close(); });
   fenster.addEventListener('click', function (e) { if (e.target === fenster) fenster.close(); });
+  // Zurück von Stripe: danken, freiwilligen Namen an das Abo schreiben
+  var danke = new URLSearchParams(location.search).get('danke');
+  if (danke) {
+    document.getElementById('ei-danke').hidden = false;
+    fetch('/api/mitglied-danke?sitzung=' + encodeURIComponent(danke)).catch(function () {});
+    history.replaceState(null, '', location.pathname);
+  }
+  // Zahl der Mitglieder und Friends of the Edition
+  fetch('/api/mitglieder').then(function (r) { return r.json(); }).then(function (j) {
+    if (!j.ok || !j.zahl) return;
+    var z = document.getElementById('ei-zahl');
+    z.textContent = EN ? (j.zahl === 1 ? 'One member supports the editions.' : j.zahl + ' members support the editions.') : (j.zahl === 1 ? 'Ein Mitglied trägt die Ausgaben mit.' : j.zahl + ' Mitglieder tragen die Ausgaben mit.');
+    z.hidden = false;
+    if (j.namen && j.namen.length) {
+      var ul = document.getElementById('ei-friends');
+      j.namen.forEach(function (n) { var li = document.createElement('li'); li.textContent = n; ul.appendChild(li); });
+      ul.hidden = false;
+    }
+  }).catch(function () {});
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>

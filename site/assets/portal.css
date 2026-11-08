@@ -133,3 +133,10 @@ button.ei-knopf{background:none;font:inherit;font-size:.86rem;cursor:pointer}
 .ei-kofi-fuss{margin:0;padding:.7rem 1.2rem .9rem;font-size:.76rem;color:var(--text-muted);border-top:1px solid var(--rule)}
 .ei-kofi-fuss a{color:var(--text-muted);text-decoration:underline}
 .ei-kofi-kopf:focus{outline:none}
+
+/* Stripe im Fenster: das eingebettete Bezahlfeld bringt seinen eigenen hellen Grund mit */
+.ei-kasse{background:#fff;min-height:6rem}
+.ei-kasse-meldung{margin:0;padding:1rem 1.2rem;font-size:.88rem;color:var(--text-muted)}
+.ei-danke{margin:1rem 0;padding:.8rem 1rem;border:1px solid var(--accent-gold);border-radius:3px;color:var(--text-ink);font-size:.95rem}
+.ei-zahl{color:var(--text-ink)}
+.ei-friends{list-style:none;padding:0;margin:.6rem 0 0;display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.92rem;color:var(--text-body)}

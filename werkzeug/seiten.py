@@ -7,6 +7,8 @@ import pathlib
 S = pathlib.Path.home() / 'idealismus/site'
 KOFI = 'https://ko-fi.com/idealismedition'
 KOFI_STUFEN = KOFI + '/tiers'
+# Stripe-Kundenportal (Anmeldelink aus dem Stripe-Dashboard: Einstellungen → Billing → Kundenportal). Leer: Link entfällt.
+STRIPE_PORTAL = ''
 
 # Mitgliedsstufen: Name, Preis, fuer wen, welche Ringe gold (a oben, b links, c rechts wie im Zeichen)
 STUFEN = [('Reader', '1,99', 'Für Studierende und alle, die mit kleinem Budget lesen.', 'a'),
@@ -22,7 +24,7 @@ def stufe(name, preis, wer, an):
       <h2>{name}</h2>
       <p class="ei-preis">{preis}&nbsp;€ im Monat</p>
       <p class="ei-wer">{wer}</p>
-      <a class="ei-knopf ei-stufe-knopf" href="{KOFI_STUFEN}" data-name="{name}" data-betrag="{preis}" data-an="{an}">{name} werden</a>
+      <a class="ei-knopf ei-stufe-knopf" href="#mitglied" data-stufe="{name.lower()}" data-name="{name}" data-betrag="{preis}" data-an="{an}">{name} werden</a>
     </li>'''
 
 RINGE = ('<svg class="ringe-mark site-title-rings" viewBox="0 0 200 120" aria-hidden="true">'
@@ -161,17 +163,19 @@ seite('support.html', 'Unterstützen', f'''
   <ul class="ei-stufen">
 {chr(10).join(stufe(*x) for x in STUFEN)}
   </ul>
-  <p class="ei-hinweis">Die Stufen unterscheiden sich nur im Betrag; wählen Sie, was zu Ihnen passt. Bezahlt wird über Ko-fi, direkt hier auf der Seite, und die Mitgliedschaft lässt sich jederzeit beenden. <button type="button" class="ei-einmalig" data-name="" data-betrag="">Lieber einmalig unterstützen</button></p>
-  <p class="ei-hinweis ei-leise">Ein Klick auf eine Stufe lädt das Zahlfeld von Ko-fi; erst dann gehen Daten an Ko-fi (siehe <a href="/privacy">Datenschutz</a>).</p>
+  <p class="ei-hinweis">Die Stufen unterscheiden sich nur im Betrag; wählen Sie, was zu Ihnen passt. Bezahlt wird sicher über Stripe, direkt hier auf der Seite; die Mitgliedschaft lässt sich jederzeit beenden.{(' <a href="' + STRIPE_PORTAL + '" target="_blank" rel="noopener">Mitgliedschaft verwalten</a>') if STRIPE_PORTAL else ''}</p>
+  <p class="ei-hinweis ei-leise">Ein Klick auf eine Stufe lädt das Bezahlfeld von Stripe; erst dann gehen Daten an Stripe (siehe <a href="/privacy">Datenschutz</a>).</p>
+  <p class="ei-danke" id="ei-danke" hidden>Danke! Ihre Mitgliedschaft ist eingerichtet. Eine Bestätigung kommt per E-Mail von Stripe.</p>
 
-  <dialog class="ei-kofi-fenster" id="kofi-fenster" aria-labelledby="kofi-titel">
+  <dialog class="ei-kofi-fenster" id="kasse-fenster" aria-labelledby="kasse-titel">
     <div class="ei-kofi-kopf" tabindex="-1" autofocus>
-      <svg viewBox="0 0 200 120" aria-hidden="true" id="kofi-ringe"><circle cx="100" cy="44" r="34"/><circle cx="80" cy="72" r="34"/><circle cx="120" cy="72" r="34"/></svg>
-      <div><h2 id="kofi-titel"></h2><p class="ei-kofi-schritt" id="kofi-schritt"></p></div>
-      <button type="button" class="ei-kofi-zu" id="kofi-zu" aria-label="Schließen">×</button>
+      <svg viewBox="0 0 200 120" aria-hidden="true" id="kasse-ringe"><circle cx="100" cy="44" r="34"/><circle cx="80" cy="72" r="34"/><circle cx="120" cy="72" r="34"/></svg>
+      <div><h2 id="kasse-titel"></h2><p class="ei-kofi-schritt" id="kasse-preis"></p></div>
+      <button type="button" class="ei-kofi-zu" id="kasse-zu" aria-label="Schließen">×</button>
     </div>
-    <div class="ei-kofi-feld" id="kofi-feld"></div>
-    <p class="ei-kofi-fuss">Bleibt das Feld leer, lässt Ko-fi das Einbetten in Ihrem Browser nicht zu: <a href="{KOFI_STUFEN}" target="_blank" rel="noopener">dann direkt auf Ko-fi</a>.</p>
+    <div class="ei-kasse" id="kasse"></div>
+    <p class="ei-kasse-meldung" id="kasse-meldung" hidden></p>
+    <p class="ei-kofi-fuss">Bezahlt wird über Stripe; Ihre Karten- oder Kontodaten sehen wir nicht. Monatlich kündbar.</p>
   </dialog>
 
   <section class="legal-section">
@@ -187,33 +191,63 @@ seite('support.html', 'Unterstützen', f'''
   <section class="legal-section">
     <h2>Friends of the Edition</h2>
     <p>Mitglieder werden, wenn sie es wünschen, unter den Friends of the Edition genannt.</p>
+    <p class="ei-zahl" id="ei-zahl" hidden></p>
+    <ul class="ei-friends" id="ei-friends" hidden></ul>
   </section>
 </main>''', beschreibung='Die Ausgaben sind frei zugänglich. Wer die Arbeit mittragen will, kann Mitglied werden.', aktuell='unterstuetzen',
       fuss='''<script>
-/* Ko-fi direkt auf der Seite: die Stufe öffnet ein Fenster mit dem Zahlfeld von Ko-fi. Das Zahlfeld lädt erst mit
-   diesem Klick (vorher keine Anfrage an Ko-fi) und bleibt danach geladen. */
+/* Mitgliedschaft mit Stripe, direkt auf der Seite: die Stufe öffnet ein Fenster mit Stripes eingebettetem Bezahlfeld
+   (api/mitglied-sitzung.js). Stripe.js lädt erst mit diesem Klick. Nach dem Bezahlen kehrt Stripe mit ?danke= zurück. */
 (function () {
-  var fenster = document.getElementById('kofi-fenster'), feld = document.getElementById('kofi-feld');
   var EN = document.documentElement.lang === 'en';
-  function oeffnen(name, betrag, an) {
-    if (!feld.firstChild) {
-      var i = document.createElement('iframe');
-      i.src = 'https://ko-fi.com/idealismedition/?hidefeed=true&widget=true&embed=true&preview=true';
-      i.title = 'Ko-fi'; i.height = '690';
-      feld.appendChild(i);
-    }
-    document.getElementById('kofi-titel').textContent = name ? (EN ? 'Become a ' + name : name + ' werden') : (EN ? 'Support once' : 'Einmalig unterstützen');
-    document.getElementById('kofi-schritt').textContent = name
-      ? (EN ? 'Enter ' + betrag.replace(',', '.') + ' € below and tick “Make this monthly”.' : 'Unten ' + betrag + ' € eintragen und „Make this monthly“ anhaken.')
-      : (EN ? 'Choose any amount below.' : 'Unten einen beliebigen Betrag wählen.');
-    document.querySelectorAll('#kofi-ringe circle').forEach(function (c, k) { c.classList.toggle('an', (an || '').indexOf('abc'[k]) >= 0); });
-    if (fenster.showModal) fenster.showModal(); else fenster.setAttribute('open', '');
+  var fenster = document.getElementById('kasse-fenster'), feld = document.getElementById('kasse'), meldung = document.getElementById('kasse-meldung');
+  var kasse = null, stripeLaedt = null;
+  function ladeStripe() {
+    if (!stripeLaedt) stripeLaedt = new Promise(function (ok, nein) {
+      var sc = document.createElement('script'); sc.src = 'https://js.stripe.com/v3/'; sc.onload = ok; sc.onerror = nein; document.head.appendChild(sc);
+    });
+    return stripeLaedt;
   }
-  document.querySelectorAll('.ei-stufe-knopf, .ei-einmalig').forEach(function (a) {
-    a.addEventListener('click', function (e) { e.preventDefault(); oeffnen(a.dataset.name, a.dataset.betrag, a.dataset.an); });
+  function zeige(t) { meldung.textContent = t; meldung.hidden = !t; }
+  function oeffnen(a) {
+    document.getElementById('kasse-titel').textContent = EN ? 'Become a ' + a.dataset.name : a.dataset.name + ' werden';
+    document.getElementById('kasse-preis').textContent = EN ? '€' + a.dataset.betrag.replace(',', '.') + ' a month, cancel any time' : a.dataset.betrag + ' € im Monat, jederzeit kündbar';
+    document.querySelectorAll('#kasse-ringe circle').forEach(function (c, k) { c.classList.toggle('an', (a.dataset.an || '').indexOf('abc'[k]) >= 0); });
+    if (fenster.showModal) fenster.showModal(); else fenster.setAttribute('open', '');
+    if (kasse) { kasse.destroy(); kasse = null; }
+    feld.textContent = ''; zeige(EN ? 'Loading the payment form …' : 'Das Bezahlfeld wird geladen …');
+    var antwort;
+    fetch('/api/mitglied-sitzung', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ stufe: a.dataset.stufe, sprache: EN ? 'en' : 'de' }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!j.ok) throw new Error(j.grund); antwort = j; return ladeStripe(); })
+      .then(function () { return Stripe(antwort.publishableKey).initEmbeddedCheckout({ fetchClientSecret: function () { return Promise.resolve(antwort.clientSecret); } }); })
+      .then(function (k) { kasse = k; zeige(''); k.mount('#kasse'); })
+      .catch(function () { zeige(EN ? 'The payment form could not be loaded. Please try again later.' : 'Das Bezahlfeld ließ sich nicht laden. Bitte später noch einmal.'); });
+  }
+  document.querySelectorAll('.ei-stufe-knopf').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); oeffnen(a); });
   });
-  document.getElementById('kofi-zu').addEventListener('click', function () { fenster.close(); });
+  document.getElementById('kasse-zu').addEventListener('click', function () { fenster.close(); });
   fenster.addEventListener('click', function (e) { if (e.target === fenster) fenster.close(); });
+  // Zurück von Stripe: danken, freiwilligen Namen an das Abo schreiben
+  var danke = new URLSearchParams(location.search).get('danke');
+  if (danke) {
+    document.getElementById('ei-danke').hidden = false;
+    fetch('/api/mitglied-danke?sitzung=' + encodeURIComponent(danke)).catch(function () {});
+    history.replaceState(null, '', location.pathname);
+  }
+  // Zahl der Mitglieder und Friends of the Edition
+  fetch('/api/mitglieder').then(function (r) { return r.json(); }).then(function (j) {
+    if (!j.ok || !j.zahl) return;
+    var z = document.getElementById('ei-zahl');
+    z.textContent = EN ? (j.zahl === 1 ? 'One member supports the editions.' : j.zahl + ' members support the editions.') : (j.zahl === 1 ? 'Ein Mitglied trägt die Ausgaben mit.' : j.zahl + ' Mitglieder tragen die Ausgaben mit.');
+    z.hidden = false;
+    if (j.namen && j.namen.length) {
+      var ul = document.getElementById('ei-friends');
+      j.namen.forEach(function (n) { var li = document.createElement('li'); li.textContent = n; ul.appendChild(li); });
+      ul.hidden = false;
+    }
+  }).catch(function () {});
 })();
 </script>
 ''')
@@ -301,13 +335,14 @@ seite('privacy.html', 'Datenschutz', '''
   </section>
 
   <section class="legal-section">
-    <h2>5. Zahlfeld von Ko-fi (nur nach Klick)</h2>
-    <p>Auf der Seite „Unterstützen“ lässt sich das Zahlfeld von Ko-fi (Ko-fi Labs Limited, Vereinigtes Königreich) in die Seite laden. Das geschieht erst, wenn Sie eine der Stufen oder „Lieber einmalig unterstützen“ anklicken; vorher wird nichts von Ko-fi geladen. Nach dem Klick ruft Ihr Browser Inhalte von Servern von Ko-fi ab. Dabei erhält Ko-fi Ihre IP-Adresse und technische Angaben zu Ihrem Browser und kann Cookies setzen. Zahlungen wickelt Ko-fi über Zahlungsdienstleister wie PayPal und Stripe ab; dafür gilt die Datenschutzerklärung von Ko-fi. Rechtsgrundlage ist Ihre Einwilligung durch den Klick (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG); sie gilt nur für diesen Seitenaufruf.</p>
+    <h2>5. Mitgliedschaft über Stripe (nur nach Klick)</h2>
+    <p>Auf der Seite „Unterstützen“ lässt sich eine Mitgliedschaft direkt abschließen. Dafür lädt die Seite das Bezahlfeld von Stripe (Stripe Payments Europe, Ltd., Irland), aber erst, wenn Sie eine der Stufen anklicken; vorher wird nichts von Stripe geladen. Nach dem Klick ruft Ihr Browser Inhalte von Servern von Stripe ab. Dabei erhält Stripe Ihre IP-Adresse und technische Angaben zu Ihrem Browser und setzt Cookies, die der Betrugsvorbeugung dienen.</p>
+    <p>Ihre Zahlungsangaben geben Sie unmittelbar bei Stripe ein; Karten- und Kontodaten erhalten wir nicht. In unserem Stripe-Konto sehen wir Ihren Namen, Ihre E-Mail-Adresse, die gewählte Stufe und den Stand der Mitgliedschaft, und den Namen, den Sie freiwillig für die Friends of the Edition angeben. Diesen Namen zeigen wir auf der Seite „Unterstützen“, solange die Mitgliedschaft läuft. Rechtsgrundlage für das Laden des Bezahlfelds ist Ihre Einwilligung durch den Klick (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG), für die Abwicklung der Mitgliedschaft deren Durchführung (Art. 6 Abs. 1 lit. b DSGVO). Ergänzend gilt die Datenschutzerklärung von Stripe.</p>
   </section>
 
   <section class="legal-section">
     <h2>6. Verweise auf andere Websites</h2>
-    <p>Die Treffer der Recherche und die Bandtitel führen in die Ausgaben auf www.fichteedition.com, schellingedition.com und hegeledition.com; dort gelten deren Datenschutzhinweise. Für die Mitgliedschaft wird auf Ko-fi verwiesen. Es handelt sich um einfache Links: Erst wenn Sie einen anklicken, verlassen Sie diese Website.</p>
+    <p>Die Treffer der Recherche und die Bandtitel führen in die Ausgaben auf www.fichteedition.com, schellingedition.com und hegeledition.com; dort gelten deren Datenschutzhinweise. Es handelt sich um einfache Links: Erst wenn Sie einen anklicken, verlassen Sie diese Website.</p>
   </section>
 
   <section class="legal-section">
