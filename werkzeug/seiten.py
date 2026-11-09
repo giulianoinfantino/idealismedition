@@ -10,19 +10,21 @@ KOFI_STUFEN = KOFI + '/tiers'
 # Stripe-Kundenportal (Anmeldelink aus dem Stripe-Dashboard: Einstellungen → Billing → Kundenportal). Leer: Link entfällt.
 STRIPE_PORTAL = ''
 
-# Mitgliedsstufen: Name, Preis, fuer wen, welche Ringe gold (a oben, b links, c rechts wie im Zeichen)
-STUFEN = [('Reader', '1,99', 'Für Studierende und alle, die mit kleinem Budget lesen.', 'a'),
-          ('Fellow', '3,99', 'Für Promovierende und Postdocs, die mit den Texten arbeiten.', 'ab'),
-          ('Scholar', '5,99', 'Für Professorinnen und Professoren, die die Ausgaben in Forschung und Lehre nutzen.', 'abc')]
+# Mitgliedsstufen: Name, Betrag alle drei Monate, derselbe Betrag je Monat, fuer wen, welche Ringe gold
+# (a oben, b links, c rechts wie im Zeichen). Beträge wie in api/_stripe.js (seit 08.11.2026 vierteljährlich).
+STUFEN = [('Reader', '6', '2', 'Für Studierende und alle, die mit kleinem Budget lesen.', 'a'),
+          ('Fellow', '12', '4', 'Für Promovierende und Postdocs, die mit den Texten arbeiten.', 'ab'),
+          ('Scholar', '24', '8', 'Für Professorinnen und Professoren, die die Ausgaben in Forschung und Lehre nutzen.', 'abc')]
 
 
-def stufe(name, preis, wer, an):
+def stufe(name, preis, monat, wer, an):
     ringe = ''.join(f'<circle{" class=\"an\"" if k in an else ""} cx="{x}" cy="{y}" r="34"/>'
                     for k, x, y in (('a', 100, 44), ('b', 80, 72), ('c', 120, 72)))
     return f'''    <li class="ei-stufe">
       <svg viewBox="0 0 200 120" aria-hidden="true">{ringe}</svg>
       <h2>{name}</h2>
-      <p class="ei-preis">{preis}&nbsp;€ im Monat</p>
+      <p class="ei-preis">{preis}&nbsp;€ alle drei Monate</p>
+      <p class="ei-preis-monat">{monat}&nbsp;€ im Monat</p>
       <p class="ei-wer">{wer}</p>
       <a class="ei-knopf ei-stufe-knopf" href="#mitglied" data-stufe="{name.lower()}" data-name="{name}" data-betrag="{preis}" data-an="{an}">{name} werden</a>
     </li>'''
@@ -175,7 +177,7 @@ seite('support.html', 'Unterstützen', f'''
     </div>
     <div class="ei-kasse" id="kasse"></div>
     <p class="ei-kasse-meldung" id="kasse-meldung" hidden></p>
-    <p class="ei-kofi-fuss">Bezahlt wird über Stripe; Ihre Karten- oder Kontodaten sehen wir nicht. Monatlich kündbar.</p>
+    <p class="ei-kofi-fuss">Bezahlt wird über Stripe; Ihre Karten- oder Kontodaten sehen wir nicht. Jederzeit kündbar, zum Ende des laufenden Vierteljahrs.</p>
   </dialog>
 
   <section class="legal-section">
@@ -211,7 +213,7 @@ seite('support.html', 'Unterstützen', f'''
   function zeige(t) { meldung.textContent = t; meldung.hidden = !t; }
   function oeffnen(a) {
     document.getElementById('kasse-titel').textContent = EN ? 'Become a ' + a.dataset.name : a.dataset.name + ' werden';
-    document.getElementById('kasse-preis').textContent = EN ? '€' + a.dataset.betrag.replace(',', '.') + ' a month, cancel any time' : a.dataset.betrag + ' € im Monat, jederzeit kündbar';
+    document.getElementById('kasse-preis').textContent = EN ? '€' + a.dataset.betrag.replace(',', '.') + ' every three months, cancel any time' : a.dataset.betrag + ' € alle drei Monate, jederzeit kündbar';
     document.querySelectorAll('#kasse-ringe circle').forEach(function (c, k) { c.classList.toggle('an', (a.dataset.an || '').indexOf('abc'[k]) >= 0); });
     if (fenster.showModal) fenster.showModal(); else fenster.setAttribute('open', '');
     if (kasse) { kasse.destroy(); kasse = null; }

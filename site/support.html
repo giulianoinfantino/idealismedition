@@ -48,23 +48,26 @@
     <li class="ei-stufe">
       <svg viewBox="0 0 200 120" aria-hidden="true"><circle class="an" cx="100" cy="44" r="34"/><circle cx="80" cy="72" r="34"/><circle cx="120" cy="72" r="34"/></svg>
       <h2>Reader</h2>
-      <p class="ei-preis">1.99&nbsp;€ per month</p>
+      <p class="ei-preis">6&nbsp;€ every three months</p>
+      <p class="ei-preis-monat">2&nbsp;€ per month</p>
       <p class="ei-wer">For students and anyone reading on a small budget.</p>
-      <a class="ei-knopf ei-stufe-knopf" href="#mitglied" data-stufe="reader" data-name="Reader" data-betrag="1,99" data-an="a">Become a Reader</a>
+      <a class="ei-knopf ei-stufe-knopf" href="#mitglied" data-stufe="reader" data-name="Reader" data-betrag="6" data-an="a">Become a Reader</a>
     </li>
     <li class="ei-stufe">
       <svg viewBox="0 0 200 120" aria-hidden="true"><circle class="an" cx="100" cy="44" r="34"/><circle class="an" cx="80" cy="72" r="34"/><circle cx="120" cy="72" r="34"/></svg>
       <h2>Fellow</h2>
-      <p class="ei-preis">3.99&nbsp;€ per month</p>
+      <p class="ei-preis">12&nbsp;€ every three months</p>
+      <p class="ei-preis-monat">4&nbsp;€ per month</p>
       <p class="ei-wer">For doctoral students and postdocs who work with the texts.</p>
-      <a class="ei-knopf ei-stufe-knopf" href="#mitglied" data-stufe="fellow" data-name="Fellow" data-betrag="3,99" data-an="ab">Become a Fellow</a>
+      <a class="ei-knopf ei-stufe-knopf" href="#mitglied" data-stufe="fellow" data-name="Fellow" data-betrag="12" data-an="ab">Become a Fellow</a>
     </li>
     <li class="ei-stufe">
       <svg viewBox="0 0 200 120" aria-hidden="true"><circle class="an" cx="100" cy="44" r="34"/><circle class="an" cx="80" cy="72" r="34"/><circle class="an" cx="120" cy="72" r="34"/></svg>
       <h2>Scholar</h2>
-      <p class="ei-preis">5.99&nbsp;€ per month</p>
+      <p class="ei-preis">24&nbsp;€ every three months</p>
+      <p class="ei-preis-monat">8&nbsp;€ per month</p>
       <p class="ei-wer">For professors who use the editions in research and teaching.</p>
-      <a class="ei-knopf ei-stufe-knopf" href="#mitglied" data-stufe="scholar" data-name="Scholar" data-betrag="5,99" data-an="abc">Become a Scholar</a>
+      <a class="ei-knopf ei-stufe-knopf" href="#mitglied" data-stufe="scholar" data-name="Scholar" data-betrag="24" data-an="abc">Become a Scholar</a>
     </li>
   </ul>
   <p class="ei-hinweis">The tiers differ only in amount; choose what suits you. Payment goes securely through Stripe, right here on this page; you can end your membership at any time.</p>
@@ -79,7 +82,7 @@
     </div>
     <div class="ei-kasse" id="kasse"></div>
     <p class="ei-kasse-meldung" id="kasse-meldung" hidden></p>
-    <p class="ei-kofi-fuss">Payment goes through Stripe; we never see your card or account details. Cancel monthly.</p>
+    <p class="ei-kofi-fuss">Payment goes through Stripe; we never see your card or account details. Cancel any time, effective at the end of the current quarter.</p>
   </dialog>
 
   <section class="legal-section">
@@ -122,7 +125,7 @@
   function zeige(t) { meldung.textContent = t; meldung.hidden = !t; }
   function oeffnen(a) {
     document.getElementById('kasse-titel').textContent = EN ? 'Become a ' + a.dataset.name : a.dataset.name + ' werden';
-    document.getElementById('kasse-preis').textContent = EN ? '€' + a.dataset.betrag.replace(',', '.') + ' a month, cancel any time' : a.dataset.betrag + ' € im Monat, jederzeit kündbar';
+    document.getElementById('kasse-preis').textContent = EN ? '€' + a.dataset.betrag.replace(',', '.') + ' every three months, cancel any time' : a.dataset.betrag + ' € alle drei Monate, jederzeit kündbar';
     document.querySelectorAll('#kasse-ringe circle').forEach(function (c, k) { c.classList.toggle('an', (a.dataset.an || '').indexOf('abc'[k]) >= 0); });
     if (fenster.showModal) fenster.showModal(); else fenster.setAttribute('open', '');
     if (kasse) { kasse.destroy(); kasse = null; }
