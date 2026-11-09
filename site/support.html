@@ -97,9 +97,8 @@
 
   <section class="legal-section">
     <h2>Friends of the Edition</h2>
-    <p>Members who wish are named among the Friends of the Edition.</p>
+    <p>Members who wish can be named among the <a href="/friends">Friends of the Edition</a>.</p>
     <p class="ei-zahl" id="ei-zahl" hidden></p>
-    <ul class="ei-friends" id="ei-friends" hidden></ul>
   </section>
 </main>
 
@@ -156,11 +155,6 @@
     var z = document.getElementById('ei-zahl');
     z.textContent = EN ? (j.zahl === 1 ? 'One member supports the editions.' : j.zahl + ' members support the editions.') : (j.zahl === 1 ? 'Ein Mitglied trägt die Ausgaben mit.' : j.zahl + ' Mitglieder tragen die Ausgaben mit.');
     z.hidden = false;
-    if (j.namen && j.namen.length) {
-      var ul = document.getElementById('ei-friends');
-      j.namen.forEach(function (n) { var li = document.createElement('li'); li.textContent = n; ul.appendChild(li); });
-      ul.hidden = false;
-    }
   }).catch(function () {});
 })();
 </script>

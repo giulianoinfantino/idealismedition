@@ -173,3 +173,4 @@ button.ei-knopf{background:none;font:inherit;font-size:.86rem;cursor:pointer}
 .ki-auszug{margin:.3rem 0 0;font-size:.86rem;line-height:1.6;color:var(--text-body)}
 .ki-kosten{margin:1.6rem 0 0;font-size:.74rem;color:var(--text-muted);font-variant-numeric:lining-nums tabular-nums}
 .ki-hinweis{margin:2.2rem 0 0;font-size:.76rem;line-height:1.6;color:var(--text-muted)}
+.ei-friends-leer{font-size:.92rem;color:var(--text-muted);font-style:italic}

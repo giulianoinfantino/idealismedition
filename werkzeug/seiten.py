@@ -17,6 +17,21 @@ STUFEN = [('Reader', '6', '2', 'Für Studierende und alle, die mit kleinem Budge
           ('Scholar', '24', '8', 'Für Professorinnen und Professoren, die die Ausgaben in Forschung und Lehre nutzen.', 'abc')]
 
 
+# Friends-Seite (/friends). Zwei Listen, nie vermischen:
+# - Friends of the Edition: wer die drei Ausgaben seit Oktober 2026 (Hegel 0.8) mit einem wiederkehrenden Beitrag
+#   mitträgt. Stripe-Mitglieder kommen von selbst (api/mitglieder.js); Ko-fi-Abonnenten hier von Hand eintragen.
+# - Friends of the Hegel Edition: wer die Transkription der Hegel-Edition mitbezahlt hat (bis 08.11.2026 auf
+#   hegeledition.com/friends, Ko-fi). Abgeschlossen, wird nicht mehr ergänzt.
+FRIENDS_KOFI = []
+FRIENDS_HEGEL = ['Theodor Avenarius', 'ET', 'Johann Gottlieb Fichte', 'J. Rafael González', 'Giuliano Infantino',
+                 'Anton Kabeshkin', 'Eric Lam', 'Daniel LeBlanc', 'Shiyv Lin', 'Karl von der Luft', 'Nicole Marczyk',
+                 'Jelena Milosavljevic', 'Georg Oswald', 'Klint Shim', 'Tan Siek Leng', 'Xi Wang', 'Clark Wolf',
+                 'Zhaoyi Zhu']
+
+
+def namen(liste):
+    return '\n'.join(f'      <li>{n}</li>' for n in liste)
+
 def stufe(name, preis, monat, wer, an):
     ringe = ''.join(f'<circle{" class=\"an\"" if k in an else ""} cx="{x}" cy="{y}" r="34"/>'
                     for k, x, y in (('a', 100, 44), ('b', 80, 72), ('c', 120, 72)))
@@ -192,9 +207,8 @@ seite('support.html', 'Unterstützen', f'''
 
   <section class="legal-section">
     <h2>Friends of the Edition</h2>
-    <p>Mitglieder werden, wenn sie es wünschen, unter den Friends of the Edition genannt.</p>
+    <p>Mitglieder werden, wenn sie es wünschen, unter den <a href="/friends">Friends of the Edition</a> genannt.</p>
     <p class="ei-zahl" id="ei-zahl" hidden></p>
-    <ul class="ei-friends" id="ei-friends" hidden></ul>
   </section>
 </main>''', beschreibung='Die Ausgaben sind frei zugänglich. Wer die Arbeit mittragen will, kann Mitglied werden.', aktuell='unterstuetzen',
       fuss='''<script>
@@ -244,11 +258,47 @@ seite('support.html', 'Unterstützen', f'''
     var z = document.getElementById('ei-zahl');
     z.textContent = EN ? (j.zahl === 1 ? 'One member supports the editions.' : j.zahl + ' members support the editions.') : (j.zahl === 1 ? 'Ein Mitglied trägt die Ausgaben mit.' : j.zahl + ' Mitglieder tragen die Ausgaben mit.');
     z.hidden = false;
-    if (j.namen && j.namen.length) {
-      var ul = document.getElementById('ei-friends');
-      j.namen.forEach(function (n) { var li = document.createElement('li'); li.textContent = n; ul.appendChild(li); });
-      ul.hidden = false;
-    }
+  }).catch(function () {});
+})();
+</script>
+''')
+
+seite('friends.html', 'Friends of the Edition', f'''
+<main class="legal-container">
+  <div class="legal-kicker">Unterstützen</div>
+  <h1>Friends of the Edition</h1>
+  <p class="legal-lead">Die Ausgaben sind frei, weil Leserinnen und Leser sie mittragen. Hier stehen ihre Namen, mit Dank.</p>
+
+  <section class="legal-section" id="edition">
+    <h2>Friends of the Edition</h2>
+    <p>Sie tragen die Ausgaben von Fichte, Schelling und Hegel seit Oktober 2026 mit einem wiederkehrenden Beitrag.</p>
+    <ul class="ei-friends" id="ei-friends"{'' if FRIENDS_KOFI else ' hidden'}>
+{namen(FRIENDS_KOFI)}
+    </ul>
+    <p class="ei-friends-leer" id="ei-friends-leer"{' hidden' if FRIENDS_KOFI else ''}>Die ersten Namen folgen.</p>
+    <p class="ei-hinweis"><a href="/support">Mitglied werden</a> und, wenn Sie möchten, hier genannt werden.</p>
+  </section>
+
+  <section class="legal-section" id="hegel">
+    <h2>Friends of the Hegel Edition</h2>
+    <p>Sie haben die Transkription der Hegel-Edition mitbezahlt, bevor sie Teil der Edition Deutscher Idealismus wurde.</p>
+    <ul class="ei-friends">
+{namen(FRIENDS_HEGEL)}
+    </ul>
+  </section>
+</main>''', beschreibung='Die Namen derer, die die Ausgaben von Fichte, Schelling und Hegel mittragen.', aktuell='unterstuetzen',
+      fuss='''<script>
+/* Stripe-Mitglieder mit freiwillig angegebenem Namen zu den von Hand eingetragenen dazu (api/mitglieder.js) */
+(function () {
+  var ul = document.getElementById('ei-friends'), leer = document.getElementById('ei-friends-leer');
+  fetch('/api/mitglieder').then(function (r) { return r.json(); }).then(function (j) {
+    if (!j.ok || !j.namen || !j.namen.length) return;
+    var da = {};
+    ul.querySelectorAll('li').forEach(function (li) { da[li.textContent] = 1; });
+    j.namen.forEach(function (n) { if (!da[n]) { var li = document.createElement('li'); li.textContent = n; ul.appendChild(li); } });
+    var alle = Array.prototype.slice.call(ul.children).sort(function (a, b) { return a.textContent.localeCompare(b.textContent, 'de'); });
+    alle.forEach(function (li) { ul.appendChild(li); });
+    ul.hidden = false; leer.hidden = true;
   }).catch(function () {});
 })();
 </script>
