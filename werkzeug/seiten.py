@@ -36,7 +36,7 @@ RINGE = ('<svg class="ringe-mark site-title-rings" viewBox="0 0 200 120" aria-hi
 
 
 def seite(datei, titel, rumpf, beschreibung='', aktuell='', ohne_index=False, kopf='', fuss=''):
-    nav = [('/#editionen', 'Ausgaben', ''), ('/search', 'Recherche', 'recherche'), ('/analyses', 'Analysen', 'analysen'),
+    nav = [('/', 'Ausgaben', ''), ('/search', 'Recherche', 'recherche'), ('/analyses', 'Analysen', 'analysen'),
            ('/support', 'Unterstützen', 'unterstuetzen')]
     navhtml = '\n'.join(f'      <li' + (' class="nav-weit"' if k == 'unterstuetzen' else '') + f'><a href="{h}"' + (' target="_blank" rel="noopener"' if h.startswith('http') else '') + (' class="current" aria-current="page"' if k and k == aktuell else '') + f'>{t}</a></li>' for h, t, k in nav)
     kanon = '' if ohne_index else f'\n  <link rel="canonical" href="https://www.idealismedition.com/{datei.removesuffix(".html").removesuffix("index")}">'

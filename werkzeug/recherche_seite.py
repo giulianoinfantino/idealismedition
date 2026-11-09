@@ -40,7 +40,7 @@ ers('''      <li><a href="index.html">Sammlung</a></li>
       <li><a href="text.html">Lektüre</a></li>
       <li><a href="search.html" class="current" aria-current="page">Recherche</a></li>
       <li class="nav-weit"><a href="https://www.idealismedition.com/de/support">Unterstützen</a></li>''',
-    '''      <li><a href="/#editionen">Ausgaben</a></li>
+    '''      <li><a href="/">Ausgaben</a></li>
       <li><a href="search" class="current" aria-current="page">Recherche</a></li>
       <li><a href="/analyses">Analysen</a></li>
       <li class="nav-weit"><a href="/support">Unterstützen</a></li>''')
