@@ -321,6 +321,7 @@ seite('ask.html', 'Die Texte befragen', '''
     fetch('/api/ki-frage', { method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ frage: frage, sprache: EN ? 'en' : 'de', modell: $('ki-modell').value }) })
       .then(function (r) {
+        if (r.status === 403) { schritt(EN ? 'This feature is not open yet.' : 'Diese Funktion ist noch nicht freigegeben.'); return; }
         if (!r.ok || !r.body) throw new Error(r.status);
         var leser = r.body.getReader(), dec = new TextDecoder();
         function weiter() {
