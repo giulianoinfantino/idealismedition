@@ -7,3 +7,5 @@ site/assets/suche/
 site/de/assets
 site/de/api
 werkzeug/__pycache__/
+.env*
+site/node_modules/

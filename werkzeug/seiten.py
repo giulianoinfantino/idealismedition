@@ -254,6 +254,113 @@ seite('support.html', 'Unterstützen', f'''
 </script>
 ''')
 
+seite('ask.html', 'Die Texte befragen', '''
+<main class="legal-container legal-container--wide ki">
+  <div class="legal-kicker">Recherche · Vorschau</div>
+  <h1>Die Texte befragen</h1>
+  <p class="legal-lead">Stellen Sie eine Frage zu Fichte, Schelling oder Hegel. Claude sucht in den 41 Bänden, liest die einschlägigen Stellen und antwortet mit Belegen, die in den Leser führen.</p>
+
+  <form class="ki-form" id="ki-form">
+    <textarea id="ki-frage" rows="3" maxlength="1500" placeholder="Zum Beispiel: Wie bestimmt Hegel das Leben in der Wissenschaft der Logik?" aria-label="Ihre Frage"></textarea>
+    <div class="ki-leiste">
+      <label class="ki-modell">Modell
+        <select id="ki-modell">
+          <option value="claude-opus-5-5">Claude Opus 5.5</option>
+          <option value="claude-sonnet-5-5">Claude Sonnet 5.5</option>
+          <option value="claude-haiku-5-5">Claude Haiku 5.5</option>
+        </select>
+      </label>
+      <button type="submit" id="ki-los">Fragen</button>
+    </div>
+  </form>
+  <p class="an-beispiele ki-beispiele"><span>Zum Beispiel</span>
+    <button type="button">Was versteht Fichte unter dem Anstoß?</button>
+    <button type="button">Wie unterscheidet Schelling Grund und Existenz?</button>
+    <button type="button">Wo spricht Hegel von der „Arbeit des Begriffs“?</button>
+  </p>
+
+  <ol class="ki-schritte" id="ki-schritte" aria-live="polite" hidden></ol>
+  <div class="ki-antwort" id="ki-antwort" hidden></div>
+  <section class="ki-quellen" id="ki-quellen" hidden>
+    <h2>Belege</h2>
+    <ol id="ki-quellenliste"></ol>
+  </section>
+  <p class="ki-kosten" id="ki-kosten" hidden></p>
+  <p class="ki-hinweis">Die Antworten schreibt ein Sprachmodell. Prüfen Sie jede Aussage an den Belegen; nur was dort steht, ist gesichert.</p>
+</main>''', beschreibung='Fragen an die Werke von Fichte, Schelling und Hegel, beantwortet mit Belegen aus den 41 Bänden.', ohne_index=True,
+      fuss=r'''<script>
+/* KI-Recherche (Vorschau): schickt die Frage an api/ki-frage.js und liest die Antwort als Strom (eine JSON-Zeile je Ereignis):
+   Arbeitsschritte, dann Antwort mit Belegen ⟦1⟧, dann Kosten. */
+(function () {
+  var EN = document.documentElement.lang === 'en';
+  var $ = function (id) { return document.getElementById(id); };
+  var form = $('ki-form'), feld = $('ki-frage'), los = $('ki-los'), schritte = $('ki-schritte'), antwort = $('ki-antwort'),
+      quellen = $('ki-quellen'), liste = $('ki-quellenliste'), kosten = $('ki-kosten');
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function satz(s) { return esc(s).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\*([^*\n]+)\*/g, '<em class="sperrsatz">$1</em>'); }
+  function schritt(t) { var li = document.createElement('li'); li.textContent = t; schritte.appendChild(li); schritte.hidden = false; }
+  function malAntwort(a) {
+    var html = a.text.split(/\n{2,}/).map(function (absatz) {
+      return '<p>' + satz(absatz.trim()).replace(/⟦([\d,]+)⟧/g, function (_, n) {
+        return '<sup class="ki-marke">' + n.split(',').map(function (k) { return '<a href="#ki-q' + k + '">' + k + '</a>'; }).join(',') + '</sup>';
+      }) + '</p>';
+    }).join('');
+    antwort.innerHTML = html; antwort.hidden = false;
+    liste.innerHTML = a.quellen.map(function (q) {
+      return '<li id="ki-q' + q.nr + '"><a class="ki-zitat" href="' + esc(q.link) + '" target="_blank" rel="noopener">' + esc(q.zitat) + '</a>'
+        + ' <span class="ki-werk">' + esc(q.werk) + (q.abschnitt ? ' · ' + esc(q.abschnitt) : '') + '</span>'
+        + '<p class="ki-auszug">' + satz(q.auszug) + '</p></li>';
+    }).join('');
+    quellen.hidden = !a.quellen.length;
+  }
+  function fragen(frage) {
+    schritte.innerHTML = ''; antwort.hidden = true; quellen.hidden = true; kosten.hidden = true;
+    los.disabled = true; los.textContent = EN ? 'Searching …' : 'Sucht …';
+    schritt(EN ? 'Reading the question …' : 'Die Frage wird gelesen …');
+    var puffer = '';
+    fetch('/api/ki-frage', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ frage: frage, sprache: EN ? 'en' : 'de', modell: $('ki-modell').value }) })
+      .then(function (r) {
+        if (!r.ok || !r.body) throw new Error(r.status);
+        var leser = r.body.getReader(), dec = new TextDecoder();
+        function weiter() {
+          return leser.read().then(function (st) {
+            if (st.done) return;
+            puffer += dec.decode(st.value, { stream: true });
+            var zeilen = puffer.split('\n'); puffer = zeilen.pop();
+            zeilen.forEach(function (z) { if (z.trim()) ereignis(JSON.parse(z)); });
+            return weiter();
+          });
+        }
+        return weiter();
+      })
+      .catch(function () { schritt(EN ? 'The question could not be answered. Please try again later.' : 'Die Frage ließ sich nicht beantworten. Bitte später noch einmal.'); })
+      .then(function () { los.disabled = false; los.textContent = EN ? 'Ask' : 'Fragen'; });
+  }
+  function ereignis(e) {
+    if (e.t === 'schritt' && e.art === 'suche') schritt((EN ? 'Searches “' : 'Sucht „') + e.anfrage + (EN ? '”' : '“')
+      + (e.autor && e.autor !== 'alle' ? (EN ? ' in ' : ' bei ') + e.autor.charAt(0).toUpperCase() + e.autor.slice(1) : '')
+      + ' · ' + e.gesamt + (EN ? ' passages' : ' Stellen'));
+    else if (e.t === 'schritt') schritt((EN ? 'Reads ' : 'Liest ') + e.zitat);
+    else if (e.t === 'antwort') malAntwort(e);
+    else if (e.t === 'fehler') schritt((EN ? 'Error: ' : 'Fehler: ') + e.grund);
+    else if (e.t === 'kosten') {
+      var v = e.verbrauch;
+      kosten.textContent = e.modell + ' · ' + e.sekunden + ' s · ' + (v.input_tokens + v.cache_read_input_tokens + v.cache_creation_input_tokens).toLocaleString(EN ? 'en-US' : 'de-DE')
+        + (EN ? ' tokens read, ' : ' Token gelesen, ') + v.output_tokens.toLocaleString(EN ? 'en-US' : 'de-DE') + (EN ? ' written · about $' : ' geschrieben · etwa ')
+        + e.dollar.toLocaleString(EN ? 'en-US' : 'de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 3 }) + (EN ? '' : ' $');
+      kosten.hidden = false;
+    }
+  }
+  form.addEventListener('submit', function (ev) { ev.preventDefault(); var f = feld.value.trim(); if (f.length > 2) fragen(f); });
+  feld.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' && (ev.metaKey || ev.ctrlKey)) form.requestSubmit(); });
+  document.querySelectorAll('.ki-beispiele button').forEach(function (b) {
+    b.addEventListener('click', function () { feld.value = b.textContent; fragen(b.textContent); });
+  });
+})();
+</script>
+''')
+
 seite('legal-notice.html', 'Impressum', f'''
 <main class="legal-container">
   <div class="legal-kicker">Rechtliche Angaben</div>

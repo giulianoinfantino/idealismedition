@@ -1101,7 +1101,24 @@
   "Bezahlt wird über Stripe; Ihre Karten- oder Kontodaten sehen wir nicht. Monatlich kündbar.": "Payment goes through Stripe; we never see your card or account details. Cancel monthly.",
   "{0}&nbsp;€ alle drei Monate": "{0}&nbsp;€ every three months",
   "Bezahlt wird über Stripe; Ihre Karten- oder Kontodaten sehen wir nicht. Jederzeit kündbar, zum Ende des laufenden Vierteljahrs.": "Payment goes through Stripe; we never see your card or account details. Cancel any time, effective at the end of the current quarter.",
-  "Die Stufen unterscheiden sich nur im Betrag; wählen Sie, was zu Ihnen passt. Bezahlt wird sicher über Stripe, direkt hier auf der Seite; die Mitgliedschaft lässt sich jederzeit beenden. <a href=\"https://billing.stripe.com/p/login/7sY00k4l22zc7LMcbSdEs00\" target=\"_blank\" rel=\"noopener\">Mitgliedschaft verwalten</a>": "The tiers differ only in amount; choose what suits you. Payment goes securely through Stripe, right here on this page; you can end your membership at any time. <a href=\"https://billing.stripe.com/p/login/7sY00k4l22zc7LMcbSdEs00\" target=\"_blank\" rel=\"noopener\">Manage your membership</a>"
+  "Die Stufen unterscheiden sich nur im Betrag; wählen Sie, was zu Ihnen passt. Bezahlt wird sicher über Stripe, direkt hier auf der Seite; die Mitgliedschaft lässt sich jederzeit beenden. <a href=\"https://billing.stripe.com/p/login/7sY00k4l22zc7LMcbSdEs00\" target=\"_blank\" rel=\"noopener\">Mitgliedschaft verwalten</a>": "The tiers differ only in amount; choose what suits you. Payment goes securely through Stripe, right here on this page; you can end your membership at any time. <a href=\"https://billing.stripe.com/p/login/7sY00k4l22zc7LMcbSdEs00\" target=\"_blank\" rel=\"noopener\">Manage your membership</a>",
+  "Die Texte befragen · Edition Deutscher Idealismus": "Ask the Texts · Edition of German Idealism",
+  "Recherche · Vorschau": "Research · Preview",
+  "Die Texte befragen": "Ask the texts",
+  "Stellen Sie eine Frage zu Fichte, Schelling oder Hegel. Claude sucht in den {0} Bänden, liest die einschlägigen Stellen und antwortet mit Belegen, die in den Leser führen.": "Ask a question about Fichte, Schelling or Hegel. Claude searches the {0} volumes, reads the relevant passages and answers with references that lead into the reader.",
+  "Modell": "Model",
+  "Claude Opus {0}.{1}": "Claude Opus {0}.{1}",
+  "Claude Sonnet {0}.{1}": "Claude Sonnet {0}.{1}",
+  "Claude Haiku {0}.{1}": "Claude Haiku {0}.{1}",
+  "Fragen": "Ask",
+  "Was versteht Fichte unter dem Anstoß?": "What does Fichte mean by the Anstoß (check)?",
+  "Wie unterscheidet Schelling Grund und Existenz?": "How does Schelling distinguish ground and existence?",
+  "Wo spricht Hegel von der „Arbeit des Begriffs“?": "Where does Hegel speak of the “labour of the concept”?",
+  "Belege": "References",
+  "Die Antworten schreibt ein Sprachmodell. Prüfen Sie jede Aussage an den Belegen; nur was dort steht, ist gesichert.": "The answers are written by a language model. Check every statement against the references; only what they say is certain.",
+  "Fragen an die Werke von Fichte, Schelling und Hegel, beantwortet mit Belegen aus den {0} Bänden.": "Questions to the works of Fichte, Schelling and Hegel, answered with references from the {0} volumes.",
+  "Zum Beispiel: Wie bestimmt Hegel das Leben in der Wissenschaft der Logik?": "For example: How does Hegel define life in the Science of Logic?",
+  "Ihre Frage": "Your question"
  },
  "js": {
   "Digitale Ausgabe von Fichtes Werken nach dem Text der Sämmtlichen und Nachgelassenen Werke, hg. von I. H. Fichte (1834–1846): frei lesbar, durchsuchbar, am Scan geprüft.": "Digital edition of Fichte’s works based on the text of the Sämmtliche Werke and Nachgelassene Werke, ed. I. H. Fichte (1834–1846): freely readable, searchable, checked against the scan.",
@@ -1436,6 +1453,11 @@
   "Das Bezahlfeld ließ sich nicht laden. Bitte später noch einmal.": "Das Bezahlfeld ließ sich nicht laden. Bitte später noch einmal.",
   "Ein Mitglied trägt die Ausgaben mit.": "Ein Mitglied trägt die Ausgaben mit.",
   " Mitglieder tragen die Ausgaben mit.": " Mitglieder tragen die Ausgaben mit.",
-  " € alle drei Monate, jederzeit kündbar": " € alle drei Monate, jederzeit kündbar"
+  " € alle drei Monate, jederzeit kündbar": " € alle drei Monate, jederzeit kündbar",
+  "Die Frage wird gelesen …": "Die Frage wird gelesen …",
+  "Die Frage ließ sich nicht beantworten. Bitte später noch einmal.": "Die Frage ließ sich nicht beantworten. Bitte später noch einmal.",
+  "Searches “": "Searches “",
+  "Sucht „": "Sucht „",
+  " Stellen": " Stellen"
  }
 }

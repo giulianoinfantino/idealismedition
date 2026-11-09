@@ -1,0 +1,8 @@
+{
+  "name": "idealismedition",
+  "private": true,
+  "description": "Portal Edition Deutscher Idealismus; Abhängigkeiten nur für api/ (KI-Recherche)",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.6.0"
+  }
+}

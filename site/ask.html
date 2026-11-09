@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script>/*sprache*/try{if(localStorage.getItem('sprache')==='de'&&!/[?&]en\b/.test(location.search))location.replace('/de'+(location.pathname==='/'?'/':location.pathname)+location.search+location.hash)}catch(e){}</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="alternate" hreflang="en" href="https://www.idealismedition.com/ask">
+  <link rel="alternate" hreflang="de" href="https://www.idealismedition.com/de/ask">
+  <link rel="alternate" hreflang="x-default" href="https://www.idealismedition.com/ask">
+  <title>Ask the Texts · Edition of German Idealism</title>
+  <meta name="description" content="Questions to the works of Fichte, Schelling and Hegel, answered with references from the 41 volumes.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96.png">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-title" content="Idealismus">
+  <meta name="theme-color" content="#232229">
+  <link rel="preload" href="/assets/fonts/SourceSerif4-Variable-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/fonts.css">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="/assets/portal.css">
+  <script src="/assets/en/themefarbe.js"></script>
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <a href="/" class="site-title" aria-label="Edition Deutscher Idealismus, home page">
+    <svg class="ringe-mark site-title-rings" viewBox="0 0 200 120" aria-hidden="true"><circle class="ring ring-a" cx="100" cy="44" r="34" vector-effect="non-scaling-stroke"/><circle class="ring ring-b" cx="80" cy="72" r="34" vector-effect="non-scaling-stroke"/><circle class="ring ring-c" cx="120" cy="72" r="34" vector-effect="non-scaling-stroke"/></svg>
+    <span class="site-title-rows"> <span class="site-title-hegel">IDEALISMUS</span> <span class="site-title-edition">edition</span> </span> </a>
+  <nav class="sitenav" aria-label="Main navigation">
+    <ul>
+      <li><a href="/">Editions</a></li>
+      <li><a href="/search">Search</a></li>
+      <li><a href="/analyses">Analyses</a></li>
+      <li class="nav-weit"><a href="/support">Support</a></li>
+    </ul>
+  </nav>
+  <div class="kopf-rechts"><a class="sprache-schalter" href="/de/ask" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsche Fassung" onclick="try{localStorage.setItem('sprache','de')}catch(e){};this.href='/de'+(location.pathname==='/'?'/':location.pathname)+location.search+location.hash">DE</a></div>
+</header>
+
+<main class="legal-container legal-container--wide ki">
+  <div class="legal-kicker">Research · Preview</div>
+  <h1>Ask the texts</h1>
+  <p class="legal-lead">Ask a question about Fichte, Schelling or Hegel. Claude searches the 41 volumes, reads the relevant passages and answers with references that lead into the reader.</p>
+
+  <form class="ki-form" id="ki-form">
+    <textarea id="ki-frage" rows="3" maxlength="1500" placeholder="For example: How does Hegel define life in the Science of Logic?" aria-label="Your question"></textarea>
+    <div class="ki-leiste">
+      <label class="ki-modell">Model
+        <select id="ki-modell">
+          <option value="claude-opus-5-5">Claude Opus 5.5</option>
+          <option value="claude-sonnet-5-5">Claude Sonnet 5.5</option>
+          <option value="claude-haiku-5-5">Claude Haiku 5.5</option>
+        </select>
+      </label>
+      <button type="submit" id="ki-los">Ask</button>
+    </div>
+  </form>
+  <p class="an-beispiele ki-beispiele"><span>For example</span>
+    <button type="button">What does Fichte mean by the Anstoß (check)?</button>
+    <button type="button">How does Schelling distinguish ground and existence?</button>
+    <button type="button">Where does Hegel speak of the “labour of the concept”?</button>
+  </p>
+
+  <ol class="ki-schritte" id="ki-schritte" aria-live="polite" hidden></ol>
+  <div class="ki-antwort" id="ki-antwort" hidden></div>
+  <section class="ki-quellen" id="ki-quellen" hidden>
+    <h2>References</h2>
+    <ol id="ki-quellenliste"></ol>
+  </section>
+  <p class="ki-kosten" id="ki-kosten" hidden></p>
+  <p class="ki-hinweis">The answers are written by a language model. Check every statement against the references; only what they say is certain.</p>
+</main>
+
+<footer class="site-footer">
+  <div>Edition Deutscher Idealismus · Fichte, Schelling, Hegel</div>
+  <nav>
+    <a href="https://www.fichteedition.com/">Fichte Edition</a> <a href="https://www.schellingedition.com/">Schelling Edition</a> <a href="https://www.hegeledition.com/">Hegel Edition</a> <a href="/support">Support</a> <a href="/privacy">Privacy</a> <a href="/legal-notice">Legal notice</a>
+  </nav>
+</footer>
+<script>
+/* KI-Recherche (Vorschau): schickt die Frage an api/ki-frage.js und liest die Antwort als Strom (eine JSON-Zeile je Ereignis):
+   Arbeitsschritte, dann Antwort mit Belegen ⟦1⟧, dann Kosten. */
+(function () {
+  var EN = document.documentElement.lang === 'en';
+  var $ = function (id) { return document.getElementById(id); };
+  var form = $('ki-form'), feld = $('ki-frage'), los = $('ki-los'), schritte = $('ki-schritte'), antwort = $('ki-antwort'),
+      quellen = $('ki-quellen'), liste = $('ki-quellenliste'), kosten = $('ki-kosten');
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function satz(s) { return esc(s).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\*([^*\n]+)\*/g, '<em class="sperrsatz">$1</em>'); }
+  function schritt(t) { var li = document.createElement('li'); li.textContent = t; schritte.appendChild(li); schritte.hidden = false; }
+  function malAntwort(a) {
+    var html = a.text.split(/\n{2,}/).map(function (absatz) {
+      return '<p>' + satz(absatz.trim()).replace(/⟦([\d,]+)⟧/g, function (_, n) {
+        return '<sup class="ki-marke">' + n.split(',').map(function (k) { return '<a href="#ki-q' + k + '">' + k + '</a>'; }).join(',') + '</sup>';
+      }) + '</p>';
+    }).join('');
+    antwort.innerHTML = html; antwort.hidden = false;
+    liste.innerHTML = a.quellen.map(function (q) {
+      return '<li id="ki-q' + q.nr + '"><a class="ki-zitat" href="' + esc(q.link) + '" target="_blank" rel="noopener">' + esc(q.zitat) + '</a>'
+        + ' <span class="ki-werk">' + esc(q.werk) + (q.abschnitt ? ' · ' + esc(q.abschnitt) : '') + '</span>'
+        + '<p class="ki-auszug">' + satz(q.auszug) + '</p></li>';
+    }).join('');
+    quellen.hidden = !a.quellen.length;
+  }
+  function fragen(frage) {
+    schritte.innerHTML = ''; antwort.hidden = true; quellen.hidden = true; kosten.hidden = true;
+    los.disabled = true; los.textContent = EN ? 'Searching …' : 'Sucht …';
+    schritt(EN ? 'Reading the question …' : 'Die Frage wird gelesen …');
+    var puffer = '';
+    fetch('/api/ki-frage', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ frage: frage, sprache: EN ? 'en' : 'de', modell: $('ki-modell').value }) })
+      .then(function (r) {
+        if (!r.ok || !r.body) throw new Error(r.status);
+        var leser = r.body.getReader(), dec = new TextDecoder();
+        function weiter() {
+          return leser.read().then(function (st) {
+            if (st.done) return;
+            puffer += dec.decode(st.value, { stream: true });
+            var zeilen = puffer.split('\n'); puffer = zeilen.pop();
+            zeilen.forEach(function (z) { if (z.trim()) ereignis(JSON.parse(z)); });
+            return weiter();
+          });
+        }
+        return weiter();
+      })
+      .catch(function () { schritt(EN ? 'The question could not be answered. Please try again later.' : 'Die Frage ließ sich nicht beantworten. Bitte später noch einmal.'); })
+      .then(function () { los.disabled = false; los.textContent = EN ? 'Ask' : 'Fragen'; });
+  }
+  function ereignis(e) {
+    if (e.t === 'schritt' && e.art === 'suche') schritt((EN ? 'Searches “' : 'Sucht „') + e.anfrage + (EN ? '”' : '“')
+      + (e.autor && e.autor !== 'alle' ? (EN ? ' in ' : ' bei ') + e.autor.charAt(0).toUpperCase() + e.autor.slice(1) : '')
+      + ' · ' + e.gesamt + (EN ? ' passages' : ' Stellen'));
+    else if (e.t === 'schritt') schritt((EN ? 'Reads ' : 'Liest ') + e.zitat);
+    else if (e.t === 'antwort') malAntwort(e);
+    else if (e.t === 'fehler') schritt((EN ? 'Error: ' : 'Fehler: ') + e.grund);
+    else if (e.t === 'kosten') {
+      var v = e.verbrauch;
+      kosten.textContent = e.modell + ' · ' + e.sekunden + ' s · ' + (v.input_tokens + v.cache_read_input_tokens + v.cache_creation_input_tokens).toLocaleString(EN ? 'en-US' : 'de-DE')
+        + (EN ? ' tokens read, ' : ' Token gelesen, ') + v.output_tokens.toLocaleString(EN ? 'en-US' : 'de-DE') + (EN ? ' written · about $' : ' geschrieben · etwa ')
+        + e.dollar.toLocaleString(EN ? 'en-US' : 'de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 3 }) + (EN ? '' : ' $');
+      kosten.hidden = false;
+    }
+  }
+  form.addEventListener('submit', function (ev) { ev.preventDefault(); var f = feld.value.trim(); if (f.length > 2) fragen(f); });
+  feld.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' && (ev.metaKey || ev.ctrlKey)) form.requestSubmit(); });
+  document.querySelectorAll('.ki-beispiele button').forEach(function (b) {
+    b.addEventListener('click', function () { feld.value = b.textContent; fragen(b.textContent); });
+  });
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

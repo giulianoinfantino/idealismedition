@@ -117,5 +117,11 @@
       "source": "/de/manifest.json",
       "destination": "/manifest.json"
     }
-  ]
+  ],
+  "functions": {
+    "api/ki-frage.js": {
+      "maxDuration": 300,
+      "includeFiles": "assets/suche/**"
+    }
+  }
 }

@@ -141,3 +141,30 @@ button.ei-knopf{background:none;font:inherit;font-size:.86rem;cursor:pointer}
 .ei-danke{margin:1rem 0;padding:.8rem 1rem;border:1px solid var(--accent-gold);border-radius:3px;color:var(--text-ink);font-size:.95rem}
 .ei-zahl{color:var(--text-ink)}
 .ei-friends{list-style:none;padding:0;margin:.6rem 0 0;display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.92rem;color:var(--text-body)}
+/* KI-Recherche (ask.html, Vorschau) */
+.ki-form{border:1px solid var(--rule);border-radius:2px;margin:0 0 .9rem}
+.ki-form:focus-within{border-color:var(--text-muted)}
+.ki-form textarea{display:block;width:100%;box-sizing:border-box;min-height:5.2rem;resize:vertical;background:none;border:0;outline:none;padding:.8rem .95rem;font:inherit;font-size:1rem;line-height:1.55;color:var(--text-ink)}
+.ki-form textarea::placeholder{color:var(--text-muted)}
+.ki-leiste{display:flex;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid var(--rule);padding:.35rem .4rem .35rem .95rem}
+.ki-modell{font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:.5rem}
+.ki-modell select{font:inherit;font-size:.78rem;background:none;border:0;color:var(--text-body);cursor:pointer}
+.ki-leiste button{background:none;border:1px solid var(--rule);border-radius:2px;padding:.4rem 1.1rem;font:inherit;font-size:.86rem;color:var(--text-ink);cursor:pointer}
+.ki-leiste button:hover{border-color:var(--accent-gold)}
+.ki-leiste button:disabled{opacity:.55;cursor:default}
+.ki-beispiele{margin-bottom:2.2rem}
+.ki-schritte{list-style:none;margin:0 0 1.8rem;padding:0 0 0 .9rem;border-left:1px solid var(--rule);font-size:.8rem;line-height:1.7;color:var(--text-muted);font-variant-numeric:lining-nums}
+.ki-antwort p{font-size:1.02rem;line-height:1.75;color:var(--text-ink);margin:0 0 1rem}
+.ki-antwort .sperrsatz,.ki-auszug .sperrsatz{font-style:normal;letter-spacing:.12em}
+.ki-marke{font-size:.66em;line-height:0;margin-left:.08em;font-variant-numeric:lining-nums}
+.ki-marke a{color:var(--accent-gold);text-decoration:none}
+.ki-marke a:hover{text-decoration:underline}
+.ki-quellen{margin:2.2rem 0 0;padding-top:1.2rem;border-top:1px solid var(--rule)}
+.legal-container .ki-quellen h2{font-family:var(--font-display);font-weight:400;font-size:1.15rem;color:var(--text-ink);margin:0 0 .9rem}
+.ki-quellen ol{margin:0;padding-left:1.4rem}
+.ki-quellen li{margin:0 0 1rem;font-size:.86rem;color:var(--text-muted);font-variant-numeric:lining-nums}
+.ki-quellen li:target{background:color-mix(in srgb,var(--accent-gold) 10%,transparent)}
+.ki-zitat{color:var(--text-ink);text-decoration:none;border-bottom:1px solid var(--accent-gold)}
+.ki-auszug{margin:.3rem 0 0;font-size:.86rem;line-height:1.6;color:var(--text-body)}
+.ki-kosten{margin:1.6rem 0 0;font-size:.74rem;color:var(--text-muted);font-variant-numeric:lining-nums tabular-nums}
+.ki-hinweis{margin:2.2rem 0 0;font-size:.76rem;line-height:1.6;color:var(--text-muted)}
