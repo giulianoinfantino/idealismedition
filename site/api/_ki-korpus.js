@@ -72,7 +72,8 @@ function muster(anfrage) {
     const anfang = /\*$/.test(roh);
     const t = norm(roh.replace(/\*$/, '')).replace(/[^\p{L}\p{N}\s-]/gu, '').trim();
     if (t.length < 2) continue;
-    const kern = t.split(/\s+/).map(esc).join('[\\s\\-]+');
+    // Genitiv: Begriffs ~ Begriffes (ein Wort auf -s findet auch -es und umgekehrt)
+    const kern = t.split(/\s+/).map(w => w.length > 4 && /[^s]e?s$/.test(w) ? esc(w.replace(/e?s$/, '')) + 'e?s' : esc(w)).join('[\\s\\-]+');
     teile.push({ wort: roh, re: new RegExp('(?<![\\p{L}])' + kern + (anfang ? '[\\p{L}]*' : '(?![\\p{L}])'), 'gu') });
   }
   return teile;
