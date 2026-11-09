@@ -8,8 +8,11 @@
 .rch-gruppe h2 .ei-autor{font-weight:500;margin-right:.15em}
 .rch-zitat .ei-autor{display:block;font-size:.74rem}
 
-/* Im schmalen Kopf ist fuer drei Wege kein Platz; „Unterstuetzen“ steht dann im Titelblatt und im Fuss. */
-@media (max-width:600px){.sitenav li.nav-weit{display:none}}
+/* Telefon: wie in portal.css. Wo „Unterstuetzen“ im Kopf keinen Platz hat, steht es im Titelblatt und im Fuss. */
+@media (max-width:600px){.sitenav li:first-child{display:none}}
+@media (max-width:627px){html[lang="de"] .sitenav li:first-child{display:none}}
+@media (max-width:329px){.sitenav li.nav-weit{display:none}}
+@media (max-width:399px){html[lang="de"] .sitenav li.nav-weit{display:none}}
 
 /* ── Querverweise ───────────────────────────────────────────────────────── */
 /* Parallelstellen: Knopf in der Wegzeile, Block unter der Stelle */

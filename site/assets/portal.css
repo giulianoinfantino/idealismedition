@@ -48,8 +48,13 @@
 .ei-knopf{display:inline-block;font-size:.86rem;padding:.7rem 1.3rem;border:1px solid var(--rule);border-radius:2px;color:var(--text-ink)}
 .ei-knopf:hover{border-color:var(--text-muted);text-decoration:none}
 
-/* Im schmalen Kopf ist fuer drei Wege kein Platz; „Unterstuetzen“ steht dann im Fuss. */
-@media (max-width:600px){.sitenav li.nav-weit{display:none}}
+/* Telefon: Das Ringzeichen fuehrt schon zur Startseite, also faellt „Ausgaben“ weg und „Unterstuetzen“ rueckt nach.
+   Deutsch passen vier Punkte erst ab 628 px. „Unterstuetzen“ als dritter Punkt passt englisch ab 330 px, deutsch ab 400 px;
+   darunter stehen nur Recherche und Analysen, und „Unterstuetzen“ steht im Fuss. */
+@media (max-width:600px){.sitenav li:first-child{display:none}}
+@media (max-width:627px){html[lang="de"] .sitenav li:first-child{display:none}}
+@media (max-width:329px){.sitenav li.nav-weit{display:none}}
+@media (max-width:399px){html[lang="de"] .sitenav li.nav-weit{display:none}}
 
 /* Mitgliedsstufen auf Unterstuetzen: drei gleich gebaute Karten, das Zeichen fuellt sich Ring um Ring */
 .ei-stufen{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2.2rem 0 1rem;padding:0}
