@@ -848,22 +848,28 @@ body.dipl-mode .dipl-content{font-size:calc(1em * var(--dipl-skala, 1))}
 @media (min-width:769px){.jump-input-group input{width:3.4rem}}
 
 /* ── Nutzung der letzten 30 Tage (index.html, assets/nutzung.js) ─────────
-   Zwei Reihen, gestapelt: Website-Besucher und Mac-App-Geraete je Tag.
-   Die Reihenfarben sind je Modus gegen den Untergrund (--bg-desktop)
-   gerechnet: Helligkeitsband, Farbsehschwaeche (Deutan/Tritan),
-   Normalsicht und Kontrast >= 3:1 -- das Gold der Marke selbst (#cbaa5c
-   dunkel, #7d6118 hell) liegt dafuer zu hell bzw. zu nah am Rot.
+   Vier Reihen, gestapelt: die Besucher von Hegel, Fichte, Schelling und
+   Portal je Tag. Die Reihenfarben sind je Modus gegen den Untergrund
+   (--bg-desktop) gerechnet: Helligkeitsband, Farbsehschwaeche
+   (Deutan/Tritan), Normalsicht und Kontrast >= 3:1 -- das Gold der Marke
+   selbst (#cbaa5c dunkel, #7d6118 hell) liegt dafuer zu hell. Schelling und
+   Portal liegen bei Deutan knapp unter 8; die 2 px Luft zwischen den
+   Segmenten, Legende, Einblendung und Tabelle tragen die Kennung mit.
    Text traegt nie die Reihenfarbe; die Kennung sitzt im Feld daneben. */
-:root{--nutzung-web:#b08f3f;--nutzung-app:#c23b35}
-:root[data-theme="hell"]{--nutzung-web:#a5821f;--nutzung-app:#8f2a24}
+:root{--nutzung-hegel:#b08f3f;--nutzung-fichte:#5b8bd0;--nutzung-schelling:#2a9d7a;--nutzung-portal:#c94a44}
+:root[data-theme="hell"]{--nutzung-hegel:#a5821f;--nutzung-fichte:#3f6fb8;--nutzung-schelling:#1f8566;--nutzung-portal:#a8352f}
 .nutzung-section .about-lead{margin-bottom:1.6rem}
 .nutzung-figur{position:relative;max-width:44rem;margin:0}
 .nutzung-legende{list-style:none;display:flex;flex-wrap:wrap;gap:0.4rem 1.8rem;margin:0 0 1rem 0;padding:0;font-size:0.85rem;color:var(--text-muted)}
 .nutzung-legende-eintrag{display:inline-flex;align-items:center;gap:0.5rem}
 .nutzung-feld{display:inline-block;width:0.8rem;height:0.8rem;border-radius:2px}
 .nutzung-legende-summe{font-variant-numeric:tabular-nums;color:var(--text-ink)}
-.nutzung-web{fill:var(--nutzung-web);background:var(--nutzung-web)}
-.nutzung-app{fill:var(--nutzung-app);background:var(--nutzung-app)}
+.nutzung-hegel{fill:var(--nutzung-hegel);background:var(--nutzung-hegel)}
+.nutzung-fichte{fill:var(--nutzung-fichte);background:var(--nutzung-fichte)}
+.nutzung-schelling{fill:var(--nutzung-schelling);background:var(--nutzung-schelling)}
+.nutzung-portal{fill:var(--nutzung-portal);background:var(--nutzung-portal)}
+.nutzung-legende-gesamt .nutzung-legende-name{color:var(--text-body)}
+.nutzung-legende-gesamt .nutzung-legende-summe{font-weight:600}
 .nutzung-svg{display:block;width:100%;height:auto;font-family:var(--font-body);overflow:visible}
 .nutzung-gitter line{stroke:var(--rule);stroke-width:1;shape-rendering:crispEdges}
 .nutzung-gitter text,.nutzung-achse text{fill:var(--text-muted);font-size:11px;font-variant-numeric:tabular-nums}

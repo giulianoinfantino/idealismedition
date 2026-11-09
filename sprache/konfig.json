@@ -63,6 +63,34 @@
   [
    "<h4>Fast immer hervorgehoben</h4>",
    "<h4>Almost always emphasized</h4>"
+  ],
+  [
+   "['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag']",
+   "['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']"
+  ],
+  [
+   "return Number(t[2]) + '. ' + MONATE[Number(t[1]) - 1];",
+   "return MONATE[Number(t[1]) - 1] + ' ' + Number(t[2]);"
+  ],
+  [
+   "'nutzung-tip-name', 'gesamt'",
+   "'nutzung-tip-name', 'total'"
+  ],
+  [
+   "html('th', null, 'Gesamt', kopf)",
+   "html('th', null, 'Total', kopf)"
+  ],
+  [
+   "'nutzung-legende-name', 'Zusammen'",
+   "'nutzung-legende-name', 'Total'"
+  ],
+  [
+   "return wt + ', ' + datum(tag) + ' ' + tag.slice(0, 4);",
+   "return wt + ', ' + datum(tag) + ', ' + tag.slice(0, 4);"
+  ],
+  [
+   "datum(t.tag) + ' ' + t.tag.slice(0, 4)",
+   "datum(t.tag) + ', ' + t.tag.slice(0, 4)"
   ]
  ]
 }

@@ -434,7 +434,7 @@ seite('privacy.html', 'Datenschutz', '''
 
   <section class="legal-section">
     <h2>3. Keine Cookies, cookielose Reichweitenmessung</h2>
-    <p>Diese Website setzt keine Cookies. Die Reichweite misst Vercel Web Analytics ohne Cookies und ohne dauerhafte Kennung: Aus Seitenaufrufen entstehen Zählwerte je Tag; ein Besucher wird nicht über den Tag hinaus wiedererkannt. Rechtsgrundlage ist das berechtigte Interesse an einer Reichweitenstatistik (Art. 6 Abs. 1 lit. f DSGVO). Die Startseite zeigt die Besucher je Tag der letzten 30 Tage. Schriften und Suchdaten werden von dieser Website selbst geladen, nicht von Dritten.</p>
+    <p>Diese Website setzt keine Cookies. Die Reichweite misst Vercel Web Analytics ohne Cookies und ohne dauerhafte Kennung: Aus Seitenaufrufen entstehen Zählwerte je Tag; ein Besucher wird nicht über den Tag hinaus wiedererkannt. Rechtsgrundlage ist das berechtigte Interesse an einer Reichweitenstatistik (Art. 6 Abs. 1 lit. f DSGVO). Die Startseite zeigt die Besucher je Tag der letzten 30 Tage, zusammengezählt über dieses Portal und die Hegel-, Fichte- und Schelling-Edition; dafür werden nur deren Zählwerte je Tag abgefragt. Schriften und Suchdaten werden von dieser Website selbst geladen, nicht von Dritten.</p>
     <p>Im lokalen Speicher Ihres Browsers werden nur Ihr Farbschema und Ihre zuletzt gesuchten Anfragen abgelegt. Beides bleibt auf Ihrem Gerät und wird nicht übertragen. Die Recherche läuft vollständig in Ihrem Browser: Ihre Anfragen werden nicht an den Server geschickt. Da diese Speicherung für den von Ihnen gewünschten Dienst unbedingt erforderlich ist, bedarf sie keiner Einwilligung (§ 25 Abs. 2 Nr. 2 TDDDG). Sie können die Angaben jederzeit über die Einstellungen Ihres Browsers löschen.</p>
   </section>
 

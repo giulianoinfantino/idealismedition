@@ -1,12 +1,13 @@
 /* Nutzung der letzten 30 Tage: ein gestapeltes Saeulendiagramm, je Tag die
-   Besucher der Website und die Macs, auf denen die App lief. Daten von
-   /api/nutzung. Der Abschnitt (#nutzung) bleibt verborgen, bis Daten da sind
+   Besucher der vier Seiten (Hegel, Fichte, Schelling, Portal), je Seite ein
+   Segment; die Saeule ist die Summe. Daten von /api/nutzung, das auch die
+   Reihen nennt. Der Abschnitt (#nutzung) bleibt verborgen, bis Daten da sind
    -- ohne Daten oder bei Fehlern erscheint er gar nicht (gleiches Muster wie
    download-counter.js: nie ein Leer- oder Fehlerzustand sichtbar).
 
    Gezeichnet wird in SVG ohne Bibliothek. Farben kommen aus style.css
-   (--nutzung-web, --nutzung-app), dort fuer hell und dunkel getrennt gegen
-   den Untergrund gemessen. Jede Saeule traegt eine Einblendung bei Zeiger
+   (--nutzung-hegel, -fichte, -schelling, -portal), dort fuer hell und dunkel
+   getrennt gegen den Untergrund geprueft (validate_palette.js). Jede Saeule traegt eine Einblendung bei Zeiger
    und Tastatur; dieselben Zahlen stehen darunter als Tabelle. */
 (function () {
   var abschnitt = document.getElementById('nutzung');
@@ -18,12 +19,12 @@
   function zahl(n) { return Number(n).toLocaleString('en-US'); }
   function datum(tag) {
     var t = tag.split('-');
-    return Number(t[2]) + '. ' + MONATE[Number(t[1]) - 1];
+    return MONATE[Number(t[1]) - 1] + ' ' + Number(t[2]);
   }
   function datumLang(tag) {
     var d = new Date(tag + 'T00:00:00Z');
-    var wt = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'][d.getUTCDay()];
-    return wt + ', ' + datum(tag) + ' ' + tag.slice(0, 4);
+    var wt = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][d.getUTCDay()];
+    return wt + ', ' + datum(tag) + ', ' + tag.slice(0, 4);
   }
   function el(name, attrs, parent) {
     var e = document.createElementNS(SVGNS, name);
@@ -49,11 +50,9 @@
 
   function zeichnen(daten) {
     var tage = daten.tage;
-    var hatWeb = tage.some(function (t) { return t.web != null; });
-    var hatApp = tage.some(function (t) { return t.app != null; });
-    var reihen = [];
-    if (hatWeb) reihen.push({ key: 'web', name: 'Website', klasse: 'nutzung-web' });
-    if (hatApp) reihen.push({ key: 'app', name: 'Mac-App', klasse: 'nutzung-app' });
+    var reihen = (daten.reihen || []).map(function (r) {
+      return { key: r.key, name: r.name, klasse: 'nutzung-' + r.key };
+    });
     if (!reihen.length) return false;
 
     var summen = {};
@@ -67,8 +66,12 @@
     });
     if (max === 0) return false;
 
-    /* Legende mit den Summen -- die Zahlen im Textton, die Farbe nur im Feld. */
+    /* Legende mit den Summen -- die Zahlen im Textton, die Farbe nur im Feld.
+       Vorn die Summe aller Seiten. */
     var legende = abschnitt.querySelector('.nutzung-legende');
+    var gesamt = html('li', 'nutzung-legende-eintrag nutzung-legende-gesamt', null, legende);
+    html('span', 'nutzung-legende-name', 'Total', gesamt);
+    html('span', 'nutzung-legende-summe', zahl(reihen.reduce(function (a, r) { return a + summen[r.key]; }, 0)), gesamt);
     reihen.forEach(function (r) {
       var li = html('li', 'nutzung-legende-eintrag', null, legende);
       html('span', 'nutzung-feld ' + r.klasse, null, li);
@@ -118,7 +121,7 @@
         var g = html('div', 'nutzung-tip-zeile nutzung-tip-gesamt', null, ausgabe);
         html('span', 'nutzung-strich', null, g);
         html('span', 'nutzung-tip-wert', zahl(reihen.reduce(function (a, r) { return a + (t[r.key] || 0); }, 0)), g);
-        html('span', 'nutzung-tip-name', 'gesamt', g);
+        html('span', 'nutzung-tip-name', 'total', g);
       }
       ausgabe.hidden = false;
       /* Lage: ueber der Saeule, in Prozent der Zeichenbreite, damit es beim
@@ -177,10 +180,10 @@
     var tabelle = abschnitt.querySelector('.nutzung-tabelle tbody');
     var kopf = abschnitt.querySelector('.nutzung-tabelle thead tr');
     reihen.forEach(function (r) { html('th', null, r.name, kopf); });
-    if (reihen.length > 1) html('th', null, 'Gesamt', kopf);
+    if (reihen.length > 1) html('th', null, 'Total', kopf);
     tage.slice().reverse().forEach(function (t) {
       var tr = html('tr', null, null, tabelle);
-      html('th', null, datum(t.tag) + ' ' + t.tag.slice(0, 4), tr);
+      html('th', null, datum(t.tag) + ', ' + t.tag.slice(0, 4), tr);
       var summe = 0;
       reihen.forEach(function (r) { summe += t[r.key] || 0; html('td', null, zahl(t[r.key] || 0), tr); });
       if (reihen.length > 1) html('td', null, zahl(summe), tr);
