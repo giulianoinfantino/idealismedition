@@ -8,7 +8,7 @@ S = pathlib.Path.home() / 'idealismus/site'
 KOFI = 'https://ko-fi.com/idealismedition'
 KOFI_STUFEN = KOFI + '/tiers'
 # Stripe-Kundenportal (Anmeldelink aus dem Stripe-Dashboard: Einstellungen → Billing → Kundenportal). Leer: Link entfällt.
-STRIPE_PORTAL = ''
+STRIPE_PORTAL = 'https://billing.stripe.com/p/login/7sY00k4l22zc7LMcbSdEs00'
 
 # Mitgliedsstufen: Name, Betrag alle drei Monate, derselbe Betrag je Monat, fuer wen, welche Ringe gold
 # (a oben, b links, c rechts wie im Zeichen). Beträge wie in api/_stripe.js (seit 08.11.2026 vierteljährlich).

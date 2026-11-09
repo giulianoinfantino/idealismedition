@@ -1100,7 +1100,8 @@
   "Danke! Ihre Mitgliedschaft ist eingerichtet. Eine Bestätigung kommt per E-Mail von Stripe.": "Thank you! Your membership is set up. Stripe will send a confirmation by email.",
   "Bezahlt wird über Stripe; Ihre Karten- oder Kontodaten sehen wir nicht. Monatlich kündbar.": "Payment goes through Stripe; we never see your card or account details. Cancel monthly.",
   "{0}&nbsp;€ alle drei Monate": "{0}&nbsp;€ every three months",
-  "Bezahlt wird über Stripe; Ihre Karten- oder Kontodaten sehen wir nicht. Jederzeit kündbar, zum Ende des laufenden Vierteljahrs.": "Payment goes through Stripe; we never see your card or account details. Cancel any time, effective at the end of the current quarter."
+  "Bezahlt wird über Stripe; Ihre Karten- oder Kontodaten sehen wir nicht. Jederzeit kündbar, zum Ende des laufenden Vierteljahrs.": "Payment goes through Stripe; we never see your card or account details. Cancel any time, effective at the end of the current quarter.",
+  "Die Stufen unterscheiden sich nur im Betrag; wählen Sie, was zu Ihnen passt. Bezahlt wird sicher über Stripe, direkt hier auf der Seite; die Mitgliedschaft lässt sich jederzeit beenden. <a href=\"https://billing.stripe.com/p/login/7sY00k4l22zc7LMcbSdEs00\" target=\"_blank\" rel=\"noopener\">Mitgliedschaft verwalten</a>": "The tiers differ only in amount; choose what suits you. Payment goes securely through Stripe, right here on this page; you can end your membership at any time. <a href=\"https://billing.stripe.com/p/login/7sY00k4l22zc7LMcbSdEs00\" target=\"_blank\" rel=\"noopener\">Manage your membership</a>"
  },
  "js": {
   "Digitale Ausgabe von Fichtes Werken nach dem Text der Sämmtlichen und Nachgelassenen Werke, hg. von I. H. Fichte (1834–1846): frei lesbar, durchsuchbar, am Scan geprüft.": "Digital edition of Fichte’s works based on the text of the Sämmtliche Werke and Nachgelassene Werke, ed. I. H. Fichte (1834–1846): freely readable, searchable, checked against the scan.",
