@@ -21,7 +21,7 @@ const WERKZEUGE = [
     description: 'Sucht Stellen in den 41 Bänden nach Wörtern. Alle Wörter müssen in derselben Stelle (einem Seitenstück) vorkommen; '
       + '"Wortfolge" in Anführungszeichen sucht genau diese Folge; ein Stern am Wortende sucht den Wortanfang (Begriff* findet Begriffe, begrifflich). '
       + 'Groß-/Kleinschreibung, ß/ss, th/t (Nothwendigkeit), ey/ei (seyn) und ae/ä werden angeglichen; andere alte Schreibungen '
-      + '(c/k/z wie Princip, Accidenz; -iren) bitte als Varianten eigens suchen. Gibt die Gesamtzahl, die Verteilung auf Bände '
+      + '(c/k/z wie Princip, Accidenz; -iren) bitte als Varianten eigens suchen. Es gibt kein OR; für Alternativen mehrere Suchen. Gibt die Gesamtzahl, die Verteilung auf Bände '
       + 'und die besten Stellen mit Kennung, Zitat und Ausschnitt zurück.',
     input_schema: {
       type: 'object', additionalProperties: false,
@@ -166,3 +166,6 @@ module.exports = async (req, res) => {
   sende({ t: 'kosten', modell, effort, sekunden: Math.round((Date.now() - beginn) / 1000), verbrauch, dollar: Math.round(dollar * 1000) / 1000 });
   res.end();
 };
+// für den lokalen Betrieb mit Claude Code (werkzeug/ki-lokal.js)
+module.exports.system = system;
+module.exports.belege = belege;
