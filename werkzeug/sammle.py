@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Das Portal auf den Stand der Editionen bringen: Suchdaten zusammenlegen, Zahlen und Bandlisten in die Startseite schreiben.
 
-Quellen sind die Ordner, aus denen die Editionen ausgeliefert werden, nie die Arbeitsordner mit gesperrten Baenden:
+Quellen sind die Ordner, aus denen die Editionen ausgeliefert werden; gesperrte Baende filtert GESPERRT:
   Schelling  ~/schelling/site
-  Hegel      ~/hegel-umfrage-wt   (ohne GW 13 und GW 16, bis 31.12.2026 gesperrt)
+  Hegel      ~/Desktop/Claude Code/idealismus-edition/Hegel Edition (Hauptordner; GW 13 und GW 16 filtert GESPERRT,
+             bis 31.12.2026 gesperrt; der Umfrage-Worktree ~/hegel-umfrage-wt blieb auf 0.81 stehen, darum nicht mehr)
 
 Aufruf nach jeder Freigabe einer Edition:  python3 werkzeug/sammle.py
 """
@@ -26,7 +27,7 @@ EDITIONEN = [
          url='https://www.schellingedition.com', quelle=HOME / 'schelling/site', praefix='sw-'),
     dict(id='hegel', name='Hegel', voll='Georg Wilhelm Friedrich Hegel', leben='1770–1831',
          ausgabe='Gesammelte Werke', hg='herausgegeben von der Nordrhein-Westfälischen Akademie der Wissenschaften, seit 1968',
-         url='https://www.hegeledition.com', quelle=HOME / 'hegel-umfrage-wt', praefix='gw-'),
+         url='https://www.hegeledition.com', quelle=HOME / 'Desktop/Claude Code/idealismus-edition/Hegel Edition', praefix='gw-'),
 ]
 
 SCHMAL = '&#8239;'
