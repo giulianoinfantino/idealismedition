@@ -5,10 +5,11 @@
    -- ohne Daten oder bei Fehlern erscheint er gar nicht (gleiches Muster wie
    download-counter.js: nie ein Leer- oder Fehlerzustand sichtbar).
 
-   Gezeichnet wird in SVG ohne Bibliothek. Farben kommen aus style.css
-   (--nutzung-hegel, -fichte, -schelling, -portal), dort fuer hell und dunkel
-   getrennt gegen den Untergrund geprueft (validate_palette.js). Jede Saeule traegt eine Einblendung bei Zeiger
-   und Tastatur; dieselben Zahlen stehen darunter als Tabelle. */
+   Gezeichnet wird in SVG ohne Bibliothek. Farben kommen aus style.css: die
+   Autorenfarben der Edition (--autor-hegel, -fichte, -schelling) und eine
+   neutrale Tinte fuer das Portal (--autor-portal), dort fuer hell und dunkel
+   getrennt gegen den Untergrund gemessen. Jede Saeule traegt eine Einblendung
+   bei Zeiger und Tastatur; dieselben Zahlen stehen darunter als Tabelle. */
 (function () {
   var abschnitt = document.getElementById('nutzung');
   if (!abschnitt) return;

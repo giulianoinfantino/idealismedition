@@ -174,3 +174,42 @@ button.ei-knopf{background:none;font:inherit;font-size:.86rem;cursor:pointer}
 .ki-kosten{margin:1.6rem 0 0;font-size:.74rem;color:var(--text-muted);font-variant-numeric:lining-nums tabular-nums}
 .ki-hinweis{margin:2.2rem 0 0;font-size:.76rem;line-height:1.6;color:var(--text-muted)}
 .ei-friends-leer{font-size:.92rem;color:var(--text-muted);font-style:italic}
+
+/* ══ Startseite: was nur das Portal kann, im ersten Bildschirm (Behebungsplan 09.11.2026, Nr. 5) ═══════
+   Suchfeld oben mit drei Beispielanfragen, darunter eine echte Begriffskurve (assets/start-kurve.js,
+   Zeitkurve wie in den Analysen) und daneben drei Zeilen „Nur hier“ in die Recherche, die Bildnisse
+   kleiner als Reihe. Bei 1440 × 900 steht alles ohne Blättern. */
+.p.p-hub{max-width:60rem;padding-top:calc(var(--header-h) + 1rem);padding-bottom:clamp(2rem,5vh,3rem)}
+.p-hub .p-suche{margin-top:1rem}
+.p-beispiele{margin:.5rem auto 0;font-size:.84rem;color:var(--text-muted)}
+.p-beispiele a{color:var(--text-body);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;margin:0 .3rem}
+.p-beispiele a:hover{color:var(--text-ink);text-decoration-color:var(--accent-gold)}
+.p-hubzeile{display:grid;grid-template-columns:29rem minmax(0,1fr);gap:1rem 2.5rem;align-items:start;margin:1rem auto 0;text-align:left}
+.p-kurve{margin:0;min-width:0}
+.p-kurve[hidden]{display:none}
+.p-kurve-titel{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:0 0 .4rem;font-family:var(--font-body);font-weight:400;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+.p-kurve-titel b{font-weight:400;color:var(--text-ink);letter-spacing:.06em}
+.p-kurve-titel a{color:var(--text-muted);text-transform:none;letter-spacing:0;font-size:.84rem;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;white-space:nowrap}
+.p-kurve-titel a:hover{color:var(--text-ink);text-decoration-color:var(--accent-gold)}
+.p-kurve .zk{min-height:8rem}
+.p-kurve .zk-legende{margin-bottom:.3rem;gap:.2rem 1.4rem}
+.p-kurve .zk-legende-zahl{display:none}
+.p-kurve .zk-details{display:none}
+.p-kurve-fuss{margin:.25rem 0 0;font-size:.78rem;color:var(--text-muted)}
+.p-nurhier{list-style:none;margin:1.7rem 0 0;padding:0;display:grid;gap:.9rem;font-size:.84rem;line-height:1.45;color:var(--text-muted)}
+.p-nurhier li{border-top:1px solid var(--rule);padding-top:.5rem}
+.p-nurhier a{display:block;color:var(--text-ink);text-decoration:none;font-size:.95rem;margin-bottom:.1rem}
+.p-nurhier a::after{content:" →";color:var(--accent-gold)}
+.p-nurhier a:hover{text-decoration:underline;text-decoration-color:var(--accent-gold);text-underline-offset:3px}
+.p-hub .p-drei{max-width:26rem;margin-top:.6rem;gap:clamp(.8rem,2.5vw,1.6rem)}
+.p-hub .p-bild picture{width:clamp(4.4rem,6.5vw,5rem)}
+.p-hub .p-wer{margin-top:.45rem;font-size:.95rem}
+@media (max-width:900px){
+  .p-hubzeile{grid-template-columns:minmax(0,1fr)}
+  .p-nurhier{margin-top:.4rem;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+}
+@media (max-width:640px){
+  .p-nurhier{grid-template-columns:1fr;gap:.6rem}
+  .p-kurve-titel{flex-direction:column;align-items:flex-start;gap:.2rem}
+  .p-hub .p-bild picture{width:5.2rem}
+}

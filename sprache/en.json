@@ -1130,7 +1130,14 @@
   "Friends of the Hegel Edition": "Friends of the Hegel Edition",
   "Sie haben die Transkription der Hegel-Edition mitbezahlt, bevor sie Teil der Edition Deutscher Idealismus wurde.": "They helped pay for the transcription of the Hegel edition before it became part of the German Idealism Edition.",
   "Die Namen derer, die die Ausgaben von Fichte, Schelling und Hegel mittragen.": "The names of those who support the Fichte, Schelling and Hegel editions.",
-  "Mitglieder werden, wenn sie es wünschen, unter den <a href=\"/friends\">Friends of the Edition</a> genannt.": "Members who wish can be named among the <a href=\"/friends\">Friends of the Edition</a>."
+  "Mitglieder werden, wenn sie es wünschen, unter den <a href=\"/friends\">Friends of the Edition</a> genannt.": "Members who wish can be named among the <a href=\"/friends\">Friends of the Edition</a>.",
+  "Zum Beispiel <a href=\"search?q=Anschauung\">Anschauung</a> · <a href=\"search?q=Freiheit\">Freiheit</a> · <a href=\"search?q=%22intellektuelle+Anschauung%{0}\">„intellektuelle Anschauung“</a>": "For example <a href=\"search?q=Anschauung\">Anschauung</a> · <a href=\"search?q=Freiheit\">Freiheit</a> · <a href=\"search?q=%22intellektuelle+Anschauung%{0}\">“intellektuelle Anschauung”</a>",
+  "<span>Begriffsgeschichte · <b>Freiheit</b></span><a href=\"/analyses#begriffsgeschichte\">Eigenes Wort verfolgen</a>": "<span>History of a concept · <b>Freiheit</b></span><a href=\"/analyses#begriffsgeschichte\">Trace your own word</a>",
+  "Vorkommen je {0} Wörter und Jahrfünft bei Fichte, Schelling und Hegel, aus allen datierten Schriften.": "Occurrences per {0} words and five-year period in Fichte, Schelling and Hegel, from all datable writings.",
+  "<a href=\"search?q=Anschauung&amp;ansicht=vergleich\">Vergleich der drei</a>Ein Wort bei Fichte, Schelling und Hegel nebeneinander: wer es wie oft und in welchen Werken gebraucht.": "<a href=\"search?q=Anschauung&amp;ansicht=vergleich\">Comparing the three</a>One word in Fichte, Schelling and Hegel side by side: who uses it how often, and in which works.",
+  "<a href=\"search?q=Freiheit&amp;ansicht=zeit\">Verlauf über die Zeit</a>Jede Anfrage über die Jahrfünfte von {0} bis {1}, mit den Werken, aus denen die Zahlen kommen.": "<a href=\"search?q=Freiheit&amp;ansicht=zeit\">Course over time</a>Any query across the five-year periods from {0} to {1}, with the works the figures come from.",
+  "<a href=\"search?q=%22intellektuelle+Anschauung%{0}\">Parallelstellen</a>Zu jeder Stelle mit einem Klick die nächsten Stellen bei den beiden anderen.": "<a href=\"search?q=%22intellektuelle+Anschauung%{0}\">Parallel passages</a>For any passage, one click brings up the closest passages in the other two.",
+  "Was nur das Portal kann": "What only the portal can do"
  },
  "js": {
   "Digitale Ausgabe von Fichtes Werken nach dem Text der Sämmtlichen und Nachgelassenen Werke, hg. von I. H. Fichte (1834–1846): frei lesbar, durchsuchbar, am Scan geprüft.": "Digital edition of Fichte’s works based on the text of the Sämmtliche Werke and Nachgelassene Werke, ed. I. H. Fichte (1834–1846): freely readable, searchable, checked against the scan.",
@@ -1471,6 +1478,7 @@
   "Searches “": "Searches “",
   "Sucht „": "Sucht „",
   " Stellen": " Stellen",
-  "Diese Funktion ist noch nicht freigegeben.": "Diese Funktion ist noch nicht freigegeben."
+  "Diese Funktion ist noch nicht freigegeben.": "Diese Funktion ist noch nicht freigegeben.",
+  "Menü": "Menu"
  }
 }

@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="assets/fonts.css">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/portal.css">
+  <link rel="stylesheet" href="assets/zeitkurve.css">
   <script src="assets/themefarbe.js"></script>
 </head>
 <body class="startseite-still">
@@ -58,10 +59,27 @@
   <div class="kopf-rechts"><a class="sprache-schalter" href="/?en" hreflang="en" lang="en" title="English" aria-label="English version" onclick="try{localStorage.setItem('sprache','en')}catch(e){};this.href=(location.pathname.replace(/^\/de(?=\/|$)/,'')||'/')+location.search+location.hash">EN</a></div>
 </header>
 
-<main id="inhalt" class="p">
+<main id="inhalt" class="p p-hub">
   <h1>Edition Deutscher Idealismus</h1>
   <p class="p-unter">Die Werke Fichtes, Schellings und Hegels in digitalen Ausgaben, frei zugänglich.</p>
   <p class="p-von">Von <a href="https://giulianoinfantino.com" rel="me">Giuliano Infantino</a></p>
+  <form class="p-suche" action="search" method="get" role="search">
+    <input type="search" name="q" placeholder="In allen 41 Bänden suchen" aria-label="In allen Bänden suchen" spellcheck="false" autocapitalize="off" autocorrect="off">
+    <button type="submit">Suchen</button>
+  </form>
+  <p class="p-beispiele">Zum Beispiel <a href="search?q=Anschauung">Anschauung</a> · <a href="search?q=Freiheit">Freiheit</a> · <a href="search?q=%22intellektuelle+Anschauung%22">„intellektuelle Anschauung“</a></p>
+  <div class="p-hubzeile">
+  <section class="p-kurve" aria-labelledby="p-kurve-titel">
+    <h2 class="p-kurve-titel" id="p-kurve-titel"><span>Begriffsgeschichte · <b>Freiheit</b></span><a href="/de/analyses#begriffsgeschichte">Eigenes Wort verfolgen</a></h2>
+    <figure class="zk" id="p-kurve" data-wort="Freiheit"></figure>
+    <p class="p-kurve-fuss">Vorkommen je 10&#8239;000 Wörter und Jahrfünft bei Fichte, Schelling und Hegel, aus allen datierten Schriften.</p>
+  </section>
+  <ul class="p-nurhier" aria-label="Was nur das Portal kann">
+    <li><a href="search?q=Anschauung&amp;ansicht=vergleich">Vergleich der drei</a>Ein Wort bei Fichte, Schelling und Hegel nebeneinander: wer es wie oft und in welchen Werken gebraucht.</li>
+    <li><a href="search?q=Freiheit&amp;ansicht=zeit">Verlauf über die Zeit</a>Jede Anfrage über die Jahrfünfte von 1785 bis 1854, mit den Werken, aus denen die Zahlen kommen.</li>
+    <li><a href="search?q=%22intellektuelle+Anschauung%22">Parallelstellen</a>Zu jeder Stelle mit einem Klick die nächsten Stellen bei den beiden anderen.</li>
+  </ul>
+  </div>
   <nav class="p-drei" id="editionen" aria-label="Die Ausgaben">
     <a class="p-bild" href="https://www.fichteedition.com/de/">
       <picture><source type="image/webp" srcset="assets/bildnisse/fichte.webp 1x, assets/bildnisse/fichte@2x.webp 2x"><img src="assets/bildnisse/fichte.jpg" width="340" height="442" alt="Johann Gottlieb Fichte" decoding="async"></picture>
@@ -79,10 +97,6 @@
       <span class="p-leise">1770–1831<span class="p-trenn"> · </span><span data-baende="hegel">16 Bände</span></span>
     </a>
   </nav>
-  <form class="p-suche" action="search" method="get" role="search">
-    <input type="search" name="q" placeholder="In allen 41 Bänden suchen" aria-label="In allen Bänden suchen" spellcheck="false" autocapitalize="off" autocorrect="off">
-    <button type="submit">Suchen</button>
-  </form>
 </main>
 
 <!-- ═══ NUTZUNG ═══ wie in der Hegel- und der Schelling-Edition. Erscheint erst, wenn /api/nutzung Daten liefert (assets/nutzung.js). -->
@@ -118,5 +132,8 @@
 <script src="/assets/nutzung.js" defer></script>
 <!-- Reichweitenmessung: cookielos, ohne dauerhafte Kennung. Siehe privacy -->
 <script defer src="/_vercel/insights/script.js"></script>
+<script src="assets/ortho.js" defer></script>
+<script src="assets/zeitkurve.js" defer></script>
+<script src="assets/start-kurve.js" defer></script>
 </body>
 </html>

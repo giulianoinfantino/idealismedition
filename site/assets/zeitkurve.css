@@ -1,10 +1,10 @@
 /* Zeitkurve (assets/zeitkurve.js): Seite „Analysen“ und Ansicht „Zeit“ der Recherche.
-   Drei Reihen, je Modus gegen den Untergrund (--bg-desktop) gerechnet: Helligkeitsband, Farbsehschwäche
-   (alle Paare), Normalsicht, Kontrast. Dunkel bestehen alle drei 3:1; hell liegen Schelling und Hegel
-   darunter, darum stehen die Namen immer als Text an der Linie und die Zahlen in der Tabelle.
-   Fest nach Autor, nie nach Rang: Fichte Blau, Schelling Orange, Hegel Grün. */
-:root{--zk-fichte:#3987e5;--zk-schelling:#d95926;--zk-hegel:#199e70}
-:root[data-theme="hell"]{--zk-fichte:#2a78d6;--zk-schelling:#eb6834;--zk-hegel:#1baf7a}
+   Drei Reihen in den Autorenfarben der Edition (--autor-fichte, --autor-schelling, --autor-hegel aus
+   style.css, dort je Modus gegen den Grund gemessen; alle über 3:1). Fest nach Autor, nie nach Rang:
+   Fichte Blau, durchgezogen; Schelling Rotbraun, gestrichelt; Hegel Grün, gepunktet. Die Strichart
+   gilt in der Linie, in der Legende und in der Einblendung; die Namen stehen immer als Text an der
+   Linie und die Zahlen in der Tabelle. Die Felder in den Balken der Analysen und vor den Werken der
+   Recherche tragen nur die Farbe, der Autorname steht dort jeweils dabei. */
 
 .zk{position:relative;margin:0}
 .zk-legende{list-style:none;display:flex;flex-wrap:wrap;gap:.35rem 1.6rem;margin:0 0 .9rem;padding:0;font-size:.85rem;color:var(--text-muted)}
@@ -14,18 +14,20 @@
 .zk-legende-name{color:var(--text-ink)}
 .zk-legende-zahl{font-variant-numeric:tabular-nums}
 .zk-feld{display:inline-block;width:.75rem;height:.75rem;border-radius:2px;flex:none}
-.zk-feld.zk-fichte{background:var(--zk-fichte)}
-.zk-feld.zk-schelling{background:var(--zk-schelling)}
-.zk-feld.zk-hegel{background:var(--zk-hegel)}
+.zk-feld.zk-fichte{color:var(--autor-fichte);background:var(--autor-fichte);border-top-style:solid}
+.zk-feld.zk-schelling{color:var(--autor-schelling);background:var(--autor-schelling);border-top-style:dashed}
+.zk-feld.zk-hegel{color:var(--autor-hegel);background:var(--autor-hegel);border-top-style:dotted}
+/* In Legende und Einblendung ist das Feld ein Strich in Farbe und Strichart der Reihe */
+.zk-legende-eintrag .zk-feld,.zk-tip-zeile .zk-feld{width:1.4rem;height:0;border-radius:0;background:none;border-top-width:2px;border-top-color:currentColor}
 .zk-svg{display:block;width:100%;height:auto;overflow:visible;font-family:var(--font-body)}
 .zk-gitter line{stroke:var(--rule);stroke-width:1;shape-rendering:crispEdges}
-.zk-gitter text,.zk-achse text{fill:var(--text-muted);font-size:11px;font-variant-numeric:tabular-nums}
+.zk-gitter text,.zk-achse text{fill:var(--text-muted);font-size:13px;font-variant-numeric:tabular-nums}
 .zk-grundlinie{stroke:var(--text-muted);stroke-width:1;opacity:.6;shape-rendering:crispEdges}
 .zk-linie{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
 .zk-punkt{stroke:var(--bg-desktop);stroke-width:2}
-.zk-reihe.zk-fichte .zk-linie{stroke:var(--zk-fichte)} .zk-reihe.zk-fichte .zk-punkt{fill:var(--zk-fichte)}
-.zk-reihe.zk-schelling .zk-linie{stroke:var(--zk-schelling)} .zk-reihe.zk-schelling .zk-punkt{fill:var(--zk-schelling)}
-.zk-reihe.zk-hegel .zk-linie{stroke:var(--zk-hegel)} .zk-reihe.zk-hegel .zk-punkt{fill:var(--zk-hegel)}
+.zk-reihe.zk-fichte .zk-linie{stroke:var(--autor-fichte)} .zk-reihe.zk-fichte .zk-punkt{fill:var(--autor-fichte)}
+.zk-reihe.zk-schelling .zk-linie{stroke:var(--autor-schelling);stroke-dasharray:7 5} .zk-reihe.zk-schelling .zk-punkt{fill:var(--autor-schelling)}
+.zk-reihe.zk-hegel .zk-linie{stroke:var(--autor-hegel);stroke-dasharray:.1 4.4} .zk-reihe.zk-hegel .zk-punkt{fill:var(--autor-hegel)}
 .zk-name{fill:var(--text-body);font-size:12px;paint-order:stroke;stroke:var(--bg-desktop);stroke-width:4px;stroke-linejoin:round}
 .zk-faden{stroke:var(--text-muted);stroke-width:1;stroke-dasharray:2 3}
 .zk-ziele rect{fill:transparent;outline:none;cursor:crosshair}

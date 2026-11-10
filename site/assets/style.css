@@ -847,27 +847,38 @@ body.dipl-mode .dipl-content{font-size:calc(1em * var(--dipl-skala, 1))}
        „S.", dort ginge jeder Buchstabe von der Suche ab (text.html). */
 @media (min-width:769px){.jump-input-group input{width:3.4rem}}
 
+/* ── Autorenfarben fuer alle Diagramme (Zeitkurve, Analysen, Recherche,
+   Nutzung; assets/zeitkurve.css greift dieselben Token). Fest nach Autor,
+   nie nach Rang: Fichte Blau, Schelling Rotbraun, Hegel Gruen -- entsaettigt
+   und auf Papier und dunklen Grund abgestimmt, nicht die Standardfarben einer
+   Diagrammbibliothek. Je Modus gegen --bg-desktop und --bg-paper gemessen
+   (WCAG): dunkel 6,2-7,4:1, hell 4,7-6,1:1; Abstand zum Gold der Marke
+   (#cbaa5c / #7d6118) dE >= 26, damit sich Reihe und Akzent nicht beissen.
+   Fichte und Hegel fallen bei Tritanopie zusammen, Schelling und Hegel bei
+   Protanopie nahe -- darum traegt jeder Autor zusaetzlich eine Strichart
+   (Fichte durchgezogen, Schelling gestrichelt, Hegel gepunktet), und Text
+   traegt nie die Reihenfarbe; die Namen stehen immer daneben.
+   Die Portal-Reihe der Nutzungsgrafik ist kein Autor: neutrale Tinte,
+   dunkler als die drei Autoren (dunkel 4,0:1, hell 8,0:1), nicht das Rot
+   (--accent), das der Verweisfarbe vorbehalten bleibt. */
+:root{--autor-fichte:#8fa6c4;--autor-schelling:#cf8c6b;--autor-hegel:#8fb39a;--autor-portal:#7e7a73}
+:root[data-theme="hell"]{--autor-fichte:#3f5f8a;--autor-schelling:#964e2c;--autor-hegel:#3f7355;--autor-portal:#4a453d}
+
 /* ── Nutzung der letzten 30 Tage (index.html, assets/nutzung.js) ─────────
    Vier Reihen, gestapelt: die Besucher von Hegel, Fichte, Schelling und
-   Portal je Tag. Die Reihenfarben sind je Modus gegen den Untergrund
-   (--bg-desktop) gerechnet: Helligkeitsband, Farbsehschwaeche
-   (Deutan/Tritan), Normalsicht und Kontrast >= 3:1 -- das Gold der Marke
-   selbst (#cbaa5c dunkel, #7d6118 hell) liegt dafuer zu hell. Schelling und
-   Portal liegen bei Deutan knapp unter 8; die 2 px Luft zwischen den
-   Segmenten, Legende, Einblendung und Tabelle tragen die Kennung mit.
-   Text traegt nie die Reihenfarbe; die Kennung sitzt im Feld daneben. */
-:root{--nutzung-hegel:#b08f3f;--nutzung-fichte:#5b8bd0;--nutzung-schelling:#2a9d7a;--nutzung-portal:#c94a44}
-:root[data-theme="hell"]{--nutzung-hegel:#a5821f;--nutzung-fichte:#3f6fb8;--nutzung-schelling:#1f8566;--nutzung-portal:#a8352f}
+   Portal je Tag, in den Autorenfarben oben. Die 2 px Luft zwischen den
+   Segmenten, Legende, Einblendung und Tabelle tragen die Kennung mit;
+   in der Einblendung zeigt der Strich auch die Strichart des Autors. */
 .nutzung-section .about-lead{margin-bottom:1.6rem}
 .nutzung-figur{position:relative;max-width:44rem;margin:0}
 .nutzung-legende{list-style:none;display:flex;flex-wrap:wrap;gap:0.4rem 1.8rem;margin:0 0 1rem 0;padding:0;font-size:0.85rem;color:var(--text-muted)}
 .nutzung-legende-eintrag{display:inline-flex;align-items:center;gap:0.5rem}
 .nutzung-feld{display:inline-block;width:0.8rem;height:0.8rem;border-radius:2px}
 .nutzung-legende-summe{font-variant-numeric:tabular-nums;color:var(--text-ink)}
-.nutzung-hegel{fill:var(--nutzung-hegel);background:var(--nutzung-hegel)}
-.nutzung-fichte{fill:var(--nutzung-fichte);background:var(--nutzung-fichte)}
-.nutzung-schelling{fill:var(--nutzung-schelling);background:var(--nutzung-schelling)}
-.nutzung-portal{fill:var(--nutzung-portal);background:var(--nutzung-portal)}
+.nutzung-hegel{fill:var(--autor-hegel);background:var(--autor-hegel)}
+.nutzung-fichte{fill:var(--autor-fichte);background:var(--autor-fichte)}
+.nutzung-schelling{fill:var(--autor-schelling);background:var(--autor-schelling)}
+.nutzung-portal{fill:var(--autor-portal);background:var(--autor-portal)}
 .nutzung-legende-gesamt .nutzung-legende-name{color:var(--text-body)}
 .nutzung-legende-gesamt .nutzung-legende-summe{font-weight:600}
 .nutzung-svg{display:block;width:100%;height:auto;font-family:var(--font-body);overflow:visible}
@@ -881,9 +892,15 @@ body.dipl-mode .dipl-content{font-size:calc(1em * var(--dipl-skala, 1))}
 .nutzung-tag:focus-visible .nutzung-treffer{stroke:var(--accent-gold);stroke-width:1.5;fill:none}
 .nutzung-tip{position:absolute;top:0;z-index:5;min-width:11rem;padding:0.55rem 0.75rem;background:var(--bg-paper);border:1px solid var(--rule);border-radius:var(--radius);box-shadow:0 4px 16px var(--shadow-med);font-size:0.8rem;line-height:1.5;pointer-events:none}
 .nutzung-tip-datum{color:var(--text-muted);margin-bottom:0.25rem;white-space:nowrap}
-.nutzung-tip-zeile{display:grid;grid-template-columns:0.9rem 3.2rem 1fr;align-items:center;gap:0.4rem}
+.nutzung-tip-zeile{display:grid;grid-template-columns:1.4rem 3.2rem 1fr;align-items:center;gap:0.4rem}
 .nutzung-tip-gesamt{border-top:1px solid var(--rule);margin-top:0.2rem;padding-top:0.2rem}
-.nutzung-strich{display:inline-block;width:0.7rem;height:2px;border-radius:1px}
+.nutzung-strich{display:inline-block;width:1.4rem;height:2px;border-radius:1px}
+/* Strichart je Autor: durchgezogen, gestrichelt, gepunktet (wie in der Zeitkurve). */
+.nutzung-strich.nutzung-fichte,.nutzung-strich.nutzung-schelling,.nutzung-strich.nutzung-hegel,.nutzung-strich.nutzung-portal{height:0;border-radius:0;background:none;border-top:2px solid currentColor}
+.nutzung-strich.nutzung-fichte{color:var(--autor-fichte)}
+.nutzung-strich.nutzung-schelling{color:var(--autor-schelling);border-top-style:dashed}
+.nutzung-strich.nutzung-hegel{color:var(--autor-hegel);border-top-style:dotted}
+.nutzung-strich.nutzung-portal{color:var(--autor-portal)}
 .nutzung-tip-wert{font-variant-numeric:tabular-nums;color:var(--text-ink);font-weight:600;text-align:right}
 .nutzung-tip-name{color:var(--text-muted)}
 .nutzung-details{margin-top:1.2rem;font-size:0.82rem;color:var(--text-muted)}
@@ -1152,3 +1169,42 @@ body .page-card .text-unit.type-quote .dipl-line-text{text-align:center}
 /* Schmale Telefone (bis 480 px): das Menü lief unter den Sprachschalter.
    Die Wortmarke weicht, das Ringzeichen bleibt und führt weiter zur Startseite (08.11.2026). */
 @media (max-width:480px){.site-title-rows{display:none}.sitenav ul{gap:.55rem}}
+
+/* ══ Kopf: Darstellung und Menü am Telefon (Behebungsplan 09.11.2026, Nr. 3 und 13) ═══════════
+   Ein Knopf „Aa“ für die Darstellung auf jeder Seite rechts im Kopf (themefarbe.js; in der Lektüre der
+   Einstellungsknopf des Lesers, lesepult.js). Unter 640 px weicht die Navigation einem Menü mit allen
+   Punkten und den drei Ausgaben (<details>, ohne Skript bedienbar); die Wortmarke kommt zurück, und
+   kein Ziel im Kopf ist kleiner als 44 px. */
+.thema-schalter.darstellung-knopf{height:2rem;min-width:2.3rem;padding:0 .5rem;display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-size:.86rem;letter-spacing:.01em;line-height:1;border:1px solid var(--rule);border-radius:3px;background:none;color:var(--text-muted);cursor:pointer;transition:color .2s,border-color .2s}
+.thema-schalter.darstellung-knopf:hover,.thema-schalter.darstellung-knopf[aria-expanded="true"]{color:var(--accent-gold);border-color:var(--accent-gold)}
+.darstellung-panel{min-width:17rem}
+.darstellung-panel .einstellungen-zeile,.einstellungen-panel .lp-thema-zeile{grid-template-columns:minmax(0,1fr) auto}
+.darstellung-panel .einstellungen-gruppe{font-size:.74rem;letter-spacing:.08em;text-transform:none;font-variant-caps:all-small-caps;color:var(--text-muted)}
+.darstellung-panel .lp-etikett{font-size:.86rem;color:var(--text-body)}
+.darstellung-panel .lp-segment{display:inline-flex;border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.darstellung-panel .lp-segment button{font:inherit;font-size:.78rem;background:none;border:0;padding:.28rem .55rem;color:var(--text-muted);cursor:pointer}
+.darstellung-panel .lp-segment button + button{border-left:1px solid var(--rule)}
+.darstellung-panel .lp-segment button[aria-pressed="true"]{background:var(--bg-subtle);color:var(--text-ink)}
+.kopf-menue{display:none}
+@media (max-width:640px){
+  .sitenav{display:none}
+  .site-title-rows{display:flex}
+  .kopf-rechts{gap:.35rem}
+  .kopf-menue{display:block}
+  .kopf-menue summary{list-style:none;display:inline-flex;align-items:center;gap:.45rem;height:2.75rem;min-width:2.75rem;padding:0 .7rem;border:1px solid var(--rule);border-radius:3px;color:var(--text-muted);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;user-select:none;-webkit-user-select:none;transition:color .2s,border-color .2s}
+  .kopf-menue summary::-webkit-details-marker{display:none}
+  .kopf-menue summary::marker{content:""}
+  .kopf-menue summary svg{width:1rem;height:1rem;flex:none}
+  .kopf-menue summary:hover,.kopf-menue[open] summary{color:var(--text-ink);border-color:var(--accent-gold)}
+  .kopf-menue-feld{position:absolute;left:0;right:0;top:100%;z-index:199;background:var(--bg-desktop);border-bottom:1px solid var(--rule);padding:.3rem 1.25rem 1rem;box-shadow:0 14px 30px var(--shadow-med)}
+  .kopf-menue-nav ul{list-style:none;margin:0;padding:0;display:block}
+  .kopf-menue-nav li{display:block}
+  .kopf-menue-nav a{display:flex;align-items:center;min-height:2.9rem;font-size:.86rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-body);text-decoration:none;border-bottom:1px solid var(--rule)}
+  .kopf-menue-nav a:hover{color:var(--text-ink);text-decoration:none}
+  .kopf-menue-nav a.current{color:var(--text-ink);text-decoration:underline;text-decoration-color:var(--accent-gold);text-decoration-thickness:1px;text-underline-offset:.4em}
+  .kopf-menue-familie{margin:.7rem 0 0;display:flex;flex-wrap:wrap;gap:0 1.2rem;font-size:.84rem;color:var(--text-muted)}
+  .kopf-menue-familie a{display:inline-flex;align-items:center;min-height:2.6rem;color:var(--text-muted);text-decoration:none}
+  .kopf-menue-familie a:hover{color:var(--text-ink)}
+  .kopf-menue-familie a[aria-current]{color:var(--text-ink)}
+  .sprache-schalter,.thema-schalter.darstellung-knopf{height:2.75rem;min-width:2.75rem}
+}

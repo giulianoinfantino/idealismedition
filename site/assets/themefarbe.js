@@ -71,8 +71,35 @@
       document.head.appendChild(m);
     }
     m.content = FARBE[ist];
+    try { document.dispatchEvent(new CustomEvent('thema-gewechselt', { detail: { wahl: wahl, ist: ist } })); } catch (_) {}
     return ist;
   }
+
+  // ── Einstellungen wandern mit über die vier Domains (Behebungsplan 09.11.2026, Nr. 2) ──────────
+  // Farbschema, Schriftgrad, Ansicht, Hervorhebung, Kopier-Optionen, Sprache und der gesehene
+  // Speicherhinweis liegen je Domain im lokalen Speicher; die Schlüssel heißen auf allen vier Seiten
+  // gleich. Ein Link zu einer Schwesterseite bekommt sie beim Klick als Parameter e mit; die Zielseite
+  // liest ihn hier, vor dem ersten Zeichnen, speichert die Werte und nimmt ihn aus der Adresse.
+  var MITGABE = [SCHLUESSEL, 'hegel-font-step', 'hegel-reader-view', 'hegel-emphasis', 'hegel-cite', 'hegel-cite-zeilen',
+                 'hegel-cite-italic', 'sprache', 'hegel-cookie-notice'];
+  var EIGENE = /(^|\.)(hegel|fichte|schelling|idealism)edition\.com$/;
+  try {
+    var adresse = new URL(location.href), mit = adresse.searchParams.get('e');
+    if (mit) {
+      new URLSearchParams(mit).forEach(function (v, k) { if (MITGABE.indexOf(k) > -1) localStorage.setItem(k, v); });
+      adresse.searchParams.delete('e');
+      history.replaceState(null, '', adresse.href);
+    }
+  } catch (_) {}
+  document.addEventListener('click', function (ev) {
+    var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+    if (!a || ev.defaultPrevented) return;
+    var ziel; try { ziel = new URL(a.href); } catch (_) { return; }
+    if (!EIGENE.test(ziel.hostname) || ziel.hostname === location.hostname) return;
+    var p = new URLSearchParams();
+    MITGABE.forEach(function (k) { var v = null; try { v = localStorage.getItem(k); } catch (_) {} if (v !== null) p.set(k, v); });
+    if (p.toString()) { ziel.searchParams.set('e', p.toString()); a.href = ziel.href; }
+  }, true);
 
   anwenden(gespeichert());
 
@@ -84,48 +111,105 @@
     else if (mq.addListener) mq.addListener(horcher);
   }
 
-  // ── Schalter in der Kopfleiste ───────────────────────────────────────────
-  // Er gehoert **nicht** ins Zahnrad des Lesers: die Darstellung gilt fuer die
-  // ganze Website, das Zahnrad gibt es aber nur in der Lektuere. Hier gebaut,
-  // weil dieses Skript als einziges auf jeder Seite laeuft.
-  var ZEICHEN = { system: '◐', hell: '☀', dunkel: '☾' };
-  var WORT = { system: 'Systemvorgabe', hell: 'Hell', dunkel: 'Dunkel' };
-  var NAECHST = { system: 'Hell', hell: 'Dunkel', dunkel: 'Systemvorgabe' };
+  // ── Darstellung und Menü in der Kopfleiste (Behebungsplan 09.11.2026, Nr. 3 und 13) ──
+  // Ein Knopf „Aa“ für die Darstellung, auf jeder Seite an derselben Stelle rechts im Kopf. In der
+  // Lektüre nimmt lesepult.js dafür den Einstellungsknopf des Lesers (Klasse darstellung-knopf) und
+  // legt das Farbschema in dessen Feld; auf allen anderen Seiten baut dieses Skript ein kleines Feld
+  // mit dem Farbschema (System · Hell · Dunkel). Dazu, für schmale Fenster, das Menü: alle Punkte der
+  // Navigation und die drei Ausgaben, als <details>, also auch ohne Skript zu öffnen. Hier gebaut,
+  // weil dieses Skript als einziges auf jeder Seite läuft.
+  var EN = (document.documentElement.lang || 'de').slice(0, 2) === 'en';
+  var T = EN ? { darstellung: 'Display', schema: 'Colour scheme', system: 'System', hell: 'Light', dunkel: 'Dark',
+                 menue: 'Menu', familie: 'German Idealism Edition' }
+             : { darstellung: 'Darstellung', schema: 'Farbschema', system: 'System', hell: 'Hell', dunkel: 'Dunkel',
+                 menue: 'Menü', familie: 'Edition Deutscher Idealismus' };
 
-  function beschriften(knopf) {
-    var w = gespeichert();
-    knopf.textContent = ZEICHEN[w] || ZEICHEN.system;
-    knopf.setAttribute('aria-label', 'Darstellung: ' + WORT[w] + ' — umschalten auf ' + NAECHST[w]);
-    knopf.title = 'Darstellung: ' + WORT[w] + ' · klicken für ' + NAECHST[w];
-  }
-
-  function baueSchalter() {
-    var kopf = document.querySelector('.site-header');
-    if (!kopf || document.getElementById('thema-schalter')) return;
-    var knopf = document.createElement('button');
-    knopf.type = 'button';
-    knopf.id = 'thema-schalter';
-    knopf.className = 'thema-schalter';
-    beschriften(knopf);
-    knopf.addEventListener('click', function () {
-      window.HEGEL_THEMA.weiter();
-      beschriften(knopf);
+  /** Drei Felder System · Hell · Dunkel; das gewählte ist gefüllt. Auch der Leser (lesepult.js) baut damit. */
+  function baueWahl() {
+    var g = document.createElement('div');
+    g.className = 'lp-segment'; g.setAttribute('role', 'group'); g.setAttribute('aria-label', T.schema);
+    ['system', 'hell', 'dunkel'].forEach(function (w) {
+      var b = document.createElement('button'); b.type = 'button'; b.dataset.thema = w; b.textContent = T[w];
+      b.addEventListener('click', function () { window.HEGEL_THEMA.setze(w); });
+      g.appendChild(b);
     });
-    var rechts = kopf.querySelector('.kopf-rechts');   // rechts neben dem Sprachumschalter
-    var nav = kopf.querySelector('.sitenav');
-    if (rechts) rechts.appendChild(knopf);
-    else if (nav && nav.parentNode === kopf) kopf.insertBefore(knopf, nav.nextSibling);
-    else kopf.appendChild(knopf);
+    function malen() {
+      var w = gespeichert();
+      g.querySelectorAll('[data-thema]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.thema === w)); });
+    }
+    malen();
+    document.addEventListener('thema-gewechselt', malen);
+    return g;
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', baueSchalter);
-  } else {
-    baueSchalter();
+  function baueDarstellung(kopf) {
+    if (kopf.querySelector('.darstellung-knopf') || document.getElementById('thema-schalter')) return;
+    var rechts = kopf.querySelector('.kopf-rechts');
+    var knopf = document.createElement('button');
+    knopf.type = 'button'; knopf.id = 'thema-schalter'; knopf.className = 'thema-schalter darstellung-knopf';
+    knopf.textContent = 'Aa'; knopf.setAttribute('aria-label', T.darstellung); knopf.title = T.darstellung;
+    knopf.setAttribute('aria-haspopup', 'true'); knopf.setAttribute('aria-expanded', 'false');
+    var feld = document.createElement('div');
+    feld.className = 'einstellungen-panel darstellung-panel'; feld.hidden = true;
+    var gruppe = document.createElement('div'); gruppe.className = 'einstellungen-gruppe'; gruppe.textContent = T.darstellung;
+    var zeile = document.createElement('div'); zeile.className = 'einstellungen-zeile lp-thema-zeile';
+    var etikett = document.createElement('span'); etikett.className = 'lp-etikett'; etikett.textContent = T.schema;
+    zeile.appendChild(etikett); zeile.appendChild(baueWahl());
+    feld.appendChild(gruppe); feld.appendChild(zeile);
+    function auf(an) {
+      knopf.setAttribute('aria-expanded', an ? 'true' : 'false');
+      if (an && window.nurEines) window.nurEines(feld);
+      feld.hidden = !an;
+      if (!an) return;
+      // öffnet nach links unter dem Knopf, wie das Einstellungsfeld des Lesers
+      var r = knopf.getBoundingClientRect();
+      feld.style.top = (r.bottom + 6) + 'px';
+      feld.style.left = '';
+      feld.style.right = Math.max(8, document.documentElement.clientWidth - r.right) + 'px';
+    }
+    knopf.addEventListener('click', function (e) { e.stopPropagation(); auf(feld.hidden); });
+    document.addEventListener('click', function (e) { if (!feld.hidden && !feld.contains(e.target)) auf(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !feld.hidden) { auf(false); knopf.focus(); } });
+    (rechts || kopf).appendChild(knopf);
+    document.body.appendChild(feld);
   }
+
+  var LINIEN = '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M1.5 3.5h13M1.5 8h13M1.5 12.5h13" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
+  var AUSGABEN = [['idealism', 'https://www.idealismedition.com/', T.familie], ['fichte', 'https://www.fichteedition.com/', 'Fichte'],
+                  ['schelling', 'https://www.schellingedition.com/', 'Schelling'], ['hegel', 'https://www.hegeledition.com/', 'Hegel']];
+  function baueMenue(kopf) {
+    var liste = kopf.querySelector('.sitenav ul'), rechts = kopf.querySelector('.kopf-rechts');
+    if (!liste || !rechts || kopf.querySelector('.kopf-menue')) return;
+    var d = document.createElement('details'); d.className = 'kopf-menue';
+    var s = document.createElement('summary'); s.innerHTML = LINIEN + '<span>' + T.menue + '</span>';
+    var feld = document.createElement('div'); feld.className = 'kopf-menue-feld';
+    var n = document.createElement('nav'); n.className = 'kopf-menue-nav'; n.setAttribute('aria-label', T.menue);
+    n.appendChild(liste.cloneNode(true));
+    var fam = document.createElement('p'); fam.className = 'kopf-menue-familie';
+    AUSGABEN.forEach(function (a) {
+      var l = document.createElement('a'); l.href = a[1] + (EN ? '' : 'de/'); l.textContent = a[2];
+      if (location.hostname.indexOf(a[0]) > -1) l.setAttribute('aria-current', 'true');
+      fam.appendChild(l);
+    });
+    feld.appendChild(n); feld.appendChild(fam);
+    d.appendChild(s); d.appendChild(feld);
+    rechts.insertBefore(d, rechts.firstChild);
+    document.addEventListener('click', function (e) { if (d.open && !d.contains(e.target)) d.open = false; });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && d.open) { d.open = false; s.focus(); } });
+  }
+
+  function baueKopf() {
+    var kopf = document.querySelector('.site-header');
+    if (!kopf) return;
+    baueMenue(kopf);
+    baueDarstellung(kopf);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', baueKopf);
+  else baueKopf();
 
   window.HEGEL_THEMA = {
     wahl: gespeichert,
+    baueWahl: baueWahl,
     ist: function () { return aufgeloest(gespeichert()); },
     setze: function (wahl) {
       try { localStorage.setItem(SCHLUESSEL, wahl); } catch (_) {}

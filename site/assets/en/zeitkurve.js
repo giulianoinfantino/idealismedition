@@ -3,8 +3,9 @@
    Gemeinsam für die Seite „Analysen“ (vorgerechnete Zeitreihen, assets/zeitreihen.json) und die
    Ansicht „Zeit“ der Recherche (vom Worker gezählt).
 
-   Gezeichnet wird in SVG ohne Bibliothek. Die Reihenfarben stehen in portal.css (--zk-fichte,
-   --zk-schelling, --zk-hegel), je Modus gegen den Untergrund gemessen. Text trägt nie die
+   Gezeichnet wird in SVG ohne Bibliothek. Farbe und Strichart je Autor kommen aus zeitkurve.css
+   (Token --autor-fichte, --autor-schelling, --autor-hegel in style.css, je Modus gegen den Untergrund
+   gemessen; Fichte durchgezogen, Schelling gestrichelt, Hegel gepunktet). Text trägt nie die
    Reihenfarbe; die Namen stehen in der Legende und am Ende jeder Linie. Ein Jahrfünft mit zu wenig
    Text (weniger als d.min Wörter) bekommt keinen Punkt: die Linie setzt dort aus, statt aus drei
    Seiten eine Spitze zu machen. Dieselben Zahlen stehen darunter als Tabelle. */
