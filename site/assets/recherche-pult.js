@@ -417,8 +417,25 @@
       (s ? '<footer class="pv-fuss"><button type="button" data-pv="kopie">' + tx('Zitat kopieren', 'Copy citation') + '</button>' +
         '<button type="button" data-pv="merk" aria-pressed="' + g + '">' + (g ? tx('Gemerkt', 'On your list') : tx('Merken', 'Add to list')) + '</button>' +
         '<a class="pv-auf" href="' + esc(C.leserLink(s, true)) + '">' + tx('Im Druckbild öffnen', 'Open in print layout') + '</a></footer>' : '');
+    passeSeiteEin();
     var hier = dom.vorschau.querySelector('.pv-z.hier'), leib = dom.vorschau.querySelector('.pv-leib');
     if (hier && leib) leib.scrollTop = Math.max(0, hier.offsetTop - leib.offsetTop - leib.clientHeight * 0.3);
+  }
+  /** Druckzeilen sollen Zeilen bleiben: die Schrift der Seite wird so weit verkleinert, dass die längste Zeile
+   *  in die Spalte passt, aber nicht unter 9,5 px. Fehlt wenig, bleibt es bei 9,5 px und die längsten Zeilen
+   *  brechen mit Einzug um; fehlt viel (Telefon), bleibt die gewöhnliche Größe. */
+  function passeSeiteEin() {
+    var seite = dom.vorschau && dom.vorschau.querySelector('.pv-seite');
+    if (!seite || !seite.offsetParent) return;
+    seite.style.fontSize = '';
+    seite.classList.add('pv-zeilen');
+    var breit = 0, platz = 0;
+    seite.querySelectorAll('.pv-z .tx').forEach(function (t) { if (t.scrollWidth > breit) breit = t.scrollWidth; if (!platz) platz = t.clientWidth; });
+    if (!platz || breit <= platz) return;
+    var px = parseFloat(getComputedStyle(seite).fontSize) * platz / breit * 0.975;
+    if (px >= 9.5) { seite.style.fontSize = px.toFixed(2) + 'px'; return; }
+    seite.classList.remove('pv-zeilen');
+    if (px >= 8.2) seite.style.fontSize = '9.5px';
   }
 
   // ═════════════════════════════════════════════════════════════════════
@@ -890,6 +907,8 @@
       if (!C.H.lies(q).ast) { C.toast(tx('Die Anfrage enthält kein Suchwort', 'The query contains no search word')); return; }
       Z.mit.push(q); begriffeNeu();
     });
+    var wartet = 0;
+    window.addEventListener('resize', function () { clearTimeout(wartet); wartet = setTimeout(passeSeiteEin, 150); });
     document.addEventListener('keydown', function (e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (e.key === 'Escape') {
