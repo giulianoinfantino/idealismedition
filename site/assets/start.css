@@ -94,8 +94,8 @@
 .st-band-jahr{color:var(--text-muted);margin-left:.15em}
 .st-band-seiten{font-size:.82rem;color:var(--text-muted);white-space:nowrap;font-variant-numeric:lining-nums tabular-nums}
 .st-band-seiten abbr{text-decoration:none}
-.st-band-tei{position:relative;z-index:1;font-size:.74rem;font-variant-caps:all-small-caps;letter-spacing:.08em;color:var(--accent);border:1px solid var(--rule);border-radius:var(--radius);padding:.05rem .45rem .12rem}
-.st-band-tei:hover{border-color:var(--accent)}
+.st-band-tei{position:relative;z-index:1;font-size:.74rem;font-variant-caps:all-small-caps;letter-spacing:.08em;color:var(--text-muted);border-bottom:1px solid var(--rule);padding:0 0 .06rem;transition:color .15s,border-color .15s}
+.st-band-tei:hover{color:var(--accent);border-color:var(--accent)}
 @media (max-width:760px){
   .st-gruppe{grid-template-columns:minmax(0,1fr);gap:.4rem}
   .st-band{grid-template-columns:2rem minmax(0,1fr) auto;row-gap:.1rem}
@@ -131,7 +131,7 @@
 .st-zeitleiste svg{display:block;width:100%;height:auto}
 .st-zeitleiste .v{fill:var(--accent)}
 .st-zeitleiste .achse{stroke:var(--rule)}
-.st-zeitleiste text{font-family:var(--font-body);font-size:11px;fill:var(--text-muted);font-variant-numeric:lining-nums}
+.st-zeitleiste text{font-family:var(--font-body);font-size:13px;fill:var(--text-muted);font-variant-numeric:lining-nums}
 .st-zeitleiste .anz{fill:var(--text-ink)}
 .st-zeitleiste figcaption{font-size:.8rem;color:var(--text-muted)}
 /* Auf dem Telefon schrumpft die Leiste auf gut die Haelfte: groessere Ziffern, nur jedes zweite Jahr beschriftet. */
