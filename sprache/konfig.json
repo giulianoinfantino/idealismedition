@@ -91,6 +91,42 @@
   [
    "datum(t.tag) + ' ' + t.tag.slice(0, 4)",
    "datum(t.tag) + ', ' + t.tag.slice(0, 4)"
+  ],
+  [
+   "'<h2>Querverweise</h2>'",
+   "'<h2>Cross-references</h2>'"
+  ],
+  [
+   "<caption>Wer nennt wen</caption>",
+   "<caption>Who names whom</caption>"
+  ],
+  [
+   "'<th scope=\"col\">bei '",
+   "'<th scope=\"col\">in '"
+  ],
+  [
+   "'<h4>Begriffsumfeld</h4>",
+   "'<h4>Conceptual neighborhood</h4>"
+  ],
+  [
+   "<p class=\"qp-woerter\">gemeinsam: '",
+   "<p class=\"qp-woerter\">shared: '"
+  ],
+  [
+   "'*</code> versuchen.</li>'",
+   "'*</code>.</li>'"
+  ],
+  [
+   "id=\"rch-kwic-csv\">Als CSV</button>",
+   "id=\"rch-kwic-csv\">As CSV</button>"
+  ],
+  [
+   ">Zitat kopieren</button></div>'",
+   ">Copy citation</button></div>'"
+  ],
+  [
+   "\">Lesefassung</a>",
+   "\">Reading text</a>"
   ]
  ]
 }

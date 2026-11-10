@@ -341,3 +341,402 @@ function verarbeite(e) {
   }
   GRUND(e);
 }
+
+/* ══ Pult: was die neue Suchseite des Portals (recherche-pult.js, seit 11/2026) vom Worker braucht ══
+ *   suche    {…, ordnung: rang | jahr}   -> ergebnis   Rangfolge (beste Stellen zuerst) und Zeitfolge
+ *   stellen                              -> stellen    je Stelle dazu: ed, werk, jahr, gattung
+ *   seite    {id, i} | {work, pdf}       -> seite      die Druckseite in Zeilen, mit Zeilenzahlen und Marken
+ *   pultvorschlag {id, wort, titel}      -> pultvorschlag  Wortanfang, aehnliche Woerter (Tippfehler), Werke
+ *   ort      {id, work, buch, zeile}     -> ort        Seite im Leser zu einer Buchseite (Zitatsprung)
+ *   pultwerke {id}                       -> pultwerke  die laufende Suche je Werk (Jahr, Gattung, Vorkommen)
+ *   pultstart {id, beispiele, probe, stand} -> pultstart  Zahlen der Beispiele, Profil einer Probeanfrage
+ *   begriffe {id, terme}                 -> begriffe   mehrere Anfragen ueber die Jahre, je Autor
+ * Der Worker gibt nur Daten zurueck; alle Woerter der Bedienung stehen in recherche-pult.js.
+ */
+var POST_BASIS = post;
+function mitFang(typ, f) {
+  // Eine Meldung des Kerns abfangen, statt sie an die Seite zu schicken
+  var fang = null;
+  post = function (x) { if (x && x.typ === typ && !fang) fang = x; else POST_BASIS(x); };
+  try { f(); } finally { post = POST_BASIS; }
+  return fang;
+}
+function einheitVon(b, st) { return st.pos.length ? b.tU[st.pos[0]] : b.ketten[st.kette].units[0]; }
+function werkVon(w, st) { return werkDaten(w, segVon(w)[einheitVon(BAND[w], st)]); }
+
+// ── Rangfolge: beste Stellen zuerst ─────────────────────────────────────
+// Je Stelle zaehlt, wie oft und wie dicht die gesuchten Woerter stehen (seltene Woerter mehr als haeufige),
+// ob sie im Druck hervorgehoben sind, ob sie beieinander stehen, ob die Stelle den Begriff einfuehrt
+// (nenne ich, heisst, verstehe ich in der Naehe) und ob es eine Ueberschrift ist. Bei Gleichstand Werkfolge.
+var MITTEL = 0;
+var EINFUEHREND = new Set(('nenne nennen nennt nennte genannt heisst heisse heissen verstehe verstehen versteht verstanden ' +
+  'bedeutet bedeute definition bezeichne bezeichnen bezeichnet').split(' ').map(function (x) { return H.key(x); }));
+function rangfolge(treffer) {
+  dfBauen();
+  if (!MITTEL) { var wz = 0; REIHE.forEach(function (w) { wz += BAND[w].woerter; }); MITTEL = Math.max(20, wz / Math.max(1, KETTEN)); }
+  var K1 = 1.2, BB = 0.6;
+  treffer.forEach(function (t, nr) {
+    var b = BAND[t.w], st = t.st, k = b.ketten[st.kette], pos = st.pos;
+    var laenge = Math.max(25, k.t1 - k.t0), je = new Map(), betont = 0, frueh = pos.length && pos[0] - k.t0 < 14, fuehrt = false;
+    for (var i = 0; i < pos.length; i++) {
+      var p = pos[i], key = b.keys[b.tF[p]], e = je.get(key);
+      if (e) e.n++; else je.set(key, { n: 1, erste: p });
+      betont += b.tH[p];
+    }
+    var wert = 0;
+    je.forEach(function (e, key) {
+      var g = Math.max(0.6, idf(key));
+      wert += g * e.n * (K1 + 1) / (e.n + K1 * (1 - BB + BB * laenge / MITTEL));
+    });
+    if (!pos.length) wert = 0.5;
+    if (je.size > 1) {
+      // Naehe: die kleinste Spanne, die jedes gesuchte Wort einmal enthaelt, grob ueber die ersten Vorkommen
+      var min = Infinity, max = -Infinity;
+      je.forEach(function (e) { if (e.erste < min) min = e.erste; if (e.erste > max) max = e.erste; });
+      wert *= 1 + 0.5 / (1 + (max - min) / 8);
+    }
+    for (i = 0; i < pos.length && i < 6 && !fuehrt; i++) {
+      for (var q = Math.max(k.t0, pos[i] - 5); q < Math.min(k.t1, pos[i] + 6); q++) {
+        if (EINFUEHREND.has(b.keys[b.tF[q]])) { fuehrt = true; break; }
+      }
+    }
+    if (pos.length) wert *= 1 + 0.3 * betont / pos.length;
+    if (fuehrt) wert *= 1.3;
+    if (frueh) wert *= 1.08;
+    if (k.art === 'h') wert *= 1.15; else if (k.art === 'n') wert *= 0.9;
+    t.rang = wert; t.nr = nr;
+  });
+  treffer.sort(function (a, c) { return c.rang - a.rang || a.nr - c.nr; });
+}
+function zeitfolge(treffer) {
+  treffer.forEach(function (t, nr) { var e = werkVon(t.w, t.st); t.jahr = e[1] == null ? 9999 : e[1]; t.nr = nr; });
+  treffer.sort(function (a, c) { return a.jahr - c.jahr || a.nr - c.nr; });
+}
+var SUCHE_GEFILTERT = suche;
+suche = function (m) {
+  if (m.ordnung !== 'rang' && m.ordnung !== 'jahr') { SUCHE_GEFILTERT(m); return; }
+  var m2 = {}, k;
+  for (k in m) m2[k] = m[k];
+  m2.ordnung = 'werk';
+  var antwort = mitFang('ergebnis', function () { SUCHE_GEFILTERT(m2); });
+  if (!antwort) return;
+  if (aktuell && aktuell.id === m.id && aktuell.treffer.length) {
+    if (m.ordnung === 'rang') rangfolge(aktuell.treffer); else zeitfolge(aktuell.treffer);
+    aktuell.umgeordnet = true;
+    antwort.gruppen = [];
+  }
+  antwort.ordnung = m.ordnung;
+  post(antwort);
+};
+
+// Die Konkordanz bleibt in der Folge der Werke, auch wenn die Stellen nach Rang oder Zeit geordnet sind
+function kwicWerkfolge(a, c) { return aktuell.treffer[a.ti].nr - aktuell.treffer[c.ti].nr || a.l[0] - c.l[0]; }
+var KWIC_ZEILEN_BASIS = kwicZeilen;
+kwicZeilen = function () {
+  if (aktuell.kwic) return aktuell.kwic;
+  var z = KWIC_ZEILEN_BASIS();
+  if (aktuell.umgeordnet) z.sort(kwicWerkfolge);
+  return z;
+};
+var KWIC_BASIS = kwic;
+kwic = function (m) {
+  if (aktuell && aktuell.id === m.id && aktuell.umgeordnet && (!m.ordnung || m.ordnung === 'werk') && aktuell.kwic && aktuell.kwicOrdnung && aktuell.kwicOrdnung !== 'werk') {
+    aktuell.kwic.sort(kwicWerkfolge);
+    aktuell.kwicOrdnung = 'werk';
+  }
+  KWIC_BASIS(m);
+};
+
+// ── Stelle: Edition, Werk, Jahr, Gattung dazu ───────────────────────────
+var STELLE_BASIS = stelleDaten;
+stelleDaten = function (t, i) {
+  var d = STELLE_BASIS(t, i), e = werkVon(t.w, t.st);
+  d.ed = edVon(t.w); d.werk = e[3] || ''; d.jahr = e[1]; d.gattung = e[2] || '';
+  return d;
+};
+
+// ── Seitenbild: eine Druckseite in ihren Zeilen ─────────────────────────
+function seitenVon(b) {
+  if (b._seiten) return b._seiten;
+  var m = new Map(), folge = [];
+  for (var i = 0; i < b.units.length; i++) {
+    var p = b.units[i].pdf, l = m.get(p);
+    if (!l) { m.set(p, l = []); folge.push(p); }
+    l.push(i);
+  }
+  folge.sort(function (a, c) { return a - c; });
+  return (b._seiten = { nach: m, folge: folge });
+}
+function seitenbild(m) {
+  var w, pdf, st = null, b;
+  if (m.i != null) {
+    if (!aktuell || aktuell.id !== m.id) return;
+    var t = aktuell.treffer[m.i];
+    if (!t) return;
+    w = t.w; st = t.st; b = BAND[w];
+    pdf = m.pdf != null ? m.pdf : b.units[einheitVon(b, st)].pdf;
+  } else { w = m.work; b = BAND[w]; pdf = m.pdf; }
+  if (!b) return;
+  var S = seitenVon(b), units = S.nach.get(pdf);
+  if (!units) return;
+  // Marken: alle Treffer der laufenden Suche auf dieser Seite; die gewaehlte Stelle fuer sich
+  var marken = new Map(), eigen = new Set();
+  function merke(p, ist) {
+    var u = b.tU[p];
+    if (b.units[u].pdf !== pdf) return;
+    var l = marken.get(u);
+    if (!l) marken.set(u, l = []);
+    l.push([b.tS[p], b.tE[p]]);
+    if (ist) eigen.add(u + ':' + b.tS[p]);
+  }
+  if (aktuell && (m.i == null || aktuell.id === m.id)) {
+    aktuell.treffer.forEach(function (t2) {
+      if (t2.w !== w) return;
+      var ist = t2.st === st;
+      for (var j = 0; j < t2.st.pos.length; j++) merke(t2.st.pos[j], ist);
+    });
+  }
+  var teile = units.map(function (ui) {
+    var u = b.units[ui], T = u.text, Z = u.zeilen || [], mk = (marken.get(ui) || []).sort(function (a, c) { return a[0] - c[0]; });
+    var zeilen = [], n = Z.length / 2 | 0;
+    function zeile(von, bis, nr) {
+      var hat = false, ist = false;
+      for (var j = 0; j < mk.length; j++) if (mk[j][0] < bis && mk[j][1] > von) { hat = true; if (eigen.has(ui + ':' + mk[j][0])) ist = true; }
+      var html = H.setze(T, von, bis, mk);
+      // Der Text steht ohne Trennstriche im Index: bricht die Zeile im Wort, gehoert der Strich wieder hin
+      if (bis < T.length && /[\p{L}]$/u.test(T.slice(0, bis)) && /^[\p{Ll}]/u.test(T.slice(bis))) html += '-';
+      zeilen.push({ nr: nr, html: html, treffer: hat, hier: ist });
+    }
+    if (!n) zeile(0, T.length, null);
+    else for (var j = 0; j < n; j++) zeile(j === 0 ? 0 : Z[2 * j], j + 1 < n ? Z[2 * j + 2] : T.length, Z[2 * j + 1]);
+    return { art: u.art, weiter: !!u.weiter, zeilen: zeilen };
+  });
+  // Die Stelle reicht von ihrem ersten bis zu ihrem letzten Wort: auch die Zeilen dazwischen gehoeren dazu
+  var flach = [], erste = -1, letzte = -1;
+  teile.forEach(function (t2) { t2.zeilen.forEach(function (z) { if (z.hier) { if (erste < 0) erste = flach.length; letzte = flach.length; } flach.push([t2.art, z]); }); });
+  for (var fi = erste + 1; fi < letzte; fi++) if (flach[fi][0] === flach[erste][0]) flach[fi][1].hier = true;
+  var u0 = b.units[units[0]], ix = S.folge.indexOf(pdf), e = werkDaten(w, segVon(w)[st ? einheitVon(b, st) : units[0]]);
+  var aus = { typ: 'seite', id: m.id, i: m.i == null ? null : m.i, work: w, sig: b.sig, ed: edVon(w), pdf: pdf, buch: u0.buch,
+              werk: e[3] || '', jahr: e[1], gattung: e[2] || '', teile: teile,
+              vor: ix > 0 ? S.folge[ix - 1] : null, nach: ix + 1 < S.folge.length ? S.folge[ix + 1] : null };
+  if (aus.vor != null) aus.vorBuch = b.units[S.nach.get(aus.vor)[0]].buch;
+  if (aus.nach != null) aus.nachBuch = b.units[S.nach.get(aus.nach)[0]].buch;
+  if (st) {
+    var d = stelleDaten(aktuell.treffer[m.i], m.i);
+    aus.zitat = d.zitat; aus.ziel = d.ziel; aus.woerter = d.woerter; aus.eigeneSeite = b.units[einheitVon(b, st)].pdf === pdf;
+    aus.gesamt = aktuell.treffer.length;
+  }
+  post(aus);
+}
+
+// ── Vorschlaege: Wortanfang, Tippfehler, Werke ──────────────────────────
+var LEX = null;
+function lexikon() {
+  if (LEX) return LEX;
+  LEX = new Map();
+  REIHE.forEach(function (w) {
+    var b = BAND[w];
+    for (var i = 0; i < b.formen.length; i++) {
+      var e = LEX.get(b.formen[i]);
+      if (e) e.n += b.zahl[i]; else LEX.set(b.formen[i], { form: b.anzeige[i], n: b.zahl[i] });
+    }
+  });
+  return LEX;
+}
+/** Abstand zweier Woerter (Einfuegen, Loeschen, Ersetzen, Vertauschen), abgebrochen ueber grenze. */
+function abstand(a, c, grenze) {
+  var la = a.length, lc = c.length;
+  if (Math.abs(la - lc) > grenze) return grenze + 1;
+  var vv = null, v = new Array(lc + 1), n, i, j;
+  for (j = 0; j <= lc; j++) v[j] = j;
+  for (i = 1; i <= la; i++) {
+    n = new Array(lc + 1); n[0] = i;
+    var klein = n[0];
+    for (j = 1; j <= lc; j++) {
+      var kost = a.charCodeAt(i - 1) === c.charCodeAt(j - 1) ? 0 : 1;
+      n[j] = Math.min(v[j] + 1, n[j - 1] + 1, v[j - 1] + kost);
+      if (vv && i > 1 && j > 1 && a.charCodeAt(i - 1) === c.charCodeAt(j - 2) && a.charCodeAt(i - 2) === c.charCodeAt(j - 1)) n[j] = Math.min(n[j], vv[j - 2] + 1);
+      if (n[j] < klein) klein = n[j];
+    }
+    if (klein > grenze) return grenze + 1;
+    vv = v; v = n;
+  }
+  return v[lc];
+}
+function aehnliche(wort, hoechstens) {
+  var f = wort.toLowerCase(), kf = H.key(f), grenze = f.length < 6 ? 1 : 2, aus = [];
+  if (f.length < 4) return aus;
+  lexikon().forEach(function (e, form) {
+    if (e.n < 3 || Math.abs(form.length - f.length) > grenze) return;
+    // Der erste Buchstabe stimmt fast immer; ohne diese Schranke wuerde jede Eingabe alle Formen messen
+    if (form.charCodeAt(0) !== f.charCodeAt(0) && form.charCodeAt(1) !== f.charCodeAt(1)) return;
+    var d = Math.min(abstand(f, form, grenze), abstand(kf, H.key(form), grenze));
+    if (d >= 1 && d <= grenze) aus.push({ form: e.form, n: e.n, d: d });
+  });
+  aus.sort(function (a, c) { return a.d - c.d || c.n - a.n; });
+  // Die Schreibungen desselben Wortes (Seyn, Sein) nur einmal
+  var gesehen = new Set();
+  return aus.filter(function (x) { var k = H.key(x.form.toLowerCase()); if (gesehen.has(k)) return false; gesehen.add(k); return true; }).slice(0, hoechstens || 3);
+}
+function schlicht(s) { return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ß/g, 'ss').replace(/[^a-z0-9]+/g, ' ').trim(); }
+var WERKE = null;
+function werkliste() {
+  if (WERKE) return WERKE;
+  WERKE = [];
+  REIHE.forEach(function (w) {
+    var b = BAND[w], liste = (JAHRE && JAHRE.baende[w]) || [], sv = segVon(w);
+    liste.forEach(function (e, s) {
+      if (!e[3]) return;
+      var u = b.units[e[0]], von = null, bis = null;
+      for (var i = e[0]; i < b.units.length && sv[i] === s; i++) { var bu = b.units[i].buch; if (typeof bu === 'number') { if (von == null) von = bu; bis = bu; } }
+      WERKE.push({ work: w, sig: b.sig, ed: edVon(w), titel: e[3], jahr: e[1], gattung: e[2], pdf: u ? u.pdf : null, von: von, bis: bis, s: schlicht(e[3]) });
+    });
+    WERKE.push({ work: w, sig: b.sig, ed: edVon(w), titel: b.title, band: true, pdf: b.units.length ? b.units[0].pdf : null, von: null, bis: null, s: schlicht(b.title) });
+  });
+  return WERKE;
+}
+function werkeZu(titel, hoechstens) {
+  var q = schlicht(titel || '');
+  if (q.length < 3) return [];
+  var teile = q.split(' '), aus = [];
+  werkliste().forEach(function (x) {
+    var wert = 0;
+    if (x.s.lastIndexOf(q, 0) === 0) wert = 3;
+    else if ((' ' + x.s).indexOf(' ' + q) >= 0) wert = 2;
+    else if (teile.length > 1 && teile.every(function (tl) { return (' ' + x.s).indexOf(' ' + tl) >= 0; })) wert = 1;
+    if (!wert) return;
+    if (x.band) wert -= 0.5;
+    aus.push({ x: x, wert: wert });
+  });
+  aus.sort(function (a, c) { return c.wert - a.wert || a.x.s.length - c.x.s.length; });
+  // Ein Werk, das einen Band allein fuellt, steht sonst doppelt da
+  var gesehen = new Set();
+  return aus.filter(function (a) { var k = a.x.work + '|' + a.x.s; if (gesehen.has(k)) return false; gesehen.add(k); return true; })
+    .slice(0, hoechstens || 4).map(function (a) { var x = a.x; return { work: x.work, sig: x.sig, ed: x.ed, titel: x.titel, jahr: x.jahr == null ? null : x.jahr, pdf: x.pdf, von: x.von, bis: x.bis, band: !!x.band }; });
+}
+function pultvorschlag(m) {
+  var aus = { typ: 'pultvorschlag', id: m.id, woerter: [], aehnlich: [], werke: [], zweck: m.zweck || '', wort: m.wort || '' };
+  if (m.wort && m.wort.length >= 2) {
+    var v = mitFang('vorschlag', function () { vorschlag({ id: 0, praefix: m.wort }); });
+    aus.woerter = (v && v.liste) || [];
+    var genau = aus.woerter.some(function (x) { return x.form.toLowerCase() === m.wort.toLowerCase(); }) || lexikon().has(m.wort.toLowerCase()) ||
+      REIHE.some(function (w) { return BAND[w].nachKey.has(H.key(m.wort.toLowerCase())); });
+    if (!genau && (m.zweck === 'leer' || !aus.woerter.length)) aus.aehnlich = aehnliche(m.wort, 3);
+  }
+  if (m.titel) aus.werke = werkeZu(m.titel, 4);
+  post(aus);
+}
+
+// ── Zitatsprung: die Seite im Leser zu einer Buchseite ──────────────────
+function ort(m) {
+  var b = BAND[m.work];
+  if (!b) { post({ typ: 'ort', id: m.id, work: m.work, pdf: null }); return; }
+  var ziel = String(m.buch).toLowerCase(), pdf = null, zeile = null, hatZeile = false;
+  for (var i = 0; i < b.units.length; i++) {
+    var u = b.units[i];
+    if (String(u.buch).toLowerCase() !== ziel) continue;
+    if (pdf == null) pdf = u.pdf;
+    if (m.zeile != null && u.zeilen) for (var j = 1; j < u.zeilen.length; j += 2) if (u.zeilen[j] === m.zeile) hatZeile = true;
+  }
+  if (hatZeile) zeile = m.zeile;
+  post({ typ: 'ort', id: m.id, work: m.work, buch: m.buch, pdf: pdf, zeile: zeile, von: b.seiteVon, bis: b.seiteBis });
+}
+
+// ── Die laufende Suche je Werk ──────────────────────────────────────────
+function pultwerke(m) {
+  var z = mitFang('zeit', function () { zeit(m); });
+  if (z) post({ typ: 'pultwerke', id: m.id, werke: z.werke.filter(function (x) { return x.n; }), alle: z.werke.length });
+}
+
+// ── Profil einer Anfrage ohne die laufende Suche anzutasten ─────────────
+var VON_JAHR = 1785, SCHRITT_JAHR = 5, N_JAHR = 14;
+var WORT_JE = null;
+function woerterJe() {
+  // Woerter je Edition und Jahrfuenft (ohne Exzerpte), einmal gezaehlt
+  if (WORT_JE) return WORT_JE;
+  WORT_JE = {};
+  EDS.forEach(function (ed) { WORT_JE[ed] = new Array(N_JAHR).fill(0); });
+  REIHE.forEach(function (w) {
+    var liste = JAHRE && JAHRE.baende[w], ed = edVon(w);
+    if (!liste || !WORT_JE[ed]) return;
+    var wz = woerterVon(w);
+    liste.forEach(function (e, s) {
+      if (e[2] === 'e' || e[1] == null) return;
+      var j = Math.floor((e[1] - VON_JAHR) / SCHRITT_JAHR);
+      if (j >= 0 && j < N_JAHR) WORT_JE[ed][j] += wz[s];
+    });
+  });
+  return WORT_JE;
+}
+function profil(q, mitZeit, mitKwic) {
+  var g = H.lies(q || '');
+  if (!g.ast) return { q: q, leer: true };
+  var aus = { q: q, stellen: 0, vorkommen: 0, jeBand: [], je: {}, kwic: [] };
+  EDS.forEach(function (ed) { aus.je[ed] = { stellen: 0, vorkommen: 0, woerter: 0, n: new Array(N_JAHR).fill(0) }; });
+  REIHE.forEach(function (w) {
+    var b = BAND[w], ed = edVon(w), r = KERN_SUCHE(b, g.ast, { arten: ALLE, aus: [], seiten: null, hervor: false });
+    var vork = 0, sv = mitZeit ? segVon(w) : null;
+    r.stellen.forEach(function (st) {
+      var l = H.laeufe(st.pos), n = l.length || 1;
+      vork += n;
+      if (mitZeit && aus.je[ed]) {
+        var e = werkDaten(w, sv[einheitVon(b, st)]);
+        if (e[2] !== 'e' && e[1] != null) { var j = Math.floor((e[1] - VON_JAHR) / SCHRITT_JAHR); if (j >= 0 && j < N_JAHR) aus.je[ed].n[j] += n; }
+      }
+      if (mitKwic && aus.kwic.length < 40 && l.length) aus.kwic.push({ b: b, l: l[0], n: st.pos.length });
+    });
+    aus.stellen += r.stellen.length; aus.vorkommen += vork;
+    aus.jeBand.push({ work: w, sig: b.sig, ed: ed, n: vork, woerter: b.woerter });
+    if (aus.je[ed]) { aus.je[ed].stellen += r.stellen.length; aus.je[ed].vorkommen += vork; aus.je[ed].woerter += b.woerter; }
+  });
+  if (mitZeit) { var wj = woerterJe(); EDS.forEach(function (ed) { aus.je[ed].w = wj[ed]; }); }
+  if (mitKwic) {
+    // vier Zeilen aus der Mitte des Bestands, nicht die ersten vier desselben Bandes
+    var z = aus.kwic, schritt = Math.max(1, Math.floor(z.length / 4));
+    aus.kwic = [z[0], z[schritt], z[2 * schritt], z[3 * schritt]].filter(Boolean).map(function (x) { var k = H.kwic(x.b, x.l, 34); return { links: k.links, wort: k.wort, rechts: k.rechts }; });
+  }
+  return aus;
+}
+var STAND = null;
+function standLaden() {
+  if (STAND) return Promise.resolve(STAND);
+  return fetch(new URL('index.json', new URL('../suche/', self.location.href))).then(function (r) { return r.json(); })
+    .then(function (ix) { STAND = ix.stand; return STAND; }, function () { return null; });
+}
+function pultstart(m) {
+  standLaden().then(function (stand) {
+    if (stand && m.stand === stand) { post({ typ: 'pultstart', id: m.id, stand: stand, gleich: true }); return; }
+    var offen = (m.beispiele || []).slice(), zahlen = {};
+    function weiter() {
+      // Eine Anfrage je Runde, dazwischen kommt die Seite mit eigenen Anfragen zum Zug
+      var q = offen.shift();
+      if (q == null) {
+        var p = m.probe ? profil(m.probe, true, true) : null;
+        post({ typ: 'pultstart', id: m.id, stand: stand, zahlen: zahlen, probe: p });
+        return;
+      }
+      var r = profil(q, false, false);
+      zahlen[q] = r.leer ? null : { stellen: r.stellen, vorkommen: r.vorkommen };
+      setTimeout(weiter, 30);
+    }
+    weiter();
+  });
+}
+function begriffe(m) {
+  var aus = (m.terme || []).slice(0, 4).map(function (q) {
+    var p = profil(q, true, false);
+    return p.leer ? { q: q, leer: true } : { q: q, stellen: p.stellen, vorkommen: p.vorkommen, je: p.je };
+  });
+  post({ typ: 'begriffe', id: m.id, terme: aus, von: VON_JAHR, schritt: SCHRITT_JAHR, n: N_JAHR });
+}
+
+var PULT = { seite: seitenbild, pultvorschlag: pultvorschlag, ort: ort, pultwerke: pultwerke, pultstart: pultstart, begriffe: begriffe };
+var VERARBEITE_BASIS = verarbeite;
+verarbeite = function (e) {
+  var m = e.data, f = PULT[m.typ];
+  if (!f) { VERARBEITE_BASIS(e); return; }
+  (ladung || lade()).then(function () {
+    try { if (REIHE.length && BAND[REIHE[REIHE.length - 1]]) f(m); }
+    catch (err) { post({ typ: 'fehler', id: m.id, text: String(err && err.message || err) }); }
+  });
+};

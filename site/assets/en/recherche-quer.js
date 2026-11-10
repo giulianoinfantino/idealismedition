@@ -24,7 +24,7 @@
           '<h4>Where most frequent</h4><ol class="qv-baende">' + e.baende.map(function (b) {
             return '<li><button type="button" data-qv-band="' + esc(b.work) + '"><span class="s">' + esc(b.sig) + '</span><span class="t">' + esc(b.title) + '</span><span class="n">' + zahl(b.n) + '</span></button></li>';
           }).join('') + '</ol>' +
-          (e.umfeld.length ? '<h4>Begriffsumfeld</h4><p class="qv-umfeld">' + e.umfeld.map(function (u) {
+          (e.umfeld.length ? '<h4>Conceptual neighborhood</h4><p class="qv-umfeld">' + e.umfeld.map(function (u) {
             return '<button type="button" data-qv-nah="' + esc(u.wort) + '" data-qv-ed="' + e.ed + '" title="' + zahl(u.n) + '× nearby, ' + komma(u.faktor) + '× as often as usual">' + esc(u.wort) + '</button>';
           }).join('') + '</p>' : '') +
           '<h4>Densest passages</h4>' + e.beste.map(function (s) {
@@ -85,7 +85,7 @@
       var l = m.liste.filter(function (x) { return x.ed === ed; });
       return '<div class="qp-gruppe"><h4>' + NAME[ed] + '</h4>' + (l.length ? l.map(function (x) {
         return '<div class="qp-stelle"><a href="' + esc(c.leserLink(x, true)) + '">' + esc(x.zitat) + '</a> <span class="qp-titel">' + esc(x.title) + '</span>' +
-          '<p>' + x.html + '</p><p class="qp-woerter">gemeinsam: ' + x.woerter.map(esc).join(', ') + '</p></div>';
+          '<p>' + x.html + '</p><p class="qp-woerter">shared: ' + x.woerter.map(esc).join(', ') + '</p></div>';
       }).join('') : '<p class="qp-nichts">No similar passage.</p>') + '</div>';
     }).join('');
     var div = document.createElement('div');
@@ -103,16 +103,16 @@
       if (gleich) return '<td class="qb-gleich" aria-label="same edition">—</td>';
       return '<td>' + (n ? '<button type="button" data-qb-q="' + anfrage + '" data-qb-ed="' + ed + '">' + zahl(n) + '</button>' : '<span class="qb-null">0</span>') + '</td>';
     }
-    var kopf = '<tr><th></th>' + d.editionen.map(function (ed) { return '<th scope="col">bei ' + NAME[ed] + '</th>'; }).join('') + '</tr>';
+    var kopf = '<tr><th></th>' + d.editionen.map(function (ed) { return '<th scope="col">in ' + NAME[ed] + '</th>'; }).join('') + '</tr>';
     var namen = d.namen.map(function (n) {
       return '<tr><th scope="row">' + n.name + '</th>' + n.je.map(function (x, j) { return zelle(x, n.name + '*', d.editionen[j], n.id === d.editionen[j]); }).join('') + '</tr>';
     }).join('');
     var zeugen = d.zeugen.map(function (n) {
       return '<tr><th scope="row">' + n.name + '</th>' + n.je.map(function (x, j) { return zelle(x, n.name + '*', d.editionen[j], false); }).join('') + '</tr>';
     }).join('');
-    feld.innerHTML = '<h2>Querverweise</h2>' +
+    feld.innerHTML = '<h2>Cross-references</h2>' +
       '<p class="qb-unter">How often each one names the others, and whom all three cite. A number opens the passages.</p>' +
-      '<div class="qb-tafeln"><table class="qb"><caption>Wer nennt wen</caption><thead>' + kopf + '</thead><tbody>' + namen + '</tbody></table>' +
+      '<div class="qb-tafeln"><table class="qb"><caption>Who names whom</caption><thead>' + kopf + '</thead><tbody>' + namen + '</tbody></table>' +
       '<table class="qb"><caption>Shared authorities cited</caption><thead>' + kopf + '</thead><tbody>' + zeugen + '</tbody></table></div>';
     feld.hidden = false;
   }
