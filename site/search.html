@@ -205,6 +205,7 @@
               <dt>Enter</dt><dd>open passage in Print layout</dd>
               <dt>c</dt><dd>copy citation of the passage</dd>
               <dt>1 – 6</dt><dd>Passages, Concordance, Distribution, Comparison, Time, Terms</dd>
+              <dt>v</dt><dd>show or hide the passage’s printed page</dd>
               <dt>s</dt><dd>add passage to the working list</dd>
             </dl>
           </section>
@@ -510,8 +511,9 @@
     starte();
     if (!bereit) return;   // wird nach „bereit“ nachgeholt
     anfrage++;
-    worker.postMessage({ typ: 'suche', id: anfrage, q: S.q, baende: S.baende, arten: S.arten,
-                         aus: S.aus, seiten: S.seiten, ordnung: S.ordnung, hervor: S.hervor, jahre: S.jahre, gattung: S.gattung });
+    var frage = { typ: 'suche', id: anfrage, q: S.q, baende: S.baende, arten: S.arten,
+                  aus: S.aus, seiten: S.seiten, ordnung: S.ordnung, hervor: S.hervor, jahre: S.jahre, gattung: S.gattung };
+    worker.postMessage(window.Pult ? window.Pult.frage(frage) : frage);
   }
 
   // Ohne Anfrage zeigt die Seite nur Titel, Feld, Bereich und Beispiele

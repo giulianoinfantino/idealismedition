@@ -210,6 +210,7 @@
               <dt>Enter</dt><dd>Stelle im Druckbild öffnen</dd>
               <dt>c</dt><dd>Zitat der Stelle kopieren</dd>
               <dt>1 – 6</dt><dd>Stellen, Konkordanz, Verteilung, Vergleich, Zeit, Begriffe</dd>
+              <dt>v</dt><dd>Druckseite der Stelle auf- und zuklappen</dd>
               <dt>s</dt><dd>Stelle auf die Merkliste</dd>
             </dl>
           </section>
@@ -520,8 +521,9 @@
     starte();
     if (!bereit) return;   // wird nach „bereit“ nachgeholt
     anfrage++;
-    worker.postMessage({ typ: 'suche', id: anfrage, q: S.q, baende: S.baende, arten: S.arten,
-                         aus: S.aus, seiten: S.seiten, ordnung: S.ordnung, hervor: S.hervor, jahre: S.jahre, gattung: S.gattung });
+    var frage = { typ: 'suche', id: anfrage, q: S.q, baende: S.baende, arten: S.arten,
+                  aus: S.aus, seiten: S.seiten, ordnung: S.ordnung, hervor: S.hervor, jahre: S.jahre, gattung: S.gattung };
+    worker.postMessage(window.Pult ? window.Pult.frage(frage) : frage);
   }
 
   // Ohne Anfrage zeigt die Seite nur Titel, Feld, Bereich und Beispiele

@@ -2,14 +2,17 @@
  *
  * Die Suchseite der Editionen bleibt die Quelle (werkzeug/recherche_seite.py); dieses Skript legt darüber,
  * was nur das Portal hat: ein Feld, das Wörter, Zitate (GW 9, 23) und Werktitel versteht und Tippfehler
- * auffängt; die drei Autoren als Schalter über den Stellen; die Druckseite neben der Liste; eine Merkliste
- * mit Export; die Ansicht „Begriffe“ (mehrere Anfragen auf einer Zeitachse); Filter als Marken.
+ * auffängt; ein Suchformular („Erweitert“), das die Anfrage schreibt; die drei Autoren als Schalter über
+ * den Stellen; Filter links (Zeit mit den Stationen des gewählten Autors, Gattung, Textart, aufklappbar
+ * Werke und Bände); die Druckseite einer Stelle, die unter ihr aufklappt; eine Merkliste mit Export; die
+ * Ansicht „Begriffe“ (mehrere Anfragen auf einer Zeitachse); Filter als Marken.
  *
  * Die Seite ruft an wenigen Stellen herein (werkzeug/pult_einbau.py setzt die Haken):
  *   Pult.start(ctx)      einmal, vor dem ersten Zeichnen; ctx ist window.PultCtx
  *   Pult.vor(m)          vor jeder Meldung des Workers; true = hier erledigt
  *   Pult.nach(m)         nach jeder Meldung, die die Seite gezeichnet hat
  *   Pult.ruhe(an)        Wechsel zwischen erster Ansicht und Ergebnis
+ *   Pult.frage(m)        die Suchanfrage an den Worker, bevor sie abgeht (Werkwahl)
  *   Pult.karte(s, art)   das HTML einer Stelle
  *   Pult.baende(jeBand)  nach dem Zeichnen der Bandliste
  *   Pult.adresse(p), Pult.lies(p)   eigene Angaben in der Adresse
@@ -26,10 +29,20 @@
   var NAME = { fichte: 'Fichte', schelling: 'Schelling', hegel: 'Hegel' };
   var GATTUNG = { d: tx('Druckschrift', 'Published work'), v: tx('Vorlesung', 'Lecture'), n: tx('Nachlass', 'Manuscript'), e: tx('Exzerpt', 'Excerpt') };
   var GATTUNGEN = { d: tx('Druckschriften', 'Published works'), v: tx('Vorlesungen', 'Lectures'), n: tx('Nachlass', 'Manuscripts'), e: tx('Exzerpte', 'Excerpts') };
+  // Lebensstationen je Autor als Zeitfilter nach dem Jahr der Schrift. Ein Grenzjahr gehört zu beiden
+  // Stationen. Auf den Seiten der einzelnen Editionen gilt dieselbe Liste für den einen Autor.
+  var PERIODEN = {
+    fichte: [[tx('bis 1793', 'to 1793'), 1790, 1793], ['Jena', 1794, 1799], ['Berlin', 1799, 1814]],
+    schelling: [['Tübingen, Leipzig', 1792, 1798], ['Jena', 1798, 1803], ['Würzburg', 1803, 1806], [tx('München', 'Munich'), 1806, 1820],
+                ['Erlangen', 1820, 1827], [tx('München', 'Munich'), 1827, 1841], ['Berlin', 1841, 1854]],
+    hegel: [[tx('bis Frankfurt', 'to Frankfurt'), 1785, 1800], ['Jena', 1801, 1807], [tx('Bamberg, Nürnberg', 'Bamberg, Nuremberg'), 1807, 1816],
+            ['Heidelberg', 1816, 1818], ['Berlin', 1818, 1832]]
+  };
   var Z = {
-    stat: null, karten: {}, gewaehlt: null, wunsch: null, seite: null, werke: null, werkeAuf: false, leereAuf: false,
+    stat: null, karten: {}, gewaehlt: null, seite: null, werke: null, leereAuf: false,
     liste: [], vid: 0, vliste: [], vwahl: -1, vzeit: 0, orte: {}, ortId: 0,
-    mit: [], autor: 'alle', begriffe: null, bid: 0, startId: 0
+    mit: [], autor: 'alle', begriffe: null, bid: 0, startId: 0,
+    werkwahl: [], alleWerke: null, werkSuche: '', werkAlle: false, formHinweis: ''
   };
   var dom = {};
 
@@ -46,7 +59,6 @@
     var s = v >= 10 ? 0 : v >= 1 ? 1 : 2;
     return v.toLocaleString(EN ? 'en-US' : 'de-DE', { minimumFractionDigits: s, maximumFractionDigits: s });
   }
-  function breit() { return window.matchMedia('(min-width: 1180px)').matches; }
   function schmal() { return window.matchMedia('(max-width: 900px)').matches; }
   function ruhig() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
   function sende(m) { var w = C.worker(); if (w) w.postMessage(m); }
@@ -82,10 +94,9 @@
     dom.filter = el('div', 'pult-filter', { id: 'pult-filter' });
     dom.filter.hidden = true;
     dom.mitte.appendChild(dom.autoren); dom.mitte.appendChild(dom.filter); dom.mitte.appendChild(C.results);
-    // Rechts: die Druckseite
-    dom.vorschau = el('aside', 'pult-vorschau', { id: 'pult-vorschau', 'aria-label': tx('Die Seite im Druckbild', 'The page in print layout') });
-    koerper.appendChild(dom.vorschau);
-    // Ordnung und Filterknopf in die Zeile der Ansichten
+    // Die Druckseite einer Stelle: hängt nirgends, bis eine Stelle sie aufklappt
+    dom.vorschau = el('aside', 'pult-seite', { id: 'pult-vorschau', 'aria-label': tx('Die Seite im Druckbild', 'The page in print layout') });
+    // Ordnung und Filterknopf (Telefon) in die Zeile der Ansichten
     dom.rechts = el('div', 'pult-rechts');
     var ordnung = C.$('rch-ordnung');
     if (ordnung && ordnung.closest('label')) dom.rechts.appendChild(ordnung.closest('label'));
@@ -95,21 +106,54 @@
     var link = el('button', null, { type: 'button', id: 'pult-link', title: tx('Adresse dieser Suche mit allen Einstellungen in die Zwischenablage', 'Copy the address of this search with all its settings') }, tx('Link kopieren', 'Copy link'));
     C.$('rch-aktionen').appendChild(link);
     link.addEventListener('click', function () { C.kopiere(location.href, tx('Link kopiert', 'Link copied')); });
-    // Facetten: Gruppe für die Textarten, Jahre als Balken, Werke, Schließen (Telefon)
-    dom.artenGruppe = el('div', 'pult-gruppe pult-gruppe-arten', null, '<div class="kopf"><span>' + tx('Text', 'Text') + '</span></div>');
-    dom.facetten.insertBefore(dom.artenGruppe, C.$('rch-zeit'));
+    // Erste Ansicht: ein Knopf öffnet alle Filter (statt „Alle Bände“)
+    dom.filterAuf = el('button', 'pult-filter-auf', { type: 'button', id: 'pult-filter-auf', 'aria-expanded': 'false', 'aria-controls': 'rch-baende' });
+    dom.leiste.insertBefore(dom.filterAuf, C.$('rch-baende-knopf'));
+    // Feld: „Erweitert“ öffnet das Suchformular
+    dom.formKnopf = el('button', 'pult-form-knopf', { type: 'button', id: 'pult-form-knopf', 'aria-expanded': 'false', 'aria-controls': 'pult-formular',
+      title: tx('Suchformular: die Anfrage aus Feldern zusammensetzen', 'Search form: build the query from fields') }, tx('Erweitert', 'Advanced'));
+    var los = C.$('rch-form').querySelector('.rch-los');
+    los.parentNode.insertBefore(dom.formKnopf, los);
+    dom.formular = el('div', 'pult-formular', { id: 'pult-formular', role: 'group', 'aria-label': tx('Erweiterte Suche', 'Advanced search') });
+    dom.formular.hidden = true;
+    kopf.insertBefore(dom.formular, dom.status);
+    // Filter: Zeit (mit den Stationen des gewählten Autors), Gattung, Textart; aufklappbar Werke und Bände
+    var zeit = C.$('rch-zeit'), zj = zeit.querySelector('.rch-zeit-jahre');
     dom.hist = el('div', 'pult-hist', { id: 'pult-hist' });
-    var zj = C.$('rch-zeit').querySelector('.rch-zeit-jahre');
+    dom.perioden = el('div', 'pult-perioden', { id: 'pult-perioden', role: 'group', 'aria-label': tx('Stationen', 'Periods') });
+    dom.perioden.hidden = true;
     zj.parentNode.insertBefore(dom.hist, zj);
-    dom.werke = el('div', 'pult-gruppe pult-werke', { id: 'pult-werke' });
-    dom.werke.hidden = true;
-    var bandKopf = C.$('rch-alle').closest('.kopf');
-    dom.facetten.insertBefore(dom.werke, bandKopf);
+    zj.parentNode.insertBefore(dom.perioden, zj);
+    var bandKopf = C.$('rch-alle').closest('.kopf'), bandListe = C.$('rch-baende-liste');
+    dom.artenGruppe = el('div', 'pult-gruppe pult-gruppe-arten', null, '<div class="kopf"><span>' + tx('Text', 'Text') + '</span></div>');
+    dom.artenGruppe.appendChild(dom.arten);
+    dom.facetten.insertBefore(dom.artenGruppe, bandKopf);
+    dom.werkeFach = el('details', 'pult-fach', { id: 'pult-werke-fach' },
+      '<summary><span>' + tx('Werke', 'Works') + '</span><span class="pf-n" id="pult-werke-n"></span></summary>' +
+      '<div class="pult-werke"><input type="search" id="pult-werke-suche" spellcheck="false" autocomplete="off" placeholder="' + tx('Werk suchen, etwa Logik', 'Find a work, e.g. Logik') +
+      '" aria-label="' + tx('Werk suchen', 'Find a work') + '"><div id="pult-werke-liste"></div></div>');
+    dom.facetten.insertBefore(dom.werkeFach, bandKopf);
+    dom.werkeListe = dom.werkeFach.querySelector('#pult-werke-liste');
+    dom.baendeFach = el('details', 'pult-fach', { id: 'pult-baende-fach' }, '<summary><span>' + tx('Bände', 'Volumes') + '</span><span class="pf-n" id="pult-baende-n"></span></summary>');
+    dom.facetten.insertBefore(dom.baendeFach, bandKopf);
+    dom.baendeFach.appendChild(bandKopf); dom.baendeFach.appendChild(bandListe);
     dom.leere = el('button', 'pult-leere', { type: 'button', id: 'pult-leere' });
     dom.leere.hidden = true;
-    dom.facetten.appendChild(dom.leere);
+    dom.baendeFach.appendChild(dom.leere);
     dom.blattZu = el('button', 'pult-blatt-zu', { type: 'button' }, tx('Stellen zeigen', 'Show passages'));
-    dom.facetten.appendChild(dom.blattZu);
+    // Alles in einen Rahmen, damit die erste Ansicht die Fächer nebeneinander stellen kann
+    dom.faecher = el('div', 'pult-faecher');
+    [zeit, dom.artenGruppe, dom.werkeFach, dom.baendeFach, dom.blattZu].forEach(function (n) { dom.faecher.appendChild(n); });
+    dom.facetten.appendChild(dom.faecher);
+    var auf = lager('idealismus-pult-faecher') || {};
+    [dom.werkeFach, dom.baendeFach].forEach(function (d) {
+      d.open = !!auf[d.id];
+      d.addEventListener('toggle', function () {
+        var a = lager('idealismus-pult-faecher') || {};
+        a[d.id] = d.open; lager('idealismus-pult-faecher', a);
+        if (d === dom.werkeFach && d.open) malWerkwahl();
+      });
+    });
     // Vorschläge: eigene Liste; die alte bleibt leer (vor() schluckt ihre Meldungen)
     dom.vorschlag = el('ul', 'rch-vorschlag pult-vorschlag', { id: 'pult-vorschlag', role: 'listbox', 'aria-label': tx('Vorschläge', 'Suggestions') });
     dom.vorschlag.hidden = true;
@@ -124,10 +168,9 @@
 
     Z.liste = lager('idealismus-merkliste') || [];
     verbinde();
-    malAutoren(); malAblage(); malVorschauLeer(); ansichtKlasse();
+    malFormular(); malAutoren(); malAblage(); ansichtKlasse(); malFilterAuf(); malPerioden(); malWerkwahl();
     zeigeStartAusLager();
   }
-
   // ═════════════════════════════════════════════════════════════════════
   //  Meldungen des Workers
   // ═════════════════════════════════════════════════════════════════════
@@ -138,40 +181,40 @@
       case 'pultvorschlag': zeigeVorschlag(m); return true;
       case 'seite': zeichneSeite(m); return true;
       case 'ort': empfangeOrt(m); return true;
-      case 'pultwerke': if (m.id === C.anfrage()) { Z.werke = m.werke; malWerke(); malHist(); malFilter(); } return true;
+      case 'pultwerke': if (m.id === C.anfrage()) { Z.werke = m.werke; malWerkwahl(); malHist(); malFilter(); } return true;
+      case 'pultliste': Z.alleWerke = m.werke; malWerkwahl(); malFilter(); return true;
       case 'pultstart': empfangeStart(m); return true;
       case 'begriffe': if (m.id === Z.bid) { Z.begriffe = m; zeichneBegriffe(); } return true;
     }
     return false;
   }
-  /** Die Druckseite steht nur neben der Liste der Stellen; die anderen Ansichten nehmen die ganze Breite. */
+  /** Nur in der Ansicht „Stellen“ gilt die Ordnung; die anderen Ansichten nehmen die ganze Breite. */
   function ansichtKlasse() { if (C) document.body.classList.toggle('pult-stellen', C.S.ansicht === 'stellen'); }
   function nach(m) {
     if (!C) return;
     ansichtKlasse();
     if (m.typ === 'bereit') {
       malAutoren();
+      sende({ typ: 'pultliste', id: 0 });
       if (document.body.classList.contains('rch-ruhe')) fordereStart();
       fordereVorschlag();
     } else if (m.typ === 'bezuege') {
       lager('idealismus-bezuege', m);
     } else if (m.typ === 'ergebnis') {
       if (m.id !== C.anfrage()) return;
-      Z.karten = {}; Z.gewaehlt = null; Z.wunsch = null; Z.werke = null; Z.begriffe = null;
-      malVorschauLeer();
+      schliesseSeite();
+      Z.karten = {}; Z.werke = null; Z.begriffe = null;
       var hat = !m.leer && m.gesamt && m.gesamt.stellen > 0;
       document.body.classList.toggle('pult-hat', !!hat);
       Z.stat = m.leer ? null : statistik(m.jeBand);
-      malAutoren(); malFilter(); malLesart();
+      malAutoren(); malFilter(); malLesart(); malPerioden();
       if (hat) sende({ typ: 'pultwerke', id: m.id });
-      else { malWerke(); malHist(); if (!m.leer) fragNachAehnlichen(); }
+      else { malWerkwahl(); malHist(); if (!m.leer) fragNachAehnlichen(); }
       // Die Liste der Vorschläge soll die neuen Stellen nicht verdecken, wenn niemand mehr tippt
       if (Date.now() - Z.vzeit > 2500) schliesseVorschlag();
     } else if (m.typ === 'stellen') {
       if (m.id !== C.anfrage()) return;
       m.stellen.forEach(function (s) { Z.karten[s.i] = s; });
-      if (Z.wunsch != null && Z.karten[Z.wunsch]) { var w = Z.wunsch; Z.wunsch = null; waehle(w, 'schritt'); }
-      else if (Z.gewaehlt == null && breit() && C.S.ansicht === 'stellen' && m.stellen.length) waehle(m.stellen[0].i, 'auto');
     }
   }
   function statistik(jeBand) {
@@ -197,17 +240,16 @@
     if (!C) return;
     if (an) {
       dom.leiste.insertBefore(dom.autoren, dom.leiste.firstChild);
-      dom.leiste.insertBefore(dom.arten, C.$('rch-baende-knopf'));
-      document.body.classList.remove('pult-hat', 'pult-vorschau-auf', 'pult-blatt-auf');
-      Z.stat = null; Z.gewaehlt = null; Z.werke = null;
-      malAutoren(); malFilter(); malWerke(); malHist(); schliesseExport();
+      document.body.classList.remove('pult-hat', 'pult-blatt-auf');
+      schliesseSeite();
+      Z.stat = null; Z.werke = null;
+      malAutoren(); malFilter(); malWerkwahl(); malHist(); schliesseExport();
       if (C.bereit()) fordereStart();
     } else {
       dom.mitte.insertBefore(dom.autoren, dom.filter);
-      dom.artenGruppe.appendChild(dom.arten);
       if (!schmal()) dom.facetten.open = true;
     }
-    malAblage();
+    malAblage(); malPerioden(); malFilterAuf();
   }
 
   // ── Autoren: Schalter über den Stellen ──────────────────────────────
@@ -219,6 +261,11 @@
     });
     return an;
   }
+  /** Der eine Autor, wenn genau eine Ausgabe ganz gewählt ist; sonst null. */
+  function einAutor() {
+    var an = gewaehlteEd(), ganz = EDS.filter(function (ed) { return an[ed] === 'true'; });
+    return ganz.length === 1 && !EDS.some(function (ed) { return an[ed] === 'mixed'; }) ? ganz[0] : null;
+  }
   function malAutoren() {
     if (!C) return;
     var an = gewaehlteEd(), keine = !C.S.baende.length, st = Z.stat, max = 0.0001;
@@ -226,12 +273,12 @@
     dom.autoren.classList.toggle('pult-autoren-wahl', !keine);
     dom.autoren.innerHTML = EDS.map(function (ed) {
       var n = C.baendeVon(ed).length, s = st && st[ed];
-      return '<button type="button" class="pa pa-' + ed + (s && !s.stellen ? ' pa-leer' : '') + '" data-ed="' + ed + '" aria-pressed="' + (keine ? 'false' : an[ed]) + '"' +
-        ' title="' + (keine ? tx('nur ' + NAME[ed], NAME[ed] + ' only') : an[ed] === 'false' ? tx(NAME[ed] + ' dazunehmen', 'add ' + NAME[ed]) : tx(NAME[ed] + ' abwählen', 'remove ' + NAME[ed])) + '">' +
+      var titel = keine ? tx('nur ' + NAME[ed], NAME[ed] + ' only') : an[ed] === 'false' ? tx(NAME[ed] + ' dazunehmen', 'add ' + NAME[ed]) : tx(NAME[ed] + ' abwählen', 'remove ' + NAME[ed]);
+      if (s) titel += ' · ' + dichte(s.dichte) + ' ' + tx('Vorkommen je 10 000 Wörter', 'occurrences per 10,000 words');
+      return '<button type="button" class="pa pa-' + ed + (s && !s.stellen ? ' pa-leer' : '') + '" data-ed="' + ed + '" aria-pressed="' + (keine ? 'false' : an[ed]) + '" title="' + titel + '">' +
         '<span class="pa-kopf"><i class="pa-punkt" aria-hidden="true"></i><b>' + NAME[ed] + '</b>' +
         '<span class="pa-n">' + (s ? zahl(s.stellen) + '<span class="pa-wort"> ' + (s.stellen === 1 ? tx('Stelle', 'passage') : tx('Stellen', 'passages')) + '</span>' : n + ' ' + tx('Bände', 'volumes')) + '</span></span>' +
-        (s ? '<span class="pa-rate">' + dichte(s.dichte) + ' ' + tx('je 10 000 Wörter', 'per 10,000 words') + '</span>' +
-             '<span class="pa-bar" aria-hidden="true"><i style="width:' + (s.dichte / max * 100).toFixed(1) + '%"></i></span>' : '') +
+        (s ? '<span class="pa-bar" aria-hidden="true"><i style="width:' + (s.dichte / max * 100).toFixed(1) + '%"></i></span>' : '') +
         '</button>';
     }).join('');
   }
@@ -247,7 +294,7 @@
       if (EDS.every(function (e) { return C.baendeVon(e).every(function (w) { return neu.indexOf(w) >= 0; }); })) neu = [];
     }
     S.baende = neu; S.seiten = null;
-    if (S.q) C.suche(true); else { C.zeichneBaende(null); C.schreibeAdresse(true); malAutoren(); }
+    if (S.q) C.suche(true); else { C.zeichneBaende(null); C.schreibeAdresse(true); malAutoren(); malWerkwahl(); }
   }
 
   // ── Bandliste: Zahl je Autor, leere Bände eingeklappt ───────────────
@@ -268,21 +315,62 @@
     malAutoren();
   }
 
-  // ── Werke und Jahre der laufenden Suche ─────────────────────────────
-  function malWerke() {
-    var w = (Z.werke || []).slice().sort(function (a, b) { return b.n - a.n; });
-    if (!w.length || document.body.classList.contains('rch-ruhe')) { dom.werke.hidden = true; dom.werke.innerHTML = ''; return; }
-    var zeige = Z.werkeAuf ? w.slice(0, 40) : w.slice(0, 6), max = w[0].n;
-    dom.werke.innerHTML = '<div class="kopf"><span>' + tx('Werke', 'Works') + '</span><span class="pw-zahl">' + zahl(w.length) + '</span></div>' +
-      zeige.map(function (x) {
-        return '<button type="button" class="pw pw-' + x.ed + '" data-work="' + esc(x.work) + '"' + (x.von != null ? ' data-von="' + x.von + '" data-bis="' + x.bis + '"' : '') +
-          ' title="' + esc(NAME[x.ed] + ', ' + x.sig + (x.jahr != null ? ' · ' + x.jahr : '') + ' · ' + (GATTUNG[x.gattung] || '')) + '">' +
-          '<span class="t">' + esc(x.titel) + '</span><span class="c">' + zahl(x.n) + '</span>' +
-          '<span class="bar" aria-hidden="true"><i style="width:' + (x.n / max * 100).toFixed(1) + '%"></i></span></button>';
-      }).join('') +
-      (w.length > 6 ? '<button type="button" class="pult-mehr" data-werke-mehr>' + (Z.werkeAuf ? tx('weniger', 'fewer') : tx('weitere ' + Math.min(34, w.length - 6), Math.min(34, w.length - 6) + ' more')) + '</button>' : '');
-    dom.werke.hidden = false;
+  // ── Stationen des gewählten Autors ──────────────────────────────────
+  function malPerioden() {
+    if (!C || !dom.perioden) return;
+    var ed = einAutor(), S = C.S;
+    dom.perioden.hidden = !ed;
+    if (!ed) { dom.perioden.innerHTML = ''; return; }
+    dom.perioden.innerHTML = '<span class="pp-lab">' + tx(NAME[ed] + 's Stationen', NAME[ed] + '’s periods') + '</span>' + PERIODEN[ed].map(function (p) {
+      var an = !!S.jahre && S.jahre.von === p[1] && S.jahre.bis === p[2];
+      return '<button type="button" data-von="' + p[1] + '" data-bis="' + p[2] + '" aria-pressed="' + an + '">' + p[0] + ' <span>' + p[1] + '–' + p[2] + '</span></button>';
+    }).join('');
   }
+
+  // ── Werke: eines oder mehrere aus allen Werken der Ausgabe ──────────
+  function werkVon(k) {
+    var L = Z.alleWerke || Z.werke || [];
+    for (var i = 0; i < L.length; i++) if (L[i].k === k) return L[i];
+    return null;
+  }
+  function malWerkwahl() {
+    if (!C || !dom.werkeListe) return;
+    document.getElementById('pult-werke-n').textContent = Z.werkwahl.length ? Z.werkwahl.length + ' ' + tx('gewählt', 'selected') : '';
+    if (!dom.werkeFach.open) return;
+    if (!Z.alleWerke) {
+      dom.werkeListe.innerHTML = '<p class="pw-hinweis">' + tx('Die Werke stehen hier, sobald die Bände geladen sind.', 'The works are listed here once the volumes have loaded.') + '</p>';
+      C.starte();
+      return;
+    }
+    var zahlJe = {}, hatZahl = !!(Z.werke && C.S.q && !document.body.classList.contains('rch-ruhe'));
+    (Z.werke || []).forEach(function (x) { zahlJe[x.k] = x.n; });
+    var an = gewaehlteEd(), keineEd = !C.S.baende.length, q = Z.werkSuche.trim().toLowerCase();
+    var L = [];
+    Z.alleWerke.forEach(function (x, i) {
+      var g = Z.werkwahl.indexOf(x.k) >= 0;
+      if (!g && !keineEd && an[x.ed] === 'false') return;
+      if (!g && q && (x.titel + ' ' + x.sig + ' ' + (x.jahr == null ? '' : x.jahr) + ' ' + NAME[x.ed]).toLowerCase().indexOf(q) < 0) return;
+      L.push({ x: x, i: i, g: g ? 1 : 0, n: zahlJe[x.k] || 0 });
+    });
+    L.sort(function (a, b) { return (b.g - a.g) || (hatZahl ? b.n - a.n : 0) || a.i - b.i; });
+    var grenze = q ? 40 : Z.werkAlle ? L.length : 8, zeige = L.slice(0, Math.max(grenze, Z.werkwahl.length));
+    dom.werkeListe.innerHTML = zeige.map(function (e) {
+      var x = e.x;
+      return '<button type="button" class="pw pw-' + x.ed + '" data-k="' + esc(x.k) + '" aria-pressed="' + (e.g ? 'true' : 'false') + '">' +
+        '<span class="t">' + esc(x.titel) + '</span><span class="c">' + (hatZahl ? (e.n ? zahl(e.n) : '–') : '') + '</span>' +
+        '<span class="pw-ort">' + esc(NAME[x.ed] + ' · ' + x.sig + (x.jahr != null ? ' · ' + x.jahr : '')) + '</span></button>';
+    }).join('') +
+      (!L.length ? '<p class="pw-hinweis">' + tx('Kein Werk mit diesem Titel.', 'No work with this title.') + '</p>' : '') +
+      (L.length > zeige.length ? '<button type="button" class="pult-mehr" data-werke-mehr>' + tx('alle ' + L.length + ' zeigen', 'show all ' + L.length) + '</button>'
+        : (Z.werkAlle && !q && L.length > 8 ? '<button type="button" class="pult-mehr" data-werke-mehr>' + tx('weniger zeigen', 'show fewer') + '</button>' : ''));
+  }
+  function schalteWerk(k) {
+    var i = Z.werkwahl.indexOf(k);
+    if (i >= 0) Z.werkwahl.splice(i, 1); else Z.werkwahl.push(k);
+    C.S.seiten = null;
+    if (C.S.q) C.suche(true); else { C.schreibeAdresse(true); malWerkwahl(); }
+  }
+
   var HVON = 1785, HSCHRITT = 5, HN = 14;
   function malHist() {
     var w = Z.werke || [];
@@ -303,16 +391,14 @@
   }
 
   // ── Filter als Marken über den Stellen ──────────────────────────────
-  function malFilter() {
-    if (!C) return;
+  function aktiveFilter() {
     var S = C.S, m = [], an = gewaehlteEd();
-    if (document.body.classList.contains('rch-ruhe') || !S.q) { dom.filter.hidden = true; dom.filter.innerHTML = ''; return; }
-    if (S.seiten) {
-      var werk = (Z.werke || []).filter(function (x) { return x.work === S.seiten.work && x.von === S.seiten.von && x.bis === S.seiten.bis; })[0];
-      m.push(['seiten', werk ? werk.titel : C.sigVon(S.seiten.work) + ', ' + tx('S.', 'pp.') + ' ' + S.seiten.von + '–' + S.seiten.bis]);
-    } else if (S.baende.length && EDS.some(function (ed) { return an[ed] === 'mixed'; })) {
+    if (S.seiten) m.push(['seiten', C.sigVon(S.seiten.work) + ', ' + tx('S.', 'pp.') + ' ' + S.seiten.von + '–' + S.seiten.bis]);
+    else if (S.baende.length && EDS.some(function (ed) { return an[ed] === 'mixed'; })) {
       m.push(['baende', S.baende.length === 1 ? C.sigVon(S.baende[0]) : S.baende.length + ' ' + tx('Bände', 'volumes')]);
     }
+    if (Z.werkwahl.length > 2) m.push(['werke', Z.werkwahl.length + ' ' + tx('Werke', 'works')]);
+    else Z.werkwahl.forEach(function (k) { var x = werkVon(k); m.push(['werk:' + k, x ? x.titel : tx('ein Werk', 'one work')]); });
     if (S.jahre) m.push(['jahre', S.jahre.von + '–' + S.jahre.bis]);
     if (S.gattung) m.push(['gattung', tx('nur ', 'only ') + S.gattung.split('').map(function (g) { return GATTUNGEN[g]; }).join(', ')]);
     if (S.hervor) m.push(['hervor', tx('nur Hervorhebungen', 'emphasis only')]);
@@ -324,15 +410,31 @@
       m.push(['arten', tx('ohne ', 'without ') + aus.join(', ')]);
     }
     if (S.aus.length) m.push(['aus', S.aus.length === 1 ? tx('ohne die Form ', 'without the form ') + S.aus[0] : tx('ohne ' + S.aus.length + ' Formen', 'without ' + S.aus.length + ' forms')]);
+    return m;
+  }
+  function malFilter() {
+    if (!C) return;
+    if (document.body.classList.contains('rch-ruhe') || !C.S.q) { dom.filter.hidden = true; dom.filter.innerHTML = ''; return; }
+    var m = aktiveFilter();
     dom.filter.hidden = !m.length;
     dom.filter.innerHTML = m.map(function (x) {
-      return '<span class="pf">' + esc(x[1]) + '<button type="button" data-filter-weg="' + x[0] + '" aria-label="' + esc(tx('Filter aufheben: ', 'Remove filter: ') + x[1]) + '">×</button></span>';
+      return '<span class="pf"><span>' + esc(x[1]) + '</span><button type="button" data-filter-weg="' + esc(x[0]) + '" aria-label="' + esc(tx('Filter aufheben: ', 'Remove filter: ') + x[1]) + '">×</button></span>';
     }).join('') + (m.length > 1 ? '<button type="button" class="pf-alle" data-filter-weg="alle">' + tx('alle Filter aufheben', 'clear all filters') + '</button>' : '');
+  }
+  /** Erste Ansicht: der Knopf „Filter“ zählt, was gesetzt ist. */
+  function malFilterAuf() {
+    if (!C || !dom.filterAuf) return;
+    var n = aktiveFilter().length, auf = document.body.classList.contains('rch-baende-auf');
+    dom.filterAuf.innerHTML = tx('Filter', 'Filters') + (n ? ' <span class="pf-n">' + n + '</span>' : '');
+    dom.filterAuf.setAttribute('aria-expanded', auf ? 'true' : 'false');
   }
   function filterWeg(was) {
     var S = C.S, alle = was === 'alle';
     if (alle || was === 'seiten') { if (S.seiten) S.baende = []; S.seiten = null; }
-    if (alle || was === 'baende') { S.baende = []; S.seiten = null; }
+    // „alle Filter aufheben“ lässt die Wahl ganzer Autoren stehen: sie steht über den Stellen, nicht bei den Marken
+    if (was === 'baende' || (alle && EDS.some(function (ed) { return gewaehlteEd()[ed] === 'mixed'; }))) { S.baende = []; S.seiten = null; }
+    if (alle || was === 'werke') Z.werkwahl = [];
+    if (was.indexOf('werk:') === 0) Z.werkwahl = Z.werkwahl.filter(function (k) { return k !== was.slice(5); });
     if (alle || was === 'jahre') S.jahre = null;
     if (alle || was === 'gattung') S.gattung = '';
     if (alle || was === 'hervor') { S.hervor = false; C.$('rch-hervor').setAttribute('aria-pressed', 'false'); }
@@ -347,50 +449,53 @@
   function schluessel(s) { return s.work + '|' + s.zitat; }
   function gemerkt(s) { var k = schluessel(s); return Z.liste.some(function (x) { return x.k === k; }); }
   function karte(s, ARTNAME) {
-    var druck = C.leserLink(s, true), lese = C.leserLink(s, false), g = gemerkt(s);
+    var druck = C.leserLink(s, true), g = gemerkt(s);
     return '<article class="rch-stelle pk pk-' + s.ed + '" tabindex="-1" data-i="' + s.i + '" data-zitat="' + esc(s.zitat) + '" data-druck="' + esc(druck) + '">' +
       '<div class="rch-zitat"><span class="ei-autor">' + esc(NAME[s.ed] || C.edName(s.work)) + '</span>, ' + esc(s.zitat) +
       (ARTNAME[s.art] ? '<span class="art">' + ARTNAME[s.art] + '</span>' : '') + '</div>' +
       '<div class="pk-werk">' + (s.werk ? '<i>' + esc(s.werk) + '</i>' : '') + (s.jahr != null ? '<span class="j">' + s.jahr + '</span>' : '') + '</div>' +
       (s.abschnitt && s.abschnitt !== s.werk ? '<div class="rch-pfad">' + esc(s.abschnitt) + '</div>' : '') +
       '<p class="rch-text">' + s.html + '</p>' +
-      '<div class="rch-wege"><a href="' + esc(druck) + '">' + tx('Im Druckbild öffnen', 'Open in print layout') + '</a>' +
-      '<a href="' + esc(lese) + '">' + tx('Lesefassung', 'Reading text') + '</a>' +
+      '<div class="rch-wege"><button type="button" class="pk-seite" data-seite="' + s.i + '" aria-expanded="false">' + tx('Seite zeigen', 'Show page') + '</button>' +
+      '<a href="' + esc(druck) + '">' + tx('Im Leser öffnen', 'Open in the reader') + '</a>' +
       '<button type="button" data-kopie="' + esc(s.zitat) + '">' + tx('Zitat kopieren', 'Copy citation') + '</button>' +
-      '<button type="button" class="pk-merk" data-merk="' + s.i + '" aria-pressed="' + g + '">' + (g ? tx('Gemerkt', 'On your list') : tx('Merken', 'Add to list')) + '</button>' +
-      '<button type="button" class="qp-knopf" data-parallel="' + s.i + '" title="' + tx('Ähnliche Stellen bei Fichte, Schelling und Hegel', 'Similar passages in Fichte, Schelling, and Hegel') + '">' + tx('Parallelstellen', 'Parallel passages') + '</button></div>' +
+      '<button type="button" class="pk-merk" data-merk="' + s.i + '" aria-pressed="' + g + '">' + (g ? tx('Gemerkt', 'On your list') : tx('Merken', 'Add to list')) + '</button></div>' +
       '</article>';
   }
   function karteVon(i) { return C.results.querySelector('.rch-stelle[data-i="' + i + '"]'); }
-  function waehle(i, woher) {
+  /** Die Druckseite klappt unter der Stelle auf; ein zweiter Klick schließt sie. Immer nur eine. */
+  function schliesseSeite() {
+    if (!dom.vorschau) return;
+    var art = dom.vorschau.parentNode;
+    if (art) {
+      art.removeChild(dom.vorschau);
+      var qp = art.querySelector && art.querySelector('.qp');
+      if (qp) qp.remove();
+    }
+    C.results.querySelectorAll('.rch-stelle.pult-gewaehlt').forEach(function (a) {
+      a.classList.remove('pult-gewaehlt');
+      var b = a.querySelector('[data-seite]');
+      if (b) { b.setAttribute('aria-expanded', 'false'); b.textContent = tx('Seite zeigen', 'Show page'); }
+    });
+    Z.gewaehlt = null; Z.seite = null;
+  }
+  function waehle(i) {
     var art = karteVon(i);
     if (!art) return;
+    if (Z.gewaehlt === i) { schliesseSeite(); return; }
+    schliesseSeite();
     Z.gewaehlt = i;
-    C.results.querySelectorAll('.rch-stelle.pult-gewaehlt').forEach(function (a) { a.classList.remove('pult-gewaehlt'); });
     art.classList.add('pult-gewaehlt');
-    if (woher === 'schritt') art.scrollIntoView({ block: 'nearest', behavior: ruhig() ? 'auto' : 'smooth' });
-    if (breit() || woher === 'klick' || woher === 'schritt') {
-      if (!breit() && woher !== 'auto') document.body.classList.add('pult-vorschau-auf');
-      sende({ typ: 'seite', id: C.anfrage(), i: i });
-    }
-  }
-  function schritt(d) {
-    if (Z.gewaehlt == null) return;
-    var ziel = Z.gewaehlt + d, gesamt = C.gesamt();
-    if (ziel < 0 || (gesamt && ziel >= gesamt)) return;
-    if (karteVon(ziel)) waehle(ziel, 'schritt');
-    else { Z.wunsch = ziel; C.fordereStellen(); }
-  }
-  function malVorschauLeer() {
-    Z.seite = null;
-    if (dom.vorschau) dom.vorschau.innerHTML = '<p class="pv-leer">' + tx('Eine Stelle anklicken, und ihre Seite steht hier im Druckbild, mit Zeilenzahlen.', 'Click a passage and its page appears here in print layout, with line numbers.') + '</p>';
+    var b = art.querySelector('[data-seite]');
+    if (b) { b.setAttribute('aria-expanded', 'true'); b.textContent = tx('Seite schließen', 'Close page'); }
+    dom.vorschau.innerHTML = '<p class="pv-leer">' + tx('Die Seite wird gesetzt …', 'Setting the page …') + '</p>';
+    art.appendChild(dom.vorschau);
+    sende({ typ: 'seite', id: C.anfrage(), i: i });
   }
   function zeichneSeite(m) {
-    if (m.i != null && (m.id !== C.anfrage() || m.i !== Z.gewaehlt)) return;
+    if (m.i == null || m.id !== C.anfrage() || m.i !== Z.gewaehlt || !dom.vorschau.parentNode) return;
     Z.seite = m;
-    var s = m.i != null ? Z.karten[m.i] : null;
-    var zitat = s ? NAME[m.ed] + ', ' + m.zitat : NAME[m.ed] + ', ' + m.sig + ', ' + m.buch;
-    var meta = [];
+    var s = Z.karten[m.i], meta = [NAME[m.ed] + ', ' + m.sig];
     if (m.jahr != null) meta.push(m.jahr);
     if (GATTUNG[m.gattung]) meta.push(GATTUNG[m.gattung]);
     meta.push(tx('Seite ', 'page ') + m.buch);
@@ -400,23 +505,19 @@
         return '<div class="pv-z' + (z.hier ? ' hier' : '') + '"><span class="nr">' + nr + '</span><span class="tx">' + z.html + '</span></div>';
       }).join('') + '</div>';
     }).join('');
-    var g = s && gemerkt(s);
     dom.vorschau.innerHTML =
-      '<header class="pv-kopf"><b>' + esc(zitat) + '</b>' +
-      (m.i != null && m.gesamt ? '<span class="pv-nr">' + tx('Stelle ', 'Passage ') + zahl(m.i + 1) + tx(' von ', ' of ') + zahl(m.gesamt) + '</span>' +
-        '<button type="button" data-pv="vor" aria-label="' + tx('vorige Stelle', 'previous passage') + '"' + (m.i === 0 ? ' disabled' : '') + '>‹</button>' +
-        '<button type="button" data-pv="nach" aria-label="' + tx('nächste Stelle', 'next passage') + '"' + (m.i + 1 >= m.gesamt ? ' disabled' : '') + '>›</button>' : '') +
-      '<button type="button" class="pv-zu" data-pv="zu" aria-label="' + tx('schließen', 'close') + '">×</button></header>' +
-      '<div class="pv-leib" tabindex="0"><p class="pv-werk">' + esc(m.werk || '') + '</p><p class="pv-meta">' + esc(meta.join(' · ')) + '</p>' +
-      '<div class="pv-seite pv-ed-' + m.ed + '">' + seite + '</div>' +
-      '<nav class="pv-blatt" aria-label="' + tx('Blättern', 'Turn pages') + '">' +
-      (m.vor != null ? '<button type="button" data-pv="seite" data-pdf="' + m.vor + '">‹ ' + tx('S. ', 'p. ') + esc(m.vorBuch) + '</button>' : '<span></span>') +
-      (m.i != null && !m.eigeneSeite ? '<button type="button" data-pv="heim">' + tx('zur Stelle', 'back to the passage') + '</button>' : '<span></span>') +
-      (m.nach != null ? '<button type="button" data-pv="seite" data-pdf="' + m.nach + '">' + tx('S. ', 'p. ') + esc(m.nachBuch) + ' ›</button>' : '<span></span>') +
-      '</nav></div>' +
-      (s ? '<footer class="pv-fuss"><button type="button" data-pv="kopie">' + tx('Zitat kopieren', 'Copy citation') + '</button>' +
-        '<button type="button" data-pv="merk" aria-pressed="' + g + '">' + (g ? tx('Gemerkt', 'On your list') : tx('Merken', 'Add to list')) + '</button>' +
-        '<a class="pv-auf" href="' + esc(C.leserLink(s, true)) + '">' + tx('Im Druckbild öffnen', 'Open in print layout') + '</a></footer>' : '');
+      '<header class="pv-kopf"><p><b>' + esc(m.werk || '') + '</b><span class="pv-meta">' + esc(meta.join(' · ')) + '</span></p>' +
+      '<button type="button" class="pv-zu" data-pv="zu" aria-label="' + tx('Seite schließen', 'close page') + '">×</button></header>' +
+      '<div class="pv-leib" tabindex="0"><div class="pv-seite pv-ed-' + m.ed + '">' + seite + '</div></div>' +
+      '<footer class="pv-fuss"><nav class="pv-blatt" aria-label="' + tx('Blättern', 'Turn pages') + '">' +
+      (m.vor != null ? '<button type="button" data-pv="seite" data-pdf="' + m.vor + '">‹ ' + tx('S. ', 'p. ') + esc(m.vorBuch) + '</button>' : '') +
+      (!m.eigeneSeite ? '<button type="button" data-pv="heim">' + tx('zur Stelle', 'back to the passage') + '</button>' : '') +
+      (m.nach != null ? '<button type="button" data-pv="seite" data-pdf="' + m.nach + '">' + tx('S. ', 'p. ') + esc(m.nachBuch) + ' ›</button>' : '') +
+      '</nav>' +
+      (s ? '<span class="pv-wege"><button type="button" class="qp-knopf" data-parallel="' + s.i + '" title="' + tx('Ähnliche Stellen bei Fichte, Schelling und Hegel', 'Similar passages in Fichte, Schelling, and Hegel') + '">' + tx('Parallelstellen', 'Parallel passages') + '</button>' +
+        '<a href="' + esc(C.leserLink(s, false)) + '">' + tx('Lesefassung', 'Reading text') + '</a>' +
+        '<a class="pv-auf" href="' + esc(C.leserLink(s, true)) + '">' + tx('Im Druckbild öffnen', 'Open in print layout') + '</a></span>' : '') +
+      '</footer>';
     passeSeiteEin();
     var hier = dom.vorschau.querySelector('.pv-z.hier'), leib = dom.vorschau.querySelector('.pv-leib');
     if (hier && leib) leib.scrollTop = Math.max(0, hier.offsetTop - leib.offsetTop - leib.clientHeight * 0.3);
@@ -429,10 +530,10 @@
     if (!seite || !seite.offsetParent) return;
     seite.style.fontSize = '';
     seite.classList.add('pv-zeilen');
-    var breit = 0, platz = 0;
-    seite.querySelectorAll('.pv-z .tx').forEach(function (t) { if (t.scrollWidth > breit) breit = t.scrollWidth; if (!platz) platz = t.clientWidth; });
-    if (!platz || breit <= platz) return;
-    var px = parseFloat(getComputedStyle(seite).fontSize) * platz / breit * 0.975;
+    var breite = 0, platz = 0;
+    seite.querySelectorAll('.pv-z .tx').forEach(function (t) { if (t.scrollWidth > breite) breite = t.scrollWidth; if (!platz) platz = t.clientWidth; });
+    if (!platz || breite <= platz) return;
+    var px = parseFloat(getComputedStyle(seite).fontSize) * platz / breite * 0.975;
     if (px >= 9.5) { seite.style.fontSize = px.toFixed(2) + 'px'; return; }
     seite.classList.remove('pv-zeilen');
     if (px >= 8.2) seite.style.fontSize = '9.5px';
@@ -460,8 +561,6 @@
       b.setAttribute('aria-pressed', g ? 'true' : 'false');
       b.textContent = g ? tx('Gemerkt', 'On your list') : tx('Merken', 'Add to list');
     });
-    var pm = dom.vorschau.querySelector('[data-pv="merk"]'), s = Z.gewaehlt != null && Z.karten[Z.gewaehlt];
-    if (pm && s) { var g = gemerkt(s); pm.setAttribute('aria-pressed', g ? 'true' : 'false'); pm.textContent = g ? tx('Gemerkt', 'On your list') : tx('Merken', 'Add to list'); }
   }
   function malAblage() {
     if (!dom.ablage) return;
@@ -702,6 +801,104 @@
   }
 
   // ═════════════════════════════════════════════════════════════════════
+  //  Suchformular („Erweitert“): schreibt die Anfrage ins Feld, ohne dass man die Suchsprache kennen muss
+  // ═════════════════════════════════════════════════════════════════════
+  function formLeer() { return { alle: '', wendung: '', eines: '', keines: '', a: '', b: '', n: 8, art: 'NEAR', schreibung: 'alle' }; }
+  var F = formLeer();
+  var OPERATOR = /^(AND|OR|NOT|UND|ODER|NICHT|SATZ|SENTENCE|(NEAR|NAH|BEFORE|VOR)(\/\d+)?)$/;
+  function formWoerter(s) {
+    return String(s || '').split(/[\s,;]+/).map(function (w) { return w.replace(/^[=("„“”]+|[~)"“”.]+$/g, ''); }).filter(function (w) { return w && !OPERATOR.test(w); });
+  }
+  /** Ein Wort mit der gewählten Schreibung: =Wort nur genau so, Wort~ auch gebeugt. Muster (* ?) bleiben, wie sie sind. */
+  function formWort(w) { return /[*?]/.test(w) ? w : F.schreibung === 'exakt' ? '=' + w : F.schreibung === 'formen' ? w + '~' : w; }
+  function formAnfrage() {
+    var t = [], a = formWoerter(F.a)[0], b = formWoerter(F.b)[0];
+    formWoerter(F.alle).forEach(function (w) { t.push(formWort(w)); });
+    var wendung = F.wendung.replace(/["„“”]/g, ' ').replace(/\s+/g, ' ').trim();
+    if (wendung) t.push('"' + wendung + '"');
+    var eines = formWoerter(F.eines).map(formWort);
+    if (eines.length === 1) t.push(eines[0]); else if (eines.length) t.push('(' + eines.join(' OR ') + ')');
+    if (a && b) t.push('(' + formWort(a) + ' ' + (F.art === 'SENTENCE' ? 'SENTENCE' : F.art + '/' + F.n) + ' ' + formWort(b) + ')');
+    if (!t.length) return '';
+    return t.join(' ') + formWoerter(F.keines).map(function (w) { return ' NOT ' + formWort(w); }).join('');
+  }
+  /** Eine Anfrage zurück in die Felder lesen, soweit sie aus dem Formular stammen könnte; sonst null. */
+  function formLies(q) {
+    var f = formLeer(), r = ' ' + (q || '') + ' ', m, keine = [];
+    if ((m = /"([^"]+)"/.exec(r))) { f.wendung = m[1]; r = r.replace(m[0], ' '); }
+    if ((m = /\(?\s*([^\s()"]+)\s+(NEAR|NAH|BEFORE|VOR)\/(\d+)\s+([^\s()"]+)\s*\)?/.exec(r))) {
+      f.a = m[1]; f.b = m[4]; f.n = +m[3]; f.art = /NEAR|NAH/.test(m[2]) ? 'NEAR' : 'BEFORE'; r = r.replace(m[0], ' ');
+    } else if ((m = /\(?\s*([^\s()"]+)\s+(SENTENCE|SATZ)\s+([^\s()"]+)\s*\)?/.exec(r))) {
+      f.a = m[1]; f.b = m[3]; f.art = 'SENTENCE'; r = r.replace(m[0], ' ');
+    }
+    if ((m = /\(([^()"]*\s(?:OR|ODER)\s[^()"]*)\)/.exec(r))) { f.eines = m[1].split(/\s+(?:OR|ODER)\s+/).join(' ').trim(); r = r.replace(m[0], ' '); }
+    r = r.replace(/\s(?:NOT|NICHT)\s+([^\s()"]+)/g, function (_, w) { keine.push(w); return ' '; });
+    f.keines = keine.join(' ');
+    if (/["()]/.test(r) || r.split(/\s+/).some(function (w) { return OPERATOR.test(w); })) return null;
+    f.alle = r.replace(/\s+/g, ' ').trim();
+    var alle = [f.alle, f.eines, f.keines, f.a, f.b].join(' ').split(/\s+/).filter(Boolean);
+    if (alle.length && alle.every(function (w) { return w.charAt(0) === '='; })) f.schreibung = 'exakt';
+    else if (alle.length && alle.every(function (w) { return /~$/.test(w); })) f.schreibung = 'formen';
+    ['alle', 'eines', 'keines', 'a', 'b'].forEach(function (k) { f[k] = f[k].split(/\s+/).map(function (w) { return w.replace(/^=|~$/g, ''); }).join(' ').trim(); });
+    return f;
+  }
+  function formFeld(k, name, beispiel) {
+    return '<label class="pfo-zeile"><span class="pfo-lab">' + name + '</span><input type="text" data-f="' + k + '" spellcheck="false" autocapitalize="off" autocomplete="off"' +
+      (beispiel ? ' placeholder="' + beispiel + '"' : '') + '></label>';
+  }
+  function malFormular() {
+    var arten = [['NEAR', tx('nahe bei', 'near')], ['BEFORE', tx('vor', 'before')], ['SENTENCE', tx('im selben Satz wie', 'in the same sentence as')]];
+    var schreibung = [['alle', tx('jede Schreibung der Zeit', 'every period spelling'), tx('Sein findet auch Seyn', 'Sein also finds Seyn')],
+                      ['exakt', tx('nur genau diese Schreibung', 'this exact spelling only'), tx('Sein findet nur Sein', 'Sein finds only Sein')],
+                      ['formen', tx('auch gebeugte Formen', 'inflected forms too'), tx('Begriff findet Begriffe, Begriffs', 'Begriff finds Begriffe, Begriffs')]];
+    dom.formular.innerHTML = '<div class="pfo-felder">' +
+      formFeld('alle', tx('Alle diese Wörter', 'All of these words'), tx('etwa: Begriff Idee', 'e.g. Begriff Idee')) +
+      formFeld('wendung', tx('Genau diese Wendung', 'This exact phrase'), tx('etwa: an und für sich', 'e.g. an und für sich')) +
+      formFeld('eines', tx('Eines dieser Wörter', 'Any of these words'), tx('etwa: Seyn Wesen', 'e.g. Seyn Wesen')) +
+      formFeld('keines', tx('Keines dieser Wörter', 'None of these words'), '') +
+      '<div class="pfo-zeile pfo-naehe"><span class="pfo-lab">' + tx('Zwei Wörter beieinander', 'Two words together') + '</span><span class="pfo-reihe">' +
+      '<input type="text" data-f="a" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="' + tx('Wort', 'word') + '" aria-label="' + tx('erstes Wort', 'first word') + '">' +
+      '<select data-f="art" aria-label="' + tx('Verhältnis der beiden Wörter', 'How the two words relate') + '">' + arten.map(function (a) { return '<option value="' + a[0] + '">' + a[1] + '</option>'; }).join('') + '</select>' +
+      '<input type="text" data-f="b" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="' + tx('Wort', 'word') + '" aria-label="' + tx('zweites Wort', 'second word') + '">' +
+      '<span class="pfo-abstand">' + tx('höchstens', 'at most') + ' <input type="number" data-f="n" min="1" max="99" aria-label="' + tx('Abstand in Wörtern', 'distance in words') + '"> ' + tx('Wörter Abstand', 'words apart') + '</span>' +
+      '</span></div></div>' +
+      '<div class="pfo-schreibung" role="radiogroup" aria-label="' + tx('Schreibung und Formen', 'Spelling and word forms') + '"><span class="pfo-lab">' + tx('Schreibung und Formen', 'Spelling and word forms') + '</span>' +
+      schreibung.map(function (x) { return '<button type="button" role="radio" data-schr="' + x[0] + '" aria-checked="false"><b>' + x[1] + '</b><span>' + x[2] + '</span></button>'; }).join('') + '</div>' +
+      '<div class="pfo-fuss"><span class="pfo-anfrage" id="pfo-anfrage" aria-live="polite"></span>' +
+      '<button type="button" data-fo="leer">' + tx('Felder leeren', 'Clear fields') + '</button>' +
+      '<button type="button" class="pfo-los" data-fo="los">' + tx('Suchen', 'Search') + '</button></div>';
+    fuelleFormular();
+  }
+  function formVorschau() {
+    var q = formAnfrage(), a = document.getElementById('pfo-anfrage');
+    dom.formular.classList.toggle('pfo-satz', F.art === 'SENTENCE');
+    dom.formular.querySelectorAll('[data-schr]').forEach(function (b) { b.setAttribute('aria-checked', b.dataset.schr === F.schreibung ? 'true' : 'false'); });
+    if (a) a.innerHTML = q ? tx('Anfrage: ', 'Query: ') + '<code>' + esc(q) + '</code>' : esc(Z.formHinweis || tx('Mindestens ein Wort oder eine Wendung eintragen.', 'Enter at least one word or phrase.'));
+  }
+  function fuelleFormular() {
+    dom.formular.querySelectorAll('[data-f]').forEach(function (e) { e.value = F[e.dataset.f]; });
+    formVorschau();
+  }
+  function formularAuf(auf) {
+    dom.formular.hidden = !auf;
+    dom.formKnopf.setAttribute('aria-expanded', auf ? 'true' : 'false');
+    if (!auf) return;
+    schliesseVorschlag();
+    var f = formLies(C.input.value);
+    Z.formHinweis = f ? '' : tx('Die Anfrage im Feld ist von Hand geschrieben; das Formular beginnt leer.', 'The query in the field was written by hand; the form starts empty.');
+    F = f || formLeer();
+    fuelleFormular();
+    var erst = dom.formular.querySelector('[data-f="alle"]');
+    if (erst) erst.focus();
+  }
+  function formularLos() {
+    var q = formAnfrage();
+    if (!q) { C.toast(tx('Das Formular ist leer', 'The form is empty')); return; }
+    formularAuf(false);
+    setzeAnfrage(q, true);
+  }
+
+  // ═════════════════════════════════════════════════════════════════════
   //  Erste Ansicht: Zahlen der Beispiele, vier kleine Ansichten
   // ═════════════════════════════════════════════════════════════════════
   var PROBE = 'Anschauung';
@@ -803,47 +1000,46 @@
   function verbinde() {
     dom.autoren.addEventListener('click', function (e) { var b = e.target.closest('[data-ed]'); if (b) schalteEd(b.dataset.ed); });
     dom.filter.addEventListener('click', function (e) { var b = e.target.closest('[data-filter-weg]'); if (b) filterWeg(b.dataset.filterWeg); });
-    dom.werke.addEventListener('click', function (e) {
-      if (e.target.closest('[data-werke-mehr]')) { Z.werkeAuf = !Z.werkeAuf; malWerke(); return; }
+    // Filter links
+    dom.werkeFach.addEventListener('click', function (e) {
+      if (e.target.closest('[data-werke-mehr]')) { Z.werkAlle = !Z.werkAlle; malWerkwahl(); return; }
       var b = e.target.closest('.pw');
-      if (b && window.QuerCtx) { blatt(false); window.QuerCtx.sucheInWerk(b.dataset.work, b.dataset.von ? +b.dataset.von : null, b.dataset.bis ? +b.dataset.bis : null); }
+      if (b) schalteWerk(b.dataset.k);
     });
-    dom.hist.addEventListener('click', function (e) {
-      var b = e.target.closest('button[data-von]');
-      if (!b) return;
-      var S = C.S, von = +b.dataset.von, bis = +b.dataset.bis;
+    dom.werkeFach.addEventListener('input', function (e) { if (e.target.id === 'pult-werke-suche') { Z.werkSuche = e.target.value; malWerkwahl(); } });
+    function zeitraum(von, bis) {
+      var S = C.S;
       S.jahre = S.jahre && S.jahre.von === von && S.jahre.bis === bis ? null : { von: von, bis: bis };
-      C.malZeit(); C.suche(true);
-    });
+      C.malZeit();
+      if (S.q) C.suche(true); else C.schreibeAdresse(true);
+    }
+    dom.perioden.addEventListener('click', function (e) { var b = e.target.closest('button[data-von]'); if (b) zeitraum(+b.dataset.von, +b.dataset.bis); });
+    dom.hist.addEventListener('click', function (e) { var b = e.target.closest('button[data-von]'); if (b) zeitraum(+b.dataset.von, +b.dataset.bis); });
     dom.leere.addEventListener('click', function () { Z.leereAuf = !Z.leereAuf; var l = C.letzte(); C.zeichneBaende(l && l.jeBand ? l.jeBand : null); });
     dom.filterKnopf.addEventListener('click', function () { blatt(!document.body.classList.contains('pult-blatt-auf')); });
     dom.blattZu.addEventListener('click', function () { blatt(false); });
+    dom.filterAuf.addEventListener('click', function () { C.$('rch-baende-knopf').click(); malFilterAuf(); malWerkwahl(); });
 
-    // Stellen
+    // Stellen: ein Klick klappt die Druckseite auf
     C.results.addEventListener('click', function (e) {
       var m = e.target.closest('[data-merk]');
       if (m) { merke(+m.dataset.merk); return; }
       var er = e.target.closest('[data-ersatz]');
       if (er) { e.preventDefault(); setzeAnfrage(C.S.q.replace(er.dataset.fuer, er.dataset.ersatz), true); return; }
-      if (e.target.closest('a, button, input, .qp')) return;
+      var se = e.target.closest('[data-seite]');
+      if (se) { waehle(+se.dataset.seite); return; }
+      if (e.target.closest('a, button, input, .qp, .pult-seite')) return;
       var art = e.target.closest('.rch-stelle');
       if (!art || (window.getSelection && String(window.getSelection()))) return;
-      waehle(+art.dataset.i, 'klick');
-    });
-    C.results.addEventListener('focusin', function (e) {
-      if (e.target.classList && e.target.classList.contains('rch-stelle') && breit() && +e.target.dataset.i !== Z.gewaehlt) waehle(+e.target.dataset.i, 'fokus');
+      waehle(+art.dataset.i);
     });
     dom.vorschau.addEventListener('click', function (e) {
       var b = e.target.closest('[data-pv]');
       if (!b) return;
-      var was = b.dataset.pv, s = Z.gewaehlt != null && Z.karten[Z.gewaehlt];
-      if (was === 'vor') schritt(-1);
-      else if (was === 'nach') schritt(1);
-      else if (was === 'zu') document.body.classList.remove('pult-vorschau-auf');
+      var was = b.dataset.pv;
+      if (was === 'zu') { var art = dom.vorschau.parentNode; schliesseSeite(); if (art && art.focus) art.focus({ preventScroll: true }); }
       else if (was === 'seite') sende({ typ: 'seite', id: C.anfrage(), i: Z.gewaehlt, pdf: +b.dataset.pdf });
       else if (was === 'heim') sende({ typ: 'seite', id: C.anfrage(), i: Z.gewaehlt });
-      else if (was === 'kopie' && s) C.kopiere(s.zitat, tx('Kopiert', 'Copied'), s.zitat);
-      else if (was === 'merk' && s) merke(s.i);
     });
 
     // Merkliste
@@ -888,6 +1084,28 @@
       nimm(+li.dataset.i);
     });
 
+    // Suchformular
+    dom.formKnopf.addEventListener('click', function () { formularAuf(dom.formular.hidden); });
+    function feldGeaendert(e) {
+      var f = e.target.dataset && e.target.dataset.f;
+      if (!f) return;
+      F[f] = f === 'n' ? Math.max(1, Math.min(99, parseInt(e.target.value, 10) || 8)) : e.target.value;
+      Z.formHinweis = '';
+      formVorschau();
+    }
+    dom.formular.addEventListener('input', feldGeaendert);
+    dom.formular.addEventListener('change', feldGeaendert);
+    dom.formular.addEventListener('click', function (e) {
+      var s = e.target.closest('[data-schr]');
+      if (s) { F.schreibung = s.dataset.schr; formVorschau(); return; }
+      var b = e.target.closest('[data-fo]');
+      if (!b) return;
+      if (b.dataset.fo === 'leer') { F = formLeer(); Z.formHinweis = ''; fuelleFormular(); } else formularLos();
+    });
+    dom.formular.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); formularLos(); }
+    });
+
     // Erste Ansicht: die vier kleinen Ansichten führen die Probeanfrage aus
     document.addEventListener('click', function (e) {
       var b = e.target.closest('#pl-ansichten [data-ansicht]');
@@ -896,7 +1114,7 @@
       if (a) { Z.autor = a.dataset.pbAutor; malBegriffeLeiste(); C.schreibeAdresse(false); zeichneBegriffe(); return; }
       var w = e.target.closest('[data-pb-weg]');
       if (w) { Z.mit.splice(+w.dataset.pbWeg, 1); begriffeNeu(); return; }
-      // Ein Klick neben das Blatt der Filter oder die Seite schließt sie (Telefon)
+      // Ein Klick neben das Blatt der Filter schließt es (Telefon)
       if (document.body.classList.contains('pult-blatt-auf') && !e.target.closest('#rch-baende, #pult-filter-knopf')) blatt(false);
     });
     document.addEventListener('submit', function (e) {
@@ -913,31 +1131,39 @@
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (e.key === 'Escape') {
         if (!dom.export.hidden) { schliesseExport(); return; }
-        if (document.body.classList.contains('pult-vorschau-auf')) { document.body.classList.remove('pult-vorschau-auf'); return; }
+        if (!dom.formular.hidden) { formularAuf(false); C.input.focus(); return; }
         if (document.body.classList.contains('pult-blatt-auf')) { blatt(false); return; }
+        if (Z.gewaehlt != null) { var offen = dom.vorschau.parentNode; schliesseSeite(); if (offen && offen.focus) offen.focus({ preventScroll: true }); return; }
       }
       var tag = (document.activeElement && document.activeElement.tagName) || '';
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
-      if (e.key === 's') {
-        var art = document.activeElement && document.activeElement.closest && document.activeElement.closest('.rch-stelle');
-        var i = art ? +art.dataset.i : Z.gewaehlt;
-        if (i != null && Z.karten[i]) { e.preventDefault(); merke(i); }
-      }
+      var art = document.activeElement && document.activeElement.closest && document.activeElement.closest('.rch-stelle');
+      var i = art ? +art.dataset.i : Z.gewaehlt;
+      if (i == null || !Z.karten[i]) return;
+      if (e.key === 's') { e.preventDefault(); merke(i); }
+      else if (e.key === 'v' && art) { e.preventDefault(); waehle(i); }
     });
   }
 
   window.Pult = {
     start: start, vor: vor, nach: nach, ruhe: ruhe, karte: karte, baende: baende,
+    frage: function (m) { if (C && Z.werkwahl.length) m.werke = Z.werkwahl.slice(); return m; },
     adresse: function (p) {
       ansichtKlasse();
-      if (!C || C.S.ansicht !== 'begriffe') return;
-      if (Z.mit.length) p.set('mit', Z.mit.join('|'));
-      if (Z.autor !== 'alle') p.set('autor', Z.autor);
+      if (!C) return;
+      if (Z.werkwahl.length) p.set('werke', Z.werkwahl.join(','));
+      if (C.S.ansicht === 'begriffe') {
+        if (Z.mit.length) p.set('mit', Z.mit.join('|'));
+        if (Z.autor !== 'alle') p.set('autor', Z.autor);
+      }
+      // Die Adresse wird nach jeder Änderung der Suche geschrieben: hier folgen die Stationen und der Zähler der Filter
+      malPerioden(); malFilterAuf();
     },
     lies: function (p) {
       Z.mit = (p.get('mit') || '').split('|').map(function (x) { return x.trim(); }).filter(Boolean).slice(0, 3);
       Z.autor = EDS.indexOf(p.get('autor')) >= 0 ? p.get('autor') : 'alle';
-      setTimeout(ansichtKlasse, 0);
+      Z.werkwahl = (p.get('werke') || '').split(',').map(function (x) { return x.trim(); }).filter(function (x) { return /^[\w-]+\|\d+$/.test(x); }).slice(0, 40);
+      setTimeout(function () { ansichtKlasse(); malWerkwahl(); malFilterAuf(); }, 0);
     },
     begriffe: begriffeAnsicht
   };

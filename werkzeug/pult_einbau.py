@@ -4,7 +4,7 @@
 Die Suchseite kommt aus der Schelling-Edition (recherche_seite.py). Hier wird ersetzt und ergänzt, was die
 neue Recherche des Portals braucht: erste Ansicht (Titel, Beispiele mit Erklärung, vier kleine Ansichten),
 Rangfolge und Zeitfolge der Stellen, die Ansicht „Begriffe“, und die Haken, über die assets/recherche-pult.js
-in die Seite greift (Pult.start, vor, nach, ruhe, karte, baende, adresse, lies, begriffe).
+in die Seite greift (Pult.start, vor, nach, ruhe, frage, karte, baende, adresse, lies, begriffe).
 
 recherche_seite.py ruft einbau(t) als letzten Schritt. Allein aufgerufen baut das Skript in die vorhandene
 Seite ein (nur wenn sie das Pult noch nicht hat):
@@ -97,7 +97,7 @@ def einbau(t):
           <option value="jahr">Zeitfolge</option>
           <option value="dichte">Trefferdichte</option>''')
     ers('<dt>1 – 5</dt><dd>Stellen, Konkordanz, Verteilung, Vergleich, Zeit</dd>',
-        '<dt>1 – 6</dt><dd>Stellen, Konkordanz, Verteilung, Vergleich, Zeit, Begriffe</dd>\n              <dt>s</dt><dd>Stelle auf die Merkliste</dd>')
+        '<dt>1 – 6</dt><dd>Stellen, Konkordanz, Verteilung, Vergleich, Zeit, Begriffe</dd>\n              <dt>v</dt><dd>Druckseite der Stelle auf- und zuklappen</dd>\n              <dt>s</dt><dd>Stelle auf die Merkliste</dd>')
     ers("ansicht: 'stellen', ordnung: 'werk',", "ansicht: 'stellen', ordnung: 'rang',")
     ers("if (S.ordnung !== 'werk') p.set('ordnung', S.ordnung);", "if (S.ordnung !== 'rang') p.set('ordnung', S.ordnung);")
     ers("S.ordnung = p.get('ordnung') === 'dichte' ? 'dichte' : 'werk';", "S.ordnung = ['werk', 'dichte', 'jahr'].indexOf(p.get('ordnung')) >= 0 ? p.get('ordnung') : 'rang';")
@@ -123,6 +123,11 @@ def einbau(t):
   var bereit = false, ladeStart = false, worker = null,""")
 
     # ── Haken ────────────────────────────────────────────────────────────
+    ers("""    worker.postMessage({ typ: 'suche', id: anfrage, q: S.q, baende: S.baende, arten: S.arten,
+                         aus: S.aus, seiten: S.seiten, ordnung: S.ordnung, hervor: S.hervor, jahre: S.jahre, gattung: S.gattung });""",
+        """    var frage = { typ: 'suche', id: anfrage, q: S.q, baende: S.baende, arten: S.arten,
+                  aus: S.aus, seiten: S.seiten, ordnung: S.ordnung, hervor: S.hervor, jahre: S.jahre, gattung: S.gattung };
+    worker.postMessage(window.Pult ? window.Pult.frage(frage) : frage);""")
     ers("  function empfange(e) {\n    var m = e.data;\n    if (m.typ === 'fortschritt') {",
         "  function empfange(e) {\n    var m = e.data;\n    if (window.Pult && window.Pult.vor(m)) return;\n    empfangeSeite(m);\n    if (window.Pult) window.Pult.nach(m);\n  }\n"
         "  function empfangeSeite(m) {\n    if (m.typ === 'fortschritt') {")

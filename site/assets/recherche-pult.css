@@ -3,10 +3,10 @@
  * Liegt über recherche.css und recherche-portal.css und gilt nur, wo der Rumpf die Klasse „pult“ trägt
  * (werkzeug/pult_einbau.py). Die Bausteine setzt assets/recherche-pult.js in die Seite.
  *
- * Aufbau: erste Ansicht (Titel, Feld im Kasten, Autoren und Textarten, Beispiele mit Zahl, vier kleine
- * Ansichten). Nach der ersten Anfrage ein Pult aus drei Spalten: links die Filter, in der Mitte die drei
- * Autoren als Schalter und darunter die Stellen, rechts die Druckseite der gewählten Stelle. Unter 1180 px
- * kommt die Seite als Blatt von rechts, unter 900 px kommen die Filter als Blatt von unten.
+ * Grundsatz: wenig zeigen, mehr auf Wunsch. Erste Ansicht: Titel, Feld im Kasten, die drei Autoren und
+ * „Filter“; „Erweitert“ im Feld öffnet das Suchformular. Ergebnis: links die Filter (Zeit mit den Stationen
+ * des gewählten Autors, Gattung, Textart; aufklappbar Werke und Bände), rechts die Stellen; die Druckseite
+ * einer Stelle klappt unter ihr auf. Unter 900 px kommen die Filter als Blatt von unten.
  * Farben nur aus den Tokens in style.css; eigene Farben haben allein die Reihen der Ansicht „Begriffe“.
  */
 
@@ -59,8 +59,8 @@ body.pult.rch-ruhe .rch-titel h1{font-weight:500;font-size:clamp(2.05rem,4.3vw,3
 body.pult.rch-ruhe .rch-titel .rch-unter,body.pult.rch-ruhe .pl-zusatz{display:inline;font-size:.98rem;color:var(--text-muted)}
 body.pult.rch-ruhe .rch-titel .rch-unter::after{content:". "}
 .pl-zusatz i{color:var(--text-body)}
-body.pult.rch-ruhe .rch-leiste{justify-content:flex-start;gap:.7rem 1.6rem;margin-top:.5rem}
-body.pult.rch-ruhe .pult-rechts,body.pult.rch-ruhe .pult-gruppe-arten{display:none}
+body.pult.rch-ruhe .rch-leiste{justify-content:flex-start;align-items:center;gap:.7rem 1.4rem;margin-top:.5rem}
+body.pult.rch-ruhe .pult-rechts{display:none}
 body.pult.rch-ruhe .rch-koerper{margin-top:2.8rem}
 body.pult #search-results{max-width:none;margin:0;padding:0}
 body.pult.rch-ruhe .rch-laden{max-width:56rem}
@@ -106,22 +106,64 @@ body.pult.rch-ruhe .rch-laden{max-width:56rem}
 .pult .rch-zuletzt{justify-content:flex-start}
 .pult .qb-feld{margin-top:0}
 
-/* Autoren als Schalter. In der ersten Ansicht klein neben den Textarten, im Ergebnis breit über den Stellen */
+/* Autoren als Schalter: in der ersten Ansicht unter dem Feld, im Ergebnis über den Stellen */
 .pult-autoren{display:flex;flex-wrap:wrap;gap:.45rem}
 .pa{font:inherit;text-align:left;background:none;border:1px solid var(--rule);border-radius:2px;padding:.26rem .7rem .3rem;color:var(--text-body);cursor:pointer;min-width:0;transition:border-color .12s,opacity .12s,background-color .12s}
 .pa:hover{border-color:var(--text-muted)}
-.pa-kopf{display:flex;align-items:center;gap:.5rem;font-size:.9rem}
+.pa-kopf{display:flex;align-items:center;gap:.5rem;font-size:.9rem;min-width:0}
 .pa-kopf b{font-weight:600;color:var(--text-ink)}
 .pa-punkt{flex:none;width:.52rem;height:.52rem;border-radius:50%;background:var(--c)}
-.pa-n{font-size:.8rem;color:var(--text-muted);font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+.pa-n{min-width:0;overflow:hidden;text-overflow:ellipsis;font-size:.8rem;color:var(--text-muted);font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
 .pult-autoren-wahl .pa[aria-pressed="false"]{opacity:.55}
 .pult-autoren-wahl .pa[aria-pressed="false"] .pa-punkt{background:none;box-shadow:inset 0 0 0 1.5px var(--c)}
 .pult-autoren-wahl .pa[aria-pressed="true"],.pult-autoren-wahl .pa[aria-pressed="mixed"]{background:var(--bg-paper);border-color:var(--text-muted)}
 .pult-autoren-wahl .pa[aria-pressed="false"]:hover{opacity:.85}
-.pa-rate,.pa-bar{display:none}
+.pa.pa-leer .pa-kopf b{color:var(--text-muted)}
+.pa-bar{display:none}
+
+/* Erste Ansicht: neben den Autoren steht nur „Filter“; Textarten und Bände liegen darin */
+.pult-filter-auf{font:inherit;font-size:.92rem;background:none;border:0;border-bottom:1px solid var(--rule);padding:.2rem 0;color:var(--text-ink);cursor:pointer}
+.pult-filter-auf:hover{border-bottom-color:var(--accent)}
+.pult-filter-auf[aria-expanded="true"]{border-bottom-color:var(--accent-gold)}
+.pult-filter-auf .pf-n{display:inline-block;min-width:1.5em;margin-left:.3rem;padding:0 .35em;border-radius:999px;background:var(--accent-gold);color:var(--bg-desktop);font-size:.72rem;font-weight:600;line-height:1.5;text-align:center;font-variant-numeric:lining-nums}
+body.pult:not(.rch-ruhe) .pult-filter-auf,body.pult .rch-baende-knopf,body.pult .rch-leiste > .rch-arten{display:none}
+
+/* ── Suchformular („Erweitert“) ───────────────────────────────────────── */
+.pult-form-knopf{flex:none;align-self:center;font:inherit;font-size:.86rem;background:none;border:0;border-bottom:1px solid var(--rule);padding:.12rem 0;margin:0 .55rem 0 .2rem;color:var(--text-muted);cursor:pointer;white-space:nowrap}
+.pult-form-knopf:hover{color:var(--text-ink);border-bottom-color:var(--accent)}
+.pult-form-knopf[aria-expanded="true"]{color:var(--text-ink);border-bottom-color:var(--accent-gold)}
+.pult-formular{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:1rem 2.4rem;padding:1.1rem 1.2rem 1rem;border:1px solid var(--rule);border-radius:3px;background:var(--bg-paper)}
+.pult-formular[hidden]{display:none}
+.pfo-felder{display:flex;flex-direction:column;gap:.6rem}
+.pfo-zeile{display:grid;grid-template-columns:11.5rem minmax(0,1fr);gap:.8rem;align-items:baseline}
+.pfo-lab{font-size:.86rem;color:var(--text-muted)}
+.pult-formular input[type="text"]{width:100%;min-width:0;font:inherit;font-size:.95rem;color:var(--text-ink);background:none;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:.16rem .1rem}
+.pult-formular input:focus,.pult-formular select:focus{outline:none;border-bottom-color:var(--accent-gold)}
+.pult-formular input::placeholder{color:var(--text-muted);font-style:italic;opacity:.7}
+.pfo-reihe{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem .6rem}
+.pfo-reihe input[type="text"]{flex:1 1 4.5rem;width:4.5rem}
+.pfo-reihe select{flex:none;font:inherit;font-size:.9rem;color:var(--text-ink);background:var(--bg-paper);border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:.14rem .1rem;cursor:pointer}
+.pfo-abstand{flex:1 1 100%;font-size:.84rem;color:var(--text-muted)}
+.pfo-abstand input{width:3rem;font:inherit;font-size:.9rem;color:var(--text-ink);background:none;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:.05rem .1rem;text-align:center;font-variant-numeric:lining-nums}
+.pfo-satz .pfo-abstand{visibility:hidden}
+.pfo-schreibung{display:flex;flex-direction:column;align-items:flex-start;gap:.35rem}
+.pfo-schreibung .pfo-lab{margin-bottom:.1rem}
+.pfo-schreibung button{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 .55rem;font:inherit;text-align:left;background:none;border:0;padding:.05rem 0;color:var(--text-muted);cursor:pointer}
+.pfo-schreibung button::before{content:"";grid-row:1 / span 2;align-self:start;margin-top:.45em;width:.62em;height:.62em;border:1px solid var(--text-muted);border-radius:50%}
+.pfo-schreibung button[aria-checked="true"]{color:var(--text-ink)}
+.pfo-schreibung button[aria-checked="true"]::before{border-color:var(--text-ink);background:var(--text-ink);box-shadow:inset 0 0 0 2px var(--bg-paper)}
+.pfo-schreibung b{font-weight:400;font-size:.9rem;line-height:1.4}
+.pfo-schreibung button span{grid-column:2;font-size:.76rem;font-style:italic;line-height:1.35;color:var(--text-muted)}
+.pfo-fuss{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .8rem;padding-top:.8rem;border-top:1px solid var(--rule)}
+.pfo-anfrage{flex:1 1 14rem;min-width:0;font-size:.86rem;color:var(--text-muted);overflow-wrap:anywhere}
+.pfo-anfrage code{font-family:var(--font-body);font-size:.96rem;color:var(--text-ink);font-variant-numeric:lining-nums}
+.pfo-fuss button{font:inherit;font-size:.84rem;background:none;border:1px solid var(--rule);border-radius:2px;padding:.32rem .85rem;color:var(--text-body);cursor:pointer;white-space:nowrap}
+.pfo-fuss button:hover{border-color:var(--text-muted);color:var(--text-ink)}
+.pfo-fuss .pfo-los{background:var(--btn-primary-bg);border-color:var(--btn-primary-bg);color:#fff;font-weight:600}
+.pfo-fuss .pfo-los:hover{background:var(--btn-primary-hover);border-color:var(--btn-primary-hover);color:#fff}
 
 /* ── Ergebnis: Kopf in einer Zeile ────────────────────────────────────── */
-body.pult:not(.rch-ruhe) .rch{max-width:92rem;padding-top:calc(var(--header-h) + 1.1rem);padding-bottom:calc(4rem + var(--pult-unten))}
+body.pult:not(.rch-ruhe) .rch{max-width:80rem;padding-top:calc(var(--header-h) + 1.1rem);padding-bottom:calc(4rem + var(--pult-unten))}
 body.pult:not(.rch-ruhe) .rch-titel{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 body.pult:not(.rch-ruhe) .rch-kopf{max-width:none;gap:.55rem}
 body.pult:not(.rch-ruhe) .rch-feld{margin-top:0}
@@ -149,44 +191,33 @@ body.pult:not(.pult-stellen) .pult-rechts label{visibility:hidden}
   body.pult:not(.rch-ruhe) .rch-kopf > .rch-status.rch-status{grid-column:2;grid-row:1}
 }
 
-/* ── Das Pult: Filter, Stellen, Druckseite ────────────────────────────── */
-body.pult:not(.rch-ruhe) .rch-koerper{margin-top:.9rem;grid-template-columns:14rem minmax(0,1fr);gap:0 1.6rem;align-items:start}
+/* ── Zwei Spalten: links die Filter, rechts die Stellen ───────────────── */
+body.pult:not(.rch-ruhe) .rch-koerper{margin-top:.9rem;grid-template-columns:15.5rem minmax(0,1fr);gap:0 2.8rem;align-items:start}
 .pult-mitte{min-width:0;container-type:inline-size;container-name:pultmitte}
-.pult-vorschau{display:none}
+body.pult.pult-stellen:not(.rch-ruhe) .pult-mitte{max-width:50rem}
 body.pult .rch-baende{max-height:calc(100vh - var(--header-h) - 2rem - var(--pult-unten))}
-@media (min-width:1180px){
-  body.pult.pult-stellen.pult-hat:not(.rch-ruhe) .rch-koerper{grid-template-columns:13rem minmax(0,1fr) clamp(24rem,36vw,33rem)}
-  body.pult.pult-stellen.pult-hat:not(.rch-ruhe) .pult-vorschau{display:flex;position:sticky;top:calc(var(--header-h) + .6rem);height:calc(100vh - var(--header-h) - 1.2rem - var(--pult-unten))}
-}
-@media (min-width:1440px){
-  body.pult.pult-stellen.pult-hat:not(.rch-ruhe) .rch-koerper{grid-template-columns:14.5rem minmax(0,1fr) clamp(24rem,36vw,33rem)}
-}
 
-/* Mitte: die drei Autoren bleiben beim Rollen stehen */
+/* Die drei Autoren bleiben beim Rollen über den Stellen stehen */
 body.pult:not(.rch-ruhe) .pult-autoren{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;position:sticky;top:var(--header-h);z-index:3;background:var(--bg-desktop);padding:.55rem 0 .6rem;border-bottom:1px solid var(--rule)}
-body.pult:not(.rch-ruhe) .pa{display:block;padding:.38rem .75rem .5rem}
+body.pult:not(.rch-ruhe) .pa{display:block;padding:.34rem .75rem .45rem}
 body.pult:not(.rch-ruhe) .pa-n{margin-left:auto}
-body.pult:not(.rch-ruhe) .pa-rate{display:block;font-size:.74rem;line-height:1.35;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums lining-nums}
-body.pult:not(.rch-ruhe) .pa-bar{display:block;height:4px;margin-top:.4rem;background:var(--bg-subtle);border-radius:2px;overflow:hidden}
+body.pult.pult-hat:not(.rch-ruhe) .pa-bar{display:block;height:3px;margin-top:.38rem;background:var(--bg-subtle);border-radius:2px;overflow:hidden}
 .pa-bar i{display:block;height:100%;background:var(--c);border-radius:2px}
-.pa.pa-leer .pa-kopf b{color:var(--text-muted)}
-.pa-kopf{min-width:0}
-.pa-n{min-width:0;overflow:hidden;text-overflow:ellipsis}
-@container pultmitte (max-width:36rem){.pa-wort{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}}
-body.pult:not(.pult-stellen) .pa-rate,body.pult:not(.pult-stellen) .pa-bar,body.pult:not(.pult-hat) .pa-rate,body.pult:not(.pult-hat) .pa-bar{display:none}
+@container pultmitte (max-width:30rem){.pa-wort{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}}
 
 /* Filter als Marken */
 .pult-filter{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .5rem;padding:.6rem 0 .1rem}
-.pf{display:inline-flex;align-items:center;gap:.2rem;border:1px solid color-mix(in srgb,var(--accent-gold) 70%,transparent);border-radius:2px;padding:.05rem .1rem .05rem .6rem;font-size:.82rem;color:var(--text-ink)}
-.pf button{font:inherit;font-size:1.05rem;line-height:1;background:none;border:0;color:var(--text-muted);padding:.12rem .4rem;cursor:pointer}
+.pf{display:inline-flex;align-items:center;gap:.2rem;max-width:100%;border:1px solid color-mix(in srgb,var(--accent-gold) 70%,transparent);border-radius:2px;padding:.05rem .1rem .05rem .6rem;font-size:.82rem;color:var(--text-ink)}
+.pf > span{min-width:0;max-width:24rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pf button{flex:none;font:inherit;font-size:1.05rem;line-height:1;background:none;border:0;color:var(--text-muted);padding:.12rem .4rem;cursor:pointer}
 .pf button:hover{color:var(--accent)}
 .pf-alle{font:inherit;font-size:.8rem;background:none;border:0;border-bottom:1px solid var(--rule);padding:0 0 1px;margin-left:.4rem;color:var(--text-muted);cursor:pointer}
 .pf-alle:hover{color:var(--text-ink);border-bottom-color:var(--accent-gold)}
 .pult-filter[hidden]{display:none}
 
 /* Die Stelle als Karte: Farbe des Autors am Rand, Fundort und Werk in einer Zeile */
-.pult .rch-stelle.pk{position:relative;grid-template-columns:auto minmax(0,1fr);gap:.12rem .9rem;padding:.85rem .8rem .9rem 1rem;cursor:pointer}
-.pult .rch-stelle.pk::before{content:"";position:absolute;left:0;top:.95rem;bottom:.95rem;width:3px;border-radius:2px;background:var(--c)}
+.pult .rch-stelle.pk{position:relative;grid-template-columns:auto minmax(0,1fr);gap:.12rem .9rem;padding:.9rem .8rem .9rem 1rem;cursor:pointer}
+.pult .rch-stelle.pk::before{content:"";position:absolute;left:0;top:1rem;bottom:1rem;width:3px;border-radius:2px;background:var(--c)}
 .pult .rch-stelle.pk:focus-visible,.pult .rch-stelle.pk.fokus{box-shadow:none;background:none;outline:1px solid var(--accent-gold);outline-offset:-1px}
 .pult .rch-stelle.pk.pult-gewaehlt{background:var(--bg-paper)}
 .pk .rch-zitat{grid-row:auto;padding-top:0;font-size:.84rem;font-weight:600;white-space:nowrap}
@@ -195,20 +226,51 @@ body.pult:not(.pult-stellen) .pa-rate,body.pult:not(.pult-stellen) .pa-bar,body.
 .pk-werk{display:flex;align-items:baseline;gap:.8rem;min-width:0;font-size:.84rem;line-height:1.5;color:var(--text-muted)}
 .pk-werk i{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:1em;line-height:inherit}
 .pk-werk .j{margin-left:auto;font-variant-numeric:tabular-nums lining-nums}
-.pk .rch-pfad,.pk .rch-text,.pk .rch-wege,.pk .qp{grid-column:1 / -1}
-.pk .rch-text{margin-top:.2rem;font-size:.98rem;line-height:1.62}
-.pk .rch-wege{gap:.2rem .95rem;font-size:.78rem;margin-top:.3rem}
+.pk .rch-pfad,.pk .rch-text,.pk .rch-wege,.pk .qp,.pk .pult-seite{grid-column:1 / -1}
+.pk .rch-text{margin-top:.2rem;font-size:1rem;line-height:1.64}
+.pk .rch-wege{gap:.2rem 1.2rem;font-size:.8rem;margin-top:.35rem}
+.pk .rch-wege a{color:var(--text-muted)}
 .pk .rch-wege button{font:inherit;background:none;border:0;padding:0;color:var(--text-muted);cursor:pointer}
-.pk .rch-wege button:hover{color:var(--accent)}
-.pk .rch-wege .qp-knopf{color:var(--accent-gold);font-size:inherit}
+.pk .rch-wege button:hover,.pk .rch-wege a:hover{color:var(--accent)}
+.pk .rch-wege .pk-seite{color:var(--text-ink);border-bottom:1px solid var(--rule)}
+.pk .rch-wege .pk-seite[aria-expanded="true"]{border-bottom-color:var(--accent-gold)}
 .pk .rch-wege .pk-merk[aria-pressed="true"]{color:var(--accent-gold)}
-@media (hover:hover) and (min-width:901px){
-  .pk .rch-wege{visibility:hidden}
-  .pk:hover .rch-wege,.pk:focus .rch-wege,.pk:focus-within .rch-wege,.pk.fokus .rch-wege,.pk.pult-gewaehlt .rch-wege{visibility:visible}
-}
 
-/* Links: Textart, Zeit, Werke, Bände */
-body.pult:not(.rch-ruhe) .rch-baende summary{display:none}
+/* Die Druckseite klappt unter der Stelle auf */
+.pult-seite{display:flex;flex-direction:column;min-width:0;margin:.75rem 0 .1rem;border:1px solid var(--rule);border-radius:3px;background:var(--bg-page);cursor:auto}
+.pv-leer{margin:0;padding:1.4rem 1.2rem;font-size:.9rem;font-style:italic;color:var(--text-muted)}
+.pv-kopf{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem .6rem .55rem 1rem;border-bottom:1px solid var(--rule)}
+.pv-kopf p{flex:1;min-width:0;margin:0;line-height:1.3}
+.pv-kopf b{display:block;font-family:var(--font-display);font-size:1.24rem;font-weight:500;line-height:1.15;color:var(--text-ink)}
+.pv-meta{font-size:.78rem;color:var(--text-muted);font-variant-numeric:lining-nums}
+.pv-zu{flex:none;width:1.75rem;height:1.75rem;font:inherit;font-size:1.1rem;line-height:1;background:none;border:1px solid var(--rule);border-radius:2px;color:var(--text-muted);cursor:pointer}
+.pv-zu:hover{color:var(--text-ink);border-color:var(--text-muted)}
+.pv-leib{max-height:min(68vh,31rem);overflow:auto;padding:.9rem .8rem 1rem .5rem;outline-offset:-2px;container-type:inline-size}
+.pv-seite{font-size:.8rem;font-size:clamp(.66rem,2.15cqi,.88rem);line-height:1.72;word-spacing:-.03em;color:var(--text-body);font-variant-numeric:lining-nums}
+.pv-z{display:grid;grid-template-columns:1.7rem minmax(0,1fr);gap:.55rem}
+.pv-z .nr{font-size:.66rem;color:var(--text-muted);text-align:right;font-variant-numeric:tabular-nums lining-nums;user-select:none;-webkit-user-select:none}
+.pv-z .tx{padding-left:1em;text-indent:-1em;overflow-wrap:anywhere}
+.pv-seite.pv-zeilen .pv-z .tx{padding-left:0;text-indent:0;white-space:nowrap;overflow-wrap:normal}
+.pv-z.hier{background:color-mix(in srgb,var(--accent-gold) 14%,transparent);box-shadow:-.5rem 0 0 color-mix(in srgb,var(--accent-gold) 14%,transparent),.8rem 0 0 color-mix(in srgb,var(--accent-gold) 14%,transparent)}
+.pv-seite mark{background:var(--rch-mark);color:var(--text-ink);border-radius:1px;padding:0 .08em}
+.pv-teil + .pv-teil{margin-top:.55rem}
+.pv-teil.pv-h{font-weight:600;color:var(--text-ink)}
+.pv-teil.pv-n{font-size:.92em;color:var(--text-muted)}
+.pv-teil.pv-t + .pv-teil.pv-n{margin-top:.9rem;padding-top:.6rem;border-top:1px solid var(--rule)}
+.pv-fuss{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem 1.2rem;padding:.55rem .7rem .55rem 1rem;border-top:1px solid var(--rule);font-size:.8rem}
+.pv-blatt{display:flex;flex-wrap:wrap;gap:.3rem 1.1rem}
+.pv-blatt button{font:inherit;background:none;border:0;padding:0;color:var(--text-muted);cursor:pointer;font-variant-numeric:lining-nums}
+.pv-blatt button:hover{color:var(--accent)}
+.pv-wege{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1.1rem;margin-left:auto}
+.pv-wege a{color:var(--text-muted)}
+.pv-wege a:hover{color:var(--accent)}
+.pv-wege .qp-knopf{font-size:inherit}
+.pv-wege .pv-auf{border:1px solid var(--btn-primary-bg);border-radius:2px;padding:.26rem .7rem;background:var(--btn-primary-bg);color:#fff;white-space:nowrap}
+.pv-wege .pv-auf:hover{background:var(--btn-primary-hover);border-color:var(--btn-primary-hover);color:#fff;text-decoration:none}
+
+/* Links: Zeit mit den Stationen des Autors, Gattung, Textart; aufklappbar Werke und Bände */
+body.pult:not(.rch-ruhe) #rch-baende-summary{display:none}
+.pult .rch-zeit{margin-bottom:1.3rem}
 .pult-gruppe{margin:0 0 1.2rem}
 .pult-gruppe-arten .rch-arten{flex-direction:column;align-items:stretch;gap:.05rem}
 .pult-gruppe-arten .rch-leiste-lab{display:none}
@@ -221,57 +283,52 @@ body.pult:not(.rch-ruhe) .rch-baende summary{display:none}
 .ph button.null{opacity:.22;cursor:default}
 .ph button:hover:not(.null){background:var(--accent);opacity:1}
 .ph-achse{display:flex;justify-content:space-between;font-size:.7rem;color:var(--text-muted);font-variant-numeric:tabular-nums lining-nums;margin-bottom:.55rem}
-.pw-zahl{font-variant:normal;letter-spacing:0;font-size:.76rem;font-variant-numeric:tabular-nums lining-nums}
-.pw{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.15rem .6rem;align-items:baseline;width:100%;font:inherit;text-align:left;background:none;border:0;border-radius:2px;padding:.26rem .35rem .4rem;color:var(--text-body);cursor:pointer}
+.pult-perioden{display:flex;flex-wrap:wrap;gap:.3rem .35rem;margin:.1rem 0 .75rem}
+.pult-perioden[hidden]{display:none}
+.pp-lab{flex:1 1 100%;font-size:.78rem;color:var(--text-muted)}
+.pult-perioden button{font:inherit;font-size:.8rem;line-height:1.5;background:none;border:1px solid var(--rule);border-radius:2px;padding:.06rem .5rem;color:var(--text-body);cursor:pointer}
+.pult-perioden button span{font-size:.7rem;color:var(--text-muted);font-variant-numeric:lining-nums}
+.pult-perioden button:hover{border-color:var(--accent-gold)}
+.pult-perioden button[aria-pressed="true"]{border-color:var(--accent-gold);background:var(--bg-subtle);color:var(--text-ink)}
+.pult-fach{border-top:1px solid var(--rule)}
+.pult-fach + .pult-blatt-zu,.pult-fach:last-of-type{border-bottom:1px solid var(--rule)}
+.pult .pult-fach > summary{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;list-style:none;cursor:pointer;padding:.55rem 0;font-variant:small-caps;letter-spacing:.2em;font-size:.77rem;color:var(--text-muted)}
+.pult .pult-fach > summary::-webkit-details-marker{display:none}
+.pult .pult-fach > summary::after{content:none}
+.pult .pult-fach > summary > span:first-child::after{content:"+";margin-left:.5rem;letter-spacing:0}
+.pult .pult-fach[open] > summary > span:first-child::after{content:"–"}
+.pult .pult-fach > summary:hover{color:var(--text-ink)}
+.pult-fach summary .pf-n{font-variant:normal;letter-spacing:0;font-size:.76rem;color:var(--accent-gold)}
+.pult-fach[open]{padding-bottom:.7rem}
+.pult-fach .kopf{justify-content:flex-end;margin:0}
+.pult-fach .kopf > span{display:none}
+#pult-werke-suche{width:100%;font:inherit;font-size:.86rem;color:var(--text-ink);background:none;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:.2rem .1rem;margin-bottom:.4rem}
+#pult-werke-suche:focus{outline:none;border-bottom-color:var(--accent-gold)}
+#pult-werke-suche::placeholder{color:var(--text-muted);font-style:italic;opacity:.75}
+.pw{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:0 .5rem;align-items:baseline;width:100%;font:inherit;text-align:left;background:none;border:0;border-radius:2px;padding:.26rem .2rem .3rem;color:var(--text-body);cursor:pointer}
+.pw::before{content:"";align-self:start;margin-top:.42em;width:.6em;height:.6em;border:1px solid var(--text-muted)}
+.pw[aria-pressed="true"]::before{border-color:var(--c);background:var(--c);box-shadow:inset 0 0 0 2px var(--bg-desktop)}
 .pw:hover{background:var(--bg-subtle)}
-.pw .t{font-size:.8rem;line-height:1.3;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden}
+.pw .t{font-size:.82rem;line-height:1.3;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden}
+.pw[aria-pressed="true"] .t{color:var(--text-ink)}
 .pw .c{font-size:.76rem;color:var(--text-muted);font-variant-numeric:tabular-nums lining-nums}
-.pw .bar{grid-column:1 / -1;display:block;height:2px;background:var(--rule);border-radius:1px}
-.pw .bar i{display:block;height:100%;background:var(--c);border-radius:1px}
-.pult-mehr,.pult-leere{font:inherit;font-size:.78rem;font-style:italic;background:none;border:0;padding:.3rem .35rem;color:var(--text-muted);cursor:pointer}
+.pw-ort{grid-column:2 / -1;font-size:.72rem;line-height:1.4;color:var(--text-muted);font-variant-numeric:lining-nums}
+.pw-hinweis{margin:.2rem 0;font-size:.8rem;font-style:italic;color:var(--text-muted)}
+.pult-mehr,.pult-leere{font:inherit;font-size:.78rem;font-style:italic;background:none;border:0;padding:.3rem .2rem;color:var(--text-muted);cursor:pointer}
 .pult-mehr:hover,.pult-leere:hover{color:var(--accent)}
-.pult-werke[hidden],.pult-leere[hidden]{display:none}
+.pult-leere[hidden]{display:none}
 .pult .ei-bandkopf .c{flex:none;margin-left:auto;font-style:normal;font-size:.76rem;overflow:visible;font-variant-numeric:tabular-nums lining-nums}
 .pult .ei-bandkopf.leer{opacity:.55}
 .pult .rch-baende-liste:not(.pult-leere-auf) .rch-band.leer:not([aria-pressed="true"]){display:none}
 .pult-blatt-zu{display:none}
 
-/* Rechts: die Seite im Druckbild */
-.pult-vorschau{flex-direction:column;min-height:0;border:1px solid var(--rule);border-radius:3px;background:var(--bg-page)}
-.pv-leer{margin:0;padding:2.2rem 1.4rem;font-size:.9rem;font-style:italic;color:var(--text-muted)}
-.pv-kopf{display:flex;align-items:center;gap:.4rem;padding:.5rem .6rem .5rem .9rem;border-bottom:1px solid var(--rule);font-size:.84rem}
-.pv-kopf b{font-weight:600;color:var(--text-ink);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-variant-numeric:lining-nums}
-.pv-nr{margin-left:auto;padding-right:.3rem;font-size:.78rem;color:var(--text-muted);white-space:nowrap;font-variant-numeric:tabular-nums lining-nums}
-.pv-kopf button{flex:none;width:1.75rem;height:1.75rem;font:inherit;font-size:1.05rem;line-height:1;background:none;border:1px solid var(--rule);border-radius:2px;color:var(--text-muted);cursor:pointer}
-.pv-kopf button:hover:not(:disabled){color:var(--text-ink);border-color:var(--text-muted)}
-.pv-kopf button:disabled{opacity:.35;cursor:default}
-.pv-kopf .pv-nr + button{margin-left:0}
-.pv-kopf > b + button{margin-left:auto}
-.pv-zu{display:none}
-.pv-leib{flex:1;min-height:0;overflow:auto;padding:1rem .6rem 1.1rem .45rem;outline-offset:-2px;container-type:inline-size}
-.pv-werk{margin:0 0 .15rem 1.95rem;font-family:var(--font-display);font-size:1.32rem;font-weight:500;line-height:1.15;color:var(--text-ink)}
-.pv-meta{margin:0 0 .9rem 1.95rem;font-size:.78rem;color:var(--text-muted);font-variant-numeric:lining-nums}
-.pv-seite{font-size:.74rem;font-size:clamp(.64rem,2.58cqi,.8rem);line-height:1.72;word-spacing:-.03em;color:var(--text-body);font-variant-numeric:lining-nums}
-.pv-z{display:grid;grid-template-columns:1.5rem minmax(0,1fr);gap:.45rem}
-.pv-z .nr{font-size:.64rem;color:var(--text-muted);text-align:right;font-variant-numeric:tabular-nums lining-nums;user-select:none;-webkit-user-select:none}
-.pv-z .tx{padding-left:1em;text-indent:-1em;overflow-wrap:anywhere}
-.pv-seite.pv-zeilen .pv-z .tx{padding-left:0;text-indent:0;white-space:nowrap;overflow-wrap:normal}
-.pv-z.hier{background:color-mix(in srgb,var(--accent-gold) 14%,transparent);box-shadow:-.45rem 0 0 color-mix(in srgb,var(--accent-gold) 14%,transparent),.6rem 0 0 color-mix(in srgb,var(--accent-gold) 14%,transparent)}
-.pv-seite mark{background:var(--rch-mark);color:var(--text-ink);border-radius:1px;padding:0 .08em}
-.pv-teil + .pv-teil{margin-top:.55rem}
-.pv-teil.pv-h{font-weight:600;color:var(--text-ink)}
-.pv-teil.pv-n{font-size:.92em;color:var(--text-muted)}
-.pv-teil.pv-t + .pv-teil.pv-n{margin-top:.9rem;padding-top:.6rem;border-top:1px solid var(--rule)}
-.pv-blatt{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.5rem;margin:1.1rem 0 0 1.95rem;padding-top:.7rem;border-top:1px solid var(--rule);font-size:.8rem}
-.pv-blatt button{font:inherit;background:none;border:0;padding:0;color:var(--text-muted);cursor:pointer;justify-self:start;font-variant-numeric:lining-nums}
-.pv-blatt button:last-child{justify-self:end}
-.pv-blatt button:hover{color:var(--accent)}
-.pv-fuss{display:flex;flex-wrap:wrap;gap:.45rem;padding:.6rem .7rem;border-top:1px solid var(--rule)}
-.pv-fuss button,.pv-auf{font:inherit;font-size:.8rem;line-height:1.3;background:none;border:1px solid var(--rule);border-radius:2px;padding:.3rem .65rem;color:var(--text-body);cursor:pointer;white-space:nowrap}
-.pv-fuss button:hover{border-color:var(--text-muted);color:var(--text-ink)}
-.pv-fuss button[aria-pressed="true"]{border-color:var(--accent-gold);color:var(--accent-gold)}
-.pv-auf{margin-left:auto;background:var(--btn-primary-bg);border-color:var(--btn-primary-bg);color:#fff}
-.pv-auf:hover{background:var(--btn-primary-hover);border-color:var(--btn-primary-hover);color:#fff;text-decoration:none}
+/* Erste Ansicht: „Filter“ öffnet dieselben Fächer als Feld unter den Autoren */
+body.pult.rch-ruhe.rch-baende-auf .rch-baende{padding:1.1rem 0 0;margin-bottom:2.4rem}
+body.pult.rch-ruhe .pult-faecher{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 3.2rem;align-items:start}
+body.pult.rch-ruhe .pult-faecher > .pult-fach{grid-column:1 / -1}
+body.pult.rch-ruhe .pult-fach > summary{display:flex !important}
+body.pult.rch-ruhe .pult-hist{display:none}
+body.pult.rch-ruhe .rch-zeit,body.pult.rch-ruhe .pult-gruppe-arten{max-width:22rem}
 
 /* ── Merkliste: Ablage am unteren Rand, Export darüber ────────────────── */
 .pult-ablage{display:none}
@@ -351,12 +408,6 @@ body.pult-ablage-an .rch-toast{bottom:calc(4.3rem + env(safe-area-inset-bottom,0
 .pult-zitat p{margin:0 0 .3rem;font-size:.86rem;color:var(--text-muted)}
 .pult-zitat a,.pult-zitat span{display:block;font-variant-numeric:lining-nums}
 
-/* ── Unter 1180 px: die Seite als Blatt von rechts ────────────────────── */
-@media (max-width:1179.98px){
-  body.pult.pult-vorschau-auf .pult-vorschau{display:flex;position:fixed;top:var(--header-h);right:0;bottom:var(--pult-unten);z-index:330;width:min(31rem,100%);border-width:0 0 0 1px;border-radius:0;box-shadow:-24px 0 60px rgba(0,0,0,.45)}
-  body.pult.pult-vorschau-auf .pv-zu{display:block}
-}
-
 /* ── Unter 900 px: eine Spalte, Filter als Blatt von unten ────────────── */
 @media (max-width:900px){
   body.pult:not(.rch-ruhe) .rch-koerper{grid-template-columns:minmax(0,1fr)}
@@ -367,12 +418,14 @@ body.pult-ablage-an .rch-toast{bottom:calc(4.3rem + env(safe-area-inset-bottom,0
   body.pult.pult-blatt-auf:not(.rch-ruhe) .rch-baende{display:block;position:fixed;left:0;right:0;bottom:0;top:auto;z-index:350;max-height:84vh;overflow:auto;overscroll-behavior:contain;margin:0;padding:1.1rem 1.1rem 0;background:var(--bg-paper);border:0;border-top:1px solid var(--rule);border-radius:12px 12px 0 0;box-shadow:0 -24px 60px rgba(0,0,0,.45)}
   body.pult.pult-blatt-auf .rch-baende-liste{display:block}
   body.pult.pult-blatt-auf .pult-blatt-zu{display:block;position:sticky;bottom:0;width:calc(100% + 2.2rem);margin:1rem -1.1rem 0;padding:.85rem 1rem calc(.85rem + env(safe-area-inset-bottom,0px));font:inherit;font-size:.95rem;font-weight:600;background:var(--btn-primary-bg);color:#fff;border:0;cursor:pointer}
+  body.pult.pult-blatt-auf .pw[aria-pressed="true"]::before{box-shadow:inset 0 0 0 2px var(--bg-paper)}
   .pult .pl-beispiele{grid-template-columns:minmax(0,1fr)}
   .pl-vier{grid-template-columns:repeat(2,minmax(0,1fr))}
   .pl-vier button:nth-child(odd){border-left:0;padding-left:0}
   .pl-vier button:nth-child(even){padding-right:0}
   .pl-vier button:nth-child(n+3){border-top:1px solid var(--rule)}
   .pa-tasten{display:none}
+  .pult-formular{grid-template-columns:minmax(0,1fr)}
 }
 
 /* ── Telefon ──────────────────────────────────────────────────────────── */
@@ -384,8 +437,10 @@ body.pult-ablage-an .rch-toast{bottom:calc(4.3rem + env(safe-area-inset-bottom,0
   .pult .rch-feld::after{left:1.48rem}
   .pult .rch-eingabe input,.pult .rch-spiegel{font-size:1.06rem;padding:.7rem .3rem .74rem 0}
   .pult .rch-eingabe input::placeholder{font-size:1rem}
+  .pult-form-knopf{margin:0 .35rem 0 .1rem;font-size:.82rem}
   body.pult.rch-ruhe .rch-koerper{margin-top:2.6rem}
   .pult .rch-hilfe{gap:2.6rem}
+  body.pult.rch-ruhe .pult-faecher{grid-template-columns:minmax(0,1fr)}
   body.pult:not(.rch-ruhe) .rch{padding-top:calc(var(--header-h) + .8rem)}
   body.pult:not(.rch-ruhe) .rch-leiste{gap:0 .8rem;flex-wrap:nowrap}
   body.pult:not(.rch-ruhe) .rch-ansichten{width:auto;flex:1;min-width:0;gap:1.05rem}
@@ -398,29 +453,30 @@ body.pult-ablage-an .rch-toast{bottom:calc(4.3rem + env(safe-area-inset-bottom,0
   body.pult:not(.rch-ruhe) .pult-autoren{padding:.45rem 0 .5rem}
   body.pult .pa{padding:.3rem .4rem .4rem}
   body.pult .pa-kopf{flex-wrap:wrap;gap:0 .3rem;font-size:.82rem}
-  body.pult:not(.rch-ruhe) #search-status{display:block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   body.pult .pa-n{flex:1 1 100%;margin-left:0;font-size:.74rem}
-  body.pult:not(.rch-ruhe) .pa-rate{display:none}
+  body.pult:not(.rch-ruhe) #search-status{display:block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .pa-wort{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-  body.pult:not(.rch-ruhe) .pa-bar{margin-top:.3rem}
   .pult .rch-chip-hervor{margin-left:0;padding-left:0 !important;border-left:0 !important}
-  .pv-nr{font-size:0;flex:1;padding:0}
-  .pv-fuss .pv-auf{order:-1;flex:1 1 100%;margin:0;text-align:center}
-  .pult-ablage{gap:.6rem}
-  #pult-ablage-auf{font-size:.8rem;padding:.3rem .6rem}
-  .pult-export > footer{flex-wrap:wrap}
-  .pult-export > footer button{padding:.32rem .55rem;font-size:.78rem}
   .pult .rch-stelle.pk{grid-template-columns:minmax(0,1fr);padding:.8rem .2rem .85rem .85rem}
   .pk .rch-zitat{display:block;white-space:normal}
-  body.pult.pult-vorschau-auf .pult-vorschau{width:100%;border-left:0}
+  .pult-seite{margin-right:-.2rem}
+  .pv-leib{padding:.8rem .5rem .9rem .3rem}
+  .pv-wege{margin-left:0;flex:1 1 100%}
+  .pv-wege .pv-auf{margin-left:auto}
+  .pfo-zeile{grid-template-columns:minmax(0,1fr);gap:.1rem}
+  .pult-formular{padding:.9rem .8rem .8rem}
+  .pult-ablage{gap:.6rem}
   .pa-sigel{display:none}
   .pa-zahl{flex:1}
+  #pult-ablage-auf{font-size:.8rem;padding:.3rem .6rem}
   .pult-export{left:0;right:0;bottom:0;width:auto;max-height:86vh;border-width:1px 0 0;border-radius:12px 12px 0 0;padding-bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:360}
+  .pult-export > footer{flex-wrap:wrap}
+  .pult-export > footer button{padding:.32rem .55rem;font-size:.78rem}
   #pb-neu{width:10rem}
 }
 
 @media (prefers-reduced-motion:reduce){.pult .rch-feld,.pa,.pult .pl-beispiele .q,.pl-vier b{transition:none}}
 @media (forced-colors:active){
-  .pa-punkt,.pa-bar i,.pw .bar i,.pb-saeulen i,.pb-drei i,.ph button{forced-color-adjust:none}
+  .pa-punkt,.pa-bar i,.pb-saeulen i,.pb-drei i,.ph button,.pw::before{forced-color-adjust:none}
   .pult .rch-stelle.pk::before{background:CanvasText}
 }

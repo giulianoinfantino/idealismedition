@@ -1169,7 +1169,9 @@
   "Stellen, Konkordanz, Verteilung, Vergleich, Zeit, Begriffe": "Passages, Concordance, Distribution, Comparison, Time, Terms",
   "s": "s",
   "Stelle auf die Merkliste": "add passage to the working list",
-  "Wort, Wendung, Zitat (GW {0}, {1}) oder Werktitel": "Word, phrase, citation (GW {0}, {1}) or work title"
+  "Wort, Wendung, Zitat (GW {0}, {1}) oder Werktitel": "Word, phrase, citation (GW {0}, {1}) or work title",
+  "v": "v",
+  "Druckseite der Stelle auf- und zuklappen": "show or hide the passage’s printed page"
  },
  "js": {
   "Digitale Ausgabe von Fichtes Werken nach dem Text der Sämmtlichen und Nachgelassenen Werke, hg. von I. H. Fichte (1834–1846): frei lesbar, durchsuchbar, am Scan geprüft.": "Digital edition of Fichte’s works based on the text of the Sämmtliche Werke and Nachgelassene Werke, ed. I. H. Fichte (1834–1846): freely readable, searchable, checked against the scan.",

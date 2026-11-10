@@ -349,6 +349,8 @@ function verarbeite(e) {
  *   pultvorschlag {id, wort, titel}      -> pultvorschlag  Wortanfang, aehnliche Woerter (Tippfehler), Werke
  *   ort      {id, work, buch, zeile}     -> ort        Seite im Leser zu einer Buchseite (Zitatsprung)
  *   pultwerke {id}                       -> pultwerke  die laufende Suche je Werk (Jahr, Gattung, Vorkommen)
+ *   pultliste {id}                       -> pultliste  alle Werke der Ausgabe (fuer die Werkwahl)
+ *   suche    {…, werke: [band|nr, …]}    -> ergebnis   nur in den gewaehlten Werken
  *   pultstart {id, beispiele, probe, stand} -> pultstart  Zahlen der Beispiele, Profil einer Probeanfrage
  *   begriffe {id, terme}                 -> begriffe   mehrere Anfragen ueber die Jahre, je Autor
  * Der Worker gibt nur Daten zurueck; alle Woerter der Bedienung stehen in recherche-pult.js.
@@ -644,9 +646,57 @@ function ort(m) {
 
 // ── Die laufende Suche je Werk ──────────────────────────────────────────
 function pultwerke(m) {
-  var z = mitFang('zeit', function () { zeit(m); });
-  if (z) post({ typ: 'pultwerke', id: m.id, werke: z.werke.filter(function (x) { return x.n; }), alle: z.werke.length });
+  if (!aktuell || aktuell.id !== m.id) return;
+  var idx = {}, werke = [];
+  aktuell.treffer.forEach(function (t) {
+    var b = BAND[t.w], s = segVon(t.w)[einheitVon(b, t.st)], k = t.w + '|' + s, x = idx[k];
+    if (!x) {
+      var e = werkDaten(t.w, s);
+      x = idx[k] = { k: k, ed: edVon(t.w), work: t.w, sig: b.sig, titel: e[3] || b.title, jahr: e[1], gattung: e[2] || '', n: 0, stellen: 0 };
+      werke.push(x);
+    }
+    x.stellen++; x.n += (t.st.laeufe || []).length || 1;
+  });
+  post({ typ: 'pultwerke', id: m.id, werke: werke });
 }
+/** Alle Werke der Ausgabe fuer die Werkwahl: Schluessel ist Band und Nummer des Werks im Band. */
+function pultliste(m) {
+  var aus = [];
+  REIHE.forEach(function (w) {
+    var b = BAND[w], liste = (JAHRE && JAHRE.baende[w]) || [];
+    liste.forEach(function (e, s) {
+      if (e[3]) aus.push({ k: w + '|' + s, ed: edVon(w), work: w, sig: b.sig, titel: e[3], jahr: e[1], gattung: e[2] || '' });
+    });
+  });
+  post({ typ: 'pultliste', id: m.id, werke: aus });
+}
+
+// ── Werke als Filter: mehrere Werke, quer durch die Baende ──────────────
+var WERKWAHL = null;
+var H_SUCHE_VOR_WERKEN = H.suche;
+H.suche = function (b, ast, opts) {
+  var r = H_SUCHE_VOR_WERKEN(b, ast, opts);
+  if (!WERKWAHL) return r;
+  var sv = segVon(b.work), w = b.work;
+  r.stellen = r.stellen.filter(function (st) { return WERKWAHL.has(w + '|' + sv[einheitVon(b, st)]); });
+  return r;
+};
+var SUCHE_VOR_WERKEN = suche;
+suche = function (m) {
+  var wahl = Array.isArray(m.werke) && m.werke.length ? new Set(m.werke.map(String)) : null, m2 = m;
+  if (wahl) {
+    // nur die Baende durchsuchen, in denen die gewaehlten Werke stehen
+    var baende = {}, k;
+    wahl.forEach(function (x) { baende[x.slice(0, x.lastIndexOf('|'))] = 1; });
+    m2 = {};
+    for (k in m) m2[k] = m[k];
+    m2.baende = Object.keys(baende).filter(function (w) { return BAND[w] && (!m.baende || !m.baende.length || m.baende.indexOf(w) >= 0); });
+    m2.seiten = null;
+    if (!m2.baende.length) m2.baende = Object.keys(baende).filter(function (w) { return BAND[w]; });
+  }
+  WERKWAHL = wahl;
+  try { SUCHE_VOR_WERKEN(m2); } finally { WERKWAHL = null; }
+};
 
 // ── Profil einer Anfrage ohne die laufende Suche anzutasten ─────────────
 var VON_JAHR = 1785, SCHRITT_JAHR = 5, N_JAHR = 14;
@@ -730,7 +780,7 @@ function begriffe(m) {
   post({ typ: 'begriffe', id: m.id, terme: aus, von: VON_JAHR, schritt: SCHRITT_JAHR, n: N_JAHR });
 }
 
-var PULT = { seite: seitenbild, pultvorschlag: pultvorschlag, ort: ort, pultwerke: pultwerke, pultstart: pultstart, begriffe: begriffe };
+var PULT = { seite: seitenbild, pultvorschlag: pultvorschlag, ort: ort, pultwerke: pultwerke, pultliste: pultliste, pultstart: pultstart, begriffe: begriffe };
 var VERARBEITE_BASIS = verarbeite;
 verarbeite = function (e) {
   var m = e.data, f = PULT[m.typ];
