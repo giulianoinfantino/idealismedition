@@ -1208,3 +1208,18 @@ body .page-card .text-unit.type-quote .dipl-line-text{text-align:center}
   .kopf-menue-familie a[aria-current]{color:var(--text-ink)}
   .sprache-schalter,.thema-schalter.darstellung-knopf{height:2.75rem;min-width:2.75rem}
 }
+
+/* ══ Hinweis auf die Mitgliedschaft (assets/mitglied-hinweis.js, 09.11.2026): Band am oberen Rand ═══════════
+   Nutzt die Mechanik des alten Förderbanners (.promo-banner, --banner-h). In der Lektüre weicht es mit dem Kopf. */
+.promo-banner.mitglied-hinweis{justify-content:center;gap:0;padding:.75rem 3rem .8rem 1.25rem;text-align:left;background:var(--bg-paper);font-size:.86rem;line-height:1.5;color:var(--text-body)}
+.mitglied-hinweis p{max-width:62rem;margin:0}
+.mitglied-hinweis strong{font-weight:600;color:var(--text-ink)}
+.mitglied-hinweis a.mh-los{display:inline-block;margin:0 .9rem 0 .2rem;color:var(--text-ink);font-weight:400;text-decoration:underline;text-decoration-color:var(--accent-gold);text-underline-offset:3px;white-space:nowrap}
+.mitglied-hinweis a.mh-los:hover{color:var(--accent-gold)}
+.mitglied-hinweis .mh-bin{font:inherit;font-size:.8rem;background:none;border:0;padding:0;color:var(--text-muted);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;cursor:pointer;white-space:nowrap}
+.mitglied-hinweis .mh-bin:hover{color:var(--text-ink)}
+.mitglied-hinweis .promo-banner-close{right:.8rem;min-width:2.5rem;min-height:2.5rem;font-size:1.3rem}
+.site-header,.promo-banner{transition:transform .28s ease}
+body.lp-kopf-weg .promo-banner{transform:translateY(-100%)}
+.mitglied-hinweis .mh-kurz{display:none}
+@media (max-width:640px){.promo-banner.mitglied-hinweis{font-size:.82rem;padding:.6rem 2.8rem .7rem 1rem}.mitglied-hinweis .mh-lang{display:none}.mitglied-hinweis .mh-kurz{display:inline}}

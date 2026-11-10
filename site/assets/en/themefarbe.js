@@ -81,7 +81,8 @@
   // gleich. Ein Link zu einer Schwesterseite bekommt sie beim Klick als Parameter e mit; die Zielseite
   // liest ihn hier, vor dem ersten Zeichnen, speichert die Werte und nimmt ihn aus der Adresse.
   var MITGABE = [SCHLUESSEL, 'hegel-font-step', 'hegel-reader-view', 'hegel-emphasis', 'hegel-cite', 'hegel-cite-zeilen',
-                 'hegel-cite-italic', 'sprache', 'hegel-cookie-notice'];
+                 'hegel-cite-italic', 'sprache', 'hegel-cookie-notice',
+                 'edition-lesezeit', 'edition-hinweis-bis', 'edition-hinweis-n', 'edition-mitglied'];
   var EIGENE = /(^|\.)(hegel|fichte|schelling|idealism)edition\.com$/;
   try {
     var adresse = new URL(location.href), mit = adresse.searchParams.get('e');
@@ -225,3 +226,5 @@
 
 /* Rückmeldung (assets/rueckmeldung.js, seit 08.11.2026): Fußlink und Formular auf jeder Seite, die diese Datei lädt */
 (function () { var s = document.createElement('script'); s.src = '/assets/rueckmeldung.js'; s.async = true; document.head.appendChild(s); })();
+/* Hinweis auf die Mitgliedschaft (assets/mitglied-hinweis.js, seit 09.11.2026): nach einer Stunde Lesezeit, bis man Mitglied ist */
+(function () { var s = document.createElement('script'); s.src = '/assets/mitglied-hinweis.js'; s.async = true; document.head.appendChild(s); })();

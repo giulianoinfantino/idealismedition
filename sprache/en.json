@@ -1137,7 +1137,8 @@
   "<a href=\"search?q=Anschauung&amp;ansicht=vergleich\">Vergleich der drei</a>Ein Wort bei Fichte, Schelling und Hegel nebeneinander: wer es wie oft und in welchen Werken gebraucht.": "<a href=\"search?q=Anschauung&amp;ansicht=vergleich\">Comparing the three</a>One word in Fichte, Schelling and Hegel side by side: who uses it how often, and in which works.",
   "<a href=\"search?q=Freiheit&amp;ansicht=zeit\">Verlauf über die Zeit</a>Jede Anfrage über die Jahrfünfte von {0} bis {1}, mit den Werken, aus denen die Zahlen kommen.": "<a href=\"search?q=Freiheit&amp;ansicht=zeit\">Course over time</a>Any query across the five-year periods from {0} to {1}, with the works the figures come from.",
   "<a href=\"search?q=%22intellektuelle+Anschauung%{0}\">Parallelstellen</a>Zu jeder Stelle mit einem Klick die nächsten Stellen bei den beiden anderen.": "<a href=\"search?q=%22intellektuelle+Anschauung%{0}\">Parallel passages</a>For any passage, one click brings up the closest passages in the other two.",
-  "Was nur das Portal kann": "What only the portal can do"
+  "Was nur das Portal kann": "What only the portal can do",
+  "<span data-fakten>{0} Bände · {1} {2} Seiten · {3}&nbsp;Mio. Wörter</span><span class=\"p-ft\"> · </span>nach dem Text der Werkausgaben, Seite für Seite am Druck geprüft<span class=\"p-ft\"> · </span>eingerichtet von <a href=\"https://giulianoinfantino.com\" rel=\"me\">Giuliano Infantino</a>": "<span data-fakten>{0} volumes · {1} {2} pages · {3}&nbsp;million words</span><span class=\"p-ft\"> · </span>after the text of the collected editions, checked page by page against the print<span class=\"p-ft\"> · </span>prepared by <a href=\"https://giulianoinfantino.com\" rel=\"me\">Giuliano Infantino</a>"
  },
  "js": {
   "Digitale Ausgabe von Fichtes Werken nach dem Text der Sämmtlichen und Nachgelassenen Werke, hg. von I. H. Fichte (1834–1846): frei lesbar, durchsuchbar, am Scan geprüft.": "Digital edition of Fichte’s works based on the text of the Sämmtliche Werke and Nachgelassene Werke, ed. I. H. Fichte (1834–1846): freely readable, searchable, checked against the scan.",
@@ -1479,6 +1480,7 @@
   "Sucht „": "Sucht „",
   " Stellen": " Stellen",
   "Diese Funktion ist noch nicht freigegeben.": "Diese Funktion ist noch nicht freigegeben.",
-  "Menü": "Menu"
+  "Menü": "Menu",
+  "edition-hinweis-bis": "edition-hinweis-bis"
  }
 }

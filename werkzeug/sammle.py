@@ -132,6 +132,7 @@ def main():
     for e in da:
         i = re.sub(rf'(<span data-baende="{e["id"]}">)\d+ Bände', rf'\g<1>{len(e["werke"])} Bände', i)
     i = re.sub(r'placeholder="In allen \d+ Bänden suchen"', f'placeholder="In allen {nb} Bänden suchen"', i)
+    i = re.sub(r'(<span data-fakten>)[^<]*', rf'\g<1>{nb} Bände · {zahl(ns)} Seiten · {mio}&nbsp;Mio. Wörter', i)   # Kennzahlenzeile unter dem Suchfeld
     (S / 'de' / 'index.html').write_text(i, encoding='utf-8')
     r = (S / 'de' / 'search.html').read_text(encoding='utf-8')
     r = re.sub(r'(<p class="rch-unter" id="rch-unter">)[^<]*', rf'\g<1>Volltext von Fichte, Schelling und Hegel · {nb} Bände', r, count=1)

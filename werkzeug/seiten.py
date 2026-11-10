@@ -250,6 +250,7 @@ seite('support.html', 'Unterstützen', f'''
   if (danke) {
     document.getElementById('ei-danke').hidden = false;
     fetch('/api/mitglied-danke?sitzung=' + encodeURIComponent(danke)).catch(function () {});
+    try { localStorage.setItem('edition-mitglied', 'ja'); } catch (e) {}   // der Hinweis auf die Mitgliedschaft (mitglied-hinweis.js) kommt nicht mehr
     history.replaceState(null, '', location.pathname);
   }
   // Zahl der Mitglieder und Friends of the Edition
