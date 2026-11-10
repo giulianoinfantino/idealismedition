@@ -252,6 +252,11 @@ ers('<div class="kopf"><span>Bände</span><button type="button" id="rch-alle" hi
 # (werkzeug/suche_hervor_einbau.py); das Portal ergänzt nur die Tastenzeile um seine zwei Ansichten
 ers('<dt>1 · 2 · 3</dt><dd>Stellen, Konkordanz, Verteilung</dd>', '<dt>1 – 5</dt><dd>Stellen, Konkordanz, Verteilung, Vergleich, Zeit</dd>')
 
+# ── Das Pult: erste Ansicht, Rangfolge, Begriffe und die Haken für assets/recherche-pult.js ──
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import pult_einbau
+t = pult_einbau.einbau(t)
+
 # Was nach dem Ersetzen nicht mehr vorkommen darf: Seiten der Edition, die es im Portal nicht gibt
 for rest in ('search.html', 'index.html', 'text.html', 'news.html', 'edition-data', 'Gesammelten Werke'):
     if rest in t:

@@ -29,10 +29,11 @@
   <link rel="stylesheet" href="assets/recherche.css">
   <link rel="stylesheet" href="assets/recherche-portal.css">
   <link rel="stylesheet" href="assets/zeitkurve.css">
+  <link rel="stylesheet" href="assets/recherche-pult.css">
   <script src="assets/nur-eines.js"></script>
 <script src="assets/themefarbe.js"></script>
 </head>
-<body class="search-page recherche rch-ruhe">
+<body class="search-page recherche rch-ruhe pult">
 
 <a href="#search-input" class="skip-link">Zur Suche springen</a>
 
@@ -59,15 +60,16 @@
 
   <div class="rch-kopf">
     <div class="rch-titel">
-      <h1>Recherche</h1>
-      <p class="rch-unter" id="rch-unter">Volltext von Fichte, Schelling und Hegel · 41 Bände</p>
+      <h1>Jedes Wort von Fichte, Schelling und Hegel, zitiert bis zur Druckzeile.</h1>
+      <p class="rch-unter" id="rch-unter">41 Bände im Volltext</p>
+      <p class="pl-zusatz">Die Schreibung der Zeit wird verstanden: <i>Sein</i> findet <i>Seyn</i>.</p>
     </div>
 
     <form class="rch-feld" id="rch-form" role="search" autocomplete="off">
       <div class="rch-eingabe" id="rch-eingabe">
         <div class="rch-spiegel" id="rch-spiegel" aria-hidden="true"></div>
         <input type="text" id="search-input" name="q" spellcheck="false" autocapitalize="off" autocorrect="off"
-               placeholder="Wort, Wendung oder Ausdruck  ·  Taste /"
+               placeholder="Wort, Wendung, Zitat (GW 9, 23) oder Werktitel"
                aria-label="Suchanfrage" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="rch-vorschlag"
                title="Tastenkürzel: „/“ springt von überall auf der Seite hierher">
         <kbd class="rch-taste" aria-hidden="true">/</kbd>
@@ -95,6 +97,7 @@
         <button type="button" role="tab" id="tab-verteilung" data-ansicht="verteilung" aria-selected="false" aria-controls="search-results">Verteilung<span class="kz">3</span></button>
         <button type="button" role="tab" id="tab-vergleich" data-ansicht="vergleich" aria-selected="false" aria-controls="search-results">Vergleich<span class="kz">4</span></button>
         <button type="button" role="tab" id="tab-zeit" data-ansicht="zeit" aria-selected="false" aria-controls="search-results">Zeit<span class="kz">5</span></button>
+        <button type="button" role="tab" id="tab-begriffe" data-ansicht="begriffe" aria-selected="false" aria-controls="search-results">Begriffe<span class="kz">6</span></button>
       </div>
     </div>
   </div>
@@ -105,7 +108,9 @@
       <span id="rch-seitenfilter"></span>
       <label>Ordnung
         <select id="rch-ordnung" aria-label="Ordnung der Stellen">
+          <option value="rang">Beste zuerst</option>
           <option value="werk">Werkfolge</option>
+          <option value="jahr">Zeitfolge</option>
           <option value="dichte">Trefferdichte</option>
         </select>
       </label>
@@ -137,17 +142,28 @@
 
     <section class="rch-ergebnis" id="search-results" role="tabpanel" aria-labelledby="tab-stellen" tabindex="-1">
       <div class="rch-hilfe" id="search-guide">
-        <div>
-          <h2>Zum Beispiel</h2>
-          <div class="rch-beispiele">
-            <button type="button" data-q="&quot;intellectuelle Anschauung&quot;" title="genaue Wortfolge">„intellectuelle Anschauung“</button>
-            <button type="button" data-q="Indifferenz" title="ein Wort, in allen Schreibungen">Indifferenz</button>
-            <button type="button" data-q="Nicht-Ich" title="ein Wort">Nicht-Ich</button>
-            <button type="button" data-q="Schöpfung NEAR/8 Freiheit" title="Nähe">Schöpfung NEAR/8 Freiheit</button>
-            <button type="button" data-q="*seyn" title="Wortende: Daseyn, Fürsichseyn …">*seyn</button>
-            <button type="button" data-q="Begriff~" title="mit gebeugten Formen: Begriffe, Begriffs …">Begriff~</button>
+        <section class="pl-bsp" aria-labelledby="pl-bsp-h">
+          <h2 id="pl-bsp-h">So lässt sich fragen</h2>
+          <p class="pl-unter">Jede Zeile führt die Suche aus; rechts steht, wie viel sie findet.</p>
+          <div class="rch-beispiele pl-beispiele">
+            <button type="button" data-q="&quot;intellectuelle Anschauung&quot;"><span class="q">„intellectuelle Anschauung“</span><span class="n" data-zahl></span><span class="w">Die genaue Wortfolge, in jeder Schreibung der Zeit.</span></button>
+            <button type="button" data-q="Schöpfung NEAR/8 Freiheit"><span class="q">Schöpfung <code>NEAR/8</code> Freiheit</span><span class="n" data-zahl></span><span class="w">Beide Wörter höchstens acht Wörter voneinander, in beliebiger Folge.</span></button>
+            <button type="button" data-q="Sein"><span class="q">Sein</span><span class="n" data-zahl></span><span class="w">Die heutige Schreibung findet auch <i>Seyn</i>.</span></button>
+            <button type="button" data-q="*seyn"><span class="q"><code>*</code>seyn</span><span class="n" data-zahl></span><span class="w">Jedes Wort mit diesem Ende: <i>Daseyn</i>, <i>Fürsichseyn</i>.</span></button>
+            <button type="button" data-q="Substanz SENTENCE Subject"><span class="q">Substanz <code>SENTENCE</code> Subject</span><span class="n" data-zahl></span><span class="w">Beide Wörter im selben Satz.</span></button>
+            <button type="button" data-q="(Begriff OR Idee) AND Urtheil"><span class="q">(Begriff <code>OR</code> Idee) <code>AND</code> Urtheil</span><span class="n" data-zahl></span><span class="w">Eines von zwei Wörtern, zusammen mit einem dritten.</span></button>
           </div>
-        </div>
+        </section>
+        <section class="pl-ans" id="pl-ansichten" aria-labelledby="pl-ans-h">
+          <h2 id="pl-ans-h">Was zurückkommt</h2>
+          <p class="pl-unter">Nicht nur eine Liste von Stellen. Am Beispiel <i>Anschauung</i>:</p>
+          <div class="pl-vier">
+            <button type="button" data-ansicht="konkordanz"><span class="bild" data-bild="kwic"></span><b>Konkordanz</b><span class="t">Jedes Vorkommen in einer Zeile, zu ordnen nach dem Wort davor oder danach.</span></button>
+            <button type="button" data-ansicht="verteilung"><span class="bild" data-bild="baende"></span><b>Verteilung</b><span class="t">Wo das Wort dicht steht, Band für Band, je 10 000 Wörter.</span></button>
+            <button type="button" data-ansicht="vergleich"><span class="bild" data-bild="autoren"></span><b>Vergleich</b><span class="t">Wie oft und in welchem Umfeld die drei das Wort gebrauchen.</span></button>
+            <button type="button" data-ansicht="zeit"><span class="bild" data-bild="zeit"></span><b>Zeit</b><span class="t">Von 1785 bis 1854 in Jahrfünften, nach dem Jahr jeder Schrift.</span></button>
+          </div>
+        </section>
         <div class="qb-feld" id="qb" hidden></div>
         <div id="rch-zuletzt-feld" hidden>
           <h2>Zuletzt gesucht</h2>
@@ -193,7 +209,8 @@
               <dt>j · k</dt><dd>zur nächsten, vorigen Stelle</dd>
               <dt>Enter</dt><dd>Stelle im Druckbild öffnen</dd>
               <dt>c</dt><dd>Zitat der Stelle kopieren</dd>
-              <dt>1 – 5</dt><dd>Stellen, Konkordanz, Verteilung, Vergleich, Zeit</dd>
+              <dt>1 – 6</dt><dd>Stellen, Konkordanz, Verteilung, Vergleich, Zeit, Begriffe</dd>
+              <dt>s</dt><dd>Stelle auf die Merkliste</dd>
             </dl>
           </section>
         </div>
@@ -223,6 +240,7 @@
 <script src="assets/recherche-kern.js"></script>
 <script src="assets/zeitkurve.js"></script>
 <script src="assets/recherche-quer.js"></script>
+<script src="assets/recherche-pult.js"></script>
 <script src="assets/parallel-start.js" defer></script>
 <script>
 (function () {
@@ -236,7 +254,7 @@
   var input = $('search-input'), spiegel = $('rch-spiegel'), results = $('search-results'), status = $('search-status');
 
   var S = {
-    q: '', baende: [], arten: { t: 1, n: 1, h: 1 }, ansicht: 'stellen', ordnung: 'werk',
+    q: '', baende: [], arten: { t: 1, n: 1, h: 1 }, ansicht: 'stellen', ordnung: 'rang',
     aus: [], seiten: null, kwicOrdnung: 'werk', jahre: null, gattung: '', hervor: false
   };
   var BANDLISTE = (window.HEGEL_EDITION_BAENDE || []);
@@ -252,6 +270,16 @@
     if (!S.baende.length) return null;
     var ed = edVon(S.baende[0]), alle = baendeVon(ed);
     return alle.length === S.baende.length && S.baende.every(function (w) { return edVon(w) === ed; }) ? ed : null;
+  }
+  /** Die Editionen, deren Bände genau gewählt sind (mit Komma), sonst null. */
+  function ganzeEditionen() {
+    if (!S.baende.length) return null;
+    var eds = [], rest = S.baende.slice();
+    Object.keys(EDITIONEN).forEach(function (ed) {
+      var alle = baendeVon(ed);
+      if (alle.length && alle.every(function (w) { return rest.indexOf(w) >= 0; })) { eds.push(ed); rest = rest.filter(function (w) { return alle.indexOf(w) < 0; }); }
+    });
+    return eds.length && !rest.length ? eds.join(',') : null;
   }
   var bereit = false, ladeStart = false, worker = null, anfrage = 0, letzteAntwort = null;
   var STUECK = 30;
@@ -274,6 +302,11 @@
 
   function empfange(e) {
     var m = e.data;
+    if (window.Pult && window.Pult.vor(m)) return;
+    empfangeSeite(m);
+    if (window.Pult) window.Pult.nach(m);
+  }
+  function empfangeSeite(m) {
     if (m.typ === 'fortschritt') {
       $('rch-laden').firstElementChild.style.width = (m.fertig / m.gesamt * 100) + '%';
       status.textContent = 'Lade die Bände … ' + m.fertig + ' von ' + m.gesamt;
@@ -281,7 +314,7 @@
       bereit = true;
       BANDLISTE = m.baende;
       $('rch-laden').hidden = true;
-      $('rch-unter').textContent = 'Volltext von Fichte, Schelling und Hegel · ' + m.baende.length + ' Bände · ' + zahl(m.woerter) + ' Wörter';
+      $('rch-unter').textContent = m.baende.length + ' Bände · ' + zahl(m.woerter) + ' Wörter im Volltext';
       zeichneBaende(null);
       worker.postMessage({ typ: 'bezuege' });
       if (S.q) suche(false); else status.textContent = 'Bereit. ' + zahl(m.woerter) + ' Wörter in ' + m.baende.length + ' Bänden.';
@@ -439,17 +472,18 @@
   function schreibeAdresse(neu) {
     var p = new URLSearchParams();
     if (S.q) p.set('q', S.q);
-    var ganz = ganzeEdition();
+    var ganz = ganzeEditionen();
     if (ganz) p.set('ed', ganz); else if (S.baende.length) p.set('work', S.baende.join(','));
     var a = (S.arten.t ? 't' : '') + (S.arten.n ? 'n' : '') + (S.arten.h ? 'h' : '');
     if (a !== 'tnh') p.set('in', a || '-');
     if (S.ansicht !== 'stellen') p.set('ansicht', S.ansicht);
-    if (S.ordnung !== 'werk') p.set('ordnung', S.ordnung);
+    if (S.ordnung !== 'rang') p.set('ordnung', S.ordnung);
     if (S.aus.length) p.set('ohne', S.aus.join(','));
     if (S.seiten) p.set('seiten', S.seiten.work + ':' + S.seiten.von + '-' + S.seiten.bis);
     if (S.jahre) p.set('jahre', S.jahre.von + '-' + S.jahre.bis);
     if (S.gattung) p.set('gattung', S.gattung);
     if (S.hervor) p.set('hervor', '1');
+    if (window.Pult) window.Pult.adresse(p);
     var url = location.pathname + (p.toString() ? '?' + p.toString() : '');
     if (url === location.pathname + location.search) return;
     history[neu ? 'pushState' : 'replaceState'](null, '', url);
@@ -458,11 +492,11 @@
     var p = new URLSearchParams(location.search);
     S.q = (p.get('q') || '').trim();
     S.baende = (p.get('work') || '').split(',').filter(Boolean);
-    if (!S.baende.length && p.get('ed')) S.baende = baendeVon(p.get('ed'));
+    if (!S.baende.length && p.get('ed')) p.get('ed').split(',').forEach(function (ed) { S.baende = S.baende.concat(baendeVon(ed)); });
     var a = p.get('in');
     S.arten = a ? { t: a.indexOf('t') >= 0 ? 1 : 0, n: a.indexOf('n') >= 0 ? 1 : 0, h: a.indexOf('h') >= 0 ? 1 : 0 } : { t: 1, n: 1, h: 1 };
-    S.ansicht = ['stellen', 'konkordanz', 'verteilung', 'vergleich', 'zeit'].indexOf(p.get('ansicht')) >= 0 ? p.get('ansicht') : 'stellen';
-    S.ordnung = p.get('ordnung') === 'dichte' ? 'dichte' : 'werk';
+    S.ansicht = ['stellen', 'konkordanz', 'verteilung', 'vergleich', 'zeit', 'begriffe'].indexOf(p.get('ansicht')) >= 0 ? p.get('ansicht') : 'stellen';
+    S.ordnung = ['werk', 'dichte', 'jahr'].indexOf(p.get('ordnung')) >= 0 ? p.get('ordnung') : 'rang';
     S.aus = (p.get('ohne') || '').split(',').filter(Boolean);
     var sm = /^([\w-]+):(\d+)-(\d+)$/.exec(p.get('seiten') || '');
     S.seiten = sm ? { work: sm[1], von: +sm[2], bis: +sm[3] } : null;
@@ -470,6 +504,7 @@
     S.jahre = jm ? { von: +jm[1], bis: +jm[2] } : null;
     S.gattung = /^[dvne]{1,3}$/.test(p.get('gattung') || '') ? p.get('gattung') : '';
     S.hervor = p.get('hervor') === '1';
+    if (window.Pult) window.Pult.lies(p);
     input.value = S.q;
     $('rch-ordnung').value = S.ordnung;
     malArten(); malAnsicht(); malZeit(); spiegeln();
@@ -491,7 +526,7 @@
 
   // Ohne Anfrage zeigt die Seite nur Titel, Feld, Bereich und Beispiele
   // (body.rch-ruhe); Ansichten, Status und Bandliste kommen mit der ersten Anfrage.
-  function ruhe(an) { document.body.classList.toggle('rch-ruhe', !!an); }
+  function ruhe(an) { document.body.classList.toggle('rch-ruhe', !!an); if (window.Pult) window.Pult.ruhe(!!an); }
 
   function leer() {
     ruhe(true);
@@ -636,6 +671,7 @@
     $('rch-baende-knopf').textContent = S.baende.length ? (S.baende.length === 1 ? '1 Band gewählt' : S.baende.length + ' Bände gewählt') : 'Alle ' + gesamt + ' Bände';
     var mit = jeBand ? jeBand.filter(function (b) { return b.stellen; }).length : 0;
     $('rch-baende-summary').textContent = S.baende.length ? 'Bände: ' + S.baende.length + ' gewählt' : jeBand ? 'Bände · ' + mit + ' mit Treffern' : 'Bände';
+    if (window.Pult) window.Pult.baende(jeBand);
   }
   $('rch-baende-liste').addEventListener('click', function (e) {
     var k = e.target.closest('.ei-bandkopf');
@@ -678,6 +714,7 @@
     else if (S.ansicht === 'konkordanz') { kwicGeladen = 0; baueKwicRahmen(); fordereKwic(); }
     else if (S.ansicht === 'vergleich') { results.innerHTML = '<p class="qv-warte">Die drei Ausgaben werden verglichen …</p>'; worker.postMessage({ typ: 'vergleich', id: anfrage }); }
     else if (S.ansicht === 'zeit') { results.innerHTML = '<p class="qv-warte">Die Stellen werden über die Jahre verteilt …</p>'; worker.postMessage({ typ: 'zeit', id: anfrage }); }
+    else if (S.ansicht === 'begriffe' && window.Pult) window.Pult.begriffe(results);
     else zeichneVerteilung();
   }
 
@@ -786,6 +823,7 @@
   $('rch-zeit-alle').addEventListener('click', function () { S.jahre = null; S.gattung = ''; neuGefiltert(); });
   var ARTNAME = { n: 'Anmerkung', h: 'Überschrift' };
   function stelleHtml(s) {
+    if (window.Pult) return window.Pult.karte(s, ARTNAME);
     return '<article class="rch-stelle" tabindex="-1" data-i="' + s.i + '" data-zitat="' + esc(s.zitat) + '" data-druck="' + esc(leserLink(s, true)) + '">' +
       '<div class="rch-zitat">' + (S.ordnung === 'dichte' ? '<span class="ei-autor">' + esc(edName(s.work)) + '</span> ' : '') + esc(s.zitat) + (ARTNAME[s.art] ? '<span class="art">' + ARTNAME[s.art] + '</span>' : '') +
       '<button type="button" data-kopie="' + esc(s.zitat) + '">Zitat kopieren</button></div>' +
@@ -960,6 +998,7 @@
     else if (e.key === '3') setzeAnsicht('verteilung');
     else if (e.key === '4') setzeAnsicht('vergleich');
     else if (e.key === '5') setzeAnsicht('zeit');
+    else if (e.key === '6') setzeAnsicht('begriffe');
     else if (e.key === 'c' || e.key === 'Enter') {
       var s = document.activeElement && document.activeElement.closest && document.activeElement.closest('.rch-stelle');
       if (!s || document.activeElement !== s) return;
@@ -976,6 +1015,17 @@
     this.setAttribute('aria-expanded', auf ? 'true' : 'false');
     if (auf) $('rch-baende').open = true;
   });
+
+  // Das Pult (assets/recherche-pult.js) greift über diese Namen in die Seite
+  window.PultCtx = {
+    S: S, H: H, $: $, input: input, results: results, status: status, esc: esc, zahl: zahl, EDITIONEN: EDITIONEN,
+    suche: suche, starte: starte, spiegeln: spiegeln, merkeZuletzt: merkeZuletzt, schreibeAdresse: schreibeAdresse,
+    setzeAnsicht: setzeAnsicht, malArten: malArten, malZeit: malZeit, zeichneBaende: zeichneBaende, fordereStellen: fordereStellen,
+    kopiere: kopiere, toast: toast, leserLink: leserLink, edVon: edVon, edName: edName, baendeVon: baendeVon, sigVon: sigVon, sucheMit: sucheMit,
+    baende: function () { return BANDLISTE; }, worker: function () { return worker; }, anfrage: function () { return anfrage; },
+    letzte: function () { return letzteAntwort; }, bereit: function () { return bereit; }, gesamt: function () { return stellenGesamt; }
+  };
+  if (window.Pult) window.Pult.start(window.PultCtx);
 
   // ── Start ───────────────────────────────────────────────────────────
   // Auf schmalen Schirmen steht die Bandliste zugeklappt ueber den Treffern.

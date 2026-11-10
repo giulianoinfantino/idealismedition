@@ -135,7 +135,7 @@ def main():
     i = re.sub(r'(<span data-fakten>)[^<]*', rf'\g<1>{nb} Bände · {zahl(ns)} Seiten · {mio}&nbsp;Mio. Wörter', i)   # Kennzahlenzeile unter dem Suchfeld
     (S / 'de' / 'index.html').write_text(i, encoding='utf-8')
     r = (S / 'de' / 'search.html').read_text(encoding='utf-8')
-    r = re.sub(r'(<p class="rch-unter" id="rch-unter">)[^<]*', rf'\g<1>Volltext von Fichte, Schelling und Hegel · {nb} Bände', r, count=1)
+    r = re.sub(r'(<p class="rch-unter" id="rch-unter">)[^<]*', rf'\g<1>{nb} Bände im Volltext', r, count=1)
     (S / 'de' / 'search.html').write_text(r, encoding='utf-8')
 
     # Sitemap
