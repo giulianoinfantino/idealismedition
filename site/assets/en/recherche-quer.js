@@ -36,10 +36,12 @@
 
   // ── Zeit: die Stellen über die Jahre, je Jahrfünft und Autor, darunter die Werke ──
   var GATTUNG = { d: 'Published work', v: 'Lecture', n: 'Manuscript', e: 'Excerpt' };
-  var EDS = ['fichte', 'schelling', 'hegel'];
+  // Auf der Seite einer einzelnen Ausgabe (werkzeug/ausgabe_suche.py) gibt es nur den einen Autor
+  var EDS = ['fichte', 'schelling', 'hegel'].filter(function (ed) { var E = window.IDEALISMUS_EDITIONEN; return !E || E[ed]; });
   function zeit(m, ziel) {
     var c = C(), esc = c.esc, zahl = c.zahl;
-    var VON = 1785, SCHRITT = 5, NJ = 14, MIN = 20000;
+    var ZF = window.RECHERCHE_ZEIT || { von: 1785, n: 14 };   // auf der Seite einer Ausgabe: die Jahre ihres Autors
+    var VON = ZF.von, SCHRITT = 5, NJ = ZF.n, MIN = 20000;
     var reihen = EDS.map(function (ed) {
       var n = [], w = [];
       for (var j = 0; j < NJ; j++) { n.push(0); w.push(0); }
@@ -63,7 +65,7 @@
         var d = x.woerter ? x.n / x.woerter * 1e4 : 0;
         return '<tr><td class="j">' + (x.jahr == null ? '–' : x.jahr) + '</td>' +
           '<td><button type="button" class="qz-werk" data-qz-werk="' + esc(x.work) + '"' + (x.von != null ? ' data-von="' + x.von + '" data-bis="' + x.bis + '"' : '') + '>' +
-          '<span class="zk-feld zk-' + x.ed + '" aria-hidden="true"></span><span class="s">' + esc(NAME[x.ed]) + ', ' + esc(x.sig) + '</span> <span class="t">' + esc(x.titel) + '</span></button></td>' +
+          '<span class="zk-feld zk-' + x.ed + '" aria-hidden="true"></span><span class="s">' + (EDS.length > 1 ? esc(NAME[x.ed]) + ', ' : '') + esc(x.sig) + '</span> <span class="t">' + esc(x.titel) + '</span></button></td>' +
           '<td class="g">' + esc(GATTUNG[x.gattung] || '') + '</td><td class="z">' + zahl(x.n) + '</td><td class="z">' + Zeitkurve.dichte(d) + '</td></tr>';
       }).join('') + '</tbody></table>';
     var fig = document.getElementById('qz-kurve');
@@ -81,7 +83,7 @@
     if (alt) alt.remove();
     var knopf = art.querySelector('[data-parallel]');
     if (knopf) { knopf.disabled = false; knopf.textContent = 'Hide parallel passages'; knopf.dataset.offen = '1'; }
-    var gruppen = ['fichte', 'schelling', 'hegel'].map(function (ed) {
+    var gruppen = EDS.map(function (ed) {
       var l = m.liste.filter(function (x) { return x.ed === ed; });
       return '<div class="qp-gruppe"><h4>' + NAME[ed] + '</h4>' + (l.length ? l.map(function (x) {
         return '<div class="qp-stelle"><a href="' + esc(c.leserLink(x, true)) + '">' + esc(x.zitat) + '</a> <span class="qp-titel">' + esc(x.title) + '</span>' +

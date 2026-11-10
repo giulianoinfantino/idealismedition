@@ -318,8 +318,8 @@
         return gruppe(n.l) + ' and ' + gruppe(n.r);
       case 'or': return gruppe(n.l) + ' or ' + gruppe(n.r);
       case 'not': return 'every passage without ' + lesart(n.c, tief + 1);
-      case 'nah': return lesart(n.l, tief + 1) + ', at most ' + zahlwort(n.d) + ' of ' + lesart(n.r, tief + 1) + ' entfernt';
-      case 'vor': return lesart(n.l, tief + 1) + ', danach innerhalb ' + (n.d === 1 ? 'the next word' : '' + n.d + ' words') + ' ' + lesart(n.r, tief + 1);
+      case 'nah': return lesart(n.l, tief + 1) + ', at most ' + zahlwort(n.d) + ' of ' + lesart(n.r, tief + 1);
+      case 'vor': return lesart(n.l, tief + 1) + ', then within ' + (n.d === 1 ? 'the next word' : '' + n.d + ' words') + ' ' + lesart(n.r, tief + 1);
       case 'satz': return lesart(n.l, tief + 1) + ' and ' + lesart(n.r, tief + 1) + ' in the same sentence';
     }
     return '';

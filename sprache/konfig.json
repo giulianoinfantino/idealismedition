@@ -127,6 +127,14 @@
   [
    "\">Lesefassung</a>",
    "\">Reading text</a>"
+  ],
+  [
+   "lesart(n.r, tief + 1) + ' entfernt';",
+   "lesart(n.r, tief + 1);"
+  ],
+  [
+   "', danach innerhalb '",
+   "', then within '"
   ]
  ]
 }
