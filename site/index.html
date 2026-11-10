@@ -35,7 +35,6 @@
   <link rel="stylesheet" href="assets/fonts.css">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/portal.css">
-  <link rel="stylesheet" href="assets/zeitkurve.css">
   <script src="assets/en/themefarbe.js"></script>
 </head>
 <body class="startseite-still">
@@ -57,30 +56,17 @@
   <div class="kopf-rechts"><a class="sprache-schalter" href="/de/" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsche Fassung" onclick="try{localStorage.setItem('sprache','de')}catch(e){};this.href='/de'+(location.pathname==='/'?'/':location.pathname)+location.search+location.hash">DE</a></div>
 </header>
 
-<main id="inhalt" class="p p-hub">
+<main id="inhalt" class="p">
   <h1>Edition Deutscher Idealismus</h1>
   <p class="p-unter">The works of Fichte, Schelling, and Hegel in digital editions, freely accessible.</p>
   <p class="p-von">Created by <a href="https://giulianoinfantino.com" rel="me">Giuliano Infantino</a></p>
+  <nav class="p-drei" id="editionen" aria-label="The editions">
+    <a class="p-bild" href="https://www.fichteedition.com/"> <picture><source type="image/webp" srcset="assets/bildnisse/fichte.webp 1x, assets/bildnisse/fichte@2x.webp 2x"><img src="assets/bildnisse/fichte.jpg" width="340" height="442" alt="Johann Gottlieb Fichte" decoding="async"></picture> <span class="p-wer">Fichte</span> <span class="p-leise">1762–1814<span class="p-trenn"> · </span><span data-baende="fichte">11 volumes</span></span> </a> <a class="p-bild" href="https://www.schellingedition.com/"> <picture><source type="image/webp" srcset="assets/bildnisse/schelling.webp 1x, assets/bildnisse/schelling@2x.webp 2x"><img src="assets/bildnisse/schelling.jpg" width="340" height="442" alt="Friedrich Wilhelm Joseph Schelling" decoding="async"></picture> <span class="p-wer">Schelling</span> <span class="p-leise">1775–1854<span class="p-trenn"> · </span><span data-baende="schelling">14 volumes</span></span> </a> <a class="p-bild" href="https://www.hegeledition.com/"> <picture><source type="image/webp" srcset="assets/bildnisse/hegel.webp 1x, assets/bildnisse/hegel@2x.webp 2x"><img src="assets/bildnisse/hegel.jpg" width="340" height="442" alt="Georg Wilhelm Friedrich Hegel" decoding="async"></picture> <span class="p-wer">Hegel</span> <span class="p-leise">1770–1831<span class="p-trenn"> · </span><span data-baende="hegel">16 volumes</span></span> </a>
+  </nav>
   <form class="p-suche" action="search" method="get" role="search">
     <input type="search" name="q" placeholder="Search all 41 volumes" aria-label="Search all volumes" spellcheck="false" autocapitalize="off" autocorrect="off">
     <button type="submit">Search</button>
   </form>
-  <p class="p-beispiele">For example <a href="search?q=Anschauung">Anschauung</a> · <a href="search?q=Freiheit">Freiheit</a> · <a href="search?q=%22intellektuelle+Anschauung%22">“intellektuelle Anschauung”</a></p>
-  <div class="p-hubzeile">
-  <section class="p-kurve" aria-labelledby="p-kurve-titel">
-    <h2 class="p-kurve-titel" id="p-kurve-titel"><span>History of a concept · <b>Freiheit</b></span><a href="/analyses#begriffsgeschichte">Trace your own word</a></h2>
-    <figure class="zk" id="p-kurve" data-wort="Freiheit"></figure>
-    <p class="p-kurve-fuss">Occurrences per 10,000 words and five-year period in Fichte, Schelling and Hegel, from all datable writings.</p>
-  </section>
-  <ul class="p-nurhier" aria-label="What only the portal can do">
-    <li><a href="search?q=Anschauung&amp;ansicht=vergleich">Comparing the three</a>One word in Fichte, Schelling and Hegel side by side: who uses it how often, and in which works.</li>
-    <li><a href="search?q=Freiheit&amp;ansicht=zeit">Course over time</a>Any query across the five-year periods from 1785 to 1854, with the works the figures come from.</li>
-    <li><a href="search?q=%22intellektuelle+Anschauung%22">Parallel passages</a>For any passage, one click brings up the closest passages in the other two.</li>
-  </ul>
-  </div>
-  <nav class="p-drei" id="editionen" aria-label="The editions">
-    <a class="p-bild" href="https://www.fichteedition.com/"> <picture><source type="image/webp" srcset="assets/bildnisse/fichte.webp 1x, assets/bildnisse/fichte@2x.webp 2x"><img src="assets/bildnisse/fichte.jpg" width="340" height="442" alt="Johann Gottlieb Fichte" decoding="async"></picture> <span class="p-wer">Fichte</span> <span class="p-leise">1762–1814<span class="p-trenn"> · </span><span data-baende="fichte">11 volumes</span></span> </a> <a class="p-bild" href="https://www.schellingedition.com/"> <picture><source type="image/webp" srcset="assets/bildnisse/schelling.webp 1x, assets/bildnisse/schelling@2x.webp 2x"><img src="assets/bildnisse/schelling.jpg" width="340" height="442" alt="Friedrich Wilhelm Joseph Schelling" decoding="async"></picture> <span class="p-wer">Schelling</span> <span class="p-leise">1775–1854<span class="p-trenn"> · </span><span data-baende="schelling">14 volumes</span></span> </a> <a class="p-bild" href="https://www.hegeledition.com/"> <picture><source type="image/webp" srcset="assets/bildnisse/hegel.webp 1x, assets/bildnisse/hegel@2x.webp 2x"><img src="assets/bildnisse/hegel.jpg" width="340" height="442" alt="Georg Wilhelm Friedrich Hegel" decoding="async"></picture> <span class="p-wer">Hegel</span> <span class="p-leise">1770–1831<span class="p-trenn"> · </span><span data-baende="hegel">16 volumes</span></span> </a>
-  </nav>
 </main>
 
 <!-- ═══ NUTZUNG ═══ wie in der Hegel- und der Schelling-Edition. Erscheint erst, wenn /api/nutzung Daten liefert (assets/en/nutzung.js). -->
@@ -116,8 +102,5 @@
 <script src="/assets/en/nutzung.js" defer></script>
 <!-- Reichweitenmessung: cookielos, ohne dauerhafte Kennung. Siehe privacy -->
 <script defer src="/_vercel/insights/script.js"></script>
-<script src="assets/en/ortho.js" defer></script>
-<script src="assets/en/zeitkurve.js" defer></script>
-<script src="assets/start-kurve.js" defer></script>
 </body>
 </html>
