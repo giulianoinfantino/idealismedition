@@ -1,0 +1,2573 @@
+{
+ "stand": "2026-11-09",
+ "schluss": "2026-11-30T23:59:59+01:00",
+ "hinweis_intern": "Source for site/assets/glossar/abstimmung.json (built by werkzeug/glossar_seite.py). Public text: never name modern translators (owner, 09.11.2026). Counts: zaehle.py, word forms, period spellings folded. vorschlag = current proposal or null where the drafts disagree.",
+ "entscheidungen": [
+  {
+   "id": "potenz",
+   "gruppe": "shared",
+   "deutsch": "Potenz",
+   "zaehlung": {
+    "f": 86,
+    "s": 3159,
+    "h": 521
+   },
+   "frage": "Schelling's central term for the stages of nature and of God; Hegel takes it over in his Jena writings, where he is still close to Schelling. In mathematics it is the exponent.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "potency",
+     "hinweis": "Standard in Schelling scholarship; mathematical exponents stay \"power\"."
+    },
+    {
+     "key": "b",
+     "en": "power",
+     "hinweis": "One word for everything, including the mathematics; collides with Macht and Kraft."
+    },
+    {
+     "key": "c",
+     "en": "potence",
+     "hinweis": "Archaic; keeps the term visibly technical."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "mensch",
+   "gruppe": "shared",
+   "deutsch": "Mensch",
+   "zaehlung": {
+    "f": 3171,
+    "s": 3607,
+    "h": 2068
+   },
+   "frage": "Mensch is not Mann. How should the translation render the human being in texts written around 1800?",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "human being",
+     "hinweis": "Keeps Mensch and Mann apart; \"man\" only for Mann."
+    },
+    {
+     "key": "b",
+     "en": "man",
+     "hinweis": "Period-faithful in tone, as older translations do; ambiguous today."
+    },
+    {
+     "key": "c",
+     "en": "by readability (human being, humanity, man)",
+     "hinweis": "Flexible, but the search can no longer rely on one word."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "ich",
+   "gruppe": "shared",
+   "deutsch": "das Ich",
+   "zaehlung": {
+    "f": 16319,
+    "s": 9198,
+    "h": 3281
+   },
+   "frage": "Fichte's first principle, which Schelling and Hegel discuss constantly. (Counts include the ordinary pronoun ich.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "the I",
+     "hinweis": "Literal, now the usual rendering in Fichte and Hegel scholarship."
+    },
+    {
+     "key": "b",
+     "en": "the self",
+     "hinweis": "Readable, but merges das Ich with das Selbst."
+    },
+    {
+     "key": "c",
+     "en": "the ego",
+     "hinweis": "Nineteenth-century usage; psychoanalytic overtones today."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "nicht-ich",
+   "gruppe": "shared",
+   "deutsch": "Nicht-Ich",
+   "zaehlung": {
+    "f": 582,
+    "s": 268,
+    "h": 35
+   },
+   "frage": "Fichte's counterpart to the I. Should it follow whatever is chosen for das Ich?",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "not-I",
+     "hinweis": "Lowercase, parallel to \"the I\"."
+    },
+    {
+     "key": "b",
+     "en": "Not-I",
+     "hinweis": "Capitalized as a technical term."
+    },
+    {
+     "key": "c",
+     "en": "not-self",
+     "hinweis": "Goes with \"the self\"."
+    },
+    {
+     "key": "d",
+     "en": "non-ego",
+     "hinweis": "Goes with \"the ego\"."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "sittlichkeit",
+   "gruppe": "shared",
+   "deutsch": "Sittlichkeit / Moralität",
+   "zaehlung": {
+    "f": 334,
+    "s": 121,
+    "h": 394
+   },
+   "frage": "For Hegel the two are opposites (custom-based community vs. individual conscience). For Kant and Fichte Sittlichkeit simply means morality.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "ethical life in Hegel, morality in Kant and Fichte",
+     "hinweis": "Deliberate divergence by sense; the German word stays visible in the reader."
+    },
+    {
+     "key": "b",
+     "en": "ethical life everywhere",
+     "hinweis": "Reads Hegel's distinction into Fichte."
+    },
+    {
+     "key": "c",
+     "en": "morality everywhere",
+     "hinweis": "Erases Hegel's distinction."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "willkuer",
+   "gruppe": "shared",
+   "deutsch": "Willkür",
+   "zaehlung": {
+    "f": 370,
+    "s": 409,
+    "h": 18
+   },
+   "frage": "Kant's faculty of choice, but also plain arbitrariness. Fichte and Schelling use both senses.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "power of choice (faculty) / arbitrariness (caprice)",
+     "hinweis": "By sense; freie Willkür = free choice."
+    },
+    {
+     "key": "b",
+     "en": "choice throughout",
+     "hinweis": "Simple; loses the pejorative sense."
+    },
+    {
+     "key": "c",
+     "en": "arbitrary will throughout",
+     "hinweis": "Clear, but heavy, and wrong for Kant's neutral faculty."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "zweck",
+   "gruppe": "shared",
+   "deutsch": "Zweck",
+   "zaehlung": {
+    "f": 1858,
+    "s": 633,
+    "h": 1507
+   },
+   "frage": "Kant's readers know \"end\" (kingdom of ends); Hegel's readers know \"purpose\" (purposiveness, external purpose).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "purpose (fixed phrases keep \"end\": final end, end in itself)",
+     "hinweis": "One word per lemma; the Kantian formulas stay recognizable."
+    },
+    {
+     "key": "b",
+     "en": "end",
+     "hinweis": "Kantian throughout; awkward in Hegel's teleology."
+    },
+    {
+     "key": "c",
+     "en": "end in Kant-dependent texts, purpose in Hegel and Schelling",
+     "hinweis": "Faithful to each tradition, harder for the search."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gemuet",
+   "gruppe": "shared",
+   "deutsch": "Gemüt",
+   "zaehlung": {
+    "f": 314,
+    "s": 224,
+    "h": 160
+   },
+   "frage": "No English equivalent: it is the seat of feeling and of cognition at once.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "mind",
+     "hinweis": "Kantian convention; loses the warmth of the word."
+    },
+    {
+     "key": "b",
+     "en": "mind (cognitive) / heart (affective)",
+     "hinweis": "By sense; the German word stays visible in the reader."
+    },
+    {
+     "key": "c",
+     "en": "disposition",
+     "hinweis": "Captures character, misses cognition."
+    }
+   ],
+   "vorschlag": "b"
+  },
+  {
+   "id": "das-seiende",
+   "gruppe": "shared",
+   "deutsch": "das Seiende",
+   "zaehlung": {
+    "f": 14,
+    "s": 507,
+    "h": 51
+   },
+   "frage": "Above all in late Schelling (das Seiende selbst, das Seynkönnende). Not to be confused with das Existierende.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "that which is / what is",
+     "hinweis": "Literal; keeps \"the existent\" free for das Existierende."
+    },
+    {
+     "key": "b",
+     "en": "the existent",
+     "hinweis": "Compact; merges two German words."
+    },
+    {
+     "key": "c",
+     "en": "being / beings",
+     "hinweis": "Merges with Sein."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "wissen",
+   "gruppe": "shared",
+   "deutsch": "Wissen",
+   "zaehlung": {
+    "f": 2758,
+    "s": 1841,
+    "h": 1507
+   },
+   "frage": "Fichte's late Wissenschaftslehre and Hegel's last chapter both speak of absolutes Wissen.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "knowing (as the topic) / knowledge (ordinary)",
+     "hinweis": "\"absolute knowing\" in both Fichte and Hegel."
+    },
+    {
+     "key": "b",
+     "en": "knowledge everywhere",
+     "hinweis": "Natural English; loses the activity."
+    },
+    {
+     "key": "c",
+     "en": "knowing everywhere",
+     "hinweis": "Uniform; stiff in everyday uses."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "bestimmung-des-menschen",
+   "gruppe": "shared",
+   "deutsch": "Bestimmung (des Menschen)",
+   "zaehlung": {
+    "f": 1653,
+    "s": 1107,
+    "h": 4651
+   },
+   "frage": "Usually \"determination\". But in phrases like Bestimmung des Menschen or des Gelehrten it means what a human being is meant for.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "vocation",
+     "hinweis": "The Vocation of Man, The Vocation of the Scholar."
+    },
+    {
+     "key": "b",
+     "en": "destiny",
+     "hinweis": "More fateful in tone."
+    },
+    {
+     "key": "c",
+     "en": "determination",
+     "hinweis": "Uniform with the technical sense; often unidiomatic here."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "intelligenz",
+   "gruppe": "shared",
+   "deutsch": "Intelligenz",
+   "zaehlung": {
+    "f": 365,
+    "s": 484,
+    "h": 324
+   },
+   "frage": "Fichte's name for the I as knowing subject; in Hegel a stage of theoretical spirit.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "intelligence",
+     "hinweis": "Literal; \"intellect\" stays free for Intellekt."
+    },
+    {
+     "key": "b",
+     "en": "intellect",
+     "hinweis": "Reads more naturally as a subject."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "wechselwirkung",
+   "gruppe": "shared",
+   "deutsch": "Wechselwirkung",
+   "zaehlung": {
+    "f": 208,
+    "s": 110,
+    "h": 87
+   },
+   "frage": "Kant's third category of relation; for Hegel the last category of the logic of essence. Our drafts disagree here.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "interaction",
+     "hinweis": "Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "reciprocity",
+     "hinweis": "Usual in the translations of Hegel's logic."
+    },
+    {
+     "key": "c",
+     "en": "reciprocal action",
+     "hinweis": "Literal, heavier."
+    },
+    {
+     "key": "d",
+     "en": "reciprocal interaction",
+     "hinweis": "Fits Wechselbestimmung = reciprocal determination."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "grenze-schranke",
+   "gruppe": "shared",
+   "deutsch": "Grenze / Schranke / Beschränkung",
+   "zaehlung": {
+    "f": 400,
+    "s": 771,
+    "h": 605
+   },
+   "frage": "Three words, all near \"limit\". Hegel plays Grenze against Schranke, Kant distinguishes them, Fichte builds on Beschränkung. Our drafts disagree here. (Count: Grenze.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "limit / limitation / restriction",
+     "hinweis": "Grenze = limit, Schranke = limitation, Beschränkung = restriction."
+    },
+    {
+     "key": "b",
+     "en": "limit / restriction / limitation",
+     "hinweis": "Schranke = restriction, so that \"limitation\" stays with Beschränkung."
+    },
+    {
+     "key": "c",
+     "en": "boundary / barrier / limitation",
+     "hinweis": "Loses the kinship between Grenze and \"limit\"."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "glaube",
+   "gruppe": "shared",
+   "deutsch": "Glaube",
+   "zaehlung": {
+    "f": 1455,
+    "s": 991,
+    "h": 1312
+   },
+   "frage": "Religious faith, but also epistemic belief (Jacobi's Glaube, Fichte's Vocation of Man).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "faith (religious) / belief (epistemic)",
+     "hinweis": "By sense; the German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "faith throughout",
+     "hinweis": "Uniform; odd in epistemology."
+    },
+    {
+     "key": "c",
+     "en": "belief throughout",
+     "hinweis": "Uniform; flattens the religious texts."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "leib-koerper",
+   "gruppe": "shared",
+   "deutsch": "Leib / Körper",
+   "zaehlung": {
+    "f": 262,
+    "s": 567,
+    "h": 93
+   },
+   "frage": "English has one word, body. Fichte's Leib (my articulated body) is not a Körper (a physical body). (Count: Leib.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "body for both, \"physical body\" for Körper where contrasted",
+     "hinweis": "The German word stays visible in the reader."
+    },
+    {
+     "key": "b",
+     "en": "lived body for Leib",
+     "hinweis": "Phenomenological, anachronistic for 1800."
+    },
+    {
+     "key": "c",
+     "en": "human body for Leib",
+     "hinweis": "Clear, but narrows animals' Leib."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "darstellung",
+   "gruppe": "shared",
+   "deutsch": "Darstellung",
+   "zaehlung": {
+    "f": 350,
+    "s": 751,
+    "h": 504
+   },
+   "frage": "Exposition of a system (Darstellung meines Systems), but also presentation in art, and Kant's exhibition of a concept.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "presentation",
+     "hinweis": "Default; \"exhibition\" only in Kant's technical sense."
+    },
+    {
+     "key": "b",
+     "en": "exposition",
+     "hinweis": "Good for systems, wrong for art."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "herr-sinn",
+   "gruppe": "shared",
+   "deutsch": "Herr (outside the master–servant section)",
+   "zaehlung": {
+    "f": 493,
+    "s": 704,
+    "h": 377
+   },
+   "frage": "Herr is God (der Herr), the feudal lord, the master of a servant, and Mr. in address. Schelling's God is Herr des Seyns.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "by sense: the Lord (God), lord, master, Mr.",
+     "hinweis": "Herr des Seyns = Lord of being."
+    },
+    {
+     "key": "b",
+     "en": "one word everywhere",
+     "hinweis": "Uniform; wrong in most places."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "duplizitaet",
+   "gruppe": "schelling",
+   "deutsch": "Duplizität",
+   "zaehlung": {
+    "f": 92,
+    "s": 248,
+    "h": 9
+   },
+   "frage": "Schelling's original doubleness of nature. In English \"duplicity\" also means deceit.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "duplicity",
+     "hinweis": "Keeps the term unique; needs a note."
+    },
+    {
+     "key": "b",
+     "en": "duality",
+     "hinweis": "Merges with Dualität."
+    },
+    {
+     "key": "c",
+     "en": "doubleness",
+     "hinweis": "Unambiguous, a little plain."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "wissenschaftslehre",
+   "gruppe": "fichte",
+   "deutsch": "Wissenschaftslehre",
+   "zaehlung": {
+    "f": 897,
+    "s": 85,
+    "h": 34
+   },
+   "frage": "The name of Fichte's philosophy. Translate it or keep it?",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Wissenschaftslehre (untranslated)",
+     "hinweis": "What current scholarship does."
+    },
+    {
+     "key": "b",
+     "en": "Science of Knowledge",
+     "hinweis": "Older convention."
+    },
+    {
+     "key": "c",
+     "en": "Doctrine of Science",
+     "hinweis": "Literal."
+    },
+    {
+     "key": "d",
+     "en": "Science of Knowing",
+     "hinweis": "Emphasizes the activity."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "tathandlung",
+   "gruppe": "fichte",
+   "deutsch": "Tathandlung",
+   "zaehlung": {
+    "f": 19,
+    "s": 5,
+    "h": 0
+   },
+   "frage": "Fichte's coinage for the I's self-positing: an act that is at the same time its own product. He coined it against Tatsache (fact).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "F/Act",
+     "hinweis": "Keeps the play on fact/act; unusual typography."
+    },
+    {
+     "key": "b",
+     "en": "Act (capitalized)",
+     "hinweis": "Simple; collides with Handlung (act, action)."
+    },
+    {
+     "key": "c",
+     "en": "fact/act",
+     "hinweis": "Spells out the pun."
+    },
+    {
+     "key": "d",
+     "en": "deed-act",
+     "hinweis": "Literal; keeps Tat and Handlung."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "anstoss",
+   "gruppe": "fichte",
+   "deutsch": "Anstoß",
+   "zaehlung": {
+    "f": 71,
+    "s": 47,
+    "h": 48
+   },
+   "frage": "What the I runs up against: at once an obstruction and an impulse. Outside the Wissenschaftslehre an everyday word.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "check",
+     "hinweis": "Established in Fichte scholarship; needs a note on the double sense."
+    },
+    {
+     "key": "b",
+     "en": "impetus",
+     "hinweis": "Only the impulse."
+    },
+    {
+     "key": "c",
+     "en": "obstacle",
+     "hinweis": "Only the obstruction."
+    },
+    {
+     "key": "d",
+     "en": "impact",
+     "hinweis": "Physical; both senses in part."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "schweben",
+   "gruppe": "fichte",
+   "deutsch": "schweben, Schweben",
+   "zaehlung": {
+    "f": 144,
+    "s": 127,
+    "h": 62
+   },
+   "frage": "The imagination \"schwebt\" between opposites (1794); in the late Wissenschaftslehre knowing \"schwebt\" over itself.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "hover",
+     "hinweis": "Keeps schwanken = waver distinct."
+    },
+    {
+     "key": "b",
+     "en": "oscillate",
+     "hinweis": "Good for \"between\", wrong for \"over\"."
+    },
+    {
+     "key": "c",
+     "en": "waver",
+     "hinweis": "Collides with schwanken."
+    },
+    {
+     "key": "d",
+     "en": "float",
+     "hinweis": "Literal, soft."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "schlechthin",
+   "gruppe": "fichte",
+   "deutsch": "schlechthin",
+   "zaehlung": {
+    "f": 2610,
+    "s": 1007,
+    "h": 1033
+   },
+   "frage": "\"Das Ich setzt sich schlechthin.\" Machine translation renders it \"absolutely\" and so merges it with absolut.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "purely and simply (simply before adjectives)",
+     "hinweis": "Keeps \"absolutely\" free for absolut."
+    },
+    {
+     "key": "b",
+     "en": "absolutely",
+     "hinweis": "Natural, merges two words."
+    },
+    {
+     "key": "c",
+     "en": "unconditionally",
+     "hinweis": "Interpretive; collides with unbedingt."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "faktisch",
+   "gruppe": "fichte",
+   "deutsch": "faktisch, Faktizität",
+   "zaehlung": {
+    "f": 1210,
+    "s": 41,
+    "h": 35
+   },
+   "frage": "In the late Wissenschaftslehre faktisch is opposed to genetisch: what is simply found, not derived.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "factical, facticity",
+     "hinweis": "Technical; avoids the sense \"true\"."
+    },
+    {
+     "key": "b",
+     "en": "factual, factuality",
+     "hinweis": "Natural; suggests \"true\"."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "selbsttaetigkeit",
+   "gruppe": "fichte",
+   "deutsch": "Selbsttätigkeit",
+   "zaehlung": {
+    "f": 133,
+    "s": 12,
+    "h": 33
+   },
+   "frage": "The I's own activity. Fichte also uses Spontaneität.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "self-activity",
+     "hinweis": "Keeps \"spontaneity\" for Spontaneität."
+    },
+    {
+     "key": "b",
+     "en": "spontaneity",
+     "hinweis": "Natural; merges two words."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "volk-nation",
+   "gruppe": "fichte",
+   "deutsch": "Volk / Nation (Reden an die deutsche Nation)",
+   "zaehlung": null,
+   "frage": "Fichte uses both words, and not as synonyms. Both are politically loaded in English.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Volk = people, Nation = nation",
+     "hinweis": "Never interchanged; never \"folk\" or \"race\"."
+    },
+    {
+     "key": "b",
+     "en": "nation for both",
+     "hinweis": "Smooth; loses Fichte's distinction."
+    },
+    {
+     "key": "c",
+     "en": "Volk = folk",
+     "hinweis": "Marks the German concept; strong overtones."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "bild",
+   "gruppe": "fichte",
+   "deutsch": "Bild, Bilden (late Wissenschaftslehre)",
+   "zaehlung": {
+    "f": 4676,
+    "s": 521,
+    "h": 247
+   },
+   "frage": "In the late Fichte everything is image: Bild, Bilden, Bildsein. Never to be confused with Bildung.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "image, imaging, being-an-image",
+     "hinweis": "One family of English words."
+    },
+    {
+     "key": "b",
+     "en": "picture, picturing",
+     "hinweis": "Concrete; too visual."
+    },
+    {
+     "key": "c",
+     "en": "image, rendering in images",
+     "hinweis": "Clearer, but loses the verb as a term."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "nominalisierte-partikeln",
+   "gruppe": "fichte",
+   "deutsch": "das Soll, das Durch, das Dass, das Was",
+   "zaehlung": null,
+   "frage": "The late Fichte turns small words into nouns: das Soll, das Durch, das Von. English has no natural way to do this.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "in quotation marks: the \"ought\", the \"through\", the \"that\"",
+     "hinweis": "Marks the word as a word."
+    },
+    {
+     "key": "b",
+     "en": "plain: the ought, the through",
+     "hinweis": "Cleaner page; harder to read."
+    },
+    {
+     "key": "c",
+     "en": "keep the German: the Soll, the Durch",
+     "hinweis": "Exact; foreign in an English text."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "naturphilosophie",
+   "gruppe": "schelling",
+   "deutsch": "Naturphilosophie",
+   "zaehlung": {
+    "f": 45,
+    "s": 432,
+    "h": 100
+   },
+   "frage": "Translate it in the running text, or keep it as the name of Schelling's program?",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "philosophy of nature",
+     "hinweis": "In the text; the German name may appear in notes."
+    },
+    {
+     "key": "b",
+     "en": "Naturphilosophie (untranslated)",
+     "hinweis": "Marks the historical program."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "seinkoennen",
+   "gruppe": "schelling",
+   "deutsch": "Seynkönnen, das Seynkönnende",
+   "zaehlung": {
+    "f": 2,
+    "s": 274,
+    "h": 0
+   },
+   "frage": "Late Schelling's triad: das Seynkönnende, das Seynmüssende, das Seynsollende. It has to stay parallel to \"that which is\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "capacity to be; that which can be / must be / ought to be",
+     "hinweis": "The triad stays parallel."
+    },
+    {
+     "key": "b",
+     "en": "power to be",
+     "hinweis": "Close to Potenz, which may be good or bad."
+    },
+    {
+     "key": "c",
+     "en": "potential to be; the can-be",
+     "hinweis": "Literal; \"the can-be\" is stark."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "unvordenklich",
+   "gruppe": "schelling",
+   "deutsch": "unvordenklich, das unvordenkliche Seyn",
+   "zaehlung": {
+    "f": 0,
+    "s": 87,
+    "h": 0
+   },
+   "frage": "The being that precedes all thinking, which thought can never get ahead of. In ordinary use \"immemorial\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "unprethinkable (technical), immemorial (ordinary)",
+     "hinweis": "The usual term in Schelling scholarship."
+    },
+    {
+     "key": "b",
+     "en": "that before which nothing can be thought",
+     "hinweis": "Clear, but a whole clause each time."
+    },
+    {
+     "key": "c",
+     "en": "immemorial throughout",
+     "hinweis": "Elegant; loses the thinking in vordenken."
+    },
+    {
+     "key": "d",
+     "en": "primordial",
+     "hinweis": "Common, but a different idea."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "ungrund",
+   "gruppe": "schelling",
+   "deutsch": "Ungrund",
+   "zaehlung": {
+    "f": 6,
+    "s": 22,
+    "h": 1
+   },
+   "frage": "In the Freedom essay, what comes before ground and existence. Schelling builds a series: Grund, Urgrund, Ungrund, Abgrund.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "unground",
+     "hinweis": "Keeps the series (ground, primal ground, unground, abyss); also the usual word for Böhme."
+    },
+    {
+     "key": "b",
+     "en": "non-ground",
+     "hinweis": "Clear, and widely cited from the Freedom essay."
+    },
+    {
+     "key": "c",
+     "en": "the groundless",
+     "hinweis": "Natural; collides with grundlos."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "grund",
+   "gruppe": "schelling",
+   "deutsch": "Grund (von Existenz)",
+   "zaehlung": {
+    "f": 2349,
+    "s": 2688,
+    "h": 1900
+   },
+   "frage": "The Freedom essay's distinction between God's ground and his existence.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "ground; ground of existence",
+     "hinweis": "Same word as Hegel's Grund."
+    },
+    {
+     "key": "b",
+     "en": "basis; basis of existence",
+     "hinweis": "Natural English; collides with Basis."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "wesen-schelling",
+   "gruppe": "schelling",
+   "deutsch": "Wesen (in Schelling)",
+   "zaehlung": {
+    "f": 2240,
+    "s": 3710,
+    "h": 3280
+   },
+   "frage": "Essence where it contrasts with form or existence; a being where it names an entity (Urwesen, das höchste Wesen). Then Wesen and Seyn can both become \"being\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "essence / being by sense",
+     "hinweis": "The German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "being throughout",
+     "hinweis": "Merges with Seyn."
+    },
+    {
+     "key": "c",
+     "en": "essence throughout",
+     "hinweis": "Wrong for entities (the supreme being)."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "sehnsucht",
+   "gruppe": "schelling",
+   "deutsch": "Sehnsucht",
+   "zaehlung": {
+    "f": 24,
+    "s": 118,
+    "h": 58
+   },
+   "frage": "In the Freedom essay and the Ages of the World the longing of the eternal One to give birth to itself.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "longing",
+     "hinweis": "Most translations of the Weltalter."
+    },
+    {
+     "key": "b",
+     "en": "yearning",
+     "hinweis": "Warmer; also well established."
+    },
+    {
+     "key": "c",
+     "en": "nostalgia",
+     "hinweis": "Looks backward, which Sehnsucht here does not."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "ineinsbildung",
+   "gruppe": "schelling",
+   "deutsch": "Ineinsbildung, Einbildung",
+   "zaehlung": {
+    "f": 7,
+    "s": 337,
+    "h": 71
+   },
+   "frage": "Identity philosophy: the absolute forms the infinite into the finite (Ineinsbildung). Schelling reads Einbildungskraft this way. (Count: Ineinsbildung and Einbildung together.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "forming-into-one; in-forming (Einbildung)",
+     "hinweis": "Literal; keeps the play with imagination."
+    },
+    {
+     "key": "b",
+     "en": "informing into unity",
+     "hinweis": "Clearer, longer."
+    },
+    {
+     "key": "c",
+     "en": "esemplasy",
+     "hinweis": "Coleridge's coinage for exactly this; very rare."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gegenbild",
+   "gruppe": "schelling",
+   "deutsch": "Urbild / Gegenbild",
+   "zaehlung": {
+    "f": 57,
+    "s": 242,
+    "h": 18
+   },
+   "frage": "The ideal world as archetype and the real world as its Gegenbild. (Count: Urbild.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "archetype / antitype",
+     "hinweis": "A fixed pair; antitype is rare."
+    },
+    {
+     "key": "b",
+     "en": "archetype / reflected image",
+     "hinweis": "Clear, loses the pairing."
+    },
+    {
+     "key": "c",
+     "en": "archetype / counterpart",
+     "hinweis": "Natural English."
+    },
+    {
+     "key": "d",
+     "en": "archetype / counter-image",
+     "hinweis": "Literal."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "abfall",
+   "gruppe": "schelling",
+   "deutsch": "Abfall",
+   "zaehlung": {
+    "f": 16,
+    "s": 63,
+    "h": 13
+   },
+   "frage": "In Philosophy and Religion (1804) the finite \"falls away\" from the absolute. Not the biblical Fall, which Schelling calls Sündenfall.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "falling-away",
+     "hinweis": "Keeps it apart from the Fall."
+    },
+    {
+     "key": "b",
+     "en": "fall",
+     "hinweis": "Natural; merges with the Fall."
+    },
+    {
+     "key": "c",
+     "en": "apostasy / defection",
+     "hinweis": "Strong; moral overtone."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "krisis-scheidung",
+   "gruppe": "schelling",
+   "deutsch": "Krisis / Scheidung / Entscheidung",
+   "zaehlung": {
+    "f": 1,
+    "s": 130,
+    "h": 0
+   },
+   "frage": "Schelling glosses \"die Scheidung (Krisis)\": in Greek, crisis is separation and judgment. (Count: Krisis.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "crisis / separation / decision",
+     "hinweis": "Three words; a note on the Greek sense."
+    },
+    {
+     "key": "b",
+     "en": "crisis / scission / decision",
+     "hinweis": "Scission is more technical."
+    },
+    {
+     "key": "c",
+     "en": "separation (for Krisis too) / separation / decision",
+     "hinweis": "Clear; loses Schelling's Greek word."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "umtrieb",
+   "gruppe": "schelling",
+   "deutsch": "Umtrieb",
+   "zaehlung": {
+    "f": 0,
+    "s": 14,
+    "h": 6
+   },
+   "frage": "The blind rotating drive of the forces before creation (Ages of the World). Contains Trieb (drive).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "circular drive",
+     "hinweis": "Keeps Trieb."
+    },
+    {
+     "key": "b",
+     "en": "cycle",
+     "hinweis": "Short; loses the drive."
+    },
+    {
+     "key": "c",
+     "en": "rotary movement",
+     "hinweis": "Collides with rotatorische Bewegung."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "aktion",
+   "gruppe": "schelling",
+   "deutsch": "Aktion (First Outline)",
+   "zaehlung": {
+    "f": 1,
+    "s": 245,
+    "h": 37
+   },
+   "frage": "In the First Outline of 1799 the original \"actions\" of nature are something like dynamic atoms.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "actant",
+     "hinweis": "Marks the strangeness of the term."
+    },
+    {
+     "key": "b",
+     "en": "action",
+     "hinweis": "Natural; far too broad."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "selbstheit-ichheit",
+   "gruppe": "schelling",
+   "deutsch": "Selbstheit / Ichheit",
+   "zaehlung": {
+    "f": 8,
+    "s": 143,
+    "h": 10
+   },
+   "frage": "Selbstheit is the dark principle of selfhood in God and the human being; Ichheit the principle of the finite I. Neither is plain egoism. (Count: Selbstheit.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "selfhood / I-hood",
+     "hinweis": "Keeps Egoismus = egoism separate."
+    },
+    {
+     "key": "b",
+     "en": "selfhood / egoity",
+     "hinweis": "Latinate."
+    },
+    {
+     "key": "c",
+     "en": "selfhood / egoism",
+     "hinweis": "Merges with Egoismus."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "goetternamen",
+   "gruppe": "conventions",
+   "deutsch": "Names of the gods (Philosophy of Mythology)",
+   "zaehlung": null,
+   "frage": "Schelling deliberately writes the Greek forms: Dionysos, Kronos, Herodotos.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Greek forms for gods (Dionysos, Kronos, Ouranos), English for authors (Herodotus, Hesiod)",
+     "hinweis": "Follows Schelling's own practice."
+    },
+    {
+     "key": "b",
+     "en": "Latinized English throughout (Dionysus, Cronus, Uranus)",
+     "hinweis": "Familiar to English readers."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "verschiedenheit",
+   "gruppe": "shared",
+   "deutsch": "Verschiedenheit",
+   "zaehlung": {
+    "f": 146,
+    "s": 285,
+    "h": 492
+   },
+   "frage": "In Hegel's logic of essence one stage of difference among others (Unterschied, Differenz, Verschiedenheit).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "diversity",
+     "hinweis": "Keeps it apart from \"difference\"."
+    },
+    {
+     "key": "b",
+     "en": "difference",
+     "hinweis": "Kantian usage; merges three German words."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "allheit",
+   "gruppe": "shared",
+   "deutsch": "Allheit",
+   "zaehlung": {
+    "f": 13,
+    "s": 195,
+    "h": 59
+   },
+   "frage": "Kant's category of totality. Schelling uses Allheit and Totalität side by side.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "allness",
+     "hinweis": "Keeps it apart from Totalität."
+    },
+    {
+     "key": "b",
+     "en": "totality",
+     "hinweis": "Kantian convention; merges two words."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "schwaermerei",
+   "gruppe": "shared",
+   "deutsch": "Schwärmerei",
+   "zaehlung": {
+    "f": 81,
+    "s": 48,
+    "h": 14
+   },
+   "frage": "The Enlightenment's word for religious and speculative excess.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "enthusiasm",
+     "hinweis": "Period sense (as in eighteenth-century English); misleading today."
+    },
+    {
+     "key": "b",
+     "en": "fanaticism",
+     "hinweis": "Clear for modern readers; sometimes too strong."
+    },
+    {
+     "key": "c",
+     "en": "visionary extravagance",
+     "hinweis": "Descriptive, long."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "organisation",
+   "gruppe": "shared",
+   "deutsch": "Organisation",
+   "zaehlung": {
+    "f": 76,
+    "s": 390,
+    "h": 154
+   },
+   "frage": "Around 1800 it often means an organized being, an organism, not an institution.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "organization (with a note on the period sense)",
+     "hinweis": "Keeps it apart from Organismus."
+    },
+    {
+     "key": "b",
+     "en": "organism",
+     "hinweis": "Clear, but merges two German words."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "grundsatz",
+   "gruppe": "shared",
+   "deutsch": "Grundsatz / Prinzip",
+   "zaehlung": {
+    "f": 384,
+    "s": 283,
+    "h": 93
+   },
+   "frage": "Fichte's erster Grundsatz is the first principle. Should Grundsatz and Prinzip share one English word? (Count: Grundsatz.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "principle for both",
+     "hinweis": "The German word stays visible in the reader."
+    },
+    {
+     "key": "b",
+     "en": "fundamental principle for Grundsatz",
+     "hinweis": "Distinct, heavier."
+    },
+    {
+     "key": "c",
+     "en": "axiom for Grundsatz",
+     "hinweis": "Mathematical overtone."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "evidenz",
+   "gruppe": "shared",
+   "deutsch": "Evidenz",
+   "zaehlung": {
+    "f": 177,
+    "s": 91,
+    "h": 17
+   },
+   "frage": "A false friend: Evidenz is what is self-evident, not evidence for something.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "self-evidence",
+     "hinweis": "Correct sense."
+    },
+    {
+     "key": "b",
+     "en": "evidentness",
+     "hinweis": "Literal, rare in English."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "stand",
+   "gruppe": "shared",
+   "deutsch": "Stand / Stände",
+   "zaehlung": {
+    "f": 426,
+    "s": 238,
+    "h": 622
+   },
+   "frage": "The orders of society (peasants, burghers, nobility) and the Estates as an assembly (Landstände).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "estate / estates",
+     "hinweis": "Period-faithful; \"Estates\" capitalized for the assembly."
+    },
+    {
+     "key": "b",
+     "en": "class / classes",
+     "hinweis": "Modern; suggests a nineteenth-century class society."
+    },
+    {
+     "key": "c",
+     "en": "rank / station",
+     "hinweis": "Good for one's place in life."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "weib",
+   "gruppe": "shared",
+   "deutsch": "Weib",
+   "zaehlung": {
+    "f": 215,
+    "s": 373,
+    "h": 80
+   },
+   "frage": "Around 1800 the neutral word for woman (and wife), not yet pejorative.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "woman (wife by context)",
+     "hinweis": "Renders the period sense."
+    },
+    {
+     "key": "b",
+     "en": "female",
+     "hinweis": "Clinical, and wrong in tone."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "aufheben-fs",
+   "gruppe": "shared",
+   "deutsch": "aufheben (in Fichte and Schelling)",
+   "zaehlung": {
+    "f": 226,
+    "s": 472,
+    "h": 1662
+   },
+   "frage": "In Hegel always \"sublate\". But Fichte in 1794 means plainly cancel or annul.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "cancel / annul in Fichte and Schelling, sublate in Hegel",
+     "hinweis": "Doesn't read Hegel back into 1794; the search still finds the German word."
+    },
+    {
+     "key": "b",
+     "en": "sublate everywhere",
+     "hinweis": "Uniform, anachronistic for Fichte."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "register",
+   "gruppe": "conventions",
+   "deutsch": "Register",
+   "zaehlung": null,
+   "frage": "Should the English read like contemporary academic prose, or like a nineteenth-century text?",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "contemporary academic English",
+     "hinweis": "Readable today; no modern jargon."
+    },
+    {
+     "key": "b",
+     "en": "period flavor",
+     "hinweis": "Closer in tone; risks pastiche."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "woertlich",
+   "gruppe": "conventions",
+   "deutsch": "Literal or idiomatic",
+   "zaehlung": null,
+   "frage": "How close to the German should the English stay where terms are not at stake?",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "literal for terms and argument, idiomatic for the connecting words",
+     "hinweis": "Terms always fixed, the rest reads as English."
+    },
+    {
+     "key": "b",
+     "en": "as literal as English allows throughout",
+     "hinweis": "Shows the German's build; reads stiffly."
+    },
+    {
+     "key": "c",
+     "en": "idiomatic throughout, terms fixed",
+     "hinweis": "Smooth; hides how the argument is built."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "hervorhebung",
+   "gruppe": "conventions",
+   "deutsch": "Emphasis (letterspaced in the German print)",
+   "zaehlung": null,
+   "frage": "The prints emphasize by letterspacing.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "italics",
+     "hinweis": "The English convention."
+    },
+    {
+     "key": "b",
+     "en": "small caps",
+     "hinweis": "Visible, but small caps are already used for names."
+    },
+    {
+     "key": "c",
+     "en": "letterspacing as in the print",
+     "hinweis": "Faithful; unusual in English."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "ueberschriften",
+   "gruppe": "conventions",
+   "deutsch": "Headings and tables of contents",
+   "zaehlung": null,
+   "frage": "Chapter titles, section headings and tables of contents.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "English only (the toggle shows the German)",
+     "hinweis": "Clean."
+    },
+    {
+     "key": "b",
+     "en": "English with the German title under it",
+     "hinweis": "Always visible; doubles every heading."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "abkuerzungen",
+   "gruppe": "conventions",
+   "deutsch": "Period abbreviations (u. s. w., d. h., vgl.)",
+   "zaehlung": null,
+   "frage": "There are thousands: d. h. alone occurs about 5,650 times.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "spelled out in the text (and so on, that is), abbreviated in notes",
+     "hinweis": "Reads well."
+    },
+    {
+     "key": "b",
+     "en": "English abbreviations everywhere (etc., i.e., cf.)",
+     "hinweis": "Compact."
+    },
+    {
+     "key": "c",
+     "en": "as the German (abbreviated where the German abbreviates)",
+     "hinweis": "Faithful to the page."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "wortspiele",
+   "gruppe": "conventions",
+   "deutsch": "Puns and word play",
+   "zaehlung": null,
+   "frage": "Er-innerung (recollection, inwardizing), Ur-teil (judgment, original division), zugrunde gehen (perish, go to the ground).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "render the sense; the German word shows on tap; a note only where the argument depends on it",
+     "hinweis": "Light page."
+    },
+    {
+     "key": "b",
+     "en": "a translator's note at every pun",
+     "hinweis": "Explains everything; heavy."
+    },
+    {
+     "key": "c",
+     "en": "imitate the pun in English where possible",
+     "hinweis": "Lively; risks inventing."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "deutsch-in-klammern",
+   "gruppe": "conventions",
+   "deutsch": "German words in brackets",
+   "zaehlung": null,
+   "frage": "Many translations put key German words in brackets in the text.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "never in the text: the German shows on tap",
+     "hinweis": "Clean page."
+    },
+    {
+     "key": "b",
+     "en": "at the first occurrence of each key term",
+     "hinweis": "A compromise."
+    },
+    {
+     "key": "c",
+     "en": "at every key term",
+     "hinweis": "Maximal transparency; cluttered."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "er-mensch",
+   "gruppe": "conventions",
+   "deutsch": "Generic \"he\" for der Mensch",
+   "zaehlung": null,
+   "frage": "When the text says der Mensch … er.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "he",
+     "hinweis": "Follows the historical text."
+    },
+    {
+     "key": "b",
+     "en": "they",
+     "hinweis": "Modern; changes the text's grammar."
+    },
+    {
+     "key": "c",
+     "en": "rewrite into the plural",
+     "hinweis": "Neutral; loosens fidelity."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "anrede",
+   "gruppe": "conventions",
+   "deutsch": "Address to the audience (Meine Herren!)",
+   "zaehlung": null,
+   "frage": "The lectures were given to an all-male audience.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Gentlemen!",
+     "hinweis": "Historical fact."
+    },
+    {
+     "key": "b",
+     "en": "Ladies and gentlemen!",
+     "hinweis": "Inclusive; untrue to the occasion."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "bibelformen",
+   "gruppe": "conventions",
+   "deutsch": "Archaic forms in Bible quotations (thou, hath)",
+   "zaehlung": null,
+   "frage": "Only where a quotation is matched to the King James Version.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "keep the KJV forms",
+     "hinweis": "Recognizable as scripture."
+    },
+    {
+     "key": "b",
+     "en": "modernize",
+     "hinweis": "Uniform with the rest."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "werktitel-zitiert",
+   "gruppe": "conventions",
+   "deutsch": "Titles of works cited in the text",
+   "zaehlung": null,
+   "frage": "E.g. when Hegel cites Kant's Kritik der reinen Vernunft.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "English title (original on tap)",
+     "hinweis": "Readable."
+    },
+    {
+     "key": "b",
+     "en": "original title",
+     "hinweis": "Exact."
+    },
+    {
+     "key": "c",
+     "en": "English with the original at first mention",
+     "hinweis": "Both, once."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "personennamen",
+   "gruppe": "conventions",
+   "deutsch": "Personal names",
+   "zaehlung": null,
+   "frage": "Friedrich der Große, Kaiser Karl, Platon, Aristoteles.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "established English forms (Frederick the Great, Plato)",
+     "hinweis": "What English readers expect."
+    },
+    {
+     "key": "b",
+     "en": "the German forms",
+     "hinweis": "Foreign in English."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "ortsnamen",
+   "gruppe": "conventions",
+   "deutsch": "Place names",
+   "zaehlung": null,
+   "frage": "München, Köln, Wien, Rom.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "English forms (Munich, Cologne, Vienna, Rome)",
+     "hinweis": "Standard English."
+    },
+    {
+     "key": "b",
+     "en": "German forms",
+     "hinweis": "Foreign in English."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "franzoesisch",
+   "gruppe": "conventions",
+   "deutsch": "French and English passages",
+   "zaehlung": null,
+   "frage": "Hegel excerpts and quotes French; Schelling quotes French and English.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "keep them as they are, English on tap for French",
+     "hinweis": "Like Greek and Latin."
+    },
+    {
+     "key": "b",
+     "en": "translate French into English in the text",
+     "hinweis": "Smoother; loses the page."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "verse",
+   "gruppe": "conventions",
+   "deutsch": "Verse (Hegel's poem Eleusis, quoted Goethe, Schiller, Homer)",
+   "zaehlung": null,
+   "frage": "Verse occurs in Hegel's early writings and in many quotations.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "prose translation, line breaks kept",
+     "hinweis": "Accurate; no poetry claimed."
+    },
+    {
+     "key": "b",
+     "en": "verse translation",
+     "hinweis": "Reads as poetry; a creative act."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "neologismen",
+   "gruppe": "conventions",
+   "deutsch": "Neologisms",
+   "zaehlung": null,
+   "frage": "The authors coin words (Tathandlung, Ichheit, Ineinsbildung, Seynkönnen). Does the translation coin English words too?",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "a fixed English coinage for each of the authors' coinages, none of our own beyond that",
+     "hinweis": "Strange words stay strange, ordinary words stay ordinary."
+    },
+    {
+     "key": "b",
+     "en": "render coinages descriptively",
+     "hinweis": "Readable; hides that a word was new."
+    },
+    {
+     "key": "c",
+     "en": "keep the German coinage",
+     "hinweis": "Exact; many German words in an English text."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "deutsch-unuebersetzt",
+   "gruppe": "conventions",
+   "deutsch": "German words left untranslated",
+   "zaehlung": null,
+   "frage": "Should any German words stay German in the English text (Wissenschaftslehre, Geist, Aufhebung …)?",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "only Wissenschaftslehre and what the glossary lists",
+     "hinweis": "Everything else in English; the German shows on tap."
+    },
+    {
+     "key": "b",
+     "en": "the key terms (Geist, Begriff, Aufhebung …)",
+     "hinweis": "Familiar to specialists; opaque to others."
+    },
+    {
+     "key": "c",
+     "en": "none",
+     "hinweis": "Fully English."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "polemik",
+   "gruppe": "conventions",
+   "deutsch": "Polemical and comic passages",
+   "zaehlung": null,
+   "frage": "Fichte against Nicolai, Hegel's Jena reviews, Schelling's attacks on Hegel are sharp and sometimes funny.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "render them in kind: sharp where the German is sharp",
+     "hinweis": "Keeps the voice."
+    },
+    {
+     "key": "b",
+     "en": "neutral academic tone throughout",
+     "hinweis": "Uniform; loses the voice."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "aemter",
+   "gruppe": "conventions",
+   "deutsch": "Institutions and offices (Hofrat, Geheimer Rat, Konsistorium, Kurfürst)",
+   "zaehlung": null,
+   "frage": "Titles and offices of the old German states, which have no exact English equivalents.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "established English where it exists (Elector, consistory), else German with explanation on tap",
+     "hinweis": "Readable and exact."
+    },
+    {
+     "key": "b",
+     "en": "German throughout",
+     "hinweis": "Exact; opaque."
+    },
+    {
+     "key": "c",
+     "en": "English descriptions throughout (court councillor)",
+     "hinweis": "Readable; some are clumsy."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "bibel",
+   "gruppe": "conventions",
+   "deutsch": "Bible quotations",
+   "zaehlung": null,
+   "frage": "The authors quote Luther's Bible, often from memory.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "translate the author's German, matched to the King James Version where it follows Luther word for word",
+     "hinweis": "Recognizable, period-appropriate."
+    },
+    {
+     "key": "b",
+     "en": "match a modern Bible (NRSV)",
+     "hinweis": "Modern, but out of period."
+    },
+    {
+     "key": "c",
+     "en": "translate fresh, no matching",
+     "hinweis": "Faithful to the author's wording, unrecognizable as scripture."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "griechisch-latein",
+   "gruppe": "conventions",
+   "deutsch": "Greek and Latin quotations",
+   "zaehlung": null,
+   "frage": "Above all in Schelling's mythology volumes (about 9,400 Greek words).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "keep the original; translation on tap",
+     "hinweis": "Like the German: one click shows it."
+    },
+    {
+     "key": "b",
+     "en": "keep the original + translation in brackets",
+     "hinweis": "Always visible, interrupts the text."
+    },
+    {
+     "key": "c",
+     "en": "translate in the text, original on tap",
+     "hinweis": "Easiest to read, loses the look of the page."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gross-klein",
+   "gruppe": "conventions",
+   "deutsch": "Capitalization: the absolute, spirit, Idea",
+   "zaehlung": null,
+   "frage": "Older translations capitalize (the Absolute, Spirit, Notion); current ones mostly don't.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "all lowercase except God (spirit, concept, idea, the absolute)",
+     "hinweis": "Plain, no rule needed."
+    },
+    {
+     "key": "b",
+     "en": "lowercase, but \"the Idea\" capitalized",
+     "hinweis": "Marks Hegel's (and Schelling's) absolute Idea; needs a rule for when."
+    },
+    {
+     "key": "c",
+     "en": "capitals for the key terms (Spirit, Absolute, Idea, Nature)",
+     "hinweis": "Solemn; older style."
+    }
+   ],
+   "vorschlag": "b"
+  },
+  {
+   "id": "pronomen-gott",
+   "gruppe": "conventions",
+   "deutsch": "Pronoun for God",
+   "zaehlung": null,
+   "frage": "Above all in Schelling's philosophy of revelation, where God is a person.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "he (lowercase)",
+     "hinweis": "Current academic usage."
+    },
+    {
+     "key": "b",
+     "en": "He (capitalized)",
+     "hinweis": "Devotional, period convention."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "dasein-existenz",
+   "gruppe": "hegel",
+   "deutsch": "Dasein / Existenz",
+   "zaehlung": {
+    "f": 808,
+    "s": 670,
+    "h": 2459
+   },
+   "frage": "In Hegel's logic two different categories. English has one natural word, existence.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "existence / concrete existence",
+     "hinweis": "Current standard for the logic; plain \"existence\" elsewhere."
+    },
+    {
+     "key": "b",
+     "en": "determinate being / existence",
+     "hinweis": "Older standard; makes Dasein a technical term."
+    },
+    {
+     "key": "c",
+     "en": "existence for both",
+     "hinweis": "Simple; loses the distinction (the German stays visible)."
+    },
+    {
+     "key": "d",
+     "en": "thereness / existence",
+     "hinweis": "Literal; used once for the Encyclopedia Logic."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "dasein-je-autor",
+   "gruppe": "shared",
+   "deutsch": "Dasein / Existenz in Fichte and Schelling",
+   "zaehlung": {
+    "f": 808,
+    "s": 670,
+    "h": 2459
+   },
+   "frage": "If Hegel's Existenz becomes \"concrete existence\", should Fichte's and Schelling's Existenz follow? Neither of them has Hegel's contrast; for Schelling Existenz is a key term (ground and existence).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "existence for both in Fichte and Schelling; Hegel's rule only in Hegel",
+     "hinweis": "A rule per author; the German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "Hegel's pair everywhere",
+     "hinweis": "One rule; invents a doctrine in Fichte and Schelling."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "beziehung-verhaeltnis",
+   "gruppe": "hegel",
+   "deutsch": "Beziehung / Verhältnis",
+   "zaehlung": {
+    "f": 934,
+    "s": 786,
+    "h": 3504
+   },
+   "frage": "Hegel uses both all the time, and they are not the same.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "relation / relationship",
+     "hinweis": "Keeps \"self-relation\"; Verhältnis = ratio in quantity."
+    },
+    {
+     "key": "b",
+     "en": "connection, reference / relation",
+     "hinweis": "Beziehung becomes \"reference\"."
+    },
+    {
+     "key": "c",
+     "en": "relation for both",
+     "hinweis": "Loses the distinction."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gegenstand-objekt",
+   "gruppe": "hegel",
+   "deutsch": "Gegenstand / Objekt",
+   "zaehlung": {
+    "f": 834,
+    "s": 1518,
+    "h": 1789
+   },
+   "frage": "Two German words for \"object\". (Count: Gegenstand.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "object for both",
+     "hinweis": "The German word stays visible; the only option that works in Fichte and Schelling too."
+    },
+    {
+     "key": "b",
+     "en": "subject matter / object",
+     "hinweis": "Distinct, but impossible in the Phenomenology and in Fichte."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "einzelheit",
+   "gruppe": "hegel",
+   "deutsch": "Einzelheit, das Einzelne",
+   "zaehlung": {
+    "f": 4,
+    "s": 46,
+    "h": 52
+   },
+   "frage": "The third moment of the concept, after universality and particularity.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "singularity, singular",
+     "hinweis": "Keeps \"individual\" free for Individuum."
+    },
+    {
+     "key": "b",
+     "en": "individuality, individual",
+     "hinweis": "Natural English; merges with Individuum."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "an-ihm",
+   "gruppe": "hegel",
+   "deutsch": "an ihm (selbst)",
+   "zaehlung": {
+    "f": 3,
+    "s": 5,
+    "h": 951
+   },
+   "frage": "Hegel distinguishes an sich (in itself) from an ihm (on or in it). English loses this easily.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "in its own self",
+     "hinweis": "Stiff, but always distinct from \"in itself\"."
+    },
+    {
+     "key": "b",
+     "en": "in it / within it",
+     "hinweis": "Natural; the distinction disappears."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "entaeusserung",
+   "gruppe": "hegel",
+   "deutsch": "Entäußerung / Entfremdung",
+   "zaehlung": {
+    "f": 5,
+    "s": 29,
+    "h": 88
+   },
+   "frage": "Spirit's going out of itself; also the self-emptying (kenosis) of Christ.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "externalization / alienation",
+     "hinweis": "What most of the literature says."
+    },
+    {
+     "key": "b",
+     "en": "relinquishment / alienation",
+     "hinweis": "Stresses giving oneself up."
+    },
+    {
+     "key": "c",
+     "en": "emptying / alienation",
+     "hinweis": "Stresses the kenosis."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "sache-selbst",
+   "gruppe": "hegel",
+   "deutsch": "die Sache selbst",
+   "zaehlung": {
+    "f": 44,
+    "s": 67,
+    "h": 162
+   },
+   "frage": "A chapter title of the Phenomenology, and an everyday phrase.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "the matter itself",
+     "hinweis": "Literal; works in everyday use too."
+    },
+    {
+     "key": "b",
+     "en": "the crux of the matter",
+     "hinweis": "Idiomatic, loses Sache."
+    },
+    {
+     "key": "c",
+     "en": "the thing itself",
+     "hinweis": "Collides with Kant's thing in itself."
+    },
+    {
+     "key": "d",
+     "en": "the heart of the matter",
+     "hinweis": "Idiomatic."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "herr-knecht",
+   "gruppe": "hegel",
+   "deutsch": "Herr / Knecht, Herrschaft / Knechtschaft",
+   "zaehlung": {
+    "f": 32,
+    "s": 57,
+    "h": 108
+   },
+   "frage": "The most famous section of the Phenomenology. (Count: Knecht.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "master / servant; mastery / servitude",
+     "hinweis": "Current standard."
+    },
+    {
+     "key": "b",
+     "en": "lord / bondsman; lordship / bondage",
+     "hinweis": "The older standard; feudal."
+    },
+    {
+     "key": "c",
+     "en": "master / slave",
+     "hinweis": "The French tradition; Knecht is not Sklave."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "schein",
+   "gruppe": "hegel",
+   "deutsch": "Schein / scheinen",
+   "zaehlung": {
+    "f": 259,
+    "s": 599,
+    "h": 742
+   },
+   "frage": "In Hegel's logic of essence, essence \"shines\" in itself. Elsewhere Schein is semblance; in Kant, illusion.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "shine in the logic of essence, semblance elsewhere, illusion in Kant's sense",
+     "hinweis": "By context."
+    },
+    {
+     "key": "b",
+     "en": "semblance throughout",
+     "hinweis": "Uniform; loses the play with scheinen."
+    },
+    {
+     "key": "c",
+     "en": "illusory being",
+     "hinweis": "The older standard."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "selbstaendig",
+   "gruppe": "hegel",
+   "deutsch": "selbständig, Selbständigkeit",
+   "zaehlung": {
+    "f": 588,
+    "s": 366,
+    "h": 1466
+   },
+   "frage": "Standing on one's own.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "self-sufficient",
+     "hinweis": "Current standard."
+    },
+    {
+     "key": "b",
+     "en": "self-subsistent",
+     "hinweis": "Metaphysical, heavier."
+    },
+    {
+     "key": "c",
+     "en": "independent",
+     "hinweis": "Natural, loses the selbst."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "entzweiung",
+   "gruppe": "hegel",
+   "deutsch": "Entzweiung",
+   "zaehlung": {
+    "f": 5,
+    "s": 95,
+    "h": 162
+   },
+   "frage": "Splitting into two, the starting point of the Differenzschrift.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "diremption",
+     "hinweis": "Most common in the literature; rare English word."
+    },
+    {
+     "key": "b",
+     "en": "estrangement",
+     "hinweis": "Emotional overtone."
+    },
+    {
+     "key": "c",
+     "en": "division",
+     "hinweis": "Plain."
+    },
+    {
+     "key": "d",
+     "en": "dichotomy",
+     "hinweis": "Logical overtone."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "reflexion-in-sich",
+   "gruppe": "hegel",
+   "deutsch": "Reflexion-in-sich / in Anderes",
+   "zaehlung": {
+    "f": 0,
+    "s": 0,
+    "h": 327
+   },
+   "frage": "A key phrase of the logic of essence.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "reflection-into-itself / into-another",
+     "hinweis": "Most of the literature."
+    },
+    {
+     "key": "b",
+     "en": "reflection-in-itself",
+     "hinweis": "Literal, close to \"in itself\"."
+    },
+    {
+     "key": "c",
+     "en": "immanent reflection",
+     "hinweis": "Interpretive."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gehalt",
+   "gruppe": "hegel",
+   "deutsch": "Gehalt",
+   "zaehlung": {
+    "f": 490,
+    "s": 282,
+    "h": 529
+   },
+   "frage": "Next to Inhalt (content): the substantial content of something. Also \"salary\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "import",
+     "hinweis": "Short, slightly old-fashioned."
+    },
+    {
+     "key": "b",
+     "en": "basic content",
+     "hinweis": "Clear, heavy."
+    },
+    {
+     "key": "c",
+     "en": "content (same as Inhalt)",
+     "hinweis": "Simple; the German stays visible."
+    }
+   ],
+   "vorschlag": "b"
+  },
+  {
+   "id": "vorsatz",
+   "gruppe": "hegel",
+   "deutsch": "Vorsatz (vs. Zweck)",
+   "zaehlung": {
+    "f": 75,
+    "s": 25,
+    "h": 17
+   },
+   "frage": "In Hegel's theory of action the first stage of responsibility.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "purpose (marked as Vorsatz)",
+     "hinweis": "Established in discussions of Hegel's ethics; clashes with Zweck."
+    },
+    {
+     "key": "b",
+     "en": "resolve / intent",
+     "hinweis": "Distinct from Zweck."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "kultus",
+   "gruppe": "hegel",
+   "deutsch": "Kultus",
+   "zaehlung": {
+    "f": 4,
+    "s": 50,
+    "h": 141
+   },
+   "frage": "Religious practice as a whole, in Hegel's philosophy of religion.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "cult",
+     "hinweis": "Technical, no pejorative sense meant (note)."
+    },
+    {
+     "key": "b",
+     "en": "cultus",
+     "hinweis": "Latin, avoids the modern sense."
+    },
+    {
+     "key": "c",
+     "en": "worship",
+     "hinweis": "Natural; collides with Gottesdienst."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "phantasie",
+   "gruppe": "hegel",
+   "deutsch": "Phantasie vs. Einbildungskraft",
+   "zaehlung": {
+    "f": 103,
+    "s": 77,
+    "h": 214
+   },
+   "frage": "Two words for imagination. (Count: Phantasie.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "fantasy / imagination",
+     "hinweis": "Distinct; fantasy can sound frivolous."
+    },
+    {
+     "key": "b",
+     "en": "imagination for both",
+     "hinweis": "Natural; the German stays visible."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "wohl",
+   "gruppe": "hegel",
+   "deutsch": "das Wohl",
+   "zaehlung": null,
+   "frage": "In the philosophy of right: the good of a person (Absicht und Wohl).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "well-being",
+     "hinweis": "Personal."
+    },
+    {
+     "key": "b",
+     "en": "welfare",
+     "hinweis": "Political overtone."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gemeinde",
+   "gruppe": "hegel",
+   "deutsch": "Gemeinde",
+   "zaehlung": {
+    "f": 92,
+    "s": 14,
+    "h": 114
+   },
+   "frage": "The religious community of the spirit, a church congregation, or a political municipality.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "community / congregation / municipality by sense",
+     "hinweis": "Three senses."
+    },
+    {
+     "key": "b",
+     "en": "community throughout",
+     "hinweis": "Uniform."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "sinnlichkeit",
+   "gruppe": "hegel",
+   "deutsch": "Sinnlichkeit vs. Sensibilität",
+   "zaehlung": {
+    "f": 145,
+    "s": 84,
+    "h": 177
+   },
+   "frage": "Sensibilität is the physiological term (with irritability and reproduction); Sinnlichkeit is sensuousness, or Kant's faculty. (Count: Sinnlichkeit.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "sensibility for both",
+     "hinweis": "Merges them."
+    },
+    {
+     "key": "b",
+     "en": "sensuousness / sensibility",
+     "hinweis": "Kant's faculty may stay \"sensibility\"."
+    },
+    {
+     "key": "c",
+     "en": "sentience / sensibility",
+     "hinweis": "Modern."
+    }
+   ],
+   "vorschlag": "b"
+  }
+ ]
+}

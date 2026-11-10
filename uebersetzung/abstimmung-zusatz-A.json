@@ -1,0 +1,3782 @@
+{
+ "entscheidungen": [
+  {
+   "id": "aufheben-hegel",
+   "gruppe": "hegel",
+   "deutsch": "aufheben, Aufhebung (in Hegel)",
+   "zaehlung": {
+    "f": 520,
+    "s": 1049,
+    "h": 3370
+   },
+   "frage": "Hegel's signature word: to cancel, to keep and to lift up, all at once. The current standard renders it \"sublate\"; older versions say \"supersede\", and translations of the early writings \"annul\" or \"nullify\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "sublate, sublation",
+     "hinweis": "A technical coinage; one English word for all three senses."
+    },
+    {
+     "key": "b",
+     "en": "supersede, supersession",
+     "hinweis": "Older standard; ordinary English, but the sense of keeping is lost."
+    },
+    {
+     "key": "c",
+     "en": "suspend, suspension",
+     "hinweis": "Holds cancelling and keeping together; tried and dropped by current translators."
+    },
+    {
+     "key": "d",
+     "en": "by context: cancel, preserve, raise",
+     "hinweis": "Readable, but the term disappears from the page."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "an-sich-fuer-sich",
+   "gruppe": "hegel",
+   "deutsch": "an sich / für sich",
+   "zaehlung": {
+    "f": 1264,
+    "s": 2058,
+    "h": 2697
+   },
+   "frage": "Two of Hegel's basic phrases (also in Fichte and Schelling): what something is in itself, and what it is for itself. Some translations render them \"implicit\" and \"explicit\". (Count: an sich.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "in itself / for itself; hyphenated nouns (being-in-itself)",
+     "hinweis": "Literal; current standard."
+    },
+    {
+     "key": "b",
+     "en": "implicit / explicit",
+     "hinweis": "Smooth, but the spatial picture and the link to the German are lost."
+    },
+    {
+     "key": "c",
+     "en": "in itself / for itself, \"on its own\" where everyday",
+     "hinweis": "Literal for the term, idiomatic elsewhere; needs a judgment at each passage."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "in-sich",
+   "gruppe": "hegel",
+   "deutsch": "in sich, Insichsein",
+   "zaehlung": {
+    "f": 1288,
+    "s": 1878,
+    "h": 4136
+   },
+   "frage": "In sich is not the same as an sich. Hegel uses it for a movement inward (Insichgehen) or what is contained within.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "within itself; being-within-itself",
+     "hinweis": "Keeps it visibly apart from \"in itself\"."
+    },
+    {
+     "key": "b",
+     "en": "in itself",
+     "hinweis": "Natural, but merges with an sich."
+    },
+    {
+     "key": "c",
+     "en": "inwardly turned (being), take the inward turn",
+     "hinweis": "Elegant; not established as a technical rendering."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "bei-sich",
+   "gruppe": "hegel",
+   "deutsch": "bei sich (selbst)",
+   "zaehlung": {
+    "f": 144,
+    "s": 34,
+    "h": 95
+   },
+   "frage": "Hegel's formula for freedom: being bei sich selbst in an other.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "at home with itself",
+     "hinweis": "The phrasing most of the literature uses for the freedom formula."
+    },
+    {
+     "key": "b",
+     "en": "with itself",
+     "hinweis": "Literal, flat."
+    },
+    {
+     "key": "c",
+     "en": "at one with itself",
+     "hinweis": "One current translation; suggests harmony rather than self-possession."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "bewegung",
+   "gruppe": "shared",
+   "deutsch": "Bewegung",
+   "zaehlung": {
+    "f": 300,
+    "s": 1711,
+    "h": 2467
+   },
+   "frage": "Physical motion in the philosophy of nature, but also the \"movement\" of the concept or of consciousness in Hegel's logic and Phenomenology.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "motion in physics, movement in logic and the Phenomenology",
+     "hinweis": "By sense; the German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "motion throughout",
+     "hinweis": "Uniform; odd for the life of the concept."
+    },
+    {
+     "key": "c",
+     "en": "movement throughout",
+     "hinweis": "Uniform; odd for Newton and Kepler."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gleichgueltigkeit-indifferenz",
+   "gruppe": "shared",
+   "deutsch": "Gleichgültigkeit / Indifferenz",
+   "zaehlung": {
+    "f": 51,
+    "s": 834,
+    "h": 405
+   },
+   "frage": "Schelling's Indifferenz (the point where opposites are not yet different) and Hegel's everyday-logical Gleichgültigkeit both come out as \"indifference\". (Count: Indifferenz.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "indifference for both",
+     "hinweis": "The German word stays visible in the reader."
+    },
+    {
+     "key": "b",
+     "en": "indifference / non-difference (Indifferenz)",
+     "hinweis": "Distinct; non-difference is closer to Schelling's meaning but sounds coined."
+    },
+    {
+     "key": "c",
+     "en": "unconcern or neutrality for Gleichgültigkeit",
+     "hinweis": "Distinct; loses Hegel's play with the Schellingian term."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "zugrunde-gehen",
+   "gruppe": "hegel",
+   "deutsch": "zu Grunde gehen",
+   "zaehlung": {
+    "f": 59,
+    "s": 9,
+    "h": 54
+   },
+   "frage": "Everyday German for \"perish\", but Hegel puns on it: contradiction \"goes to its ground\" (Grund).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "founder where Hegel plays on Grund, otherwise perish",
+     "hinweis": "Keeps the pun where it counts."
+    },
+    {
+     "key": "b",
+     "en": "go to the ground",
+     "hinweis": "Literal; keeps the pun everywhere, odd English."
+    },
+    {
+     "key": "c",
+     "en": "perish throughout",
+     "hinweis": "Natural; the pun is lost."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "entstehen-vergehen",
+   "gruppe": "hegel",
+   "deutsch": "Entstehen / Vergehen",
+   "zaehlung": {
+    "f": 403,
+    "s": 651,
+    "h": 308
+   },
+   "frage": "The two moments of becoming in Hegel's logic of being.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "coming-to-be / ceasing-to-be",
+     "hinweis": "Current standard; hyphenated, clearly terms."
+    },
+    {
+     "key": "b",
+     "en": "arising / passing away",
+     "hinweis": "Natural English; reads less like a category."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "schlechte-unendlichkeit",
+   "gruppe": "hegel",
+   "deutsch": "schlechte Unendlichkeit",
+   "zaehlung": {
+    "f": 0,
+    "s": 0,
+    "h": 68
+   },
+   "frage": "The endless series that never arrives, as opposed to true infinity.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "bad infinity",
+     "hinweis": "Current standard; literal."
+    },
+    {
+     "key": "b",
+     "en": "spurious infinity",
+     "hinweis": "Older standard; sounds more refined, less literal."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "ideell",
+   "gruppe": "shared",
+   "deutsch": "ideell / ideal, Idealität (and reell / real)",
+   "zaehlung": {
+    "f": 7,
+    "s": 607,
+    "h": 805
+   },
+   "frage": "German has ideal and ideell, real and reell; Hegel and Schelling use all four. English has only \"ideal\" and \"real\". (Count: ideell.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "ideal and real for all four; Idealität = ideality",
+     "hinweis": "The German word stays visible in the reader."
+    },
+    {
+     "key": "b",
+     "en": "Idealität = idealization",
+     "hinweis": "One current translation; distinct, but idiosyncratic."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "differenz",
+   "gruppe": "shared",
+   "deutsch": "Differenz (vs. Unterschied)",
+   "zaehlung": {
+    "f": 56,
+    "s": 1070,
+    "h": 730
+   },
+   "frage": "Schelling's quantitative Differenz and Hegel's Differenz sit beside the ordinary Unterschied, which also means difference.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "difference for both",
+     "hinweis": "The German word stays visible in the reader."
+    },
+    {
+     "key": "b",
+     "en": "differentiation for Differenz",
+     "hinweis": "Distinct; suggests a process."
+    },
+    {
+     "key": "c",
+     "en": "non-indifference for Differenz",
+     "hinweis": "Tried once by a current translator; not adopted by others."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "kraft",
+   "gruppe": "shared",
+   "deutsch": "Kraft / Macht",
+   "zaehlung": {
+    "f": 1532,
+    "s": 2353,
+    "h": 657
+   },
+   "frage": "Kraft is force in physics and in Hegel's \"Force and the Understanding\", but also a person's power. Macht is power. (Count: Kraft.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "force in physics and Hegel's chapter, power for agency; Macht = power",
+     "hinweis": "By sense; the German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "force throughout",
+     "hinweis": "Uniform; stiff for human powers."
+    },
+    {
+     "key": "c",
+     "en": "power throughout",
+     "hinweis": "Collides with Macht, Gewalt and Potenz."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "wirklichkeit",
+   "gruppe": "shared",
+   "deutsch": "Wirklichkeit, wirklich",
+   "zaehlung": {
+    "f": 472,
+    "s": 825,
+    "h": 1769
+   },
+   "frage": "Kant, Fichte, Schelling and Hegel. In the Kantian convention it is sometimes \"reality\", which then merges with Realität.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "actuality, actual, always",
+     "hinweis": "Keeps Realität = reality free."
+    },
+    {
+     "key": "b",
+     "en": "reality where ordinary, actuality in the logic",
+     "hinweis": "Natural; the term breaks apart."
+    },
+    {
+     "key": "c",
+     "en": "reality, real",
+     "hinweis": "Natural English; merges two German words."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "sache",
+   "gruppe": "shared",
+   "deutsch": "Sache",
+   "zaehlung": {
+    "f": 1021,
+    "s": 762,
+    "h": 1111
+   },
+   "frage": "The matter at issue, but in Hegel's logic also a category (die Sache as \"fact\"). Kant pairs it with Ding.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "matter; fact as a category in Hegel's logic",
+     "hinweis": "Keeps it apart from Ding = thing."
+    },
+    {
+     "key": "b",
+     "en": "thing",
+     "hinweis": "Natural; merges with Ding."
+    },
+    {
+     "key": "c",
+     "en": "by context: matter, issue, fact",
+     "hinweis": "Readable; no fixed term."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "begriff",
+   "gruppe": "shared",
+   "deutsch": "Begriff",
+   "zaehlung": {
+    "f": 4532,
+    "s": 5383,
+    "h": 6668
+   },
+   "frage": "The central term of Hegel's logic, and a basic term for Kant, Fichte and Schelling.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "concept",
+     "hinweis": "Current standard in all three authors."
+    },
+    {
+     "key": "b",
+     "en": "Notion",
+     "hinweis": "Older standard for Hegel; marks the speculative sense."
+    },
+    {
+     "key": "c",
+     "en": "conception",
+     "hinweis": "Natural English; suggests a mental act."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "begreifen",
+   "gruppe": "shared",
+   "deutsch": "begreifen, unbegreiflich",
+   "zaehlung": {
+    "f": 1275,
+    "s": 2205,
+    "h": 945
+   },
+   "frage": "Fichte's late lectures turn on das Unbegreifliche; Hegel's begreifen is grasping in the concept. Our drafts disagree here.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "comprehend, incomprehensible",
+     "hinweis": "Hegel's draft; keeps the tie to Begriff loose."
+    },
+    {
+     "key": "b",
+     "en": "conceive, inconceivable",
+     "hinweis": "Fichte's draft; close to \"concept\"."
+    },
+    {
+     "key": "c",
+     "en": "by author: conceive in Fichte, comprehend in Hegel",
+     "hinweis": "Each author idiomatic; one German word, two English."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "bestimmtheit",
+   "gruppe": "shared",
+   "deutsch": "Bestimmtheit",
+   "zaehlung": {
+    "f": 363,
+    "s": 114,
+    "h": 4172
+   },
+   "frage": "Being determinate. Fichte's established translations say \"determinacy\", Hegel's \"determinateness\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "determinateness",
+     "hinweis": "Hegel's standard; proposed for all three."
+    },
+    {
+     "key": "b",
+     "en": "determinacy",
+     "hinweis": "Fichte's standard; shorter."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "schluss",
+   "gruppe": "shared",
+   "deutsch": "Schluss, schließen",
+   "zaehlung": {
+    "f": 274,
+    "s": 286,
+    "h": 891
+   },
+   "frage": "In logic the syllogism, in Kant the \"inference of reason\", in everyday German a conclusion or an end.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "syllogism in formal logic, inference elsewhere",
+     "hinweis": "By sense."
+    },
+    {
+     "key": "b",
+     "en": "syllogism throughout",
+     "hinweis": "Uniform; odd outside formal logic."
+    },
+    {
+     "key": "c",
+     "en": "inference throughout",
+     "hinweis": "Natural; Hegel's doctrine of the syllogism disappears."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gattung",
+   "gruppe": "shared",
+   "deutsch": "Gattung",
+   "zaehlung": {
+    "f": 241,
+    "s": 333,
+    "h": 692
+   },
+   "frage": "Genus in logic and biology, but also the human species (Menschengattung). Our drafts disagree: Fichte's says \"species\", Hegel's \"genus\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "genus",
+     "hinweis": "Hegel's draft; the logical term stays visible."
+    },
+    {
+     "key": "b",
+     "en": "species",
+     "hinweis": "Fichte's draft; natural for humankind, but collides with Art."
+    },
+    {
+     "key": "c",
+     "en": "genus in logic and nature, species for humankind",
+     "hinweis": "By sense; needs a judgment at each passage."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "trieb",
+   "gruppe": "shared",
+   "deutsch": "Trieb",
+   "zaehlung": {
+    "f": 1112,
+    "s": 155,
+    "h": 384
+   },
+   "frage": "Fichte builds his ethics on the Trieb; Hegel and Schelling use it in nature and psychology.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "drive",
+     "hinweis": "Current standard for Fichte; modern overtone of psychology."
+    },
+    {
+     "key": "b",
+     "en": "impulse",
+     "hinweis": "Used in current translations of Hegel's logic; lighter."
+    },
+    {
+     "key": "c",
+     "en": "urge",
+     "hinweis": "One current translation of Hegel's psychology."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "erkenntnis",
+   "gruppe": "shared",
+   "deutsch": "Erkenntnis, erkennen",
+   "zaehlung": {
+    "f": 1227,
+    "s": 2323,
+    "h": 2045
+   },
+   "frage": "Kant's term for cognition, distinct from Wissen. In Schelling's identity philosophy it often reads like plain knowledge.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "cognition, cognize",
+     "hinweis": "Kantian convention; keeps Wissen = knowing apart."
+    },
+    {
+     "key": "b",
+     "en": "knowledge, know",
+     "hinweis": "Natural; merges with Wissen."
+    },
+    {
+     "key": "c",
+     "en": "cognition, but knowledge for the result in Schelling",
+     "hinweis": "By author; one German word, two English."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "sinnliche-gewissheit",
+   "gruppe": "hegel",
+   "deutsch": "sinnliche Gewissheit",
+   "zaehlung": {
+    "f": 1,
+    "s": 0,
+    "h": 64
+   },
+   "frage": "The first chapter of the Phenomenology of Spirit.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "sense-certainty",
+     "hinweis": "Older standard and most of the literature."
+    },
+    {
+     "key": "b",
+     "en": "sensuous certainty",
+     "hinweis": "Current standard translation of the Phenomenology."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "meinen",
+   "gruppe": "hegel",
+   "deutsch": "das Meinen (Phenomenology)",
+   "zaehlung": {
+    "f": 3,
+    "s": 2,
+    "h": 15
+   },
+   "frage": "Sense-certainty \"means\" this here; Hegel puns on meinen (to mean, to opine) and mein (mine).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "meaning (\"meaning something\")",
+     "hinweis": "Keeps the pun on \"mean\" alive in English."
+    },
+    {
+     "key": "b",
+     "en": "opining",
+     "hinweis": "Technical; loses the everyday sense."
+    },
+    {
+     "key": "c",
+     "en": "intending",
+     "hinweis": "Modern; suggests a theory of intentionality."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "wahrnehmung",
+   "gruppe": "hegel",
+   "deutsch": "Wahrnehmung (Phenomenology chapter)",
+   "zaehlung": {
+    "f": 573,
+    "s": 91,
+    "h": 310
+   },
+   "frage": "Second chapter of the Phenomenology; also the ordinary word for perception in all three authors.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "perception",
+     "hinweis": "Usual; noun as in other works."
+    },
+    {
+     "key": "b",
+     "en": "perceiving",
+     "hinweis": "Current standard translation; stresses the activity."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "verstand",
+   "gruppe": "shared",
+   "deutsch": "Verstand",
+   "zaehlung": {
+    "f": 1331,
+    "s": 1143,
+    "h": 1264
+   },
+   "frage": "Kant's faculty of concepts, set against Vernunft (reason) by all three authors.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "the understanding",
+     "hinweis": "Kantian convention; current standard."
+    },
+    {
+     "key": "b",
+     "en": "intellect",
+     "hinweis": "Used in some translations of Hegel's Jena and psychological writings."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "verkehrte-welt",
+   "gruppe": "hegel",
+   "deutsch": "verkehrte Welt",
+   "zaehlung": {
+    "f": 0,
+    "s": 1,
+    "h": 8
+   },
+   "frage": "The famous \"inverted world\" in the Phenomenology, where everything is turned around.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "inverted world",
+     "hinweis": "Standard in current scholarship."
+    },
+    {
+     "key": "b",
+     "en": "topsy-turvy world",
+     "hinweis": "Early English rendering; playful."
+    },
+    {
+     "key": "c",
+     "en": "upside-down world",
+     "hinweis": "Plain; loses the logical sense of inversion."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "anerkennung",
+   "gruppe": "shared",
+   "deutsch": "Anerkennung, anerkennen",
+   "zaehlung": {
+    "f": 420,
+    "s": 322,
+    "h": 611
+   },
+   "frage": "Fichte's and Hegel's key term for how selves constitute each other.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "recognition, recognize",
+     "hinweis": "Standard in both literatures."
+    },
+    {
+     "key": "b",
+     "en": "acknowledgment, acknowledge",
+     "hinweis": "Avoids the sense of identifying something again."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gestalt",
+   "gruppe": "hegel",
+   "deutsch": "Gestalt, Gestaltung",
+   "zaehlung": {
+    "f": 499,
+    "s": 978,
+    "h": 1575
+   },
+   "frage": "The \"shapes of consciousness\" in the Phenomenology, but also shapes in nature and art. Form and Figur are separate words.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "shape, shaping",
+     "hinweis": "Keeps Form = form free."
+    },
+    {
+     "key": "b",
+     "en": "form",
+     "hinweis": "Natural; merges with Form."
+    },
+    {
+     "key": "c",
+     "en": "figure, configuration",
+     "hinweis": "Collides with Figur."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "anschauung",
+   "gruppe": "shared",
+   "deutsch": "Anschauung, anschauen",
+   "zaehlung": {
+    "f": 2522,
+    "s": 1245,
+    "h": 1004
+   },
+   "frage": "Kant's intuition, Fichte's and Schelling's intellectual intuition; in everyday German a view.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "intuition, intuit",
+     "hinweis": "Kantian convention, used for all three."
+    },
+    {
+     "key": "b",
+     "en": "contemplation, view",
+     "hinweis": "Some older Schelling translations; loses Kant's term."
+    },
+    {
+     "key": "c",
+     "en": "perception",
+     "hinweis": "Collides with Wahrnehmung."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "vorstellung",
+   "gruppe": "shared",
+   "deutsch": "Vorstellung, vorstellen",
+   "zaehlung": {
+    "f": 832,
+    "s": 1646,
+    "h": 2144
+   },
+   "frage": "Kant's representation; for Hegel the pictorial thinking of religion, set against the concept.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "representation, represent",
+     "hinweis": "Kantian convention; current standard for all three."
+    },
+    {
+     "key": "b",
+     "en": "presentation",
+     "hinweis": "An older Kant and Fichte rendering."
+    },
+    {
+     "key": "c",
+     "en": "picture-thinking (Hegel)",
+     "hinweis": "Older Hegel standard; vivid, but not usable for Kant."
+    },
+    {
+     "key": "d",
+     "en": "idea, notion",
+     "hinweis": "Natural; collides with Idee and Begriff."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "erinnerung",
+   "gruppe": "hegel",
+   "deutsch": "Erinnerung, Er-innerung, erinnern",
+   "zaehlung": {
+    "f": 526,
+    "s": 538,
+    "h": 441
+   },
+   "frage": "Recollection, but Hegel writes Er-innerung (going inward). And zu erinnern often just means \"to point out\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "by sense: recollection; inwardizing for Er-innerung; \"note\" for zu erinnern",
+     "hinweis": "Three senses kept apart."
+    },
+    {
+     "key": "b",
+     "en": "recollection everywhere",
+     "hinweis": "Uniform; \"as recollected\" for \"as noted\" misleads."
+    },
+    {
+     "key": "c",
+     "en": "memory, remember",
+     "hinweis": "Natural; the inward movement disappears."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "raesonnement",
+   "gruppe": "shared",
+   "deutsch": "Räsonnement, räsonieren",
+   "zaehlung": {
+    "f": 117,
+    "s": 23,
+    "h": 137
+   },
+   "frage": "Often pejorative: clever but external argument, which Hegel sets against speculative thought.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "argumentation (\"merely clever\" where pejorative)",
+     "hinweis": "Current standard."
+    },
+    {
+     "key": "b",
+     "en": "ratiocination, rationalizing",
+     "hinweis": "Keeps the edge; sounds academic."
+    },
+    {
+     "key": "c",
+     "en": "reasoning",
+     "hinweis": "Neutral; the polemic is lost."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "bildung",
+   "gruppe": "shared",
+   "deutsch": "Bildung",
+   "zaehlung": {
+    "f": 564,
+    "s": 502,
+    "h": 441
+   },
+   "frage": "Hegel's cultural formation, Fichte's cultivation of the human being, formation in nature, schooling. Our drafts render it differently.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "by context: cultural formation, cultivation, formation, education",
+     "hinweis": "Each sense idiomatic; the German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "culture",
+     "hinweis": "Short; collides with Kultur."
+    },
+    {
+     "key": "c",
+     "en": "education throughout",
+     "hinweis": "Natural, but too narrow."
+    },
+    {
+     "key": "d",
+     "en": "formation throughout",
+     "hinweis": "Uniform; flat in social contexts."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "geist",
+   "gruppe": "shared",
+   "deutsch": "Geist",
+   "zaehlung": {
+    "f": 1100,
+    "s": 2688,
+    "h": 3781
+   },
+   "frage": "Spirit or mind? Hegel's Phenomenology of Spirit has also been called of Mind; Kantian translations often say mind.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "spirit",
+     "hinweis": "Current standard for Hegel; keeps \"mind\" for Gemüt."
+    },
+    {
+     "key": "b",
+     "en": "mind",
+     "hinweis": "Used in some Hegel translations and the Kantian convention; collides with Gemüt."
+    },
+    {
+     "key": "c",
+     "en": "spirit or mind by context",
+     "hinweis": "Natural; one German word, two English."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "recht",
+   "gruppe": "shared",
+   "deutsch": "Recht",
+   "zaehlung": {
+    "f": 3440,
+    "s": 935,
+    "h": 1602
+   },
+   "frage": "Fichte's Naturrecht, Hegel's philosophy of Recht: right, law, or justice?",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "right; law only for a legal order",
+     "hinweis": "Keeps Gesetz = law free."
+    },
+    {
+     "key": "b",
+     "en": "law",
+     "hinweis": "Natural in many passages; merges with Gesetz."
+    },
+    {
+     "key": "c",
+     "en": "justice",
+     "hinweis": "Moral overtone; collides with Gerechtigkeit."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gesinnung",
+   "gruppe": "shared",
+   "deutsch": "Gesinnung, Denkungsart",
+   "zaehlung": {
+    "f": 186,
+    "s": 120,
+    "h": 130
+   },
+   "frage": "The inner stance behind actions, in Kant's ethics, Fichte and Hegel. (Count: Gesinnung.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "disposition; way of thinking for Denkungsart",
+     "hinweis": "Kantian convention; current standard."
+    },
+    {
+     "key": "b",
+     "en": "conviction, attitude",
+     "hinweis": "Modern; political overtone."
+    },
+    {
+     "key": "c",
+     "en": "sensibility",
+     "hinweis": "One current Hegel translation; collides with Sinnlichkeit."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "handlung-tat-akt",
+   "gruppe": "shared",
+   "deutsch": "Handlung / Tat / Akt",
+   "zaehlung": {
+    "f": 962,
+    "s": 912,
+    "h": 482
+   },
+   "frage": "Fichte's Handlung des Ich, Hegel's Tat, Schelling's Akt. Our drafts sometimes render Handlung as \"act\". (Count: Handlung.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "action / deed / act",
+     "hinweis": "One English word per German word."
+    },
+    {
+     "key": "b",
+     "en": "act / deed / act",
+     "hinweis": "Natural for Fichte; merges Handlung with Akt."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "arbeit",
+   "gruppe": "shared",
+   "deutsch": "Arbeit",
+   "zaehlung": {
+    "f": 785,
+    "s": 228,
+    "h": 638
+   },
+   "frage": "Hegel's master and servant, Fichte's economics, the system of needs.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "labor",
+     "hinweis": "Current standard; marks the economic and philosophical term."
+    },
+    {
+     "key": "b",
+     "en": "work",
+     "hinweis": "Natural; weaker as a term."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gemeinwesen",
+   "gruppe": "shared",
+   "deutsch": "Gemeinwesen",
+   "zaehlung": {
+    "f": 14,
+    "s": 7,
+    "h": 46
+   },
+   "frage": "The political community. Our drafts disagree: Fichte's says \"commonwealth\", Hegel's \"polity\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "polity",
+     "hinweis": "Hegel's draft; neutral."
+    },
+    {
+     "key": "b",
+     "en": "commonwealth",
+     "hinweis": "Fichte's draft; period flavor."
+    },
+    {
+     "key": "c",
+     "en": "community",
+     "hinweis": "Natural; collides with Gemeinde and Gemeinschaft."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "offenbare-religion",
+   "gruppe": "hegel",
+   "deutsch": "offenbare Religion / offenbar",
+   "zaehlung": {
+    "f": 0,
+    "s": 0,
+    "h": 8
+   },
+   "frage": "Hegel's name for Christianity in the Phenomenology. Elsewhere our drafts render offenbar as \"manifest\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "revealed religion; manifest elsewhere",
+     "hinweis": "Established term; the link to offenbar is lost."
+    },
+    {
+     "key": "b",
+     "en": "manifest religion",
+     "hinweis": "Keeps the link: the religion in which God is manifest."
+    },
+    {
+     "key": "c",
+     "en": "revealed throughout",
+     "hinweis": "Uniform; wrong for Schelling's \"becoming manifest\"."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "reflexionsphilosophie",
+   "gruppe": "hegel",
+   "deutsch": "Reflexionsphilosophie",
+   "zaehlung": {
+    "f": 0,
+    "s": 4,
+    "h": 6
+   },
+   "frage": "Hegel's polemical label for Kant, Jacobi and Fichte in the Jena writings.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "philosophy of reflection",
+     "hinweis": "Literal; matches \"philosophy of nature\"."
+    },
+    {
+     "key": "b",
+     "en": "reflective philosophy",
+     "hinweis": "Older standard; part of the established English title of Faith and Knowledge."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "volksreligion",
+   "gruppe": "hegel",
+   "deutsch": "Volksreligion",
+   "zaehlung": {
+    "f": 4,
+    "s": 5,
+    "h": 27
+   },
+   "frage": "The young Hegel's ideal of a religion lived by a whole people, as in Greece.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "folk religion",
+     "hinweis": "Usual in the literature; slightly romantic."
+    },
+    {
+     "key": "b",
+     "en": "national religion",
+     "hinweis": "Political overtone."
+    },
+    {
+     "key": "c",
+     "en": "popular religion",
+     "hinweis": "Ambiguous: also religion of the common people."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "ueberhaupt",
+   "gruppe": "shared",
+   "deutsch": "überhaupt",
+   "zaehlung": {
+    "f": 2969,
+    "s": 3218,
+    "h": 3416
+   },
+   "frage": "Over 9,000 times. In the period it mostly means \"in general, as such\"; machine translation defaults to \"at all\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "in general, as such; \"at all\" only after negation",
+     "hinweis": "Period sense."
+    },
+    {
+     "key": "b",
+     "en": "at all",
+     "hinweis": "Modern default; often wrong."
+    },
+    {
+     "key": "c",
+     "en": "generally",
+     "hinweis": "Loses the sense of the most general form."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "vorhanden",
+   "gruppe": "hegel",
+   "deutsch": "vorhanden, Vorhandensein",
+   "zaehlung": {
+    "f": 725,
+    "s": 486,
+    "h": 1263
+   },
+   "frage": "What is present or at hand. Rendering it \"existing\" would collide with Dasein and Existenz.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "present, at hand; presence",
+     "hinweis": "Keeps \"existence\" free."
+    },
+    {
+     "key": "b",
+     "en": "existing; existence",
+     "hinweis": "Natural; merges three German words."
+    },
+    {
+     "key": "c",
+     "en": "given",
+     "hinweis": "Suggests Kant's datum."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "fuer-es",
+   "gruppe": "hegel",
+   "deutsch": "für es / für uns (Phenomenology)",
+   "zaehlung": {
+    "f": 2,
+    "s": 9,
+    "h": 171
+   },
+   "frage": "The method of the Phenomenology: what holds for consciousness (für es) versus for us, the observers.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "for it / for us",
+     "hinweis": "Literal; the reader must track the referent."
+    },
+    {
+     "key": "b",
+     "en": "for consciousness / for us",
+     "hinweis": "Explicit; adds an interpretation."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "uebergreifen",
+   "gruppe": "hegel",
+   "deutsch": "übergreifen, das übergreifende Allgemeine",
+   "zaehlung": {
+    "f": 0,
+    "s": 3,
+    "h": 27
+   },
+   "frage": "The universal that includes its own other.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "overreach",
+     "hinweis": "Established in the logic translations."
+    },
+    {
+     "key": "b",
+     "en": "overarch",
+     "hinweis": "One current translation; spatial, gentler."
+    },
+    {
+     "key": "c",
+     "en": "reach over and beyond, encompass",
+     "hinweis": "Clear; less fixed as a term."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "umschlagen",
+   "gruppe": "hegel",
+   "deutsch": "umschlagen, Umschlagen",
+   "zaehlung": {
+    "f": 1,
+    "s": 5,
+    "h": 53
+   },
+   "frage": "The sudden reversal of quantity into quality and of one determination into its opposite.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "turn over (into)",
+     "hinweis": "Keeps the image of a sudden flip."
+    },
+    {
+     "key": "b",
+     "en": "revert",
+     "hinweis": "Suggests going back."
+    },
+    {
+     "key": "c",
+     "en": "change abruptly",
+     "hinweis": "Plain; loses the image."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "zusammenschliessen",
+   "gruppe": "hegel",
+   "deutsch": "sich zusammenschließen (mit)",
+   "zaehlung": {
+    "f": 1,
+    "s": 1,
+    "h": 192
+   },
+   "frage": "A pun on Schluss (syllogism): the middle term \"concludes\" the extremes together.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "join together with; note on the pun",
+     "hinweis": "Plain English; the pun goes into a note."
+    },
+    {
+     "key": "b",
+     "en": "conclude itself with",
+     "hinweis": "Keeps the pun; odd English."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "zusammengehen",
+   "gruppe": "hegel",
+   "deutsch": "mit sich zusammengehen",
+   "zaehlung": {
+    "f": 22,
+    "s": 62,
+    "h": 126
+   },
+   "frage": "The movement in which something, in perishing, comes back to itself.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "coincide with itself",
+     "hinweis": "Established; clear."
+    },
+    {
+     "key": "b",
+     "en": "go together with itself",
+     "hinweis": "Literal; awkward."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "entschluss",
+   "gruppe": "hegel",
+   "deutsch": "sich entschließen, Entschluss (logical)",
+   "zaehlung": {
+    "f": 273,
+    "s": 163,
+    "h": 102
+   },
+   "frage": "The concept or idea \"resolves\" itself to go out into the world; also a person's decision.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "resolve, resolution",
+     "hinweis": "Keeps the logical sense."
+    },
+    {
+     "key": "b",
+     "en": "decide, decision",
+     "hinweis": "Too psychological for the concept."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "entlassen",
+   "gruppe": "hegel",
+   "deutsch": "sich (frei) entlassen",
+   "zaehlung": {
+    "f": 23,
+    "s": 29,
+    "h": 23
+   },
+   "frage": "The last move of the Logic: the idea freely releases itself into nature.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "(freely) release itself",
+     "hinweis": "Older standard; plain and exact."
+    },
+    {
+     "key": "b",
+     "en": "discharge itself",
+     "hinweis": "One current translation; electrical or military overtone."
+    },
+    {
+     "key": "c",
+     "en": "let go",
+     "hinweis": "Plain; weak."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "bestehen",
+   "gruppe": "hegel",
+   "deutsch": "bestehen, das Bestehen",
+   "zaehlung": {
+    "f": 292,
+    "s": 365,
+    "h": 812
+   },
+   "frage": "Hegel's word for how things hold out on their own; also \"consist in\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "subsist, subsistence; consist in",
+     "hinweis": "Keeps \"exist\" for Dasein and Existenz."
+    },
+    {
+     "key": "b",
+     "en": "exist, existence",
+     "hinweis": "Natural; merges with two other terms."
+    },
+    {
+     "key": "c",
+     "en": "persist, persistence",
+     "hinweis": "Collides with Kant's Beharrlichkeit."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "verwirklichen",
+   "gruppe": "hegel",
+   "deutsch": "verwirklichen / realisieren",
+   "zaehlung": {
+    "f": 255,
+    "s": 406,
+    "h": 610
+   },
+   "frage": "Two German verbs for making real. Hegel uses both, and wirklich is \"actual\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "actualize / realize",
+     "hinweis": "Kept apart; follows Wirklichkeit = actuality."
+    },
+    {
+     "key": "b",
+     "en": "realize for both",
+     "hinweis": "Natural; the German word stays visible."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "progress",
+   "gruppe": "hegel",
+   "deutsch": "unendlicher Progress",
+   "zaehlung": {
+    "f": 8,
+    "s": 53,
+    "h": 213
+   },
+   "frage": "The endless series of the bad infinite in Hegel's doctrine of quantity.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "infinite progression",
+     "hinweis": "Current standard; no sense of improvement."
+    },
+    {
+     "key": "b",
+     "en": "infinite progress",
+     "hinweis": "Older standard; \"progress\" suggests getting better."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "satz",
+   "gruppe": "shared",
+   "deutsch": "Satz",
+   "zaehlung": {
+    "f": 1503,
+    "s": 1293,
+    "h": 890
+   },
+   "frage": "A sentence, a proposition, or a law: Satz der Identität, Hegel's spekulativer Satz, Fichte's Grundsätze.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "by sense: law or principle, proposition, sentence",
+     "hinweis": "Each idiomatic."
+    },
+    {
+     "key": "b",
+     "en": "proposition throughout",
+     "hinweis": "Uniform; \"proposition of identity\" is unusual."
+    },
+    {
+     "key": "c",
+     "en": "principle throughout",
+     "hinweis": "Merges with Grundsatz and Prinzip."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "aussereinander",
+   "gruppe": "hegel",
+   "deutsch": "Außereinander, Außersichsein",
+   "zaehlung": {
+    "f": 1,
+    "s": 112,
+    "h": 194
+   },
+   "frage": "Nature as the realm where everything lies outside everything else.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "asunderness; mutual externality",
+     "hinweis": "Established in the philosophy of nature."
+    },
+    {
+     "key": "b",
+     "en": "being-outside-one-another",
+     "hinweis": "Literal; heavy."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "stoss",
+   "gruppe": "hegel",
+   "deutsch": "Stoß (mechanics)",
+   "zaehlung": {
+    "f": 10,
+    "s": 74,
+    "h": 46
+   },
+   "frage": "Bodies pushing bodies in Hegel's and Schelling's mechanics.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "thrust",
+     "hinweis": "Established in the philosophy of nature."
+    },
+    {
+     "key": "b",
+     "en": "impact",
+     "hinweis": "Modern physics term."
+    },
+    {
+     "key": "c",
+     "en": "impulse",
+     "hinweis": "Collides with Fichte's Anstoß and with Trieb."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "sproede",
+   "gruppe": "hegel",
+   "deutsch": "spröde, Sprödigkeit",
+   "zaehlung": {
+    "f": 1,
+    "s": 6,
+    "h": 205
+   },
+   "frage": "Brittle in the philosophy of nature, but in the logic and aesthetics something unyielding.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "brittle in nature, austere in logic and aesthetics",
+     "hinweis": "By sense."
+    },
+    {
+     "key": "b",
+     "en": "brittle throughout",
+     "hinweis": "Uniform; odd in the logic."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "begeistung",
+   "gruppe": "hegel",
+   "deutsch": "Begeistung (chemistry)",
+   "zaehlung": {
+    "f": 0,
+    "s": 4,
+    "h": 21
+   },
+   "frage": "Not Begeisterung (enthusiasm): the chemical activation of an inert body.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "activation",
+     "hinweis": "Established in the philosophy of nature."
+    },
+    {
+     "key": "b",
+     "en": "spiritualization",
+     "hinweis": "Literal; misleading."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "fuehlende-seele",
+   "gruppe": "hegel",
+   "deutsch": "fühlende Seele",
+   "zaehlung": {
+    "f": 0,
+    "s": 0,
+    "h": 6
+   },
+   "frage": "A stage of Hegel's anthropology in the Encyclopedia.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "feeling soul",
+     "hinweis": "Current standard; literal."
+    },
+    {
+     "key": "b",
+     "en": "sentient soul",
+     "hinweis": "Variant in the same translations."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "verruecktheit",
+   "gruppe": "hegel",
+   "deutsch": "Verrücktheit, Wahnsinn, Narrheit, Blödsinn",
+   "zaehlung": {
+    "f": 39,
+    "s": 99,
+    "h": 80
+   },
+   "frage": "Hegel distinguishes several forms of mental disorder and uses the medical words of his time.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "derangement, madness, folly, imbecility (distinct, period terms)",
+     "hinweis": "Keeps Hegel's distinctions and his period."
+    },
+    {
+     "key": "b",
+     "en": "modern clinical terms",
+     "hinweis": "Readable today; anachronistic."
+    },
+    {
+     "key": "c",
+     "en": "insanity for all",
+     "hinweis": "Simple; loses the distinctions."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "ahnung",
+   "gruppe": "shared",
+   "deutsch": "Ahnung",
+   "zaehlung": {
+    "f": 69,
+    "s": 96,
+    "h": 54
+   },
+   "frage": "A dim foreknowledge. Jacobi and the Romantics made it a source of insight.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "presentiment",
+     "hinweis": "Usual in both Fichte and Hegel drafts."
+    },
+    {
+     "key": "b",
+     "en": "intimation",
+     "hinweis": "Softer, more literary."
+    },
+    {
+     "key": "c",
+     "en": "divination",
+     "hinweis": "Older standard in the Jena writings; suggests prophecy."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "schuld",
+   "gruppe": "hegel",
+   "deutsch": "Schuld",
+   "zaehlung": {
+    "f": 141,
+    "s": 128,
+    "h": 114
+   },
+   "frage": "Guilt in tragedy, responsibility for an action, a debt in public finance.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "guilt / responsibility / debt by sense",
+     "hinweis": "Three senses."
+    },
+    {
+     "key": "b",
+     "en": "guilt throughout",
+     "hinweis": "Uniform; wrong in the finance passages."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "vermoegen",
+   "gruppe": "shared",
+   "deutsch": "Vermögen",
+   "zaehlung": {
+    "f": 1065,
+    "s": 312,
+    "h": 306
+   },
+   "frage": "Kant's faculties (Erkenntnisvermögen, Begehrungsvermögen), but also wealth and means.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "faculty; means or assets in economics",
+     "hinweis": "Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "power (power of desire)",
+     "hinweis": "An alternative Kantian rendering; collides with Kraft and Macht."
+    },
+    {
+     "key": "c",
+     "en": "capacity",
+     "hinweis": "Collides with Fähigkeit."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "buergerliche-gesellschaft",
+   "gruppe": "shared",
+   "deutsch": "bürgerliche Gesellschaft",
+   "zaehlung": {
+    "f": 11,
+    "s": 14,
+    "h": 45
+   },
+   "frage": "Hegel's sphere of needs, contract and work between family and state. Also in Fichte and the young Hegel.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "civil society",
+     "hinweis": "Standard."
+    },
+    {
+     "key": "b",
+     "en": "bourgeois society",
+     "hinweis": "Marxist overtone; anachronistic."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "polizei",
+   "gruppe": "shared",
+   "deutsch": "Polizei",
+   "zaehlung": {
+    "f": 89,
+    "s": 6,
+    "h": 25
+   },
+   "frage": "Around 1800 the state's whole internal administration: welfare, public health, safety, markets. Not the police force.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "police, with a note on the period sense",
+     "hinweis": "Faithful; the English word once had that sense."
+    },
+    {
+     "key": "b",
+     "en": "public authority, administration",
+     "hinweis": "Clear; loses the period term."
+    },
+    {
+     "key": "c",
+     "en": "police administration",
+     "hinweis": "A compromise."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "korporation",
+   "gruppe": "hegel",
+   "deutsch": "Korporation",
+   "zaehlung": {
+    "f": 0,
+    "s": 1,
+    "h": 13
+   },
+   "frage": "Hegel's guild-like associations of a trade, not business firms.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "corporation, with a note",
+     "hinweis": "Faithful; misread as \"company\" without the note."
+    },
+    {
+     "key": "b",
+     "en": "guild, association",
+     "hinweis": "Clear; loses Hegel's word."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "notstaat",
+   "gruppe": "hegel",
+   "deutsch": "Not- und Verstandesstaat",
+   "zaehlung": {
+    "f": 8,
+    "s": 1,
+    "h": 1
+   },
+   "frage": "Hegel's (and Fichte's) name for the state seen only as a means to satisfy needs.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "state of necessity and of the understanding",
+     "hinweis": "Literal."
+    },
+    {
+     "key": "b",
+     "en": "external state, state based on need",
+     "hinweis": "Interpretive; clearer."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gewalt",
+   "gruppe": "shared",
+   "deutsch": "Gewalt",
+   "zaehlung": {
+    "f": 645,
+    "s": 530,
+    "h": 586
+   },
+   "frage": "Constitutional power (gesetzgebende Gewalt), physical force, or violence.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "by sense: power, force, violence",
+     "hinweis": "Never \"violence\" as the default."
+    },
+    {
+     "key": "b",
+     "en": "power throughout",
+     "hinweis": "Uniform; wrong for crime and war."
+    },
+    {
+     "key": "c",
+     "en": "violence where natural",
+     "hinweis": "Modern default; often wrong."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "weltgericht",
+   "gruppe": "hegel",
+   "deutsch": "Die Weltgeschichte ist das Weltgericht",
+   "zaehlung": {
+    "f": 1,
+    "s": 4,
+    "h": 3
+   },
+   "frage": "Hegel quotes Schiller: world history is the world's court of judgment.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "world history is the world's court of judgment",
+     "hinweis": "Clear; the pun is lost."
+    },
+    {
+     "key": "b",
+     "en": "the world's history is the world's judgment",
+     "hinweis": "Keeps the pun; ambiguous."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "kunstreligion",
+   "gruppe": "hegel",
+   "deutsch": "Kunstreligion",
+   "zaehlung": {
+    "f": 0,
+    "s": 0,
+    "h": 12
+   },
+   "frage": "The religion of the Greeks in the Phenomenology.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "art-religion",
+     "hinweis": "Current standard; marks a term."
+    },
+    {
+     "key": "b",
+     "en": "religion of art",
+     "hinweis": "Older standard; natural."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "lichtwesen",
+   "gruppe": "shared",
+   "deutsch": "Lichtwesen",
+   "zaehlung": {
+    "f": 0,
+    "s": 38,
+    "h": 11
+   },
+   "frage": "The first form of natural religion in Hegel; also used by Schelling. Our drafts render Wesen differently here.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "the luminous essence",
+     "hinweis": "Hegel's draft; follows current usage."
+    },
+    {
+     "key": "b",
+     "en": "the being of light",
+     "hinweis": "Schelling's rule: Wesen for an entity = being."
+    },
+    {
+     "key": "c",
+     "en": "the light-essence",
+     "hinweis": "Literal compound."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "werkmeister",
+   "gruppe": "hegel",
+   "deutsch": "der Werkmeister",
+   "zaehlung": {
+    "f": 4,
+    "s": 6,
+    "h": 14
+   },
+   "frage": "The Egyptian craftsman-spirit in the Phenomenology.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "the artisan",
+     "hinweis": "Current standard."
+    },
+    {
+     "key": "b",
+     "en": "the master craftsman",
+     "hinweis": "Closer to Meister."
+    },
+    {
+     "key": "c",
+     "en": "the master builder",
+     "hinweis": "Suggests architecture only."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "religion-zweckmaessigkeit",
+   "gruppe": "hegel",
+   "deutsch": "Religion der Zweckmäßigkeit",
+   "zaehlung": {
+    "f": 0,
+    "s": 0,
+    "h": 3
+   },
+   "frage": "Hegel's name for Roman religion in the lectures on religion. In the logic Zweckmäßigkeit is \"purposiveness\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "religion of expediency",
+     "hinweis": "The established rendering for Roman religion."
+    },
+    {
+     "key": "b",
+     "en": "religion of purposiveness",
+     "hinweis": "Uniform with the logic; obscure here."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "vollendete-religion",
+   "gruppe": "hegel",
+   "deutsch": "vollendete Religion",
+   "zaehlung": {
+    "f": 2,
+    "s": 0,
+    "h": 5
+   },
+   "frage": "Christianity as the completed religion in Hegel's lectures.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "consummate religion",
+     "hinweis": "Established in the lectures on religion."
+    },
+    {
+     "key": "b",
+     "en": "complete or perfected religion",
+     "hinweis": "Plainer."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "heiliger-geist",
+   "gruppe": "shared",
+   "deutsch": "Heiliger Geist",
+   "zaehlung": {
+    "f": 21,
+    "s": 39,
+    "h": 30
+   },
+   "frage": "The third person of the Trinity. Our Bible quotations follow the King James Version, which says \"Holy Ghost\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Holy Spirit",
+     "hinweis": "Current usage; matches Geist = spirit."
+    },
+    {
+     "key": "b",
+     "en": "Holy Ghost",
+     "hinweis": "King James and period English; clashes with \"spirit\"."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "beduerfnis-der-philosophie",
+   "gruppe": "hegel",
+   "deutsch": "Bedürfnis der Philosophie",
+   "zaehlung": {
+    "f": 1,
+    "s": 2,
+    "h": 23
+   },
+   "frage": "A section title of Hegel's Difference essay: the need that philosophy answers and that is philosophy's own.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "need of philosophy",
+     "hinweis": "Keeps the double genitive."
+    },
+    {
+     "key": "b",
+     "en": "need for philosophy",
+     "hinweis": "Natural; only one of the two senses."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "menschenverstand",
+   "gruppe": "shared",
+   "deutsch": "gemeiner / gesunder Menschenverstand",
+   "zaehlung": {
+    "f": 78,
+    "s": 58,
+    "h": 147
+   },
+   "frage": "Hegel mocks it (\"how ordinary human understanding takes philosophy\"); Fichte and Schelling appeal to it.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "common (sound) human understanding",
+     "hinweis": "Keeps Verstand = understanding visible."
+    },
+    {
+     "key": "b",
+     "en": "common sense",
+     "hinweis": "Natural; the polemic against Verstand is lost."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "vernichten",
+   "gruppe": "hegel",
+   "deutsch": "vernichten, Vernichtung",
+   "zaehlung": {
+    "f": 574,
+    "s": 282,
+    "h": 450
+   },
+   "frage": "In the Jena writings Hegel's word for the negation of finite thinking, before he settled on aufheben.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "annihilate, annihilation",
+     "hinweis": "Strong, literal."
+    },
+    {
+     "key": "b",
+     "en": "nullify",
+     "hinweis": "Older standard in the Jena writings; mixed with aufheben there."
+    },
+    {
+     "key": "c",
+     "en": "destroy",
+     "hinweis": "Plain."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "empirie",
+   "gruppe": "shared",
+   "deutsch": "Empirie",
+   "zaehlung": {
+    "f": 239,
+    "s": 59,
+    "h": 72
+   },
+   "frage": "The empirical domain or empirical science, not the doctrine of empiricism (Empirismus).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "the empirical, empirical knowledge",
+     "hinweis": "Faithful."
+    },
+    {
+     "key": "b",
+     "en": "empiricism",
+     "hinweis": "False friend."
+    },
+    {
+     "key": "c",
+     "en": "experience",
+     "hinweis": "Merges with Erfahrung."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "muhammedaner",
+   "gruppe": "shared",
+   "deutsch": "Türke, Muhammedaner",
+   "zaehlung": {
+    "f": 8,
+    "s": 16,
+    "h": 22
+   },
+   "frage": "The period words for Muslims.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Turk, Mohammedan",
+     "hinweis": "Period English, faithful to the register."
+    },
+    {
+     "key": "b",
+     "en": "Muslim",
+     "hinweis": "Modern; softens the period view."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "heiden",
+   "gruppe": "shared",
+   "deutsch": "Heiden, Heidentum",
+   "zaehlung": {
+    "f": 57,
+    "s": 410,
+    "h": 36
+   },
+   "frage": "Above all in Schelling's philosophy of mythology.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "pagans for antiquity, heathens in Christian polemic",
+     "hinweis": "By register."
+    },
+    {
+     "key": "b",
+     "en": "pagans throughout",
+     "hinweis": "Neutral, uniform."
+    },
+    {
+     "key": "c",
+     "en": "heathens throughout",
+     "hinweis": "Polemical, uniform."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "ding-an-sich",
+   "gruppe": "shared",
+   "deutsch": "Ding an sich",
+   "zaehlung": {
+    "f": 140,
+    "s": 236,
+    "h": 71
+   },
+   "frage": "Kant's thing in itself, the target of all three authors. Our other compounds (being-in-itself) are hyphenated.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "thing in itself",
+     "hinweis": "Kantian convention; no hyphens."
+    },
+    {
+     "key": "b",
+     "en": "thing-in-itself",
+     "hinweis": "Matches being-in-itself; marks the term."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "persoenlichkeit",
+   "gruppe": "shared",
+   "deutsch": "Persönlichkeit",
+   "zaehlung": {
+    "f": 105,
+    "s": 409,
+    "h": 162
+   },
+   "frage": "Schelling's personality of God, Hegel's legal personality.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "personality",
+     "hinweis": "Period sense; Personalität can then be personhood."
+    },
+    {
+     "key": "b",
+     "en": "personhood",
+     "hinweis": "Modern; suggests bioethics."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "wissenschaft",
+   "gruppe": "shared",
+   "deutsch": "Wissenschaft",
+   "zaehlung": {
+    "f": 1102,
+    "s": 2335,
+    "h": 1342
+   },
+   "frage": "Any systematic body of knowledge, philosophy above all, not only natural science.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "science, with one note in the front matter",
+     "hinweis": "Uniform; readers may hear natural science."
+    },
+    {
+     "key": "b",
+     "en": "science or systematic knowledge by context",
+     "hinweis": "Clearer; the term breaks apart."
+    },
+    {
+     "key": "c",
+     "en": "scholarship, discipline in academic contexts",
+     "hinweis": "Natural there; inconsistent."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "genetisch",
+   "gruppe": "shared",
+   "deutsch": "Genesis, genetisch",
+   "zaehlung": {
+    "f": 254,
+    "s": 21,
+    "h": 1
+   },
+   "frage": "The late Fichte's method: showing how something arises in knowing, not its history.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "genesis, genetic, with a note",
+     "hinweis": "Fichte's own word; \"genetic\" now suggests biology."
+    },
+    {
+     "key": "b",
+     "en": "developmental, originating",
+     "hinweis": "Clear, but historical, which Fichte does not mean."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "einerleiheit",
+   "gruppe": "shared",
+   "deutsch": "Einerleiheit",
+   "zaehlung": {
+    "f": 58,
+    "s": 92,
+    "h": 38
+   },
+   "frage": "Kant's and Wolff's word for sameness, beside Identität.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "sameness",
+     "hinweis": "Keeps Identität = identity distinct."
+    },
+    {
+     "key": "b",
+     "en": "identity",
+     "hinweis": "Kantian convention; merges two words."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "stoff",
+   "gruppe": "shared",
+   "deutsch": "Stoff",
+   "zaehlung": {
+    "f": 360,
+    "s": 732,
+    "h": 473
+   },
+   "frage": "Fichte's Stoff der Vorstellung, Schelling's chemical Stoffe, the material of art. Our drafts differ.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "material; chemical substances",
+     "hinweis": "Keeps Materie = matter free."
+    },
+    {
+     "key": "b",
+     "en": "stuff",
+     "hinweis": "Close to the German; colloquial."
+    },
+    {
+     "key": "c",
+     "en": "matter",
+     "hinweis": "Natural; merges with Materie."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "entgegensetzen",
+   "gruppe": "shared",
+   "deutsch": "entgegensetzen, Entgegensetzung",
+   "zaehlung": {
+    "f": 925,
+    "s": 2151,
+    "h": 2557
+   },
+   "frage": "Fichte's second principle: the I opposes a not-I to itself.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "oppose, opposition",
+     "hinweis": "Current standard for Fichte."
+    },
+    {
+     "key": "b",
+     "en": "counter-posit",
+     "hinweis": "Older Fichte standard; marks the act as positing."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "triebfeder",
+   "gruppe": "shared",
+   "deutsch": "Triebfeder",
+   "zaehlung": {
+    "f": 73,
+    "s": 13,
+    "h": 48
+   },
+   "frage": "Kant's term for what moves the will, taken up by Fichte and Hegel.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "incentive",
+     "hinweis": "Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "motive",
+     "hinweis": "Collides with Bewegungsgrund."
+    },
+    {
+     "key": "c",
+     "en": "spring (of action)",
+     "hinweis": "Older, literal; mechanical image."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "streben",
+   "gruppe": "shared",
+   "deutsch": "Streben, Bestrebung",
+   "zaehlung": {
+    "f": 230,
+    "s": 342,
+    "h": 110
+   },
+   "frage": "Fichte's infinite striving of the I.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "striving for both",
+     "hinweis": "One word; the German stays visible."
+    },
+    {
+     "key": "b",
+     "en": "striving / endeavor",
+     "hinweis": "Distinct; Bestrebung = endeavor in a Kantian convention."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "sitte",
+   "gruppe": "shared",
+   "deutsch": "Sitte, Sitten",
+   "zaehlung": {
+    "f": 159,
+    "s": 108,
+    "h": 161
+   },
+   "frage": "Custom and mores in Hegel, morals in Kant's Metaphysik der Sitten.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "custom, mores; morals in Kant's titles",
+     "hinweis": "By sense."
+    },
+    {
+     "key": "b",
+     "en": "ethos",
+     "hinweis": "Current in one translation of the Phenomenology; Greek."
+    },
+    {
+     "key": "c",
+     "en": "morals throughout",
+     "hinweis": "Uniform; moralizes Hegel."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "aufforderung",
+   "gruppe": "shared",
+   "deutsch": "Aufforderung",
+   "zaehlung": {
+    "f": 75,
+    "s": 29,
+    "h": 7
+   },
+   "frage": "Fichte's theory of right: another rational being summons me to act freely.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "summons",
+     "hinweis": "Current standard in Fichte scholarship."
+    },
+    {
+     "key": "b",
+     "en": "invitation, request",
+     "hinweis": "Everyday; too weak."
+    },
+    {
+     "key": "c",
+     "en": "solicitation",
+     "hinweis": "Formal; suggests asking for something."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gottheit",
+   "gruppe": "shared",
+   "deutsch": "Gottheit",
+   "zaehlung": {
+    "f": 152,
+    "s": 793,
+    "h": 162
+   },
+   "frage": "The Godhead in theology, a deity in mythology. Our drafts differ in rendering and capitalization.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "the Godhead (capital); a deity, deities",
+     "hinweis": "By sense."
+    },
+    {
+     "key": "b",
+     "en": "divinity",
+     "hinweis": "One word for both senses."
+    },
+    {
+     "key": "c",
+     "en": "the godhead (lowercase)",
+     "hinweis": "Fichte's draft; matches lowercase spirit, absolute."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "seligkeit",
+   "gruppe": "shared",
+   "deutsch": "Seligkeit, selig",
+   "zaehlung": {
+    "f": 161,
+    "s": 111,
+    "h": 13
+   },
+   "frage": "Fichte's Anweisung zum seligen Leben (The Way towards the Blessed Life).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "blessedness, blessed",
+     "hinweis": "Established title wording."
+    },
+    {
+     "key": "b",
+     "en": "beatitude",
+     "hinweis": "Theological, Latinate."
+    },
+    {
+     "key": "c",
+     "en": "bliss",
+     "hinweis": "Emotional; suggests pleasure."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "geschichtlich-historisch",
+   "gruppe": "shared",
+   "deutsch": "geschichtlich / historisch",
+   "zaehlung": {
+    "f": 32,
+    "s": 391,
+    "h": 124
+   },
+   "frage": "Schelling distinguishes what belongs to real history (geschichtlich) from what is known by report (historisch). (Count: geschichtlich.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "historical for both",
+     "hinweis": "The German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "historical / historiographical (or recorded)",
+     "hinweis": "Distinct; heavy."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "kritik",
+   "gruppe": "shared",
+   "deutsch": "Kritik",
+   "zaehlung": {
+    "f": 182,
+    "s": 378,
+    "h": 236
+   },
+   "frage": "Kant's critique of reason; also the reviews and polemics of the period.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "critique (Kant's sense), criticism or review elsewhere",
+     "hinweis": "By sense."
+    },
+    {
+     "key": "b",
+     "en": "critique throughout",
+     "hinweis": "Uniform; odd for book reviews."
+    },
+    {
+     "key": "c",
+     "en": "criticism throughout",
+     "hinweis": "Natural; Kant's titles become strange."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "urteilskraft",
+   "gruppe": "shared",
+   "deutsch": "Urteilskraft",
+   "zaehlung": {
+    "f": 72,
+    "s": 21,
+    "h": 52
+   },
+   "frage": "Kant's faculty; title of his third Critique.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "power of judgment",
+     "hinweis": "Current Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "judgment",
+     "hinweis": "Older title wording; merges with Urteil."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "inbegriff",
+   "gruppe": "shared",
+   "deutsch": "Inbegriff",
+   "zaehlung": {
+    "f": 17,
+    "s": 83,
+    "h": 36
+   },
+   "frage": "The sum of all; Kant's \"Inbegriff aller Realität\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "sum total",
+     "hinweis": "Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "epitome, embodiment",
+     "hinweis": "Modern German sense; often wrong for 1800."
+    },
+    {
+     "key": "c",
+     "en": "quintessence",
+     "hinweis": "Literary."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "achtung",
+   "gruppe": "shared",
+   "deutsch": "Achtung",
+   "zaehlung": {
+    "f": 186,
+    "s": 75,
+    "h": 80
+   },
+   "frage": "Kant's moral feeling, central in Fichte's ethics.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "respect",
+     "hinweis": "Current Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "reverence",
+     "hinweis": "Older standard; religious overtone."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "beharrlichkeit",
+   "gruppe": "shared",
+   "deutsch": "Beharrlichkeit, beharrlich",
+   "zaehlung": {
+    "f": 38,
+    "s": 18,
+    "h": 24
+   },
+   "frage": "Kant's persistence of substance.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "persistence",
+     "hinweis": "Current Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "permanence",
+     "hinweis": "Older Kant standard."
+    },
+    {
+     "key": "c",
+     "en": "perduring",
+     "hinweis": "Used for the adjective in one current translation."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "wohlgefallen",
+   "gruppe": "shared",
+   "deutsch": "Wohlgefallen",
+   "zaehlung": {
+    "f": 62,
+    "s": 10,
+    "h": 20
+   },
+   "frage": "Kant's aesthetic pleasure in the beautiful.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "satisfaction",
+     "hinweis": "Current Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "liking",
+     "hinweis": "An alternative current rendering; homely."
+    },
+    {
+     "key": "c",
+     "en": "delight",
+     "hinweis": "Older; warmer."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "weltweisheit",
+   "gruppe": "shared",
+   "deutsch": "Weltweisheit",
+   "zaehlung": {
+    "f": 11,
+    "s": 14,
+    "h": 11
+   },
+   "frage": "The period word for philosophy (Kant's title: negative magnitudes in Weltweisheit).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "philosophy",
+     "hinweis": "Kantian convention; the German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "worldly wisdom",
+     "hinweis": "Literal; sounds like practical prudence."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "bedeutung",
+   "gruppe": "shared",
+   "deutsch": "Bedeutung",
+   "zaehlung": {
+    "f": 403,
+    "s": 1025,
+    "h": 975
+   },
+   "frage": "Significance or meaning, from Kant to Schelling's mythology.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "significance; meaning where semantic",
+     "hinweis": "Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "meaning throughout",
+     "hinweis": "Natural; flattens importance into semantics."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "menschheit",
+   "gruppe": "shared",
+   "deutsch": "Menschheit",
+   "zaehlung": {
+    "f": 500,
+    "s": 560,
+    "h": 97
+   },
+   "frage": "The human species and the quality of being human (Kant's humanity in one's person).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "humanity",
+     "hinweis": "Matches Mensch = human being."
+    },
+    {
+     "key": "b",
+     "en": "mankind",
+     "hinweis": "Period English; gendered."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "allerdings",
+   "gruppe": "shared",
+   "deutsch": "allerdings",
+   "zaehlung": {
+    "f": 949,
+    "s": 1030,
+    "h": 281
+   },
+   "frage": "Around 1800 it usually affirms (\"indeed, certainly\"); today it mostly concedes (\"however\").",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "indeed, certainly; \"admittedly\" only before aber",
+     "hinweis": "Period sense."
+    },
+    {
+     "key": "b",
+     "en": "however, admittedly",
+     "hinweis": "Modern sense; often reverses the argument."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "eigentlich",
+   "gruppe": "shared",
+   "deutsch": "eigentlich",
+   "zaehlung": {
+    "f": 1746,
+    "s": 2421,
+    "h": 782
+   },
+   "frage": "Around 1800 \"proper, genuine\" (over 4,900 times); today mostly a filler (\"actually\"). Our drafts differ.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "properly, genuinely, strictly speaking",
+     "hinweis": "Period sense; never \"actually\"."
+    },
+    {
+     "key": "b",
+     "en": "actually, really",
+     "hinweis": "Modern; often a filler in English."
+    },
+    {
+     "key": "c",
+     "en": "by context, \"really\" allowed",
+     "hinweis": "Flexible; drafts of Fichte and Schelling allow it."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "lediglich",
+   "gruppe": "shared",
+   "deutsch": "lediglich",
+   "zaehlung": {
+    "f": 1218,
+    "s": 124,
+    "h": 11
+   },
+   "frage": "Fichte's favorite restrictive (over 1,200 times): solely, without belittling.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "solely",
+     "hinweis": "Kantian convention; neutral."
+    },
+    {
+     "key": "b",
+     "en": "merely",
+     "hinweis": "Modern; belittles."
+    },
+    {
+     "key": "c",
+     "en": "simply",
+     "hinweis": "Collides with schlechthin."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "schlechterdings",
+   "gruppe": "shared",
+   "deutsch": "schlechterdings",
+   "zaehlung": {
+    "f": 188,
+    "s": 268,
+    "h": 68
+   },
+   "frage": "\"Absolutely, under all circumstances.\" If schlechthin becomes \"purely and simply\", \"absolutely\" is left for absolut and this word.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "absolutely",
+     "hinweis": "Natural; shares the word with absolut."
+    },
+    {
+     "key": "b",
+     "en": "by all means, utterly",
+     "hinweis": "Distinct; slightly colloquial."
+    },
+    {
+     "key": "c",
+     "en": "unconditionally",
+     "hinweis": "Collides with unbedingt."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "physik",
+   "gruppe": "shared",
+   "deutsch": "Physik, physisch",
+   "zaehlung": {
+    "f": 27,
+    "s": 610,
+    "h": 281
+   },
+   "frage": "Around 1800 natural science in the broad sense, chemistry and physiology included.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "physics, with a note on the period sense",
+     "hinweis": "Faithful."
+    },
+    {
+     "key": "b",
+     "en": "natural science",
+     "hinweis": "Clear; loses the word."
+    },
+    {
+     "key": "c",
+     "en": "physics or natural science by context",
+     "hinweis": "Flexible; inconsistent."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "tierischer-magnetismus",
+   "gruppe": "shared",
+   "deutsch": "tierischer Magnetismus",
+   "zaehlung": {
+    "f": 4,
+    "s": 6,
+    "h": 9
+   },
+   "frage": "Mesmer's healing doctrine, much discussed by Schelling and Hegel.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "animal magnetism",
+     "hinweis": "Period term."
+    },
+    {
+     "key": "b",
+     "en": "mesmerism",
+     "hinweis": "Clear; names a person."
+    },
+    {
+     "key": "c",
+     "en": "hypnosis",
+     "hinweis": "Modernizing; anachronistic."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "waermestoff",
+   "gruppe": "shared",
+   "deutsch": "Wärmestoff",
+   "zaehlung": {
+    "f": 0,
+    "s": 77,
+    "h": 19
+   },
+   "frage": "The heat-substance of chemistry before thermodynamics.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "caloric",
+     "hinweis": "Period English technical term."
+    },
+    {
+     "key": "b",
+     "en": "heat-matter",
+     "hinweis": "Literal; collides with Wärmematerie."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "lebenskraft",
+   "gruppe": "shared",
+   "deutsch": "Lebenskraft",
+   "zaehlung": {
+    "f": 5,
+    "s": 48,
+    "h": 4
+   },
+   "frage": "The vital force of biology around 1800.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "vital force",
+     "hinweis": "Period scientific term."
+    },
+    {
+     "key": "b",
+     "en": "life force",
+     "hinweis": "Modern esoteric overtone."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "beruf",
+   "gruppe": "shared",
+   "deutsch": "Beruf",
+   "zaehlung": {
+    "f": 170,
+    "s": 87,
+    "h": 21
+   },
+   "frage": "One's calling or office, often beside Bestimmung (vocation) in Fichte.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "calling",
+     "hinweis": "Keeps \"vocation\" for Bestimmung."
+    },
+    {
+     "key": "b",
+     "en": "vocation",
+     "hinweis": "Natural; collides with Bestimmung."
+    },
+    {
+     "key": "c",
+     "en": "profession",
+     "hinweis": "Modern; too narrow."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "vaterland",
+   "gruppe": "shared",
+   "deutsch": "Vaterland",
+   "zaehlung": {
+    "f": 112,
+    "s": 50,
+    "h": 71
+   },
+   "frage": "Fichte's Addresses, Hegel's political writings. Around 1800 the word has no twentieth-century overtone.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "fatherland",
+     "hinweis": "Faithful."
+    },
+    {
+     "key": "b",
+     "en": "native country, homeland",
+     "hinweis": "Avoids later overtones; less faithful."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "weltanschauung",
+   "gruppe": "shared",
+   "deutsch": "Weltanschauung",
+   "zaehlung": {
+    "f": 28,
+    "s": 14,
+    "h": 30
+   },
+   "frage": "Before 1850 often literally an intuition of the world (Schelling). Our drafts differ.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "intuition of the world; worldview only for an outlook",
+     "hinweis": "Keeps the Kantian Anschauung."
+    },
+    {
+     "key": "b",
+     "en": "worldview throughout",
+     "hinweis": "Natural; anachronistically ideological."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "begeisterung",
+   "gruppe": "shared",
+   "deutsch": "Begeisterung",
+   "zaehlung": {
+    "f": 65,
+    "s": 69,
+    "h": 30
+   },
+   "frage": "Inspired fervor, beside Enthusiasmus and Schwärmerei.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "inspiration",
+     "hinweis": "Keeps \"enthusiasm\" for Enthusiasmus."
+    },
+    {
+     "key": "b",
+     "en": "enthusiasm",
+     "hinweis": "Natural; merges two words."
+    },
+    {
+     "key": "c",
+     "en": "spiritedness",
+     "hinweis": "Literal tie to Geist; unusual."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "aether",
+   "gruppe": "shared",
+   "deutsch": "Äther",
+   "zaehlung": {
+    "f": 22,
+    "s": 76,
+    "h": 68
+   },
+   "frage": "The subtle matter of physics around 1800. Our drafts differ in spelling.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "aether",
+     "hinweis": "Older spelling; marks the historical concept."
+    },
+    {
+     "key": "b",
+     "en": "ether",
+     "hinweis": "American spelling; also the chemical."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "kenntnis",
+   "gruppe": "shared",
+   "deutsch": "Kenntnis, kennen",
+   "zaehlung": {
+    "f": 198,
+    "s": 295,
+    "h": 249
+   },
+   "frage": "Kant separates Kenntnis from Erkenntnis and Wissen.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "acquaintance; knowledge of facts",
+     "hinweis": "Kantian convention; the German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "knowledge",
+     "hinweis": "Natural; merges three German words."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "moment",
+   "gruppe": "hegel",
+   "deutsch": "Moment",
+   "zaehlung": {
+    "f": 310,
+    "s": 1270,
+    "h": 3600
+   },
+   "frage": "Hegel's word for a part that only exists within a whole (das Moment), not a point in time (der Moment).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "moment, always for the term",
+     "hinweis": "The term stays visible."
+    },
+    {
+     "key": "b",
+     "en": "aspect, factor where natural",
+     "hinweis": "Readable; the term disappears."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "erscheinung",
+   "gruppe": "shared",
+   "deutsch": "Erscheinung",
+   "zaehlung": {
+    "f": 2570,
+    "s": 1797,
+    "h": 1115
+   },
+   "frage": "Kant's appearance; in the late Fichte the appearing of God or the absolute.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "appearance throughout",
+     "hinweis": "Uniform, Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "manifestation in the late Fichte",
+     "hinweis": "Older Fichte standard; marks the shift."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "unrecht",
+   "gruppe": "hegel",
+   "deutsch": "Unrecht",
+   "zaehlung": {
+    "f": 292,
+    "s": 105,
+    "h": 133
+   },
+   "frage": "In Hegel's philosophy of right: fraud, crime and \"unintentional\" wrong.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "wrong",
+     "hinweis": "Established; keeps Ungerechtigkeit = injustice apart."
+    },
+    {
+     "key": "b",
+     "en": "injustice",
+     "hinweis": "Natural; merges with Ungerechtigkeit."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "schicksal",
+   "gruppe": "hegel",
+   "deutsch": "Schicksal",
+   "zaehlung": {
+    "f": 146,
+    "s": 235,
+    "h": 144
+   },
+   "frage": "Fate in tragedy and in the young Hegel's theology.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "fate",
+     "hinweis": "Established."
+    },
+    {
+     "key": "b",
+     "en": "destiny",
+     "hinweis": "Collides with \"destiny\" for Bestimmung in some translations."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gerundium",
+   "gruppe": "conventions",
+   "deutsch": "Nominalized infinitives (das Aufheben, das Erkennen)",
+   "zaehlung": null,
+   "frage": "Hegel distinguishes the process (das Aufheben) from its result (Aufhebung).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "gerund for the process (sublating), noun for the result (sublation)",
+     "hinweis": "Keeps the distinction."
+    },
+    {
+     "key": "b",
+     "en": "noun for both",
+     "hinweis": "Smoother; the process becomes a thing."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "bindestriche",
+   "gruppe": "conventions",
+   "deutsch": "Hyphenated category nouns (being-for-itself)",
+   "zaehlung": null,
+   "frage": "Hegel's Fürsichsein, Sein-für-Anderes, Reflexion-in-sich.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "hyphenate the noun forms",
+     "hinweis": "Searchable as one term."
+    },
+    {
+     "key": "b",
+     "en": "no hyphens (being for itself)",
+     "hinweis": "Lighter; dissolves into a phrase."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "zitate-fremd",
+   "gruppe": "conventions",
+   "deutsch": "Quotations of Kant, Spinoza, Jacobi inside the texts",
+   "zaehlung": null,
+   "frage": "Our authors quote loosely, and their wording matters.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "translate fresh from the author's German, with our glossary",
+     "hinweis": "Matches the author's version; Kant's terms still recognizable."
+    },
+    {
+     "key": "b",
+     "en": "use existing English translations of the quoted work",
+     "hinweis": "Familiar wording; may not match what the author wrote."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "masse-waehrung",
+   "gruppe": "conventions",
+   "deutsch": "Units, currency, dates",
+   "zaehlung": null,
+   "frage": "Fuß, Meile, Taler, Gulden, Kreuzer; dates like \"d. 3. Jun. 1801\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "no conversion: foot, mile, thaler; one note",
+     "hinweis": "Faithful; a German mile is about 7.5 km."
+    },
+    {
+     "key": "b",
+     "en": "convert to modern units in brackets",
+     "hinweis": "Helpful; clutters the text."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "satzgrenzen",
+   "gruppe": "conventions",
+   "deutsch": "Long sentences",
+   "zaehlung": null,
+   "frage": "Hegel's and Fichte's periods can run for half a page. The English reader shows the German sentence by sentence.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "keep the author's sentence as the unit",
+     "hinweis": "Faithful; matching German and English one to one."
+    },
+    {
+     "key": "b",
+     "en": "split long sentences where English needs it",
+     "hinweis": "Readable; breaks the one-to-one matching."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "man-pronomen",
+   "gruppe": "conventions",
+   "deutsch": "Impersonal man",
+   "zaehlung": null,
+   "frage": "\"Man sieht hieraus …\" occurs on almost every page.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "one",
+     "hinweis": "Faithful; can sound stiff."
+    },
+    {
+     "key": "b",
+     "en": "we or you",
+     "hinweis": "Natural; changes the voice."
+    },
+    {
+     "key": "c",
+     "en": "passive",
+     "hinweis": "Smooth; hides the subject."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "ethnische-begriffe",
+   "gruppe": "conventions",
+   "deutsch": "Period terms for peoples (Neger, Wilde, Hottentotten)",
+   "zaehlung": null,
+   "frage": "The texts use the words of their time for peoples, many offensive today.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "period English equivalent, one note in front, each instance marked",
+     "hinweis": "Faithful, neither softened nor sharpened."
+    },
+    {
+     "key": "b",
+     "en": "modern terms",
+     "hinweis": "Readable today; misrepresents the authors."
+    },
+    {
+     "key": "c",
+     "en": "period terms with [sic] in the text",
+     "hinweis": "Faithful; distances loudly at every instance."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "ebp",
+   "gruppe": "conventions",
+   "deutsch": "Letters of the syllogism: E–B–A",
+   "zaehlung": null,
+   "frage": "Hegel writes E (das Einzelne), B (das Besondere), A (das Allgemeine).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "S–P–U (singular, particular, universal)",
+     "hinweis": "Follows singular for Einzelheit."
+    },
+    {
+     "key": "b",
+     "en": "I–P–U (individual, particular, universal)",
+     "hinweis": "Follows individual for Einzelheit."
+    },
+    {
+     "key": "c",
+     "en": "keep E–B–A",
+     "hinweis": "Faithful; opaque to English readers."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "werktitel-eigene",
+   "gruppe": "conventions",
+   "deutsch": "Titles of the translated works themselves",
+   "zaehlung": null,
+   "frage": "Some of our authors' works have an established English title, others none.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "established English title where one exists, otherwise literal",
+     "hinweis": "Recognizable; titles may not match our terms."
+    },
+    {
+     "key": "b",
+     "en": "always our own literal title",
+     "hinweis": "Consistent with our terms; unfamiliar."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "titel-glauben-wissen",
+   "gruppe": "hegel",
+   "deutsch": "Title: Glauben und Wissen",
+   "zaehlung": {
+    "f": 0,
+    "s": 2,
+    "h": 5
+   },
+   "frage": "Hegel's 1802 essay. Elsewhere Wissen will often be \"knowing\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Faith and Knowledge",
+     "hinweis": "Established title."
+    },
+    {
+     "key": "b",
+     "en": "Faith and Knowing",
+     "hinweis": "Consistent with Wissen = knowing."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "titel-naturrecht",
+   "gruppe": "hegel",
+   "deutsch": "Title: Über die wissenschaftlichen Behandlungsarten des Naturrechts",
+   "zaehlung": {
+    "f": 0,
+    "s": 2,
+    "h": 4
+   },
+   "frage": "Hegel's 1802/03 essay on natural law; two English titles are in use.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "On the Scientific Ways of Treating Natural Law, … Practical Philosophy, … Positive Sciences of Right",
+     "hinweis": "Literal."
+    },
+    {
+     "key": "b",
+     "en": "Natural Law: … Moral Philosophy, … Positive Sciences of Law",
+     "hinweis": "Older title; less literal."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "titel-enzyklopaedie",
+   "gruppe": "hegel",
+   "deutsch": "Title: Enzyklopädie der philosophischen Wissenschaften im Grundrisse",
+   "zaehlung": null,
+   "frage": "Hegel's system in outline (1817, 1827, 1830).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Encyclopedia of the Philosophical Sciences in Basic Outline",
+     "hinweis": "Current standard; American spelling."
+    },
+    {
+     "key": "b",
+     "en": "… in Outline",
+     "hinweis": "Older; shorter."
+    },
+    {
+     "key": "c",
+     "en": "Encyclopaedia …",
+     "hinweis": "British spelling."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "titel-notizenbuch",
+   "gruppe": "hegel",
+   "deutsch": "Title: Jenaer Notizenbuch",
+   "zaehlung": null,
+   "frage": "Hegel's Jena aphorisms, 1803–1806.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Jena Wastebook",
+     "hinweis": "Established English name."
+    },
+    {
+     "key": "b",
+     "en": "Jena Notebook",
+     "hinweis": "Literal."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "zunaechst",
+   "gruppe": "hegel",
+   "deutsch": "zunächst",
+   "zaehlung": {
+    "f": 275,
+    "s": 331,
+    "h": 1335
+   },
+   "frage": "In Hegel it marks the first, still immediate form of a category, which will later be revised.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "initially, at first, in the first instance",
+     "hinweis": "Signals that a correction is coming."
+    },
+    {
+     "key": "b",
+     "en": "first of all",
+     "hinweis": "Natural; sounds like an enumeration."
+    },
+    {
+     "key": "c",
+     "en": "next",
+     "hinweis": "Machine translation's default; wrong."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "zugleich",
+   "gruppe": "hegel",
+   "deutsch": "zugleich",
+   "zaehlung": {
+    "f": 1313,
+    "s": 2433,
+    "h": 2854
+   },
+   "frage": "Mostly logical: two determinations hold together, not one after the other.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "at the same time",
+     "hinweis": "Keeps the claim of co-presence."
+    },
+    {
+     "key": "b",
+     "en": "also, equally",
+     "hinweis": "Smooth; the claim disappears."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gefuehl-empfindung",
+   "gruppe": "shared",
+   "deutsch": "Gefühl / Empfindung",
+   "zaehlung": {
+    "f": 839,
+    "s": 544,
+    "h": 838
+   },
+   "frage": "Feeling and sensation; one Kantian translation renders both as \"feeling\". (Count: Gefühl.)",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "feeling / sensation",
+     "hinweis": "Kept apart."
+    },
+    {
+     "key": "b",
+     "en": "feeling for both",
+     "hinweis": "Natural; the German word stays visible."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "gedankending",
+   "gruppe": "shared",
+   "deutsch": "Gedankending",
+   "zaehlung": {
+    "f": 4,
+    "s": 14,
+    "h": 50
+   },
+   "frage": "Kant's ens rationis, something that exists only in thought.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "thought-entity",
+     "hinweis": "Current Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "being of reason",
+     "hinweis": "Scholastic, from ens rationis."
+    },
+    {
+     "key": "c",
+     "en": "figment of thought",
+     "hinweis": "Pejorative."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "poebel",
+   "gruppe": "hegel",
+   "deutsch": "Pöbel",
+   "zaehlung": {
+    "f": 41,
+    "s": 32,
+    "h": 26
+   },
+   "frage": "Hegel's famous problem of the impoverished underclass in civil society; also Fichte's \"writing rabble\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "rabble",
+     "hinweis": "Established."
+    },
+    {
+     "key": "b",
+     "en": "mob",
+     "hinweis": "Suggests violence."
+    },
+    {
+     "key": "c",
+     "en": "populace",
+     "hinweis": "Neutral; loses the contempt."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "geschaeft",
+   "gruppe": "shared",
+   "deutsch": "Geschäft",
+   "zaehlung": {
+    "f": 378,
+    "s": 107,
+    "h": 181
+   },
+   "frage": "Around 1800 the task one has to do (\"das erste Geschäft\"), rarely commerce.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "task, business (what one has to do)",
+     "hinweis": "Period sense."
+    },
+    {
+     "key": "b",
+     "en": "business throughout",
+     "hinweis": "Period English; modern readers hear commerce."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "witz",
+   "gruppe": "shared",
+   "deutsch": "Witz",
+   "zaehlung": {
+    "f": 51,
+    "s": 29,
+    "h": 34
+   },
+   "frage": "The faculty of seeing likenesses, quick ingenuity; \"joke\" only came in at the end of the 18th century.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "wit; witticism for an actual quip",
+     "hinweis": "Period sense, Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "ingenuity",
+     "hinweis": "Clear; loses the word."
+    },
+    {
+     "key": "c",
+     "en": "joke",
+     "hinweis": "Modern; mostly wrong."
+    }
+   ],
+   "vorschlag": "a"
+  }
+ ]
+}

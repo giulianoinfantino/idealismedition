@@ -496,18 +496,24 @@ seite('privacy.html', 'Datenschutz', '''
   </section>
 
   <section class="legal-section">
-    <h2>5. Mitgliedschaft über Stripe (nur nach Klick)</h2>
+    <h2>5. Abstimmung über das englische Glossar</h2>
+    <p>Auf der Seite „Translation“ (/translation) können Sie über die englische Wiedergabe von Fachbegriffen abstimmen. Übermittelt wird nur, wenn Sie abstimmen, eine Begründung als überzeugend markieren oder eine Begründung melden: die gewählte Wiedergabe, Ihre Begründung, die für alle Besucher sichtbar ist, der Zeitpunkt und eine zufällige Kennung, die Ihr Browser bei der ersten Stimme erzeugt und im lokalen Speicher ablegt, damit Sie Ihre Stimme später ändern können. Namen, E-Mail-Adressen oder Konten werden nicht erhoben. Ihre IP-Adresse wird nicht gespeichert; zur Begrenzung von Massenabgaben wird aus ihr ein verschlüsselter Prüfwert gebildet, der nach einer Stunde verfällt.</p>
+    <p>Die Angaben liegen in einer Datenbank von Upstash, Inc. (USA), die über eine Funktion der Website www.idealismedition.com (betrieben bei Vercel Inc.) angebunden ist; Upstash verarbeitet sie in unserem Auftrag. Nach Ende der Abstimmung werden die Begründungen mit den Entscheidungen veröffentlicht, ohne Kennung; die Datenbank wird spätestens ein Jahr nach Ende der Abstimmung gelöscht. Rechtsgrundlage ist Ihre Einwilligung durch das Absenden (Art. 6 Abs. 1 lit. a DSGVO); die Kennung im lokalen Speicher ist für den von Ihnen gewünschten Dienst erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Sie können jederzeit die Löschung Ihrer Beiträge verlangen.</p>
+  </section>
+
+  <section class="legal-section">
+    <h2>6. Mitgliedschaft über Stripe (nur nach Klick)</h2>
     <p>Auf der Seite „Unterstützen“ lässt sich eine Mitgliedschaft direkt abschließen. Dafür lädt die Seite das Bezahlfeld von Stripe (Stripe Payments Europe, Ltd., Irland), aber erst, wenn Sie eine der Stufen anklicken; vorher wird nichts von Stripe geladen. Nach dem Klick ruft Ihr Browser Inhalte von Servern von Stripe ab. Dabei erhält Stripe Ihre IP-Adresse und technische Angaben zu Ihrem Browser und setzt Cookies, die der Betrugsvorbeugung dienen.</p>
     <p>Ihre Zahlungsangaben geben Sie unmittelbar bei Stripe ein; Karten- und Kontodaten erhalten wir nicht. In unserem Stripe-Konto sehen wir Ihren Namen, Ihre E-Mail-Adresse, die gewählte Stufe und den Stand der Mitgliedschaft, und den Namen, den Sie freiwillig für die Friends of the Edition angeben. Diesen Namen zeigen wir auf der Seite „Unterstützen“, solange die Mitgliedschaft läuft. Rechtsgrundlage für das Laden des Bezahlfelds ist Ihre Einwilligung durch den Klick (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG), für die Abwicklung der Mitgliedschaft deren Durchführung (Art. 6 Abs. 1 lit. b DSGVO). Ergänzend gilt die Datenschutzerklärung von Stripe.</p>
   </section>
 
   <section class="legal-section">
-    <h2>6. Verweise auf andere Websites</h2>
+    <h2>7. Verweise auf andere Websites</h2>
     <p>Die Treffer der Recherche und die Bandtitel führen in die Ausgaben auf www.fichteedition.com, schellingedition.com und hegeledition.com; dort gelten deren Datenschutzhinweise. Es handelt sich um einfache Links: Erst wenn Sie einen anklicken, verlassen Sie diese Website.</p>
   </section>
 
   <section class="legal-section">
-    <h2>7. Ihre Rechte</h2>
+    <h2>8. Ihre Rechte</h2>
     <p>Sie haben im Rahmen der gesetzlichen Bestimmungen das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie auf Beschwerde bei einer Datenschutzaufsichtsbehörde. Fragen richten Sie bitte an giulianoinfantino[at]icloud.com.</p>
   </section>
 </main>''')

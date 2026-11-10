@@ -142,6 +142,7 @@ def main():
     heute = datetime.date.today().isoformat()
     urls = [('/', 1.0), ('/search', 0.9), ('/analyses', 0.7), ('/support', 0.5), ('/friends', 0.4), ('/legal-notice', 0.2), ('/privacy', 0.2)]
     urls += [('/de' + u if u != '/' else '/de/', round(max(0.1, p - 0.1), 1)) for u, p in list(urls)]   # Deutsch unter /de/
+    urls.insert(3, ('/translation', 0.6))   # Glossar-Abstimmung (seit 10.11.2026), nur englisch
     (S / 'sitemap.xml').write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + ''.join(f'  <url><loc>https://www.idealismedition.com{u}</loc><lastmod>{heute}</lastmod><priority>{p}</priority></url>\n' for u, p in urls)

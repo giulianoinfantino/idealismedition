@@ -1,0 +1,3587 @@
+{
+ "entscheidungen": [
+  {
+   "id": "f-faktum",
+   "gruppe": "fichte",
+   "deutsch": "Faktum (vs. Tatsache)",
+   "zaehlung": {
+    "f": 519,
+    "s": 144,
+    "h": 147
+   },
+   "frage": "Fichte uses both Tatsache and the Latin loanword Faktum for \"fact\"; Kant's \"Faktum der Vernunft\" stands behind the second. One English word, or a separate one for Faktum?",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "fact (factum only for Kant's fact of reason and explicit contrasts)",
+     "hinweis": "Natural; the German word stays visible in the reader."
+    },
+    {
+     "key": "b",
+     "en": "factum throughout",
+     "hinweis": "Keeps the Latin loanword visible; foreign in running text."
+    },
+    {
+     "key": "c",
+     "en": "fact throughout, no exception",
+     "hinweis": "Simplest; the contrast with Tatsache disappears from the page."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-leiden",
+   "gruppe": "fichte",
+   "deutsch": "Leiden (Tun und Leiden)",
+   "zaehlung": {
+    "f": 266,
+    "s": 186,
+    "h": 99
+   },
+   "frage": "In the 1794 Wissenschaftslehre Leiden is the counterpart of Tun: being acted upon, not pain. Elsewhere Fichte uses it for suffering.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "passivity (in the Wissenschaftslehre), suffering elsewhere",
+     "hinweis": "Clear technical sense; one German word, two English words."
+    },
+    {
+     "key": "b",
+     "en": "suffering throughout",
+     "hinweis": "Literal, but makes the theory sound emotional."
+    },
+    {
+     "key": "c",
+     "en": "affection (being affected)",
+     "hinweis": "Scholastic and Kantian echo; easily misread as fondness."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-entgegensetzen",
+   "gruppe": "fichte",
+   "deutsch": "entgegensetzen, Gegensetzung",
+   "zaehlung": {
+    "f": 967,
+    "s": 2152,
+    "h": 2560
+   },
+   "frage": "Fichte's second principle: the I posits a not-I \"in opposition\" to itself. Should the English keep the verb \"posit\" inside the word?",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "oppose; \"posit in opposition\" where the act is the point",
+     "hinweis": "Readable; the act stays visible where it matters."
+    },
+    {
+     "key": "b",
+     "en": "counter-posit throughout",
+     "hinweis": "Keeps \"posit\" in every occurrence; sounds coined."
+    },
+    {
+     "key": "c",
+     "en": "oppose throughout",
+     "hinweis": "Natural English; the link to positing disappears."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-bestimmtheit",
+   "gruppe": "shared",
+   "deutsch": "Bestimmtheit",
+   "zaehlung": {
+    "f": 363,
+    "s": 114,
+    "h": 4172
+   },
+   "frage": "The property of being determined, frequent in Fichte and everywhere in Hegel's logic. The Fichte and Hegel drafts render it differently.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "determinateness",
+     "hinweis": "Usual in current translations of Hegel's logic."
+    },
+    {
+     "key": "b",
+     "en": "determinacy",
+     "hinweis": "Shorter; common in Fichte translations."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "f-wechsel",
+   "gruppe": "fichte",
+   "deutsch": "Wechsel",
+   "zaehlung": {
+    "f": 174,
+    "s": 202,
+    "h": 100
+   },
+   "frage": "In the 1794 Wissenschaftslehre the Wechsel between I and not-I is a back-and-forth in which each determines the other. In ordinary German it also means change.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "alternation (interplay where it is reciprocal)",
+     "hinweis": "Keeps \"change\" free for Veränderung and Wandel."
+    },
+    {
+     "key": "b",
+     "en": "interchange",
+     "hinweis": "Stresses reciprocity; slightly commercial."
+    },
+    {
+     "key": "c",
+     "en": "change",
+     "hinweis": "Natural, but merges three German words."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-wirksamkeit",
+   "gruppe": "shared",
+   "deutsch": "Wirksamkeit, Wirkungssphäre",
+   "zaehlung": {
+    "f": 475,
+    "s": 72,
+    "h": 125
+   },
+   "frage": "In Fichte's theory of right the person's causal reach into the world. The Hegel draft renders the same word differently.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "efficacy; sphere of efficacy",
+     "hinweis": "Established for Fichte's Natural Right."
+    },
+    {
+     "key": "b",
+     "en": "effectiveness; sphere of effectiveness",
+     "hinweis": "Usual in current Hegel translations; sounds like success."
+    },
+    {
+     "key": "c",
+     "en": "activity; sphere of activity",
+     "hinweis": "Plain; merges with Tätigkeit."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "f-satz",
+   "gruppe": "shared",
+   "deutsch": "Satz (Satz der Identität)",
+   "zaehlung": {
+    "f": 1279,
+    "s": 1244,
+    "h": 760
+   },
+   "frage": "Satz is both a proposition and a law of logic (Satz der Identität, Satz des Grundes). Fichte's Wissenschaftslehre begins from A = A as a Satz.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "proposition; principle in named laws (principle of identity)",
+     "hinweis": "Usual in Fichte translations."
+    },
+    {
+     "key": "b",
+     "en": "proposition; law in named laws (law of identity)",
+     "hinweis": "Logic-textbook usage; also found in Hegel translations."
+    },
+    {
+     "key": "c",
+     "en": "proposition throughout",
+     "hinweis": "Uniform; \"proposition of identity\" is stiff."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "f-kritizismus",
+   "gruppe": "shared",
+   "deutsch": "Kritizismus (Kriticismus)",
+   "zaehlung": {
+    "f": 7,
+    "s": 114,
+    "h": 12
+   },
+   "frage": "The name for Kant's critical philosophy as a position, above all in Schelling's Philosophical Letters on Dogmatism and Criticism. In English \"criticism\" usually means finding fault.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "criticism, glossed \"critical philosophy\" at first use",
+     "hinweis": "Keeps the established title of the Letters."
+    },
+    {
+     "key": "b",
+     "en": "critical philosophy",
+     "hinweis": "Unambiguous; the title changes."
+    },
+    {
+     "key": "c",
+     "en": "criticalism",
+     "hinweis": "A term of art; rare in English."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "f-raesonnement",
+   "gruppe": "shared",
+   "deutsch": "Räsonnement, räsonieren",
+   "zaehlung": {
+    "f": 201,
+    "s": 52,
+    "h": 182
+   },
+   "frage": "Often pejorative: clever reasoning that stays outside its object. Fichte, Schelling and Hegel all use it.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "argumentation (reasoning where neutral)",
+     "hinweis": "Carries the pejorative edge in context."
+    },
+    {
+     "key": "b",
+     "en": "reasoning throughout",
+     "hinweis": "Neutral; the irony is lost."
+    },
+    {
+     "key": "c",
+     "en": "ratiocination",
+     "hinweis": "Pejorative and Latinate; collides with Kant's vernünfteln."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-geist-mind",
+   "gruppe": "shared",
+   "deutsch": "Geist (spirit or mind)",
+   "zaehlung": {
+    "f": 1019,
+    "s": 2540,
+    "h": 3722
+   },
+   "frage": "For Hegel and Schelling Geist is spirit. In Fichte's Jena psychology it often just means the mind, as in \"a pragmatic history of the human Geist\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "spirit everywhere; \"mind\" reserved for Gemüt",
+     "hinweis": "One word across authors; Fichte's psychology sounds loftier."
+    },
+    {
+     "key": "b",
+     "en": "spirit by default, mind in Fichte's faculty psychology",
+     "hinweis": "Idiomatic in Fichte; the search splits Geist."
+    },
+    {
+     "key": "c",
+     "en": "mind in Fichte, spirit in Schelling and Hegel",
+     "hinweis": "A rule per author; hides the shared vocabulary."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "f-selbstgefuehl",
+   "gruppe": "fichte",
+   "deutsch": "Selbstgefühl",
+   "zaehlung": {
+    "f": 26,
+    "s": 9,
+    "h": 83
+   },
+   "frage": "In 1794 Fichte derives a feeling of oneself from the feeling of limitation. Hegel uses the same word in his anthropology.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "self-feeling",
+     "hinweis": "Literal; keeps \"feeling\" (Gefühl) in the series."
+    },
+    {
+     "key": "b",
+     "en": "self-awareness",
+     "hinweis": "Natural; collides with self-consciousness."
+    },
+    {
+     "key": "c",
+     "en": "feeling of self",
+     "hinweis": "Clear, longer."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-vorstellung",
+   "gruppe": "shared",
+   "deutsch": "Vorstellung",
+   "zaehlung": {
+    "f": 832,
+    "s": 1646,
+    "h": 2144
+   },
+   "frage": "Kant's general word for any mental content; Hegel contrasts it with the concept (Begriff). In ordinary German it is also a theater performance.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "representation",
+     "hinweis": "Kantian convention; the current standard for all three authors."
+    },
+    {
+     "key": "b",
+     "en": "presentation",
+     "hinweis": "Older Fichte convention; collides with Darstellung."
+    },
+    {
+     "key": "c",
+     "en": "idea",
+     "hinweis": "Natural English; collides with Idee."
+    },
+    {
+     "key": "d",
+     "en": "picture-thinking (where Hegel contrasts it with Begriff)",
+     "hinweis": "Older Hegel convention; vivid but interpretive."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-sehnen",
+   "gruppe": "shared",
+   "deutsch": "Sehnen (vs. Sehnsucht)",
+   "zaehlung": {
+    "f": 80,
+    "s": 19,
+    "h": 24
+   },
+   "frage": "Fichte deduces a feeling he calls Sehnen, and writes Sehnsucht in religious contexts. The Schelling draft already gives \"longing\" to Sehnsucht.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Sehnen = longing, Sehnsucht = yearning (in Fichte)",
+     "hinweis": "Keeps Fichte's two words apart; clashes with Schelling's Sehnsucht."
+    },
+    {
+     "key": "b",
+     "en": "Sehnen = yearning, Sehnsucht = longing everywhere",
+     "hinweis": "One rendering of Sehnsucht across authors."
+    },
+    {
+     "key": "c",
+     "en": "longing for both",
+     "hinweis": "Simple; the German word stays visible."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "f-trieb",
+   "gruppe": "shared",
+   "deutsch": "Trieb",
+   "zaehlung": {
+    "f": 1112,
+    "s": 155,
+    "h": 384
+   },
+   "frage": "Central to Fichte's ethics (Naturtrieb, reiner Trieb) and to Schelling's nature (Bildungstrieb). Older translations used \"impulse\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "drive",
+     "hinweis": "Current standard for all three authors."
+    },
+    {
+     "key": "b",
+     "en": "impulse",
+     "hinweis": "Older convention; sounds momentary."
+    },
+    {
+     "key": "c",
+     "en": "instinct",
+     "hinweis": "Collides with Instinkt."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-gebundenheit",
+   "gruppe": "fichte",
+   "deutsch": "Gebundenheit",
+   "zaehlung": {
+    "f": 64,
+    "s": 11,
+    "h": 1
+   },
+   "frage": "In the System of Ethics the state of the I as bound or constrained, by its drives and by nature.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "constrained state",
+     "hinweis": "Current standard; reads smoothly."
+    },
+    {
+     "key": "b",
+     "en": "boundness",
+     "hinweis": "Literal; one noun for one noun."
+    },
+    {
+     "key": "c",
+     "en": "being-bound",
+     "hinweis": "Literal and hyphenated, like other Fichte coinages."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-besonnenheit",
+   "gruppe": "fichte",
+   "deutsch": "Besonnenheit, Besinnung",
+   "zaehlung": {
+    "f": 151,
+    "s": 77,
+    "h": 20
+   },
+   "frage": "In the late Wissenschaftslehre: the collected, self-aware state of thinking, and the act of coming to oneself. Neither is quite reflection or consciousness.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "reflective awareness; coming to one's senses",
+     "hinweis": "Distinct from Reflexion and Bewusstsein."
+    },
+    {
+     "key": "b",
+     "en": "reflection; consciousness",
+     "hinweis": "As in a translation of the 1804 lectures; merges four words."
+    },
+    {
+     "key": "c",
+     "en": "circumspection; recollection",
+     "hinweis": "Elegant, but drifts from the sense."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-vermoegen",
+   "gruppe": "shared",
+   "deutsch": "Vermögen",
+   "zaehlung": {
+    "f": 1035,
+    "s": 295,
+    "h": 275
+   },
+   "frage": "Kant's word for the mind's faculties (Erkenntnisvermögen). In economic and legal passages it means wealth or assets.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "faculty (philosophy); wealth, assets (economics)",
+     "hinweis": "Kantian convention plus a rule by sense."
+    },
+    {
+     "key": "b",
+     "en": "power (philosophy)",
+     "hinweis": "Natural English; collides with Kraft and Macht."
+    },
+    {
+     "key": "c",
+     "en": "capacity (philosophy)",
+     "hinweis": "Modern; collides with Fähigkeit."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-sinnenwelt",
+   "gruppe": "fichte",
+   "deutsch": "Sinnenwelt",
+   "zaehlung": {
+    "f": 506,
+    "s": 93,
+    "h": 47
+   },
+   "frage": "The world as given to the senses, Kant's mundus sensibilis. Fichte uses it constantly in his ethics and popular writings.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "sensible world",
+     "hinweis": "Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "world of sense",
+     "hinweis": "Natural, older English."
+    },
+    {
+     "key": "c",
+     "en": "material world",
+     "hinweis": "Readable, but adds materialism."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-uebersinnlich",
+   "gruppe": "shared",
+   "deutsch": "übersinnlich, das Übersinnliche",
+   "zaehlung": {
+    "f": 336,
+    "s": 139,
+    "h": 91
+   },
+   "frage": "What lies beyond the senses: God, freedom, the moral world. All three authors use it.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "supersensible",
+     "hinweis": "Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "supersensuous",
+     "hinweis": "Older convention, still found for Fichte and Hegel."
+    },
+    {
+     "key": "c",
+     "en": "suprasensible",
+     "hinweis": "Also current; rarer."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-vorbild-abbild",
+   "gruppe": "shared",
+   "deutsch": "Vorbild / Abbild / Nachbild",
+   "zaehlung": {
+    "f": 184,
+    "s": 249,
+    "h": 26
+   },
+   "frage": "Around Urbild (archetype) Fichte and Schelling use a whole family of image words. The drafts render them differently.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "model / copy / copy",
+     "hinweis": "Plain; Abbild and Nachbild merge."
+    },
+    {
+     "key": "b",
+     "en": "prototype / copy / ectype",
+     "hinweis": "Every word its own English term; \"ectype\" is rare."
+    },
+    {
+     "key": "c",
+     "en": "pattern / likeness / after-image",
+     "hinweis": "Readable; \"after-image\" is optical."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "f-erscheinung",
+   "gruppe": "fichte",
+   "deutsch": "Erscheinung (late Wissenschaftslehre)",
+   "zaehlung": {
+    "f": 2570,
+    "s": 1797,
+    "h": 1115
+   },
+   "frage": "In the late Fichte Erscheinung is how the absolute, God, shows itself, not a mere phenomenon. Readers of Kant know it as \"appearance\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "appearance",
+     "hinweis": "One word across all authors and Kant."
+    },
+    {
+     "key": "b",
+     "en": "manifestation",
+     "hinweis": "Older convention for the popular works; stresses the divine."
+    },
+    {
+     "key": "c",
+     "en": "appearance, epiphany where the sense is religious",
+     "hinweis": "Vivid; splits one word in two."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-begreifen",
+   "gruppe": "shared",
+   "deutsch": "begreifen, das Unbegreifliche",
+   "zaehlung": {
+    "f": 865,
+    "s": 1483,
+    "h": 556
+   },
+   "frage": "Hegel's begreifen is grasping in the concept; the late Fichte aims at das Unbegreifliche, what cannot be grasped. The drafts disagree.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "comprehend; the incomprehensible",
+     "hinweis": "Current Hegel standard; \"incomprehensible\" sounds like nonsense."
+    },
+    {
+     "key": "b",
+     "en": "conceive; the inconceivable",
+     "hinweis": "Fits Fichte; loses Hegel's \"comprehend\"."
+    },
+    {
+     "key": "c",
+     "en": "conceive in Fichte, comprehend in Hegel",
+     "hinweis": "Faithful to each; splits one word."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "f-reflexibilitaet",
+   "gruppe": "fichte",
+   "deutsch": "Reflexibilität",
+   "zaehlung": {
+    "f": 103,
+    "s": 0,
+    "h": 0
+   },
+   "frage": "A coinage of the late Fichte: the capacity of knowing to reflect on itself again and again.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "reflexibility",
+     "hinweis": "As odd as the German; stays a coinage."
+    },
+    {
+     "key": "b",
+     "en": "reflexivity",
+     "hinweis": "Familiar, but a modern logical term."
+    },
+    {
+     "key": "c",
+     "en": "reflectibility",
+     "hinweis": "Regular English formation; unusual."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-prinzipiat",
+   "gruppe": "fichte",
+   "deutsch": "Prinzipiat, prinzipiieren",
+   "zaehlung": {
+    "f": 127,
+    "s": 0,
+    "h": 0
+   },
+   "frage": "In the 1804 lectures the Prinzipiat is what a principle grounds, and prinzipiieren is to act as a principle.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "principiate; principle-providing",
+     "hinweis": "Technical coinages, as in the current translation."
+    },
+    {
+     "key": "b",
+     "en": "what is grounded; to ground",
+     "hinweis": "Readable; merges with Grund."
+    },
+    {
+     "key": "c",
+     "en": "the principled; to principle",
+     "hinweis": "Literal; \"principled\" means honest in English."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-intelligieren",
+   "gruppe": "fichte",
+   "deutsch": "intelligieren",
+   "zaehlung": {
+    "f": 40,
+    "s": 0,
+    "h": 0
+   },
+   "frage": "The late Fichte's verb for the intellect's act of seeing into itself, kept apart from denken (to think).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "intellect (as a verb), intellecting",
+     "hinweis": "Keeps the Latin root; strange English."
+    },
+    {
+     "key": "b",
+     "en": "intellectualize",
+     "hinweis": "Means something else in modern English."
+    },
+    {
+     "key": "c",
+     "en": "understand",
+     "hinweis": "Natural; collides with Verstand and verstehen."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-vernehmen",
+   "gruppe": "fichte",
+   "deutsch": "Vernehmen",
+   "zaehlung": {
+    "f": 52,
+    "s": 40,
+    "h": 30
+   },
+   "frage": "In the late Wissenschaftslehre a direct taking-in of what is given, from the same root as Vernunft (reason).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "apprehending",
+     "hinweis": "Neutral; loses the link to reason."
+    },
+    {
+     "key": "b",
+     "en": "awareness",
+     "hinweis": "Natural; collides with Bewusstsein."
+    },
+    {
+     "key": "c",
+     "en": "perceiving",
+     "hinweis": "Collides with Wahrnehmung."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-einheit",
+   "gruppe": "fichte",
+   "deutsch": "Einheit (late Wissenschaftslehre)",
+   "zaehlung": {
+    "f": 1677,
+    "s": 3176,
+    "h": 4735
+   },
+   "frage": "The late Fichte speaks constantly of absolute Einheit; he also writes Einssein (being-one).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "unity",
+     "hinweis": "Same word as in Kant and Hegel."
+    },
+    {
+     "key": "b",
+     "en": "oneness",
+     "hinweis": "As in a translation of the 1804 lectures; collides with Einssein."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-lehre",
+   "gruppe": "shared",
+   "deutsch": "-lehre: Rechtslehre, Sittenlehre, Staatslehre, Religionslehre",
+   "zaehlung": {
+    "f": 313,
+    "s": 41,
+    "h": 25
+   },
+   "frage": "Fichte names the parts of his system with -lehre. English can say \"doctrine of\", \"theory of\", or use a plain subject name.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "doctrine of right, ethics, doctrine of the state, doctrine of religion",
+     "hinweis": "Established titles; Sittenlehre is the exception."
+    },
+    {
+     "key": "b",
+     "en": "theory of right, theory of ethics, theory of the state",
+     "hinweis": "Modern academic tone."
+    },
+    {
+     "key": "c",
+     "en": "\"doctrine of\" throughout (doctrine of morals)",
+     "hinweis": "Uniform; \"doctrine of morals\" sounds old-fashioned."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-traegheit",
+   "gruppe": "fichte",
+   "deutsch": "Trägheit (radical evil)",
+   "zaehlung": {
+    "f": 52,
+    "s": 32,
+    "h": 45
+   },
+   "frage": "Fichte's account of radical evil starts from Trägheit, the will's tendency to sink back. In physics the same word means inertia.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "inertia; sloth where the vice is named",
+     "hinweis": "Keeps the physical image Fichte relies on."
+    },
+    {
+     "key": "b",
+     "en": "sloth",
+     "hinweis": "The moral vice; loses the physics."
+    },
+    {
+     "key": "c",
+     "en": "indolence",
+     "hinweis": "Moral and everyday; neither physical nor theological."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-geschlecht",
+   "gruppe": "shared",
+   "deutsch": "Menschengeschlecht",
+   "zaehlung": {
+    "f": 269,
+    "s": 235,
+    "h": 30
+   },
+   "frage": "Geschlecht means sex, lineage and kind. Menschengeschlecht is humanity seen as one lineage.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "human race",
+     "hinweis": "Period English, as in older translations; \"race\" is loaded today."
+    },
+    {
+     "key": "b",
+     "en": "humankind",
+     "hinweis": "Modern and neutral; loses the lineage."
+    },
+    {
+     "key": "c",
+     "en": "human species",
+     "hinweis": "Biological tone; collides with Gattung."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-gattung",
+   "gruppe": "shared",
+   "deutsch": "Gattung",
+   "zaehlung": {
+    "f": 241,
+    "s": 333,
+    "h": 692
+   },
+   "frage": "In Fichte the human or rational species; in Hegel's logic and philosophy of nature the genus (Gattung as against Art).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "species in Fichte, genus in Hegel",
+     "hinweis": "By sense; the German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "genus throughout",
+     "hinweis": "Uniform; odd for the human species."
+    },
+    {
+     "key": "c",
+     "en": "species throughout",
+     "hinweis": "Natural for humans; collides with Hegel's Art."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-recht",
+   "gruppe": "shared",
+   "deutsch": "Recht",
+   "zaehlung": {
+    "f": 3440,
+    "s": 935,
+    "h": 1602
+   },
+   "frage": "Recht is both a right and the law as a system of right. Fichte's and Hegel's philosophies of right turn on it.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "right (\"law\" only for a legal order)",
+     "hinweis": "Current standard for both."
+    },
+    {
+     "key": "b",
+     "en": "law",
+     "hinweis": "Natural English for the system; loses the moral sense."
+    },
+    {
+     "key": "c",
+     "en": "justice",
+     "hinweis": "Fits some uses; collides with Gerechtigkeit."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-naturrecht",
+   "gruppe": "shared",
+   "deutsch": "Naturrecht",
+   "zaehlung": {
+    "f": 158,
+    "s": 18,
+    "h": 51
+   },
+   "frage": "Fichte's Grundlage des Naturrechts and Hegel's essay on Naturrecht. In English \"natural law\" usually stands for lex naturalis or Naturgesetz.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "natural right",
+     "hinweis": "Current standard for Fichte; keeps \"law of nature\" free."
+    },
+    {
+     "key": "b",
+     "en": "natural law",
+     "hinweis": "Usual English name of the discipline; established for Hegel's essay."
+    },
+    {
+     "key": "c",
+     "en": "natural right in Fichte, natural law in Hegel's title",
+     "hinweis": "Keeps both established titles; splits one word."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "f-rechtlich",
+   "gruppe": "fichte",
+   "deutsch": "rechtlich, Rechtsverhältnis",
+   "zaehlung": {
+    "f": 283,
+    "s": 30,
+    "h": 138
+   },
+   "frage": "Fichte's adjective for what belongs to the order of right, as in rechtliches Verhältnis.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "rightful; relation of right",
+     "hinweis": "Keeps the link to right (Recht)."
+    },
+    {
+     "key": "b",
+     "en": "juridical; juridical relation",
+     "hinweis": "Technical, legal tone."
+    },
+    {
+     "key": "c",
+     "en": "legal; legal relation",
+     "hinweis": "Natural; collides with gesetzlich."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-zwangsrecht",
+   "gruppe": "fichte",
+   "deutsch": "Zwangsrecht",
+   "zaehlung": {
+    "f": 83,
+    "s": 4,
+    "h": 2
+   },
+   "frage": "In Fichte's Natural Right the right to coerce someone who violates a right.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "right of coercion",
+     "hinweis": "Current standard; a right to do something."
+    },
+    {
+     "key": "b",
+     "en": "coercive right",
+     "hinweis": "Shorter; could mean a right that coerces."
+    },
+    {
+     "key": "c",
+     "en": "right of compulsion",
+     "hinweis": "Older convention."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-aufforderung",
+   "gruppe": "fichte",
+   "deutsch": "Aufforderung",
+   "zaehlung": {
+    "f": 98,
+    "s": 43,
+    "h": 9
+   },
+   "frage": "In Fichte's Natural Right one rational being calls on another to act freely: the origin of recognition. Elsewhere an ordinary request.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "summons",
+     "hinweis": "Current standard; formal, almost legal."
+    },
+    {
+     "key": "b",
+     "en": "invitation",
+     "hinweis": "Gentle; misses the demand."
+    },
+    {
+     "key": "c",
+     "en": "call",
+     "hinweis": "Natural; vague."
+    },
+    {
+     "key": "d",
+     "en": "solicitation",
+     "hinweis": "Formal; commercial overtone."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-buergervertrag",
+   "gruppe": "fichte",
+   "deutsch": "Staatsbürgervertrag",
+   "zaehlung": {
+    "f": 96,
+    "s": 0,
+    "h": 0
+   },
+   "frage": "The contract by which individuals become citizens in Fichte's Natural Right.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "civil contract",
+     "hinweis": "Current standard."
+    },
+    {
+     "key": "b",
+     "en": "citizens' contract",
+     "hinweis": "Literal; keeps Bürger visible."
+    },
+    {
+     "key": "c",
+     "en": "social contract",
+     "hinweis": "Familiar; reads Rousseau into Fichte."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-gemeinwesen",
+   "gruppe": "shared",
+   "deutsch": "Gemeinwesen",
+   "zaehlung": {
+    "f": 14,
+    "s": 7,
+    "h": 46
+   },
+   "frage": "The political community as a whole. The Fichte and Hegel drafts render it differently.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "commonwealth",
+     "hinweis": "Established for Fichte's Natural Right."
+    },
+    {
+     "key": "b",
+     "en": "polity",
+     "hinweis": "Usual in current Hegel translations."
+    },
+    {
+     "key": "c",
+     "en": "community",
+     "hinweis": "Plain; collides with Gemeinde and Gemeinschaft."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "f-polizei",
+   "gruppe": "shared",
+   "deutsch": "Polizei",
+   "zaehlung": {
+    "f": 89,
+    "s": 6,
+    "h": 25
+   },
+   "frage": "Around 1800 Polizei is the state's whole internal administration (welfare, health, order), not only the police force.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "police, with a note on the period sense",
+     "hinweis": "Faithful; modern readers think of officers."
+    },
+    {
+     "key": "b",
+     "en": "public administration",
+     "hinweis": "Clear, but loses a term of the period."
+    },
+    {
+     "key": "c",
+     "en": "police administration",
+     "hinweis": "A compromise; still sounds like policing."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-notstaat",
+   "gruppe": "fichte",
+   "deutsch": "Notstaat, Notrecht",
+   "zaehlung": {
+    "f": 13,
+    "s": 1,
+    "h": 1
+   },
+   "frage": "The late Fichte's name for the merely provisional state, held together by necessity, as against the state of reason.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "state of necessity; right of necessity",
+     "hinweis": "Literal; keeps Not (necessity)."
+    },
+    {
+     "key": "b",
+     "en": "emergency state",
+     "hinweis": "Modern; suggests martial law."
+    },
+    {
+     "key": "c",
+     "en": "makeshift state",
+     "hinweis": "Captures the provisional; informal."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-landesgeld",
+   "gruppe": "fichte",
+   "deutsch": "Landesgeld / Weltgeld",
+   "zaehlung": {
+    "f": 54,
+    "s": 0,
+    "h": 4
+   },
+   "frage": "In The Closed Commercial State Fichte contrasts money valid only inside the country with gold and silver valid everywhere.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "national money / world money",
+     "hinweis": "Literal; keeps the pair."
+    },
+    {
+     "key": "b",
+     "en": "domestic currency / world currency",
+     "hinweis": "Modern economic terms."
+    },
+    {
+     "key": "c",
+     "en": "token money / metallic money",
+     "hinweis": "Explains the idea; not Fichte's words."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-erziehung",
+   "gruppe": "shared",
+   "deutsch": "Erziehung",
+   "zaehlung": {
+    "f": 483,
+    "s": 59,
+    "h": 98
+   },
+   "frage": "Fichte's national education in the Addresses, but also the upbringing of children in Natural Right.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "upbringing (family right), education elsewhere",
+     "hinweis": "By sense; the German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "education throughout",
+     "hinweis": "Uniform; collides with Bildung."
+    },
+    {
+     "key": "c",
+     "en": "rearing (children), education elsewhere",
+     "hinweis": "Old-fashioned for children."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-weltordnung",
+   "gruppe": "fichte",
+   "deutsch": "moralische Weltordnung",
+   "zaehlung": {
+    "f": 61,
+    "s": 19,
+    "h": 13
+   },
+   "frage": "The phrase that started the Atheism Controversy. Fichte insists it is an active ordering (ordo ordinans), not a fixed order.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "moral world order (with a note)",
+     "hinweis": "Established; the note carries Fichte's point."
+    },
+    {
+     "key": "b",
+     "en": "moral ordering of the world",
+     "hinweis": "Shows the activity in the text itself."
+    },
+    {
+     "key": "c",
+     "en": "moral order of the world",
+     "hinweis": "Natural English; static."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-weltregierung",
+   "gruppe": "fichte",
+   "deutsch": "göttliche Weltregierung",
+   "zaehlung": {
+    "f": 48,
+    "s": 8,
+    "h": 3
+   },
+   "frage": "From the title of Fichte's 1798 essay on the ground of our belief in a divine Weltregierung.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "governance of the world",
+     "hinweis": "Current standard title."
+    },
+    {
+     "key": "b",
+     "en": "government of the world",
+     "hinweis": "Older wording; sounds like a cabinet."
+    },
+    {
+     "key": "c",
+     "en": "rule of the world",
+     "hinweis": "Plain; less theological."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-normalvolk",
+   "gruppe": "fichte",
+   "deutsch": "Normalvolk",
+   "zaehlung": {
+    "f": 20,
+    "s": 0,
+    "h": 1
+   },
+   "frage": "In The Characteristics of the Present Age a people that sets the norm: an original people living by reason as instinct.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "normal people (with a note)",
+     "hinweis": "Literal; \"normal\" here means norm-giving."
+    },
+    {
+     "key": "b",
+     "en": "norm-giving people",
+     "hinweis": "Explains the sense; not Fichte's word."
+    },
+    {
+     "key": "c",
+     "en": "exemplary people",
+     "hinweis": "Readable; adds praise."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-urvolk",
+   "gruppe": "fichte",
+   "deutsch": "Urvolk",
+   "zaehlung": {
+    "f": 8,
+    "s": 8,
+    "h": 2
+   },
+   "frage": "In the Addresses Fichte calls the Germans an Urvolk, a people that has kept its original language. Often quoted in debates on nationalism.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "original people",
+     "hinweis": "Established; literal."
+    },
+    {
+     "key": "b",
+     "en": "primordial people",
+     "hinweis": "Stronger, mythical."
+    },
+    {
+     "key": "c",
+     "en": "aboriginal people",
+     "hinweis": "Ethnographic; wrong overtones."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-auslaenderei",
+   "gruppe": "fichte",
+   "deutsch": "Ausländerei",
+   "zaehlung": {
+    "f": 12,
+    "s": 0,
+    "h": 0
+   },
+   "frage": "Fichte's pejorative in the Addresses for aping foreign ways.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "foreignism",
+     "hinweis": "Keeps a single pejorative noun."
+    },
+    {
+     "key": "b",
+     "en": "affectation of foreign ways",
+     "hinweis": "Clear and descriptive, but long."
+    },
+    {
+     "key": "c",
+     "en": "xenomania",
+     "hinweis": "Learned coinage; sharper than the German."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-vaterland",
+   "gruppe": "shared",
+   "deutsch": "Vaterland",
+   "zaehlung": {
+    "f": 112,
+    "s": 50,
+    "h": 71
+   },
+   "frage": "Fichte's Addresses and Hegel's political writings. Around 1800 the word carries none of its twentieth-century weight.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "fatherland",
+     "hinweis": "Literal and period; heavy for modern ears."
+    },
+    {
+     "key": "b",
+     "en": "homeland",
+     "hinweis": "Softer; modern political overtone."
+    },
+    {
+     "key": "c",
+     "en": "native country",
+     "hinweis": "Neutral; loses the emotional charge."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-stamm",
+   "gruppe": "fichte",
+   "deutsch": "Stamm, Stämme",
+   "zaehlung": {
+    "f": 73,
+    "s": 83,
+    "h": 20
+   },
+   "frage": "In the Addresses the Germanic Stämme, and the Stamm (stock) of a language or people.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "tribe; stock",
+     "hinweis": "Period sense; \"tribe\" can sound ethnographic."
+    },
+    {
+     "key": "b",
+     "en": "stock throughout",
+     "hinweis": "Genealogical and linguistic, never racial."
+    },
+    {
+     "key": "c",
+     "en": "lineage",
+     "hinweis": "Clear; slightly genealogical."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-selbstsucht",
+   "gruppe": "fichte",
+   "deutsch": "Selbstsucht",
+   "zaehlung": {
+    "f": 35,
+    "s": 6,
+    "h": 23
+   },
+   "frage": "In the Addresses Fichte diagnoses his age as one of Selbstsucht, the reign of self-interest.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "self-seeking",
+     "hinweis": "Keeps the striving in Sucht."
+    },
+    {
+     "key": "b",
+     "en": "selfishness",
+     "hinweis": "Natural; moralizing."
+    },
+    {
+     "key": "c",
+     "en": "self-interest",
+     "hinweis": "Neutral; economic."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-zwingherr",
+   "gruppe": "fichte",
+   "deutsch": "Zwingherr (zur Deutschheit)",
+   "zaehlung": {
+    "f": 19,
+    "s": 0,
+    "h": 1
+   },
+   "frage": "Fichte imagines a \"Zwingherr zur Deutschheit\", a ruler who would compel the Germans into unity. A notorious phrase.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "coercive master (taskmaster)",
+     "hinweis": "Literal; compulsion without later associations."
+    },
+    {
+     "key": "b",
+     "en": "despot",
+     "hinweis": "Clear; adds a judgment."
+    },
+    {
+     "key": "c",
+     "en": "tyrant",
+     "hinweis": "Fichte has Tyrann for that."
+    },
+    {
+     "key": "d",
+     "en": "dictator",
+     "hinweis": "Twentieth-century overtones."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-bildung",
+   "gruppe": "shared",
+   "deutsch": "Bildung",
+   "zaehlung": {
+    "f": 564,
+    "s": 600,
+    "h": 470
+   },
+   "frage": "The formation of a person, culture, education, and in nature the formation of shapes. The Fichte and Hegel drafts render it differently.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "cultural formation (Hegel), cultivation or education (Fichte)",
+     "hinweis": "By author and sense; the German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "education throughout",
+     "hinweis": "Natural; collides with Erziehung."
+    },
+    {
+     "key": "c",
+     "en": "culture throughout",
+     "hinweis": "Collides with Kultur."
+    },
+    {
+     "key": "d",
+     "en": "formation throughout",
+     "hinweis": "Uniform; abstract."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "f-inwiefern",
+   "gruppe": "fichte",
+   "deutsch": "inwiefern",
+   "zaehlung": {
+    "f": 923,
+    "s": 853,
+    "h": 40
+   },
+   "frage": "One of Fichte's favorite conjunctions (923 times). Usually it means \"insofar as\", but it can also ask \"to what extent?\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "insofar as (\"to what extent\" only in questions)",
+     "hinweis": "Follows the usage of 1800; needs judgment each time."
+    },
+    {
+     "key": "b",
+     "en": "to what extent",
+     "hinweis": "Dictionary sense today; often wrong in Fichte."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-stunde",
+   "gruppe": "fichte",
+   "deutsch": "Stunde (in the lectures)",
+   "zaehlung": {
+    "f": 206,
+    "s": 26,
+    "h": 48
+   },
+   "frage": "In his lecture courses Fichte says \"in der vorigen Stunde\": in the previous hour, meaning the previous lecture.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "lecture",
+     "hinweis": "What is meant; loses the period idiom."
+    },
+    {
+     "key": "b",
+     "en": "hour",
+     "hinweis": "Literal; puzzling out of context."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-gemeines-bewusstsein",
+   "gruppe": "fichte",
+   "deutsch": "gemeines Bewusstsein",
+   "zaehlung": {
+    "f": 51,
+    "s": 25,
+    "h": 28
+   },
+   "frage": "Everyday consciousness before philosophy, as against the transcendental standpoint. Gemein here carries no contempt.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "ordinary consciousness",
+     "hinweis": "Neutral; clear."
+    },
+    {
+     "key": "b",
+     "en": "common consciousness",
+     "hinweis": "Literal; might suggest shared consciousness."
+    },
+    {
+     "key": "c",
+     "en": "vulgar consciousness",
+     "hinweis": "Period English; pejorative today."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-judentum",
+   "gruppe": "fichte",
+   "deutsch": "Judentum (1793)",
+   "zaehlung": {
+    "f": 14,
+    "s": 41,
+    "h": 3
+   },
+   "frage": "In the 1793 Contribution on the French Revolution Fichte calls Judentum a hostile state within the state. The word can mean the religion or the community.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Judaism (with a note on the double sense)",
+     "hinweis": "Literal; does not soften."
+    },
+    {
+     "key": "b",
+     "en": "Jewry",
+     "hinweis": "Names the community; older, harsher tone."
+    },
+    {
+     "key": "c",
+     "en": "the Jews",
+     "hinweis": "Plain; loses the abstraction."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-ethnische-begriffe",
+   "gruppe": "conventions",
+   "deutsch": "Period terms for peoples (Neger, Wilde, Barbar)",
+   "zaehlung": null,
+   "frage": "Fichte, Schelling and Hegel use the period's words for non-European peoples, several of them offensive today.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "period equivalents (Negro, savage), one editorial note, no comment in the text",
+     "hinweis": "Faithful; readers meet the original register."
+    },
+    {
+     "key": "b",
+     "en": "modernize (Black people, Indigenous peoples)",
+     "hinweis": "Readable; hides what the authors wrote."
+    },
+    {
+     "key": "c",
+     "en": "period equivalents with [sic] in the text",
+     "hinweis": "Faithful, but interrupts and comments."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-titel-bestimmung",
+   "gruppe": "fichte",
+   "deutsch": "Title: Die Bestimmung des Menschen",
+   "zaehlung": {
+    "f": 47,
+    "s": 9,
+    "h": 22
+   },
+   "frage": "Fichte's best-known popular book has been \"The Vocation of Man\" in English since the nineteenth century, while Mensch is otherwise rendered \"human being\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "The Vocation of Man",
+     "hinweis": "Established title; inconsistent with \"human being\"."
+    },
+    {
+     "key": "b",
+     "en": "The Vocation of the Human Being",
+     "hinweis": "Consistent; unfamiliar to readers."
+    },
+    {
+     "key": "c",
+     "en": "The Vocation of Humanity",
+     "hinweis": "Short and neutral; changes the singular."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-titel-gelehrter",
+   "gruppe": "fichte",
+   "deutsch": "Title: Einige Vorlesungen über die Bestimmung des Gelehrten",
+   "zaehlung": {
+    "f": 20,
+    "s": 1,
+    "h": 0
+   },
+   "frage": "Fichte's Jena lectures of 1794 on the scholar's vocation (he returned to the topic in 1805 and 1811).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Some Lectures concerning the Scholar's Vocation",
+     "hinweis": "Current standard title; literal."
+    },
+    {
+     "key": "b",
+     "en": "The Vocation of the Scholar",
+     "hinweis": "Older title; shorter."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-titel-grundzuege",
+   "gruppe": "fichte",
+   "deutsch": "Title: Die Grundzüge des gegenwärtigen Zeitalters",
+   "zaehlung": {
+    "f": 5,
+    "s": 1,
+    "h": 0
+   },
+   "frage": "Fichte's Berlin lectures of 1804/05 on the philosophy of history.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "The Characteristics of the Present Age",
+     "hinweis": "The only established English title."
+    },
+    {
+     "key": "b",
+     "en": "Basic Features of the Present Age",
+     "hinweis": "Literal; unfamiliar."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-titel-anweisung",
+   "gruppe": "fichte",
+   "deutsch": "Title: Die Anweisung zum seligen Leben",
+   "zaehlung": {
+    "f": 8,
+    "s": 6,
+    "h": 0
+   },
+   "frage": "Fichte's lectures on religion of 1806. Anweisung means guidance or instruction.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "The Way towards the Blessed Life",
+     "hinweis": "The established English title."
+    },
+    {
+     "key": "b",
+     "en": "Guide to the Blessed Life",
+     "hinweis": "Literal; plain."
+    },
+    {
+     "key": "c",
+     "en": "Instructions for the Blessed Life",
+     "hinweis": "Literal; sounds like a manual."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-titel-sonnenklar",
+   "gruppe": "fichte",
+   "deutsch": "Title: Sonnenklarer Bericht",
+   "zaehlung": {
+    "f": 15,
+    "s": 12,
+    "h": 3
+   },
+   "frage": "Fichte's 1801 report to the wider public, \"clear as the sun\", on what his philosophy really is.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "A Crystal Clear Report",
+     "hinweis": "Established English title; idiomatic."
+    },
+    {
+     "key": "b",
+     "en": "A Sun-Clear Report",
+     "hinweis": "Literal; keeps Fichte's image."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-titel-wl-englisch",
+   "gruppe": "conventions",
+   "deutsch": "Older English titles that translate Wissenschaftslehre",
+   "zaehlung": null,
+   "frage": "Wissenschaftslehre itself stays untranslated. But some established English titles translate it as \"Science of Knowledge\", such as Fichte's 1810 outline and Schelling's Abhandlungen of 1796/97.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "keep the established titles as published",
+     "hinweis": "Recognizable in libraries; inconsistent with the text."
+    },
+    {
+     "key": "b",
+     "en": "retitle them with \"Wissenschaftslehre\"",
+     "hinweis": "Consistent; differs from existing citations."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-nichtseiende",
+   "gruppe": "schelling",
+   "deutsch": "das Nichtseyende",
+   "zaehlung": {
+    "f": 13,
+    "s": 398,
+    "h": 33
+   },
+   "frage": "Schelling insists that what is not (Greek μὴ ὄν) is not nothing: creatures come from das Nichtseyende, not from das Nichts.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "that which is not",
+     "hinweis": "Parallel to \"that which is\"; never confused with nothing."
+    },
+    {
+     "key": "b",
+     "en": "non-being",
+     "hinweis": "Compact; collides with Nichtseyn."
+    },
+    {
+     "key": "c",
+     "en": "the nonexistent",
+     "hinweis": "Natural; collides with Existenz."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-aktus",
+   "gruppe": "schelling",
+   "deutsch": "Aktus, actus purus",
+   "zaehlung": {
+    "f": 8,
+    "s": 374,
+    "h": 11
+   },
+   "frage": "Late Schelling's Aristotelian term: potency passes over into Aktus. German also has Akt and Handlung for \"act\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "act; pure act (actus purus kept in Latin)",
+     "hinweis": "Short; collides with Akt and Handlung."
+    },
+    {
+     "key": "b",
+     "en": "actus (kept in Latin)",
+     "hinweis": "Unmistakable; foreign in every sentence."
+    },
+    {
+     "key": "c",
+     "en": "actuality",
+     "hinweis": "Clear for Aristotle; collides with Wirklichkeit."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-prius",
+   "gruppe": "schelling",
+   "deutsch": "Prius",
+   "zaehlung": {
+    "f": 4,
+    "s": 155,
+    "h": 7
+   },
+   "frage": "Late Schelling calls God the absolute Prius: what comes before all being, not in time but in principle.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "prius (Latin, in italics)",
+     "hinweis": "As Schelling writes it; foreign."
+    },
+    {
+     "key": "b",
+     "en": "the prior",
+     "hinweis": "English; reads like an adjective."
+    },
+    {
+     "key": "c",
+     "en": "what is first",
+     "hinweis": "Plain; loses the term."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-indifferenz",
+   "gruppe": "schelling",
+   "deutsch": "Indifferenz",
+   "zaehlung": {
+    "f": 51,
+    "s": 834,
+    "h": 405
+   },
+   "frage": "In the identity philosophy the absolute is the Indifferenz of subject and object: not apathy, but the absence of difference.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "indifference",
+     "hinweis": "Established; misleading in everyday English."
+    },
+    {
+     "key": "b",
+     "en": "nondifference",
+     "hinweis": "Exact sense; a coinage."
+    },
+    {
+     "key": "c",
+     "en": "neutrality",
+     "hinweis": "Natural; wrong overtones."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-unbedingt",
+   "gruppe": "schelling",
+   "deutsch": "das Unbedingte",
+   "zaehlung": {
+    "f": 264,
+    "s": 526,
+    "h": 176
+   },
+   "frage": "Kant's term for what is not conditioned. The young Schelling plays on be-ding-en, \"making into a thing\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "the unconditioned",
+     "hinweis": "Kantian convention."
+    },
+    {
+     "key": "b",
+     "en": "the unconditional",
+     "hinweis": "Older translation of the early essays; more idiomatic."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-einzigkeit",
+   "gruppe": "schelling",
+   "deutsch": "Einzigkeit (Gottes)",
+   "zaehlung": {
+    "f": 1,
+    "s": 141,
+    "h": 1
+   },
+   "frage": "Late Schelling sets the Einzigkeit of God against his Einheit (unity) in his account of monotheism.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "uniqueness",
+     "hinweis": "Clear; keeps \"unity\" for Einheit."
+    },
+    {
+     "key": "b",
+     "en": "singleness",
+     "hinweis": "Literal; slightly odd."
+    },
+    {
+     "key": "c",
+     "en": "oneness",
+     "hinweis": "Collides with unity and Einssein."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-das-all",
+   "gruppe": "schelling",
+   "deutsch": "das All",
+   "zaehlung": {
+    "f": 4,
+    "s": 370,
+    "h": 11
+   },
+   "frage": "The identity philosophy's word for everything as one whole. Lowercase \"the all\" is barely readable.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "the All (capitalized, as an exception)",
+     "hinweis": "Readable; breaks the lowercase rule."
+    },
+    {
+     "key": "b",
+     "en": "the universe",
+     "hinweis": "Natural; collides with Universum."
+    },
+    {
+     "key": "c",
+     "en": "the all",
+     "hinweis": "Consistent lowercase; hard to read."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-lauter",
+   "gruppe": "schelling",
+   "deutsch": "lauter, Lauterkeit",
+   "zaehlung": {
+    "f": 21,
+    "s": 153,
+    "h": 11
+   },
+   "frage": "In the Ages of the World God's essence before all being is Lauterkeit; Schelling writes \"das lautere Seynkönnen\". He also uses rein (pure).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "sheer; purity",
+     "hinweis": "Keeps \"pure\" free for rein."
+    },
+    {
+     "key": "b",
+     "en": "pure; purity",
+     "hinweis": "Natural; merges with rein."
+    },
+    {
+     "key": "c",
+     "en": "limpid; limpidity",
+     "hinweis": "Keeps the clarity of lauter; rare."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-ur-praefix",
+   "gruppe": "conventions",
+   "deutsch": "Ur- compounds (Urwesen, Urform, Urrecht, Urbewusstsein)",
+   "zaehlung": null,
+   "frage": "Hundreds of words begin with Ur-. The drafts render the prefix as original, primal or primordial, not consistently.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "primal for persons and acts, primordial for structures",
+     "hinweis": "A rule by sense; needs judgment."
+    },
+    {
+     "key": "b",
+     "en": "original throughout (Urwesen = original being)",
+     "hinweis": "Kantian convention; plain."
+    },
+    {
+     "key": "c",
+     "en": "primordial throughout",
+     "hinweis": "Uniform; heavy."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "s-weltanschauung",
+   "gruppe": "shared",
+   "deutsch": "Weltanschauung",
+   "zaehlung": {
+    "f": 28,
+    "s": 14,
+    "h": 30
+   },
+   "frage": "Around 1800 this is the intuition (Anschauung) of the world, often in a transcendental sense, not yet an ideology.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "intuition of the world (\"worldview\" for an outlook)",
+     "hinweis": "Keeps Anschauung = intuition; splits by sense."
+    },
+    {
+     "key": "b",
+     "en": "worldview",
+     "hinweis": "Natural; anachronistic overtones."
+    },
+    {
+     "key": "c",
+     "en": "view of the world",
+     "hinweis": "Neutral and plain."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "s-reizbarkeit",
+   "gruppe": "schelling",
+   "deutsch": "Reizbarkeit, Reiz",
+   "zaehlung": {
+    "f": 5,
+    "s": 69,
+    "h": 7
+   },
+   "frage": "Period physiology: Reiz is the stimulus, Reizbarkeit the capacity to respond to it. Schelling also uses Irritabilität.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "susceptibility (to stimuli); stimulus",
+     "hinweis": "Keeps \"irritability\" for Irritabilität."
+    },
+    {
+     "key": "b",
+     "en": "irritability; stimulus",
+     "hinweis": "Usual English physiology; merges two words."
+    },
+    {
+     "key": "c",
+     "en": "excitability",
+     "hinweis": "Collides with Erregbarkeit."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-kunsttrieb",
+   "gruppe": "schelling",
+   "deutsch": "Kunsttrieb",
+   "zaehlung": {
+    "f": 4,
+    "s": 92,
+    "h": 0
+   },
+   "frage": "In the philosophy of nature the drive by which animals build nests and hives; in the philosophy of art the artist's drive.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "technical drive (nature), artistic drive (art)",
+     "hinweis": "By context; the German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "artistic drive throughout",
+     "hinweis": "Uniform; odd for bees."
+    },
+    {
+     "key": "c",
+     "en": "building instinct (nature)",
+     "hinweis": "Clear; collides with Instinkt."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-chemie-perioden",
+   "gruppe": "schelling",
+   "deutsch": "Period chemistry (Lebensluft, Wärmestoff, Phlogiston)",
+   "zaehlung": {
+    "f": 0,
+    "s": 235,
+    "h": 30
+   },
+   "frage": "Schelling's philosophy of nature works with the chemistry of the 1790s: vital air for oxygen, caloric for heat, phlogiston.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "period terms (vital air, caloric, phlogiston)",
+     "hinweis": "Faithful; the history of science stays visible."
+    },
+    {
+     "key": "b",
+     "en": "modern terms (oxygen, heat)",
+     "hinweis": "Readable; makes the arguments anachronistic."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-centrum",
+   "gruppe": "schelling",
+   "deutsch": "Centrum",
+   "zaehlung": {
+    "f": 2,
+    "s": 278,
+    "h": 96
+   },
+   "frage": "Schelling writes the Latin Centrum (im Centro); in the Freedom essay the dark Centrum of the creature.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "center",
+     "hinweis": "Natural; the Latin stays visible in the reader."
+    },
+    {
+     "key": "b",
+     "en": "centrum",
+     "hinweis": "Keeps the Latin term, as in the current Freedom essay translation."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-aether",
+   "gruppe": "shared",
+   "deutsch": "Äther",
+   "zaehlung": {
+    "f": 24,
+    "s": 123,
+    "h": 93
+   },
+   "frage": "The subtle medium of light and heat in the physics of the period. The Hegel and Schelling drafts spell it differently.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "ether",
+     "hinweis": "American spelling, as elsewhere."
+    },
+    {
+     "key": "b",
+     "en": "aether",
+     "hinweis": "Marks the obsolete physical concept."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "s-naturforscher",
+   "gruppe": "schelling",
+   "deutsch": "Naturforscher",
+   "zaehlung": {
+    "f": 5,
+    "s": 115,
+    "h": 7
+   },
+   "frage": "The empirical students of nature Schelling argues with (Kielmeyer, Ritter, Humboldt). The English word \"scientist\" did not yet exist.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "natural scientist",
+     "hinweis": "Clear; slightly anachronistic."
+    },
+    {
+     "key": "b",
+     "en": "naturalist",
+     "hinweis": "Period English; now suggests field biology."
+    },
+    {
+     "key": "c",
+     "en": "investigator of nature",
+     "hinweis": "Literal; clumsy."
+    },
+    {
+     "key": "d",
+     "en": "natural philosopher",
+     "hinweis": "Period English; collides with Naturphilosoph."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-hemmung",
+   "gruppe": "shared",
+   "deutsch": "Hemmung",
+   "zaehlung": {
+    "f": 18,
+    "s": 59,
+    "h": 20
+   },
+   "frage": "Schelling's nature is an infinite productivity that must be held back to produce anything. Fichte uses the same word.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "inhibition",
+     "hinweis": "Used for both; psychological overtone today."
+    },
+    {
+     "key": "b",
+     "en": "retardation",
+     "hinweis": "Physical; negative modern sense."
+    },
+    {
+     "key": "c",
+     "en": "obstruction",
+     "hinweis": "Plain; close to Anstoß (check)."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-bewusstlos",
+   "gruppe": "schelling",
+   "deutsch": "das Bewusstlose, bewusstlos",
+   "zaehlung": {
+    "f": 39,
+    "s": 199,
+    "h": 194
+   },
+   "frage": "In the System of Transcendental Idealism nature is unconscious intelligence. The word is older than Freud's unconscious.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "unconscious",
+     "hinweis": "Natural; psychoanalytic overtone."
+    },
+    {
+     "key": "b",
+     "en": "pre-conscious",
+     "hinweis": "Interpretive, as in one translation."
+    },
+    {
+     "key": "c",
+     "en": "non-conscious",
+     "hinweis": "Neutral; rare."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-reflex",
+   "gruppe": "schelling",
+   "deutsch": "Reflex (vs. Reflexion)",
+   "zaehlung": {
+    "f": 72,
+    "s": 120,
+    "h": 21
+   },
+   "frage": "In the identity philosophy a Reflex is the mirroring of the absolute in the finite, not an act of reflection.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "reflex",
+     "hinweis": "Keeps it apart from reflection; sounds physiological."
+    },
+    {
+     "key": "b",
+     "en": "reflection",
+     "hinweis": "Natural; merges with Reflexion."
+    },
+    {
+     "key": "c",
+     "en": "reflected image",
+     "hinweis": "Clear; collides with Widerschein and Gegenbild."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-personalitaet",
+   "gruppe": "shared",
+   "deutsch": "Persönlichkeit / Personalität",
+   "zaehlung": {
+    "f": 105,
+    "s": 423,
+    "h": 164
+   },
+   "frage": "The Freedom essay asks how God can have Persönlichkeit; Schelling also writes Personalität. The drafts disagree on \"personhood\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "personality / personhood",
+     "hinweis": "Two words for two words."
+    },
+    {
+     "key": "b",
+     "en": "personality for both",
+     "hinweis": "Avoids the modern bioethical term."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "s-erkenntnis",
+   "gruppe": "shared",
+   "deutsch": "Erkenntnis (in Schelling)",
+   "zaehlung": {
+    "f": 937,
+    "s": 1272,
+    "h": 799
+   },
+   "frage": "Kant's Erkenntnis is cognition. Schelling's identity philosophy often means knowledge as a result, as in Erkenntnis Gottes.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "cognition throughout",
+     "hinweis": "Kantian convention; stiff for results."
+    },
+    {
+     "key": "b",
+     "en": "cognition (act, faculty), knowledge (result)",
+     "hinweis": "By sense; collides with Wissen."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "s-anmut",
+   "gruppe": "schelling",
+   "deutsch": "Anmut (vs. Grazie, Gnade)",
+   "zaehlung": {
+    "f": 112,
+    "s": 83,
+    "h": 6
+   },
+   "frage": "In the philosophy of art Anmut and Grazie both mean grace; in theology Gnade is grace too.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "grace for Anmut and Grazie",
+     "hinweis": "Established; the German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "charm for Anmut, grace for Grazie",
+     "hinweis": "Distinct; \"charm\" is lighter."
+    },
+    {
+     "key": "c",
+     "en": "gracefulness for Anmut",
+     "hinweis": "Keeps \"grace\" free for Gnade."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-poesie",
+   "gruppe": "schelling",
+   "deutsch": "Poesie",
+   "zaehlung": {
+    "f": 14,
+    "s": 463,
+    "h": 46
+   },
+   "frage": "For Schelling, as for Schlegel, Poesie is productive making in general (Greek poiesis), wider than verse.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "poetry (with a note)",
+     "hinweis": "Natural; the wider sense needs the note."
+    },
+    {
+     "key": "b",
+     "en": "poesy",
+     "hinweis": "Archaic; marks the wider sense."
+    },
+    {
+     "key": "c",
+     "en": "poiesis",
+     "hinweis": "Greek; explicit but learned."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-bildende-kunst",
+   "gruppe": "schelling",
+   "deutsch": "bildende Kunst",
+   "zaehlung": {
+    "f": 112,
+    "s": 144,
+    "h": 23
+   },
+   "frage": "The arts that shape matter: sculpture, painting, architecture. Schelling's 1807 Academy address is on their relation to nature.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "visual arts",
+     "hinweis": "Modern standard."
+    },
+    {
+     "key": "b",
+     "en": "plastic arts",
+     "hinweis": "Period English; \"plastic\" now means synthetic."
+    },
+    {
+     "key": "c",
+     "en": "formative arts",
+     "hinweis": "Literal; keeps bilden."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-regellose",
+   "gruppe": "schelling",
+   "deutsch": "das Regellose",
+   "zaehlung": {
+    "f": 3,
+    "s": 28,
+    "h": 11
+   },
+   "frage": "The Freedom essay: beneath all order lies das Regellose, which can always break through again.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "the unruly",
+     "hinweis": "Keeps \"rule\" (Regel)."
+    },
+    {
+     "key": "b",
+     "en": "anarchy",
+     "hinweis": "As in the current translation; political overtone."
+    },
+    {
+     "key": "c",
+     "en": "unruliness",
+     "hinweis": "Older translation; abstract noun."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-grimm",
+   "gruppe": "schelling",
+   "deutsch": "Grimm",
+   "zaehlung": {
+    "f": 3,
+    "s": 7,
+    "h": 6
+   },
+   "frage": "Böhme's word for the fierce, consuming principle in God, taken up in the Freedom essay.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "wrath",
+     "hinweis": "Theological; collides with Zorn."
+    },
+    {
+     "key": "b",
+     "en": "fury",
+     "hinweis": "As in the current translation; more violent."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-zerruettung",
+   "gruppe": "schelling",
+   "deutsch": "Zerrüttung",
+   "zaehlung": {
+    "f": 5,
+    "s": 7,
+    "h": 22
+   },
+   "frage": "In the Freedom essay evil is a Zerrüttung, a disordering of the forces, like disease.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "disruption",
+     "hinweis": "Neutral."
+    },
+    {
+     "key": "b",
+     "en": "collapse",
+     "hinweis": "As in the current translation; sounds final."
+    },
+    {
+     "key": "c",
+     "en": "derangement",
+     "hinweis": "Keeps the analogy with disease."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-gelassenheit",
+   "gruppe": "schelling",
+   "deutsch": "Gelassenheit",
+   "zaehlung": {
+    "f": 0,
+    "s": 7,
+    "h": 3
+   },
+   "frage": "Eckhart's word for letting go of one's own will, which Schelling takes up. Heidegger later made it famous.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "releasement (with a note on Eckhart)",
+     "hinweis": "Standard for Eckhart; Heideggerian overtone."
+    },
+    {
+     "key": "b",
+     "en": "letting go",
+     "hinweis": "Plain, as in a recent translation."
+    },
+    {
+     "key": "c",
+     "en": "serenity",
+     "hinweis": "Everyday sense; loses the mysticism."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-kontraktion",
+   "gruppe": "schelling",
+   "deutsch": "Zusammenziehung / Contraktion",
+   "zaehlung": {
+    "f": 24,
+    "s": 270,
+    "h": 32
+   },
+   "frage": "In the Ages of the World God's first act is to contract, to close in on himself. Schelling uses both the German and the Latin word.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "contraction for both",
+     "hinweis": "Established; the German word stays visible."
+    },
+    {
+     "key": "b",
+     "en": "concentration",
+     "hinweis": "As in one translation; less physical."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-wiederbringung",
+   "gruppe": "schelling",
+   "deutsch": "Wiederbringung (aller Dinge)",
+   "zaehlung": {
+    "f": 0,
+    "s": 11,
+    "h": 0
+   },
+   "frage": "The restoration of all things at the end of time (Greek apokatastasis), an old heterodox hope.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "restoration (of all things)",
+     "hinweis": "Theological standard; collides with Wiederherstellung."
+    },
+    {
+     "key": "b",
+     "en": "return",
+     "hinweis": "As in the current translation; vague."
+    },
+    {
+     "key": "c",
+     "en": "apokatastasis",
+     "hinweis": "The Greek term; learned."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-urzeit",
+   "gruppe": "schelling",
+   "deutsch": "Urzeit / Vorzeit",
+   "zaehlung": {
+    "f": 0,
+    "s": 54,
+    "h": 0
+   },
+   "frage": "In the Philosophy of Mythology the time before all history, as distinct from merely early times.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "primordial time / prehistoric time",
+     "hinweis": "Keeps the two apart."
+    },
+    {
+     "key": "b",
+     "en": "primeval time / prehistory",
+     "hinweis": "As in the current translation; near-synonyms."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-begeisterung",
+   "gruppe": "schelling",
+   "deutsch": "Begeisterung",
+   "zaehlung": {
+    "f": 65,
+    "s": 69,
+    "h": 30
+   },
+   "frage": "The word contains Geist: to be filled with spirit. In everyday German it simply means enthusiasm.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "inspiration",
+     "hinweis": "Keeps the spirit; collides with Inspiration."
+    },
+    {
+     "key": "b",
+     "en": "spiritedness",
+     "hinweis": "As in the current Freedom essay translation; odd."
+    },
+    {
+     "key": "c",
+     "en": "enthusiasm",
+     "hinweis": "Natural; collides with Enthusiasmus and Schwärmerei."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-titel-weltalter",
+   "gruppe": "schelling",
+   "deutsch": "Title: Die Weltalter",
+   "zaehlung": {
+    "f": 11,
+    "s": 25,
+    "h": 0
+   },
+   "frage": "Schelling's unfinished work on the past, present and future of God.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "The Ages of the World",
+     "hinweis": "Established in all translations."
+    },
+    {
+     "key": "b",
+     "en": "The World Ages",
+     "hinweis": "Literal; common in scholarship."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-nichtwissen",
+   "gruppe": "schelling",
+   "deutsch": "Nichtwissen",
+   "zaehlung": {
+    "f": 6,
+    "s": 102,
+    "h": 14
+   },
+   "frage": "Late Schelling's learned ignorance: a knowing that knows it does not know. He also uses Unwissenheit (ignorance).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "non-knowing",
+     "hinweis": "Keeps \"ignorance\" for Unwissenheit."
+    },
+    {
+     "key": "b",
+     "en": "ignorance",
+     "hinweis": "Natural; merges the two."
+    },
+    {
+     "key": "c",
+     "en": "not-knowing",
+     "hinweis": "Plain; slightly colloquial."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-ueberseiende",
+   "gruppe": "schelling",
+   "deutsch": "das Überseyende",
+   "zaehlung": {
+    "f": 0,
+    "s": 20,
+    "h": 0
+   },
+   "frage": "What is above being (Greek τὸ ὑπερόν): late Schelling's name for God before all being.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "that which is above being",
+     "hinweis": "Parallel to \"that which is\"."
+    },
+    {
+     "key": "b",
+     "en": "the supra-existent",
+     "hinweis": "Compact; collides with Existenz."
+    },
+    {
+     "key": "c",
+     "en": "the super-being",
+     "hinweis": "Short; comic."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-urstaendlich",
+   "gruppe": "schelling",
+   "deutsch": "urständliches Seyn, Urstand",
+   "zaehlung": {
+    "f": 0,
+    "s": 30,
+    "h": 1
+   },
+   "frage": "Schelling plays Urstand against Gegenstand (object): a being that stands before all objecthood.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "primal being (with a note on the pun)",
+     "hinweis": "Readable; the pun goes into the note."
+    },
+    {
+     "key": "b",
+     "en": "pre-jective being",
+     "hinweis": "A recent scholarly coinage; keeps the pun."
+    },
+    {
+     "key": "c",
+     "en": "primordial state",
+     "hinweis": "Plain; loses the pun."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-vernunftwissenschaft",
+   "gruppe": "schelling",
+   "deutsch": "Vernunftwissenschaft",
+   "zaehlung": {
+    "f": 30,
+    "s": 93,
+    "h": 0
+   },
+   "frage": "Late Schelling's name for purely rational, \"negative\" philosophy, as against positive philosophy.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "science of reason",
+     "hinweis": "Literal; as in the current translation of the Berlin lectures."
+    },
+    {
+     "key": "b",
+     "en": "rational science",
+     "hinweis": "Shorter; could mean any rational science."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-goettervorstellung",
+   "gruppe": "schelling",
+   "deutsch": "Göttervorstellung",
+   "zaehlung": {
+    "f": 0,
+    "s": 18,
+    "h": 0
+   },
+   "frage": "Late Schelling explains mythology through the peoples' Göttervorstellungen, which arise in consciousness by necessity.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "representations of gods",
+     "hinweis": "Consistent with Vorstellung = representation."
+    },
+    {
+     "key": "b",
+     "en": "conceptions of the gods",
+     "hinweis": "Natural; loses the link."
+    },
+    {
+     "key": "c",
+     "en": "ideas of the gods",
+     "hinweis": "Collides with Idee."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-heiden",
+   "gruppe": "shared",
+   "deutsch": "Heiden, Heidentum",
+   "zaehlung": {
+    "f": 30,
+    "s": 359,
+    "h": 24
+   },
+   "frage": "Schelling writes on Heidentum constantly. English has \"pagan\" and \"heathen\", which differ in tone.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "pagans, paganism (\"heathen\" only in Bible quotations)",
+     "hinweis": "Neutral, scholarly."
+    },
+    {
+     "key": "b",
+     "en": "pagans for antiquity, heathens in Christian polemic",
+     "hinweis": "Follows the tone; needs judgment."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "s-zabismus",
+   "gruppe": "schelling",
+   "deutsch": "Zabismus",
+   "zaehlung": {
+    "f": 0,
+    "s": 75,
+    "h": 0
+   },
+   "frage": "Schelling's term for the earliest astral religion, the worship of the stars.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Sabaism",
+     "hinweis": "The English term for star worship."
+    },
+    {
+     "key": "b",
+     "en": "Sabianism",
+     "hinweis": "Older form; confused with a real religious community."
+    },
+    {
+     "key": "c",
+     "en": "Zabism",
+     "hinweis": "Keeps Schelling's form; unknown in English."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-indische-namen",
+   "gruppe": "conventions",
+   "deutsch": "Indian and Near Eastern names (Wischnu, Schiwa, Brama, Melkart)",
+   "zaehlung": null,
+   "frage": "Schelling uses the German transliterations of the 1840s. Should they be modernized in English?",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "modern English forms (Vishnu, Shiva, Brahma, Melqart)",
+     "hinweis": "Recognizable; Schelling's form stays visible in the reader."
+    },
+    {
+     "key": "b",
+     "en": "Schelling's forms (Wischnu, Schiwa, Brama)",
+     "hinweis": "Faithful; look like errors to English readers."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-jehovah",
+   "gruppe": "schelling",
+   "deutsch": "Jehovah / Elohim",
+   "zaehlung": {
+    "f": 4,
+    "s": 163,
+    "h": 9
+   },
+   "frage": "Schelling builds an argument on the two divine names of the Old Testament.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Jehovah",
+     "hinweis": "As Schelling writes it; the period form."
+    },
+    {
+     "key": "b",
+     "en": "Yahweh",
+     "hinweis": "Modern scholarly form."
+    },
+    {
+     "key": "c",
+     "en": "the LORD",
+     "hinweis": "Bible convention; hides the name."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-menschwerdung",
+   "gruppe": "schelling",
+   "deutsch": "Menschwerdung",
+   "zaehlung": {
+    "f": 0,
+    "s": 115,
+    "h": 11
+   },
+   "frage": "God's becoming human in Christ, a central theme of the Philosophy of Revelation.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "incarnation",
+     "hinweis": "Theological standard; loses Mensch."
+    },
+    {
+     "key": "b",
+     "en": "becoming human",
+     "hinweis": "Literal; keeps Mensch."
+    },
+    {
+     "key": "c",
+     "en": "becoming-man",
+     "hinweis": "Literal and traditional; clashes with \"human being\"."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-heiliger-geist",
+   "gruppe": "schelling",
+   "deutsch": "der Heilige Geist",
+   "zaehlung": {
+    "f": 20,
+    "s": 38,
+    "h": 30
+   },
+   "frage": "The third person of the Trinity. The King James Version, the model for Bible quotations, says \"Holy Ghost\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Holy Spirit",
+     "hinweis": "Modern standard; consistent with \"spirit\"."
+    },
+    {
+     "key": "b",
+     "en": "Holy Ghost",
+     "hinweis": "Period and King James English; archaic."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-boehme",
+   "gruppe": "conventions",
+   "deutsch": "Böhme or Boehme",
+   "zaehlung": null,
+   "frage": "The mystic Jacob Böhme stands behind much of Schelling's middle period. The drafts disagree on the spelling of his name.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Böhme",
+     "hinweis": "German spelling."
+    },
+    {
+     "key": "b",
+     "en": "Boehme",
+     "hinweis": "Traditional English spelling."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "s-pronomen-genus",
+   "gruppe": "conventions",
+   "deutsch": "Pronouns for das Absolute and das Seyende",
+   "zaehlung": null,
+   "frage": "Late Schelling moves from neuter terms (das Seyende: it) to the personal God (er: he). The shift is part of his argument.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "follow the German gender (it for neuter, he for masculine)",
+     "hinweis": "Keeps the shift; \"it\" may then refer to God."
+    },
+    {
+     "key": "b",
+     "en": "he wherever God is meant",
+     "hinweis": "Natural; hides the transition."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-being-gross",
+   "gruppe": "conventions",
+   "deutsch": "Capitalization: being / Being",
+   "zaehlung": null,
+   "frage": "Some translations write \"Being\" for Sein, especially in Schelling. The drafts write \"being\" in lowercase.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "being (lowercase)",
+     "hinweis": "Current standard; no Heideggerian overtone."
+    },
+    {
+     "key": "b",
+     "en": "Being (capitalized)",
+     "hinweis": "Marks the term; suggests Heidegger."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-titel-methode",
+   "gruppe": "schelling",
+   "deutsch": "Title: Vorlesungen über die Methode des akademischen Studiums",
+   "zaehlung": {
+    "f": 0,
+    "s": 16,
+    "h": 0
+   },
+   "frage": "Schelling's 1803 lectures on the university, known in English under a shorter title.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Lectures on the Method of Academic Study",
+     "hinweis": "Literal."
+    },
+    {
+     "key": "b",
+     "en": "On University Studies",
+     "hinweis": "The established English title."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-titel-bruno",
+   "gruppe": "schelling",
+   "deutsch": "Title: Bruno oder über das göttliche und natürliche Princip der Dinge",
+   "zaehlung": {
+    "f": 0,
+    "s": 209,
+    "h": 0
+   },
+   "frage": "The established English title of Schelling's dialogue reverses \"divine and natural\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Bruno, or On the Natural and the Divine Principle of Things",
+     "hinweis": "The established title."
+    },
+    {
+     "key": "b",
+     "en": "Bruno, or On the Divine and the Natural Principle of Things",
+     "hinweis": "Schelling's own order."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-titel-stuttgart",
+   "gruppe": "schelling",
+   "deutsch": "Title: Stuttgarter Privatvorlesungen",
+   "zaehlung": {
+    "f": 2,
+    "s": 4,
+    "h": 0
+   },
+   "frage": "Schelling's private lectures of 1810 for a small circle in Stuttgart.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Stuttgart Private Lectures",
+     "hinweis": "Literal."
+    },
+    {
+     "key": "b",
+     "en": "Stuttgart Seminars",
+     "hinweis": "Title of the published translation."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-titel-freiheit",
+   "gruppe": "schelling",
+   "deutsch": "Title: Philosophische Untersuchungen über das Wesen der menschlichen Freiheit",
+   "zaehlung": {
+    "f": 0,
+    "s": 6,
+    "h": 0
+   },
+   "frage": "Schelling's Freedom essay of 1809.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "Philosophical Investigations into the Essence of Human Freedom",
+     "hinweis": "Current standard; literal."
+    },
+    {
+     "key": "b",
+     "en": "Of Human Freedom",
+     "hinweis": "Older short title."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-titel-wuerzburg",
+   "gruppe": "schelling",
+   "deutsch": "Title: System der gesammten Philosophie",
+   "zaehlung": {
+    "f": 0,
+    "s": 2,
+    "h": 0
+   },
+   "frage": "Schelling's Würzburg lectures of 1804.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "System of Philosophy in General",
+     "hinweis": "As in the existing partial translation."
+    },
+    {
+     "key": "b",
+     "en": "System of the Whole of Philosophy",
+     "hinweis": "Literal; gesammt means entire."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-gottheit",
+   "gruppe": "shared",
+   "deutsch": "Gottheit",
+   "zaehlung": {
+    "f": 152,
+    "s": 793,
+    "h": 162
+   },
+   "frage": "Schelling distinguishes Gott from die Gottheit, the divine essence before or above God as a person; in mythology eine Gottheit is a deity.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "the Godhead; a deity",
+     "hinweis": "Mystical tradition; capitalized."
+    },
+    {
+     "key": "b",
+     "en": "divinity; a deity",
+     "hinweis": "Plain; loses Schelling's contrast."
+    },
+    {
+     "key": "c",
+     "en": "the godhead (lowercase); a deity",
+     "hinweis": "As in the Fichte draft; capitalization differs."
+    }
+   ],
+   "vorschlag": null
+  },
+  {
+   "id": "s-ideell-reell",
+   "gruppe": "shared",
+   "deutsch": "ideell / reell (vs. ideal / real)",
+   "zaehlung": {
+    "f": 145,
+    "s": 1286,
+    "h": 1270
+   },
+   "frage": "Schelling and Hegel have four words, ideal and ideell, real and reell. English has two.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "ideal / real for all four; the German stays visible in the reader",
+     "hinweis": "Natural; the distinction lives in the data."
+    },
+    {
+     "key": "b",
+     "en": "ideal / real, but ideell = ideational",
+     "hinweis": "Visible distinction; a modern psychological word."
+    },
+    {
+     "key": "c",
+     "en": "ideal / real, but reell = genuine",
+     "hinweis": "Fits some everyday uses; wrong in technical ones."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-hinschauen",
+   "gruppe": "fichte",
+   "deutsch": "Hinschauen, Hinschauung",
+   "zaehlung": {
+    "f": 107,
+    "s": 2,
+    "h": 0
+   },
+   "frage": "A late Fichte word for the act of directing one's intuition onto something. It occurs only in Fichte.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "looking-at",
+     "hinweis": "Literal; keeps the direction (hin)."
+    },
+    {
+     "key": "b",
+     "en": "regarding",
+     "hinweis": "Natural; loses the link to Anschauung."
+    },
+    {
+     "key": "c",
+     "en": "intuiting-toward",
+     "hinweis": "Keeps Anschauung = intuition; very stiff."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-sicherscheinen",
+   "gruppe": "fichte",
+   "deutsch": "Sicherscheinen, Sicherscheinung",
+   "zaehlung": {
+    "f": 86,
+    "s": 0,
+    "h": 0
+   },
+   "frage": "In the late Wissenschaftslehre the absolute appears, and appears to itself. Fichte fuses this into one word.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "self-appearing",
+     "hinweis": "One hyphenated term, like self-positing."
+    },
+    {
+     "key": "b",
+     "en": "appearing to itself",
+     "hinweis": "Clear; no longer a single term."
+    },
+    {
+     "key": "c",
+     "en": "self-manifestation",
+     "hinweis": "Elegant; collides with Offenbarung (manifest)."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-bildungskraft",
+   "gruppe": "fichte",
+   "deutsch": "Bildungskraft",
+   "zaehlung": {
+    "f": 87,
+    "s": 4,
+    "h": 1
+   },
+   "frage": "The late Fichte: \"the Bildungskraft, known under the name Einbildungskraft (imagination)\". Not to be confused with Bildung (education).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "image-forming power",
+     "hinweis": "Keeps the link to Bild (image)."
+    },
+    {
+     "key": "b",
+     "en": "formative power",
+     "hinweis": "Natural; collides with Bildungstrieb (formative drive)."
+    },
+    {
+     "key": "c",
+     "en": "power of imaging",
+     "hinweis": "Matches \"imaging\" for Bilden; slightly awkward."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-bildwesen",
+   "gruppe": "fichte",
+   "deutsch": "Bildwesen",
+   "zaehlung": {
+    "f": 49,
+    "s": 0,
+    "h": 0
+   },
+   "frage": "Late Fichte: the being or nature of the image, and consciousness as a whole considered as image.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "image-nature",
+     "hinweis": "Literal; neutral."
+    },
+    {
+     "key": "b",
+     "en": "imagism",
+     "hinweis": "A scholarly coinage; sounds like a doctrine."
+    },
+    {
+     "key": "c",
+     "en": "image-being",
+     "hinweis": "Literal; collides with Bildsein (being-an-image)."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-durcheinander",
+   "gruppe": "fichte",
+   "deutsch": "Durcheinander (late Wissenschaftslehre)",
+   "zaehlung": {
+    "f": 44,
+    "s": 64,
+    "h": 25
+   },
+   "frage": "In ordinary German a mess. In the late Fichte two terms that exist only \"through each other\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "\"through one another\" (in quotation marks)",
+     "hinweis": "Like the other nominalized particles; unmistakable."
+    },
+    {
+     "key": "b",
+     "en": "mutual mediation",
+     "hinweis": "Readable; interpretive."
+    },
+    {
+     "key": "c",
+     "en": "interpenetration",
+     "hinweis": "Elegant; collides with durchdringen."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-lebendigkeit",
+   "gruppe": "shared",
+   "deutsch": "Lebendigkeit",
+   "zaehlung": {
+    "f": 28,
+    "s": 40,
+    "h": 164
+   },
+   "frage": "Being alive as such, the quality of life; frequent in Hegel, technical in the late Fichte.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "livingness",
+     "hinweis": "Literal; unusual but exact."
+    },
+    {
+     "key": "b",
+     "en": "vitality",
+     "hinweis": "Natural; collides with Lebenskraft (vital force)."
+    },
+    {
+     "key": "c",
+     "en": "liveliness",
+     "hinweis": "Everyday sense; too light."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-wissenschaftslehrer",
+   "gruppe": "fichte",
+   "deutsch": "Wissenschaftslehrer",
+   "zaehlung": {
+    "f": 21,
+    "s": 0,
+    "h": 0
+   },
+   "frage": "Fichte's name for those who practice his philosophy: \"wir, die Wissenschaftslehrer\".",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "practitioner of the Wissenschaftslehre",
+     "hinweis": "Clear; long."
+    },
+    {
+     "key": "b",
+     "en": "Wissenschaftslehrer (untranslated)",
+     "hinweis": "Parallel to Wissenschaftslehre; opaque."
+    },
+    {
+     "key": "c",
+     "en": "teacher of the Wissenschaftslehre",
+     "hinweis": "Literal; but Lehrer here is not a teacher."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "f-vernunftinstinkt",
+   "gruppe": "fichte",
+   "deutsch": "Vernunftinstinkt",
+   "zaehlung": {
+    "f": 43,
+    "s": 1,
+    "h": 6
+   },
+   "frage": "The first of Fichte's five ages of humanity (Characteristics of the Present Age): reason working blindly, as instinct.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "reason as instinct",
+     "hinweis": "As in the established translation; says what Fichte means."
+    },
+    {
+     "key": "b",
+     "en": "instinct of reason",
+     "hinweis": "Literal; Hegel uses the same phrase."
+    },
+    {
+     "key": "c",
+     "en": "rational instinct",
+     "hinweis": "Short; sounds like a psychological faculty."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-anorgisch",
+   "gruppe": "schelling",
+   "deutsch": "anorgisch (vs. unorganisch)",
+   "zaehlung": {
+    "f": 0,
+    "s": 173,
+    "h": 2
+   },
+   "frage": "From 1799 Schelling coins anorgisch next to the ordinary unorganisch; both mean the inorganic.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "inorganic for both",
+     "hinweis": "Natural; the German word stays visible in the reader."
+    },
+    {
+     "key": "b",
+     "en": "anorganic for anorgisch",
+     "hinweis": "Keeps the coinage visible; rare English."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-uebel",
+   "gruppe": "schelling",
+   "deutsch": "das Übel (vs. das Böse)",
+   "zaehlung": {
+    "f": 169,
+    "s": 89,
+    "h": 117
+   },
+   "frage": "The Freedom essay distinguishes das Böse (evil as an act of will) from das Übel (harm, misfortune, malum).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "ill",
+     "hinweis": "Keeps \"evil\" for das Böse; slightly old-fashioned."
+    },
+    {
+     "key": "b",
+     "en": "harm",
+     "hinweis": "Natural; too narrow for metaphysical malum."
+    },
+    {
+     "key": "c",
+     "en": "evil (both)",
+     "hinweis": "Usual English; erases the distinction."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-gottsein",
+   "gruppe": "schelling",
+   "deutsch": "Gottseyn, das Gott-Seyende",
+   "zaehlung": {
+    "f": 0,
+    "s": 14,
+    "h": 0
+   },
+   "frage": "Late Schelling asks how God is God: his Gottseyn is not his being as such, but his lordship over being.",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "being-God; that which is God",
+     "hinweis": "Literal; keeps the hyphenated term."
+    },
+    {
+     "key": "b",
+     "en": "divine being; that which is divine",
+     "hinweis": "As in the current translation; collides with Gottheit and Wesen."
+    },
+    {
+     "key": "c",
+     "en": "godhood",
+     "hinweis": "Short; sounds mythological."
+    }
+   ],
+   "vorschlag": "a"
+  },
+  {
+   "id": "s-erniedrigung",
+   "gruppe": "schelling",
+   "deutsch": "Erniedrigung (Christi)",
+   "zaehlung": {
+    "f": 6,
+    "s": 37,
+    "h": 15
+   },
+   "frage": "The Philosophy of Revelation on Christ's self-lowering in the incarnation (Philippians 2).",
+   "optionen": [
+    {
+     "key": "a",
+     "en": "humiliation",
+     "hinweis": "Theological standard; today it means embarrassment."
+    },
+    {
+     "key": "b",
+     "en": "abasement",
+     "hinweis": "Old-fashioned but clear."
+    },
+    {
+     "key": "c",
+     "en": "self-lowering",
+     "hinweis": "Literal; plain."
+    }
+   ],
+   "vorschlag": "a"
+  }
+ ]
+}
