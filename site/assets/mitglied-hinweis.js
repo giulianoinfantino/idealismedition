@@ -56,7 +56,7 @@
     if (band || document.querySelector('.promo-banner')) return;
     if (lies(MITGLIED) === 'ja') return;
     var bis = parseInt(lies(BIS) || '0', 10) || 0;
-    if (Date.now() < bis) return;
+    if (Date.now() < bis && !probe) return;
     band = document.createElement('div');
     band.className = 'promo-banner mitglied-hinweis';
     band.setAttribute('role', 'note');
@@ -83,7 +83,9 @@
     hoehe();
     window.addEventListener('resize', hoehe);
   }
-  if (sekunden >= SCHWELLE) {
+  // Zum Ansehen: ?hinweis=zeigen zeigt das Band sofort (wie ?umfrage=zeigen bei der Umfrage)
+  var probe = /[?&]hinweis=zeigen\b/.test(location.search);
+  if (sekunden >= SCHWELLE || probe) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', zeigen); else zeigen();
   }
 })();
